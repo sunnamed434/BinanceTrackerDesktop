@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Authorization;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Validation.Extension;
+using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Windows.Forms;
 
@@ -12,8 +13,12 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         {
             InitializeComponent();
 
+            base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            base.MaximizeBox = false;
         }
+
+
 
         private async void onAuthorizeButtonClick(object sender, EventArgs e)
         {

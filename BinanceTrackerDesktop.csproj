@@ -59,15 +59,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\Formatter\BinanceUserWalletStringFormatter.cs" />
+    <Compile Include="Core\Formatters\API\IBinanceValueFormatter.cs" />
+    <Compile Include="Core\Formatters\StringFormats.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
-    <Compile Include="Core\UserData\API\BinanceUserDataJson.cs" />
+    <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Forms\Authorization\BinanceAPIKeysCharactersLength.cs" />
-    <Compile Include="Forms\BinanceTrackerForm.cs">
+    <Compile Include="Forms\Tracker\API\IFormControl.cs" />
+    <Compile Include="Forms\Tracker\API\FormEventListeners.cs" />
+    <Compile Include="Forms\Tracker\BinanceTrackerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BinanceTrackerForm.Designer.cs">
+    <Compile Include="Forms\Tracker\BinanceTrackerForm.Designer.cs">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Calculator\API\IBinanceCoinOptions.cs" />
@@ -84,6 +87,16 @@
     <Compile Include="Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.Designer.cs">
+      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tracker\MoveListener\BinanceTrackerMoveListener.cs" />
+    <Compile Include="Forms\Tracker\Notifications\API\INotificationsControl.cs" />
+    <Compile Include="Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
+    <Compile Include="Forms\Tracker\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
@@ -92,8 +105,11 @@
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BinanceTrackerForm.resx">
+    <EmbeddedResource Include="Forms\Tracker\BinanceTrackerForm.resx">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.resx">
+      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

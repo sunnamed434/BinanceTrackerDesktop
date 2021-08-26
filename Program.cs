@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Forms;
 using BinanceTrackerDesktop.Forms.Authorization;
+using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
