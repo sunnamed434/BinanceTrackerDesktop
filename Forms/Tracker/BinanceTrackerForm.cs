@@ -8,6 +8,8 @@ using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using BinanceTrackerDesktop.Forms.Tracker.Tray;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
@@ -16,15 +18,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
     {
         private BinanceStartup startup;
 
-        private readonly FormEventListenerBase formMoveEventListener;
-
-        private readonly FormEventListenerBase trayDoubleClickEventListener;
-
-        private readonly TrayApplicationOpenClickEventListener applicationOpenClickEventListener;
-
-        private readonly TrayDisableNotificationsClickEventListener disableNotificationsClickEventListener;
-
-        private readonly TrayApplicationQuitClickEventListener applicationQuitClickEventListener;
+        private readonly IFormEventListener[] formEventListeners;
 
 
 
@@ -32,10 +26,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             InitializeComponent();
 
-            base.FormBorderStyle = FormBorderStyle.FixedSingle;
-            base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            base.MaximizeBox = false;
-            base.StartPosition = FormStartPosition.CenterScreen;
+            intitializeForm();
 
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
@@ -46,12 +37,26 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.DisableNotificationsToolStripMenuItem.Click += onDisableNotificationsToolStripMenuItemClick;
             this.QuitBinanceTrackerToolStripMenuItem.Click += onQuitBinanceTrackerToolStripMenuItemClick;
 
-            new BinanceTrackerMoveListener(this, formMoveEventListener = new FormEventListenerBase(), new BinanceTrackerNotificationsControl(new NotificationsControl(BinanceTrackerNotifyIcon)));
-            new BinanceTrackerTray(this,
-                trayDoubleClickEventListener = new FormEventListenerBase(),
-                applicationOpenClickEventListener = new TrayApplicationOpenClickEventListener(),
-                disableNotificationsClickEventListener = new TrayDisableNotificationsClickEventListener(),
-                applicationQuitClickEventListener = new TrayApplicationQuitClickEventListener());
+            new BinanceTrackerTray(this, formEventListeners = new FormEventListener[]
+            {
+                new FormEventListener(),
+                new FormEventListener(),
+                new FormEventListener(),
+                new FormEventListener(),
+                new FormEventListener(),
+            });
+
+            new BinanceTrackerMoveListener(this, formEventListeners[4], new BinanceTrackerNotificationsControl(new NotificationsControl(BinanceTrackerNotifyIcon)));
+        }
+
+
+
+        private void intitializeForm()
+        {
+            base.FormBorderStyle = FormBorderStyle.FixedSingle;
+            base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            base.StartPosition = FormStartPosition.CenterScreen;
+            base.MaximizeBox = false;
         }
 
 
@@ -68,33 +73,33 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private async void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
         {
-            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
-            UserTotalBalanceText.Text = new BinanceCurrencyValueFormatter().Format(result.Value);
-        }
-
-        private void onBinanceTrackerFormMove(object sender, EventArgs e)
-        {
-            formMoveEventListener.TriggerEvent(sender, e);
-        }
-        
-        private void onOpenBinanceTrackerToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            applicationOpenClickEventListener.TriggerEvent(sender, e);
+            var test = await startup.Wallet.GetTotalBalanceAsync();
+            UserTotalBalanceText.Text = new BinanceCurrencyValueFormatter().Format(test.Value);
         }
 
         private void onBinanceTrackerNotifyIconDoubleClick(object sender, EventArgs e)
         {
-            trayDoubleClickEventListener.TriggerEvent(sender, e);
+            formEventListeners[0].TriggerEvent(sender, e);
+        }
+        
+        private void onOpenBinanceTrackerToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            formEventListeners[1].TriggerEvent(sender, e);
         }
 
         private void onDisableNotificationsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            disableNotificationsClickEventListener.TriggerEvent(sender, e);
+            formEventListeners[2].TriggerEvent(sender, e);
         }
 
         private void onQuitBinanceTrackerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            applicationQuitClickEventListener.TriggerEvent(sender, e);
+            formEventListeners[3].TriggerEvent(sender, e);
+        }
+
+        private void onBinanceTrackerFormMove(object sender, EventArgs e)
+        {
+            formEventListeners[4].TriggerEvent(sender, e);
         }
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)

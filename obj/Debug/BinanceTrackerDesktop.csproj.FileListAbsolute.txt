@@ -34,3 +34,4 @@ D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\aa\BinanceTrackerDesktop.reso
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.exe
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.pdb
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.AssemblyReference.cache

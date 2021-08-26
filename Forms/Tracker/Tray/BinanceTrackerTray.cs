@@ -8,48 +8,36 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Tray
     {
         private readonly IFormControl formControl;
 
-        private readonly IFormEventListener trayDoubleClickEventListener;
-
-        private readonly TrayApplicationOpenClickEventListener applicationOpenEventClickEventListener;
-
-        private readonly TrayDisableNotificationsClickEventListener disableNotificationsClickEventListener;
-
-        private readonly TrayApplicationQuitClickEventListener applicationQuitClickEventListener;
+        private readonly IFormEventListener[] formEventListeners;
 
 
 
-        public BinanceTrackerTray(IFormControl formControl, IFormEventListener trayDoubleClickEventListener, TrayApplicationOpenClickEventListener applicationOpenEventClickEventListener, TrayDisableNotificationsClickEventListener disableNotificationsClickEventListener, TrayApplicationQuitClickEventListener applicationQuitClickEventListener)
+        public BinanceTrackerTray(IFormControl formControl, params IFormEventListener[] formEventListeners)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
 
-            if (applicationOpenEventClickEventListener == null)
-                throw new ArgumentNullException(nameof(applicationOpenEventClickEventListener));
+            if (formEventListeners == null)
+                throw new ArgumentNullException(nameof(formEventListeners));
 
-            if (disableNotificationsClickEventListener == null)
-                throw new ArgumentNullException(nameof(disableNotificationsClickEventListener));
-
-            if (applicationQuitClickEventListener == null)
-                throw new ArgumentNullException(nameof(applicationQuitClickEventListener));
+            if (formEventListeners.Length < 0)
+                throw new InvalidOperationException();
 
             this.formControl = formControl;
-            this.trayDoubleClickEventListener = trayDoubleClickEventListener;
-            this.applicationOpenEventClickEventListener = applicationOpenEventClickEventListener;
-            this.disableNotificationsClickEventListener = disableNotificationsClickEventListener;
-            this.applicationQuitClickEventListener = applicationQuitClickEventListener;
+            this.formEventListeners = formEventListeners;
 
-            this.trayDoubleClickEventListener.OnTriggerEventHandler += onTrayDoubleClicked;
-            this.applicationOpenEventClickEventListener.OnTriggerEventHandler += onApplicationOpenClicked;
-            this.disableNotificationsClickEventListener.OnTriggerEventHandler += onDisableNotificationsClicked;
-            this.applicationQuitClickEventListener.OnTriggerEventHandler += onApplicationQuitClicked;
+            this.formEventListeners[0].OnTriggerEventHandler += onTrayDoubleClicked;
+            this.formEventListeners[1].OnTriggerEventHandler += onApplicationOpenClicked;
+            this.formEventListeners[2].OnTriggerEventHandler += onDisableNotificationsClicked;
+            this.formEventListeners[3].OnTriggerEventHandler += onApplicationQuitClicked;
         }
 
         ~BinanceTrackerTray()
         {
-            this.trayDoubleClickEventListener.OnTriggerEventHandler -= onTrayDoubleClicked;
-            this.applicationOpenEventClickEventListener.OnTriggerEventHandler -= onApplicationOpenClicked;
-            this.disableNotificationsClickEventListener.OnTriggerEventHandler -= onDisableNotificationsClicked;
-            this.applicationQuitClickEventListener.OnTriggerEventHandler -= onApplicationQuitClicked;
+            this.formEventListeners[0].OnTriggerEventHandler -= onTrayDoubleClicked;
+            this.formEventListeners[1].OnTriggerEventHandler -= onApplicationOpenClicked;
+            this.formEventListeners[2].OnTriggerEventHandler -= onDisableNotificationsClicked;
+            this.formEventListeners[3].OnTriggerEventHandler -= onApplicationQuitClicked;
         }
 
 

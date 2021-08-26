@@ -13,6 +13,13 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         {
             InitializeComponent();
 
+            intitializeForm();   
+        }
+
+
+
+        private void intitializeForm()
+        {
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.MaximizeBox = false;

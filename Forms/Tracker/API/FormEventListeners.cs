@@ -11,7 +11,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.API
         void TriggerEvent(object sender, EventArgs e);
     }
 
-    public class FormEventListenerBase : IFormEventListener
+    public class FormEventListener : IFormEventListener
     {
         public event EventHandler OnTriggerEventHandler;
 
@@ -27,20 +27,5 @@ namespace BinanceTrackerDesktop.Forms.Tracker.API
 
             OnTriggerEventHandler?.Invoke(sender, e);
         }
-    }
-
-    public class TrayApplicationOpenClickEventListener : FormEventListenerBase
-    {
-
-    }
-
-    public class TrayDisableNotificationsClickEventListener : FormEventListenerBase
-    {
-
-    }
-
-    public class TrayApplicationQuitClickEventListener : FormEventListenerBase
-    {
-
     }
 }
