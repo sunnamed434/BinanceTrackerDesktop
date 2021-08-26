@@ -56,13 +56,12 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Tray
 
         private void onTrayDoubleClicked(object sender, EventArgs e)
         {
-            MessageBox.Show(nameof(onTrayDoubleClicked));
-            this.formControl.Show();
+            formControl.Show();
         }
 
         private void onApplicationOpenClicked(object sender, EventArgs e)
         {
-            this.formControl.Show();
+            formControl.Show();
         }
 
         private void onDisableNotificationsClicked(object sender, EventArgs e)

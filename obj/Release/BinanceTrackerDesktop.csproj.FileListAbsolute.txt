@@ -1,0 +1,7 @@
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Forms.SystemTray.BinanceTrackerSystemTrayForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Properties.Resources.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.GenerateResource.cache
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CoreCompileInputs.cache

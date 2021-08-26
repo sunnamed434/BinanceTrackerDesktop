@@ -84,8 +84,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private void onBinanceTrackerNotifyIconDoubleClick(object sender, EventArgs e)
         {
-            MessageBox.Show(nameof(onBinanceTrackerNotifyIconDoubleClick));
-
             trayDoubleClickEventListener.TriggerEvent(sender, e);
         }
 

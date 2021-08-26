@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>binance.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Binance.Net, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Binance.Net.7.0.2\lib\netstandard2.0\Binance.Net.dll</HintPath>
@@ -87,12 +90,6 @@
     <Compile Include="Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.Designer.cs">
-      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Tracker\MoveListener\BinanceTrackerMoveListener.cs" />
     <Compile Include="Forms\Tracker\Notifications\API\INotificationsControl.cs" />
     <Compile Include="Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
@@ -107,9 +104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tracker\BinanceTrackerForm.resx">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.resx">
-      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -134,6 +128,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="binance.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
