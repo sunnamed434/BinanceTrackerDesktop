@@ -74,6 +74,7 @@
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.Designer.cs">
       <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SystemTray\Tray\TrayDataContainer.cs" />
     <Compile Include="Forms\Tracker\API\IFormControl.cs" />
     <Compile Include="Forms\Tracker\API\IFormEventListener.cs" />
     <Compile Include="Forms\Tracker\BinanceTrackerForm.cs">

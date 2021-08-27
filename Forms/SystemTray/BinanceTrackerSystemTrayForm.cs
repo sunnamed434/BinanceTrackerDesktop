@@ -4,7 +4,6 @@ using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray
@@ -28,9 +27,12 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             if (control == null)
                 throw new ArgumentNullException(nameof(control));
 
-            NotifyIcon.Text = "Binance Tracker Desktop";
+            NotifyIcon.ContextMenuStrip = Tray;
+            NotifyIcon.Text = TrayDataContainer.ApplicationName;
+            NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
 
-            new BinanceTrackerTray(this.control = control, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), formEventListeners = new IFormEventListener[]
+            new BinanceTrackerTray(this.control = control, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), 
+            formEventListeners = new IFormEventListener[]
             {
                 new FormEventListener(),
                 new FormEventListener(),
@@ -38,21 +40,18 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
                 new FormEventListener(),
             });
 
-            NotifyIcon.ContextMenuStrip = Tray;
-            NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
-
-            initializeContextMenuStripAndReadUserData();
+            initializeContextMenuStripAndReadUserDataAsync();
         }
 
 
 
-        private async void initializeContextMenuStripAndReadUserData()
+        private async void initializeContextMenuStripAndReadUserDataAsync()
         {
             BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
 
-            this.Tray.Items.Add(new ToolStripMenuItem("Open Binance Tracker", default, (s, e) => formEventListeners[1].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem(binanceUserData.NotificationsEnabled == true ? "Disable Notifications" : "Enable Notifications", default, (s, e) => formEventListeners[2].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem("Quit Binance Tracker", default, (s, e) => formEventListeners[3].TriggerEvent(s, e)));
+            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.OpenApplication, default, (s, e) => formEventListeners[1].TriggerEvent(s, e)));
+            this.Tray.Items.Add(new ToolStripMenuItem(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications, default, (s, e) => formEventListeners[2].TriggerEvent(s, e)));
+            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.QuitApplication, default, (s, e) => formEventListeners[3].TriggerEvent(s, e)));
         }
 
 

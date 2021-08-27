@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Forms.SystemTray.Tray;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
@@ -45,7 +46,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.MoveListener
 
                 if (binanceUserData.NotificationsEnabled)
                 {
-                    this.notificationsControl.Show("Binance Tracker Desktop", "Application hiden!");
+                    this.notificationsControl.Show(TrayDataContainer.ApplicationName, "Application hiden!");
                 }
             }
         }

@@ -42,32 +42,51 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
 
 
+        private async void refreshUserTotalBalanceAsync()
+        {
+            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
+
+            UserTotalBalanceText.Text = new BinanceCurrencyValueFormatter().Format(result.Value);
+        }
+
+        private async void calculateUserTotalBalanceLosesAndRefreshTotalBalanceLosesTextAsync()
+        {
+            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
+            BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+
+            UserTotalBalanceLosesText.Text = new BinanceCurrencyValueFormatter().Format(result.Value - userData.Balance);
+        }
+
+
+
         private async void onFormActivated(object sender, EventArgs e)
         {
             base.Activated -= onFormActivated;
 
             startup = new BinanceStartup(await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData);
 
-            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
-            UserTotalBalanceText.Text = new BinanceCurrencyValueFormatter().Format(result.Value);
+            refreshUserTotalBalanceAsync();
+            calculateUserTotalBalanceLosesAndRefreshTotalBalanceLosesTextAsync();
         }
 
-        private async void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
+        private void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
         {
-            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
-            UserTotalBalanceText.Text = new BinanceCurrencyValueFormatter().Format(result.Value);
+            refreshUserTotalBalanceAsync();
+            calculateUserTotalBalanceLosesAndRefreshTotalBalanceLosesTextAsync();
         }
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
-            base.Activated -= onFormActivated;
             base.FormClosing -= onFormClosing;
+            e.Cancel = true;
 
-            BinanceUserWalletResult wallet = await startup.Wallet.GetTotalBalanceAsync();
+            BinanceUserWalletResult walletResult = await startup.Wallet.GetTotalBalanceAsync();
 
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
-            userData.Balance = wallet.Value;
+            userData.Balance = walletResult.Value;
             await new BinanceUserDataWriter().WriteDataAsync(userData);
+
+            base.Close();
         }
     }
 }

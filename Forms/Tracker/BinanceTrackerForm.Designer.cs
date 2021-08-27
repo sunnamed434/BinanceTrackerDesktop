@@ -33,6 +33,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
+            this.UserTotalBalanceLosesText = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UserTotalBalanceText
@@ -67,11 +68,23 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.RefreshTotalBalanceButton.UseVisualStyleBackColor = true;
             this.RefreshTotalBalanceButton.Click += new System.EventHandler(this.onRefreshTotalBalanceButtonClick);
             // 
+            // UserTotalBalanceLosesText
+            // 
+            this.UserTotalBalanceLosesText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserTotalBalanceLosesText.ForeColor = System.Drawing.Color.Green;
+            this.UserTotalBalanceLosesText.Location = new System.Drawing.Point(270, 3);
+            this.UserTotalBalanceLosesText.Name = "UserTotalBalanceLosesText";
+            this.UserTotalBalanceLosesText.Size = new System.Drawing.Size(124, 19);
+            this.UserTotalBalanceLosesText.TabIndex = 3;
+            this.UserTotalBalanceLosesText.Text = "- €0.0";
+            this.UserTotalBalanceLosesText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // BinanceTrackerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 330);
+            this.Controls.Add(this.UserTotalBalanceLosesText);
             this.Controls.Add(this.RefreshTotalBalanceButton);
             this.Controls.Add(this.TotalBalanceTooltipText);
             this.Controls.Add(this.UserTotalBalanceText);
@@ -87,6 +100,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         private System.Windows.Forms.Label UserTotalBalanceText;
         private System.Windows.Forms.Label TotalBalanceTooltipText;
         private System.Windows.Forms.Button RefreshTotalBalanceButton;
+        private System.Windows.Forms.Label UserTotalBalanceLosesText;
     }
 }
 

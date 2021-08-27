@@ -72,8 +72,8 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
             await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
 
-            this.systemTrayForm.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? "Disable Notifications" : "Enable Notifications");
-            this.notificationsControl.Show("Binance Tracker Desktop", binanceUserData.NotificationsEnabled == true ? "Notifications Enabled" : "Notifications Disabled");
+            this.systemTrayForm.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
+            this.notificationsControl.Show(TrayDataContainer.ApplicationName, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.NotificationsEnabled : TrayDataContainer.NotificationsDisabled);
         }
 
         private void onApplicationQuitClicked(object sender, EventArgs e)
