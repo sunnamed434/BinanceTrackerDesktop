@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.API
 {
@@ -11,5 +12,11 @@ namespace BinanceTrackerDesktop.Forms.Tracker.API
         void Hide();
 
         void Close();
+
+        event EventHandler Activated;
+
+        event FormClosingEventHandler FormClosing;
+
+        event EventHandler Move;
     }
 }

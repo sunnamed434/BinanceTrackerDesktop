@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Forms.Tracker.API;
-using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
+﻿using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using System;
 using System.Windows.Forms;
 

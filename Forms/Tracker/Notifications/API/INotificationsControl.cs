@@ -35,9 +35,9 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Notifications.API
         public abstract void Show(string title, string content, ToolTipIcon icon);
     }
 
-    public class NotificationsControl : NotificationsControlBase
+    public class StableNotificationsControl : NotificationsControlBase
     {
-        public NotificationsControl(NotifyIcon notifyIcon) : base(notifyIcon)
+        public StableNotificationsControl(NotifyIcon notifyIcon) : base(notifyIcon)
         {
 
         }

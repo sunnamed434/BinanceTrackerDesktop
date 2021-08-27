@@ -11,4 +11,9 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
     {
         public string Format(decimal value) => CurrencySymbol.EUR + value.ToString(StringFormats.Default);
     }
+
+    public class BinanceCryptocurrencyStringFormatter : IBinanceValueFormatter<string, string>
+    {
+        public string Format(string value) => value + CurrencyName.EUR;
+    }
 }

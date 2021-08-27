@@ -12,6 +12,8 @@ namespace BinanceTrackerDesktop.Core.UserData.API
         string Secret { get; set; }
 
         decimal Balance { get; set; }
+
+        bool NotificationsEnabled { get; set; }
     }
 
     public interface IBinanceUserDataWriter
@@ -56,13 +58,16 @@ namespace BinanceTrackerDesktop.Core.UserData.API
 
         public decimal Balance { get; set; }
 
+        public bool NotificationsEnabled { get; set; }
 
 
-        public BinanceUserData(string key, string secret, decimal balance)
+
+        public BinanceUserData(string key, string secret, decimal balance, bool notifications = true)
         {
             Key = key;
             Secret = secret;
             Balance = balance;
+            NotificationsEnabled = notifications;
         }
 
         public BinanceUserData()
@@ -70,6 +75,7 @@ namespace BinanceTrackerDesktop.Core.UserData.API
             Key = string.Empty;
             Secret = string.Empty;
             Balance = decimal.Zero;
+            NotificationsEnabled = true;
         }
     }
 

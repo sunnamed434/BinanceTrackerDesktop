@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Forms.Tracker.API;
+﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
 using System.Windows.Forms;
@@ -9,40 +10,43 @@ namespace BinanceTrackerDesktop.Forms.Tracker.MoveListener
     {
         private readonly IFormControl formControl;
 
-        private readonly IFormEventListener formEventListener;
-
         private readonly BinanceTrackerNotificationsControl notificationsControl;
 
 
 
-        public BinanceTrackerMoveListener(IFormControl formControl, IFormEventListener formEventListener, BinanceTrackerNotificationsControl notificationsControl)
+        public BinanceTrackerMoveListener(IFormControl formControl, BinanceTrackerNotificationsControl notificationsControl)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
 
-            if (formEventListener == null)
-                throw new ArgumentNullException(nameof(formEventListener));
+            if (notificationsControl == null)
+                throw new ArgumentNullException(nameof(notificationsControl));
 
             this.formControl = formControl;
-            this.formEventListener = formEventListener;
             this.notificationsControl = notificationsControl;
 
-            this.formEventListener.OnTriggerEventHandler += onFormMoved;
+            this.formControl.Move += onFormMove;
         }
 
         ~BinanceTrackerMoveListener()
         {
-            this.formEventListener.OnTriggerEventHandler -= onFormMoved;
+            this.formControl.Move -= onFormMove;
         }
 
 
 
-        private void onFormMoved(object sender, EventArgs e)
+        private async void onFormMove(object sender, EventArgs e)
         {
             if (this.formControl.WindowState == FormWindowState.Minimized)
             {
+                BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+
                 this.formControl.Hide();
-                this.notificationsControl.Show("Binance Tracker Desktop", "Application hiden!");
+
+                if (binanceUserData.NotificationsEnabled)
+                {
+                    this.notificationsControl.Show("Binance Tracker Desktop", "Application hiden!");
+                }
             }
         }
     }

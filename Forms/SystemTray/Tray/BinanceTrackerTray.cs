@@ -1,21 +1,32 @@
-﻿using BinanceTrackerDesktop.Forms.Tracker.API;
+﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Forms.Tracker.API;
+using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
-using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Tray
+namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
     public class BinanceTrackerTray
     {
         private readonly IFormControl formControl;
 
+        private readonly BinanceTrackerSystemTrayForm systemTrayForm;
+
+        private readonly BinanceTrackerNotificationsControl notificationsControl;
+
         private readonly IFormEventListener[] formEventListeners;
 
 
 
-        public BinanceTrackerTray(IFormControl formControl, params IFormEventListener[] formEventListeners)
+        public BinanceTrackerTray(IFormControl formControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
+
+            if (systemTrayForm == null)
+                throw new ArgumentNullException(nameof(systemTrayForm));
+
+            if (notificationsControl == null)
+                throw new ArgumentNullException(nameof(notificationsControl));
 
             if (formEventListeners == null)
                 throw new ArgumentNullException(nameof(formEventListeners));
@@ -24,6 +35,8 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Tray
                 throw new InvalidOperationException();
 
             this.formControl = formControl;
+            this.systemTrayForm = systemTrayForm;
+            this.notificationsControl = notificationsControl;
             this.formEventListeners = formEventListeners;
 
             this.formEventListeners[0].OnTriggerEventHandler += onTrayDoubleClicked;
@@ -44,17 +57,23 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Tray
 
         private void onTrayDoubleClicked(object sender, EventArgs e)
         {
-            formControl.Show();
+            this.formControl.Show();
         }
 
         private void onApplicationOpenClicked(object sender, EventArgs e)
         {
-            formControl.Show();
+            this.formControl.Show();
         }
 
-        private void onDisableNotificationsClicked(object sender, EventArgs e)
+        private async void onDisableNotificationsClicked(object sender, EventArgs e)
         {
-            MessageBox.Show(nameof(onDisableNotificationsClicked));
+            BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+            binanceUserData.NotificationsEnabled = !binanceUserData.NotificationsEnabled;
+
+            await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
+
+            this.systemTrayForm.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? "Disable Notifications" : "Enable Notifications");
+            this.notificationsControl.Show("Binance Tracker Desktop", binanceUserData.NotificationsEnabled == true ? "Notifications Enabled" : "Notifications Disabled");
         }
 
         private void onApplicationQuitClicked(object sender, EventArgs e)

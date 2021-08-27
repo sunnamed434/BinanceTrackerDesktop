@@ -29,17 +29,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinanceTrackerForm));
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
-            this.BinanceTrackerMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.OpenBinanceTrackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DisableNotificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.QuitBinanceTrackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BinanceTrackerNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.BinanceTrackerMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // UserTotalBalanceText
@@ -65,6 +58,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             // 
             // RefreshTotalBalanceButton
             // 
+            this.RefreshTotalBalanceButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RefreshTotalBalanceButton.Location = new System.Drawing.Point(140, 295);
             this.RefreshTotalBalanceButton.Name = "RefreshTotalBalanceButton";
             this.RefreshTotalBalanceButton.Size = new System.Drawing.Size(114, 23);
@@ -72,41 +66,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.RefreshTotalBalanceButton.Text = "Refresh Balance";
             this.RefreshTotalBalanceButton.UseVisualStyleBackColor = true;
             this.RefreshTotalBalanceButton.Click += new System.EventHandler(this.onRefreshTotalBalanceButtonClick);
-            // 
-            // BinanceTrackerMenuStrip
-            // 
-            this.BinanceTrackerMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpenBinanceTrackerToolStripMenuItem,
-            this.DisableNotificationsToolStripMenuItem,
-            this.QuitBinanceTrackerToolStripMenuItem});
-            this.BinanceTrackerMenuStrip.Name = "BinanceTrackerMenuStrip";
-            this.BinanceTrackerMenuStrip.Size = new System.Drawing.Size(189, 70);
-            this.BinanceTrackerMenuStrip.Text = "Binance Tracker Desktop";
-            // 
-            // OpenBinanceTrackerToolStripMenuItem
-            // 
-            this.OpenBinanceTrackerToolStripMenuItem.Name = "OpenBinanceTrackerToolStripMenuItem";
-            this.OpenBinanceTrackerToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.OpenBinanceTrackerToolStripMenuItem.Text = "Open Binance Tracker";
-            // 
-            // DisableNotificationsToolStripMenuItem
-            // 
-            this.DisableNotificationsToolStripMenuItem.Name = "DisableNotificationsToolStripMenuItem";
-            this.DisableNotificationsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.DisableNotificationsToolStripMenuItem.Text = "Disable notifications";
-            // 
-            // QuitBinanceTrackerToolStripMenuItem
-            // 
-            this.QuitBinanceTrackerToolStripMenuItem.Name = "QuitBinanceTrackerToolStripMenuItem";
-            this.QuitBinanceTrackerToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.QuitBinanceTrackerToolStripMenuItem.Text = "Quit Binance Tracker";
-            // 
-            // BinanceTrackerNotifyIcon
-            // 
-            this.BinanceTrackerNotifyIcon.ContextMenuStrip = this.BinanceTrackerMenuStrip;
-            this.BinanceTrackerNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("BinanceTrackerNotifyIcon.Icon")));
-            this.BinanceTrackerNotifyIcon.Text = "Binance Tracker Desktop";
-            this.BinanceTrackerNotifyIcon.Visible = true;
             // 
             // BinanceTrackerForm
             // 
@@ -119,7 +78,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BinanceTrackerForm";
             this.Text = "Binance Tracker Desktop";
-            this.BinanceTrackerMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,11 +87,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         private System.Windows.Forms.Label UserTotalBalanceText;
         private System.Windows.Forms.Label TotalBalanceTooltipText;
         private System.Windows.Forms.Button RefreshTotalBalanceButton;
-        private System.Windows.Forms.ContextMenuStrip BinanceTrackerMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem OpenBinanceTrackerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem DisableNotificationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem QuitBinanceTrackerToolStripMenuItem;
-        private System.Windows.Forms.NotifyIcon BinanceTrackerNotifyIcon;
     }
 }
 

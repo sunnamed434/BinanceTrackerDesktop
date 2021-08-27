@@ -1,9 +1,11 @@
 ﻿using Binance.Net;
+using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.SpotData;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.API;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
 using BinanceTrackerDesktop.Core.Currencies;
+using BinanceTrackerDesktop.Core.Formatters.API;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using CryptoExchange.Net.Objects;
 using System;
@@ -34,7 +36,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
         {
             IEnumerable<BinanceUserWalletCoinResult> buyedCoins = await GetBuyedCoinsAsync();
 
-            decimal result = 0;
+            decimal result = decimal.Zero;
             foreach (BinanceUserWalletCoinResult coin in buyedCoins)
                 result += coin.Price;
 
@@ -43,13 +45,23 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
         public async Task<IEnumerable<BinanceUserWalletCoinResult>> GetBuyedCoinsAsync()
         {
-            WebCallResult<BinanceAccountInfo> accountInfo = await client.General.GetAccountInfoAsync();
+            WebCallResult<BinanceAccountInfo> binanceAccountInfo = await client.General.GetAccountInfoAsync();
 
             List<BinanceUserWalletCoinResult> result = new List<BinanceUserWalletCoinResult>();
-            foreach (BinanceBalance balance in accountInfo.Data.Balances.Where(b => b.Total.ValueFitsToCalculation()))
-                result.Add(new BinanceUserWalletCoinResult(balance.Asset + CurrencyName.EUR, BinanceCoinCalculator.GetPrice(new BinanceCoinOptions(client.Spot.Market.GetPriceAsync(balance.Asset + CurrencyName.EUR).Result.Data.Price, balance.Total))));
+            foreach (BinanceBalance balance in binanceAccountInfo.Data.Balances.Where(b => b.Total.ValueFitsToCalculation()))
+                result.Add(await calculateAndFormatCoinPriceAsync(balance));
 
             return result;
+        }
+
+
+
+        private async Task<BinanceUserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceBalance balance)
+        {
+            string formattedBalance = new BinanceCryptocurrencyStringFormatter().Format(balance.Asset);
+            WebCallResult<BinancePrice> marketPriceResult = await client.Spot.Market.GetPriceAsync(formattedBalance);
+
+            return new BinanceUserWalletCoinResult(formattedBalance, BinanceCoinCalculator.GetPrice(new BinanceCoinOptions(marketPriceResult.Data.Price, balance.Total)));
         }
     }
 }
