@@ -28,6 +28,8 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             if (control == null)
                 throw new ArgumentNullException(nameof(control));
 
+            NotifyIcon.Text = "Binance Tracker Desktop";
+
             new BinanceTrackerTray(this.control = control, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), formEventListeners = new IFormEventListener[]
             {
                 new FormEventListener(),
