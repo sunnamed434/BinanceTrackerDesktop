@@ -40,9 +40,10 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
 
             if (options.WalletResult.Value > options.Data.Balance)
                 return Color.Green;
-            else if (options.WalletResult.Value == options.Data.Balance)
+            else if (options.WalletResult.Value < options.Data.Balance)
+                return Color.Red;
+            else
                 return Color.Gray;
-            else return Color.Red;
         }
 
 

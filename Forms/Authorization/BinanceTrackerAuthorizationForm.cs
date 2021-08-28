@@ -13,7 +13,9 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         {
             InitializeComponent();
 
-            intitializeForm();   
+            intitializeForm();
+
+            AuthorizeButton.Click += onAuthorizeButtonClicked;
         }
 
 
@@ -27,7 +29,7 @@ namespace BinanceTrackerDesktop.Forms.Authorization
 
 
 
-        private async void onAuthorizeButtonClick(object sender, EventArgs e)
+        private async void onAuthorizeButtonClicked(object sender, EventArgs e)
         {
             Validator userKeyValidator = UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
@@ -39,7 +41,9 @@ namespace BinanceTrackerDesktop.Forms.Authorization
 
             if (userKeyValidator.IsSuccess && userSecretValidator.IsSuccess)
             {
-                await new BinanceUserDataWriter().WriteDataAsync(new BinanceUserData(UserKeyTextBox.Text, UserSecretTextBox.Text, decimal.Zero));
+                AuthorizeButton.Click -= onAuthorizeButtonClicked;
+
+                await new BinanceUserDataWriter().WriteDataAsync(new BinanceUserData(UserKeyTextBox.Text, UserSecretTextBox.Text));
 
                 base.Hide();
                 new BinanceTrackerForm().ShowDialog();

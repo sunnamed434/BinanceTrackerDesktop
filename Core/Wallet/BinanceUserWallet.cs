@@ -4,14 +4,12 @@ using Binance.Net.Objects.Spot.SpotData;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.API;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
-using BinanceTrackerDesktop.Core.Currencies;
 using BinanceTrackerDesktop.Core.Formatters.API;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.Wallet

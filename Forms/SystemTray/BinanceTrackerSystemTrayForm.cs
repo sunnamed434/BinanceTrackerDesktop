@@ -15,13 +15,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
         private readonly IFormControl control;
 
-        private readonly ISystemTrayFormControl trayControl;
 
 
+        NotifyIcon ISystemTrayFormControl.NotifyIcon => this.NotifyIcon;
 
-        public NotifyIcon Notify => this.NotifyIcon;
-
-
+        
 
         public BinanceTrackerSystemTrayForm(IFormControl control)
         {
@@ -30,13 +28,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             if (control == null)
                 throw new ArgumentNullException(nameof(control));
 
-            trayControl = this;
+            this.NotifyIcon.ContextMenuStrip = Tray;
+            this.NotifyIcon.Text = TrayDataContainer.ApplicationName;
+            this.NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
 
-            NotifyIcon.ContextMenuStrip = Tray;
-            NotifyIcon.Text = TrayDataContainer.ApplicationName;
-            NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
-
-            new BinanceTrackerTray(this.control = control, this, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), 
+            new BinanceTrackerTray(this.control = control, this, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(this.NotifyIcon)), 
             formEventListeners = new IFormEventListener[]
             {
                 new FormEventListener(),
@@ -51,17 +47,6 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
         }
 
         
-
-        private async void initializeContextMenuStripAndReadUserDataAsync()
-        {
-            BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
-
-            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.OpenApplication, default, (s, e) => formEventListeners[1].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications, default, (s, e) => formEventListeners[2].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.QuitApplication, default, (s, e) => formEventListeners[3].TriggerEvent(s, e)));
-        }
-
-
 
         void ISystemTrayFormControl.Close()
         {
@@ -82,11 +67,22 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
 
 
+        private async void initializeContextMenuStripAndReadUserDataAsync()
+        {
+            BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+
+            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.OpenApplication, default, (s, e) => formEventListeners[1].TriggerEvent(s, e)));
+            this.Tray.Items.Add(new ToolStripMenuItem(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications, default, (s, e) => formEventListeners[2].TriggerEvent(s, e)));
+            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.QuitApplication, default, (s, e) => formEventListeners[3].TriggerEvent(s, e)));
+        }
+
+
+
         private void onFormClosing(object sender, FormClosingEventArgs e)
         {
             this.control.FormClosing -= onFormClosing;
 
-            trayControl.Close();
+            ((ISystemTrayFormControl)this).Close();
         }
     }
 }

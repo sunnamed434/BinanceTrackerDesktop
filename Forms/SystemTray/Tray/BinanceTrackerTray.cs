@@ -63,14 +63,22 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
 
 
-        private void onTrayDoubleClicked(object sender, EventArgs e)
+        private void unHideForm()
         {
             this.formControl.Show();
+            this.formControl.WindowState = FormWindowState.Normal;
+        }
+
+
+
+        private void onTrayDoubleClicked(object sender, EventArgs e)
+        {
+            unHideForm();
         }
 
         private void onApplicationOpenClicked(object sender, EventArgs e)
         {
-            this.formControl.Show();
+            unHideForm();
         }
 
         private async void onDisableNotificationsClicked(object sender, EventArgs e)

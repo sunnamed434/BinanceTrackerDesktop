@@ -5,7 +5,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.API
 {
     public interface IFormControl
     {
-        FormWindowState WindowState { get; }
+        FormWindowState WindowState { get; set; }
 
         void Show();
 
