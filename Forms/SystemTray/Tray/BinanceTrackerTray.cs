@@ -1,13 +1,17 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
+using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
     public class BinanceTrackerTray
     {
         private readonly IFormControl formControl;
+
+        private readonly ISystemTrayFormControl systemTrayFormControl;
 
         private readonly BinanceTrackerSystemTrayForm systemTrayForm;
 
@@ -17,10 +21,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
 
 
-        public BinanceTrackerTray(IFormControl formControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
+        public BinanceTrackerTray(IFormControl formControl, ISystemTrayFormControl systemTrayFormControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
+
+            if (systemTrayFormControl == null)
+                throw new ArgumentNullException(nameof(systemTrayFormControl));
 
             if (systemTrayForm == null)
                 throw new ArgumentNullException(nameof(systemTrayForm));
@@ -35,6 +42,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
                 throw new InvalidOperationException();
 
             this.formControl = formControl;
+            this.systemTrayFormControl = systemTrayFormControl;
             this.systemTrayForm = systemTrayForm;
             this.notificationsControl = notificationsControl;
             this.formEventListeners = formEventListeners;
@@ -72,13 +80,14 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
             await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
 
-            this.systemTrayForm.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
+            this.systemTrayFormControl.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
             this.notificationsControl.Show(TrayDataContainer.ApplicationName, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.NotificationsEnabled : TrayDataContainer.NotificationsDisabled);
         }
 
         private void onApplicationQuitClicked(object sender, EventArgs e)
         {
             this.formControl.Close();
+            this.systemTrayFormControl.Close();
         }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Forms\Authorization\BinanceAPIKeysCharactersLength.cs" />
+    <Compile Include="Forms\SystemTray\API\ISystemTrayFormControl.cs" />
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>

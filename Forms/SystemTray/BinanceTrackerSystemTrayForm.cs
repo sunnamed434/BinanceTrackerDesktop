@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
@@ -8,11 +9,13 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray
 {
-    public partial class BinanceTrackerSystemTrayForm : Form
+    public partial class BinanceTrackerSystemTrayForm : Form, ISystemTrayFormControl
     {
         private readonly IFormEventListener[] formEventListeners;
 
         private readonly IFormControl control;
+
+        private readonly ISystemTrayFormControl trayControl;
 
 
 
@@ -27,11 +30,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             if (control == null)
                 throw new ArgumentNullException(nameof(control));
 
+            trayControl = this;
+
             NotifyIcon.ContextMenuStrip = Tray;
             NotifyIcon.Text = TrayDataContainer.ApplicationName;
             NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
 
-            new BinanceTrackerTray(this.control = control, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), 
+            new BinanceTrackerTray(this.control = control, this, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(NotifyIcon)), 
             formEventListeners = new IFormEventListener[]
             {
                 new FormEventListener(),
@@ -41,9 +46,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             });
 
             initializeContextMenuStripAndReadUserDataAsync();
+
+            control.FormClosing += onFormClosing;
         }
 
-
+        
 
         private async void initializeContextMenuStripAndReadUserDataAsync()
         {
@@ -56,7 +63,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
 
 
-        public void ChangeMenuItemTitle(int index, string to)
+        void ISystemTrayFormControl.Close()
+        {
+            using (NotifyIcon)
+                this.NotifyIcon.Visible = false;
+        }
+
+        void ISystemTrayFormControl.ChangeMenuItemTitle(int index, string to)
         {
             if (this.Tray.Items[index] == null)
                 throw new IndexOutOfRangeException(nameof(index));
@@ -65,6 +78,15 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
                 throw new ArgumentNullException(nameof(to));
 
             this.Tray.Items[index].Text = to;
+        }
+
+
+
+        private void onFormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.control.FormClosing -= onFormClosing;
+
+            trayControl.Close();
         }
     }
 }
