@@ -39,6 +39,7 @@ namespace BinanceTrackerDesktop.Forms.Authorization
             // 
             this.UserKeyTextBox.Location = new System.Drawing.Point(12, 117);
             this.UserKeyTextBox.Name = "UserKeyTextBox";
+            this.UserKeyTextBox.PasswordChar = '●';
             this.UserKeyTextBox.Size = new System.Drawing.Size(325, 20);
             this.UserKeyTextBox.TabIndex = 0;
             // 
@@ -46,6 +47,7 @@ namespace BinanceTrackerDesktop.Forms.Authorization
             // 
             this.UserSecretTextBox.Location = new System.Drawing.Point(12, 143);
             this.UserSecretTextBox.Name = "UserSecretTextBox";
+            this.UserSecretTextBox.PasswordChar = '●';
             this.UserSecretTextBox.Size = new System.Drawing.Size(325, 20);
             this.UserSecretTextBox.TabIndex = 1;
             // 

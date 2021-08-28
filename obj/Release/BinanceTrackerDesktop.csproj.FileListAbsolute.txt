@@ -5,3 +5,4 @@ D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Prope
 D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
 D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.GenerateResource.cache
 D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CoreCompileInputs.cache
+D:\Github\Projects\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.AssemblyReference.cache

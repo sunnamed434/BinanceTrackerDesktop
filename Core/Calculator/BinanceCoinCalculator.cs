@@ -1,26 +1,30 @@
 ﻿using BinanceTrackerDesktop.Core.Calculator.API;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BinanceTrackerDesktop.Core.Calculator
 {
     public class BinanceCoinCalculator
     {
-        public static decimal GetPrice(BinanceCoinOptions property)
+        public static decimal GetPrice(BinanceCoinOptions options)
         {
-            if (property == null)
-                throw new ArgumentNullException(nameof(property));
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
 
-            return property.Amount * property.Price;
+            return options.Amount * options.Price;
         }
 
-        public static decimal GetPrice(IEnumerable<BinanceCoinOptions> properties)
+        public static decimal GetPrice(IEnumerable<BinanceCoinOptions> options)
         {
-            if (properties == null)
-                throw new ArgumentNullException(nameof(properties));
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+
+            if (options.Count() < 0)
+                throw new InvalidOperationException();
 
             decimal result = decimal.Zero;
-            foreach (BinanceCoinOptions property in properties)
+            foreach (BinanceCoinOptions property in options)
             {
                 if (property == null)
                     throw new ArgumentNullException(nameof(property));

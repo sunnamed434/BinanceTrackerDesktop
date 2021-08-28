@@ -62,8 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\Formatters\API\IBinanceValueFormatter.cs" />
+    <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Formatters\StringFormats.cs" />
+    <Compile Include="Core\UserData\API\Extension\BinanceUserDataExtension.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />

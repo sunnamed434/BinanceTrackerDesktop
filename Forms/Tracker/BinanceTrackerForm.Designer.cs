@@ -66,7 +66,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.RefreshTotalBalanceButton.TabIndex = 2;
             this.RefreshTotalBalanceButton.Text = "Refresh Balance";
             this.RefreshTotalBalanceButton.UseVisualStyleBackColor = true;
-            this.RefreshTotalBalanceButton.Click += new System.EventHandler(this.onRefreshTotalBalanceButtonClick);
             // 
             // UserTotalBalanceLosesText
             // 

@@ -1,18 +1,14 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects;
-using BinanceTrackerDesktop.Core.UserData;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Wallet;
 using CryptoExchange.Net.Authentication;
 using System;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Startup
 {
     public class BinanceStartup
     {
-        public readonly BinanceUserData Data;
-
         public readonly BinanceUserWallet Wallet;
 
 

@@ -81,6 +81,6 @@ namespace BinanceTrackerDesktop.Core.UserData.API
 
     public class BinanceUserDataFile
     {
-        public const string Path = "userdata.txt";
+        public const string Path = "userdata.json";
     }
 }
