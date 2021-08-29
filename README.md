@@ -1,7 +1,7 @@
 # BinanceTrackerDesktop
 
 ### About
-Warning, this is a beta version, here you can see bugs. (write them here [Issues](https://github.com/z1net/BinanceTrackerDesktop/issues))
+Warning, this is a beta version, here you can see bugs. (write them here in [Issues](https://github.com/z1net/BinanceTrackerDesktop/issues))
 
 ### How to use?
 1. Create Binance API;
