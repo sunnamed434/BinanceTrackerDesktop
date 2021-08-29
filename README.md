@@ -17,5 +17,5 @@
 ![Overview](https://user-images.githubusercontent.com/65300126/131248850-a68a0db1-0e5f-4728-b7ac-15ab68bb277b.png)
 
 ## Downoload Library
-[](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.0/BinanceTrackerDesktop.rar)
+[Click](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.0/BinanceTrackerDesktop.rar)
 
