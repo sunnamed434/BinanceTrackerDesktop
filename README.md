@@ -1,6 +1,9 @@
 # BinanceTrackerDesktop
 
 ### About
+This app can help you to fast check your balance or check the loses. Something like Binance Lite on pc.
+
+### Beta
 Warning, this is a beta version, here you can see bugs. (write them here in [Issues](https://github.com/z1net/BinanceTrackerDesktop/issues))
 
 ### How to use?
