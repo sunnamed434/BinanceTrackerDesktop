@@ -15,3 +15,7 @@
 ![Screenshot_2](https://user-images.githubusercontent.com/65300126/131249080-a179aec0-426a-435b-9070-9ba41fceaf34.png)
 
 ![Overview](https://user-images.githubusercontent.com/65300126/131248850-a68a0db1-0e5f-4728-b7ac-15ab68bb277b.png)
+
+## Downoload Library
+[](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.0/BinanceTrackerDesktop.rar)
+
