@@ -1,19 +1,15 @@
-﻿using BinanceTrackerDesktop.Core.Extension;
-using BinanceTrackerDesktop.Core.Formatters.API;
+﻿using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Core.UserData.API.Extension;
 using BinanceTrackerDesktop.Forms.SystemTray;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.Tracker.API;
-using BinanceTrackerDesktop.Forms.Tracker.MoveListener;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using BinanceTrackerDesktop.Forms.Tracker.UserData;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
 
@@ -36,7 +32,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             this.RefreshTotalBalanceButton.Click += onRefreshTotalBalanceButtonClick;
 
-            new BinanceTrackerMoveListener(this, new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(this) as ISystemTrayFormControl)?.NotifyIcon)));
+            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(this) as ISystemTrayFormControl)?.NotifyIcon));
         }
 
 

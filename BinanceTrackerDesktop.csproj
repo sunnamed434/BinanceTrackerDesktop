@@ -70,6 +70,7 @@
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Forms\Authorization\BinanceAPIKeysCharactersLength.cs" />
+    <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
     <Compile Include="Forms\SystemTray\API\ISystemTrayFormControl.cs" />
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
       <SubType>Form</SubType>
@@ -100,10 +101,11 @@
     <Compile Include="Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tracker\MoveListener\BinanceTrackerMoveListener.cs" />
     <Compile Include="Forms\Tracker\Notifications\API\INotificationsControl.cs" />
     <Compile Include="Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
     <Compile Include="Forms\SystemTray\Tray\BinanceTrackerTray.cs" />
+    <Compile Include="Forms\Tracker\Startup\WindowHandle.cs" />
+    <Compile Include="Forms\Tracker\Startup\Extension\BinanceTrackerWindowExtension.cs" />
     <Compile Include="Forms\Tracker\UserData\BinanceTrackerUserDataSaver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

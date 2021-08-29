@@ -1,6 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Forms.Authorization;
-using BinanceTrackerDesktop.Tracker.Forms;
+﻿using BinanceTrackerDesktop.Forms.Tracker.Startup;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +13,7 @@ namespace BinanceTrackerDesktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (await new BinanceUserDataReader().ReadDataAsync() != null)
-                Application.Run(new BinanceTrackerForm());
-            else
-                Application.Run(new BinanceTrackerAuthorizationForm());
+            await new BinanceTrackerStartup().InitializeAsync();
         }
     }
 }

@@ -41,8 +41,9 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserData
             BinanceUserWalletResult walletResult = await wallet.GetTotalBalanceAsync();
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
 
-            userData.With(s => s.Balance = walletResult.Value);
-            userData.With(s => s.BestBalance = walletResult.Value, walletResult.Value > userData.BestBalance);
+            userData
+                .With(s => s.Balance = walletResult.Value)
+                .With(s => s.BestBalance = walletResult.Value, walletResult.Value > userData.BestBalance);
 
             await new BinanceUserDataWriter().WriteDataAsync(userData);
 
