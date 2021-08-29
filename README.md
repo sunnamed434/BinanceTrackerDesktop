@@ -25,7 +25,8 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 
 ### Overview
 ![Overview](https://user-images.githubusercontent.com/65300126/131248850-a68a0db1-0e5f-4728-b7ac-15ab68bb277b.png)
-![Overview](https://user-images.githubusercontent.com/65300126/131262976-ed7aee39-f0c3-4c66-81a7-9f7138514c61.png)
+![Overview](https://user-images.githubusercontent.com/65300126/131262991-34969db4-fa6b-44e5-9780-ba2313b39466.png)
+
 
 ## Downoload
 [Click](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.0/BinanceTrackerDesktop.rar)
