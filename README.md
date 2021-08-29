@@ -26,6 +26,7 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 ### Overview
 ![Overview](https://user-images.githubusercontent.com/65300126/131248850-a68a0db1-0e5f-4728-b7ac-15ab68bb277b.png)
 ![Overview](https://user-images.githubusercontent.com/65300126/131262991-34969db4-fa6b-44e5-9780-ba2313b39466.png)
+And gray color, if nothing changed.
 
 
 ## Downoload
