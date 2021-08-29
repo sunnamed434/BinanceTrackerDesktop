@@ -1,7 +1,7 @@
 # BinanceTrackerDesktop
 
-### Binance API .NET
-[Im using this API](https://github.com/JKorf/Binance.Net)
+### Binance API
+[Binance.Net](https://github.com/JKorf/Binance.Net)
 
 ### About
 This app can help you to fast check your balance or check the loses. Something like Binance Lite on pc.
