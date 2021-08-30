@@ -69,6 +69,7 @@
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
+    <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
     <Compile Include="Forms\Authorization\BinanceAPIKeysCharactersLength.cs" />
     <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
     <Compile Include="Forms\SystemTray\API\ISystemTrayFormControl.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.Designer.cs">
       <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemTray\Tray\TrayDataContainer.cs" />
+    <Compile Include="Forms\SystemTray\Tray\Data\TrayDataContainer.cs" />
     <Compile Include="Forms\Tracker\API\IFormControl.cs" />
     <Compile Include="Forms\Tracker\API\IFormEventListener.cs" />
     <Compile Include="Forms\Tracker\BinanceTrackerForm.cs">
@@ -104,9 +105,9 @@
     <Compile Include="Forms\Tracker\Notifications\API\INotificationsControl.cs" />
     <Compile Include="Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
     <Compile Include="Forms\SystemTray\Tray\BinanceTrackerTray.cs" />
-    <Compile Include="Forms\Tracker\Startup\WindowHandle.cs" />
-    <Compile Include="Forms\Tracker\Startup\Extension\BinanceTrackerWindowExtension.cs" />
-    <Compile Include="Forms\Tracker\UserData\BinanceTrackerUserDataSaver.cs" />
+    <Compile Include="Core\Window\Handle\WindowHandle.cs" />
+    <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
+    <Compile Include="Forms\Tracker\UserDataLossProtector\BinanceTrackerUserDataLossProtector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">

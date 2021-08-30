@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray;
+using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;

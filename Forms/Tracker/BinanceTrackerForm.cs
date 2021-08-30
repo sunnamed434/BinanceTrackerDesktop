@@ -1,12 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.UserData.API.Extension;
 using BinanceTrackerDesktop.Forms.SystemTray;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
-using BinanceTrackerDesktop.Forms.Tracker.UserData;
+using BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
 using System.Drawing;
@@ -61,8 +62,11 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             BinanceUserWalletResult walletResult = await startup.Wallet.GetTotalBalanceAsync();
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
 
-            changeUserTotalBalanceLosesTextColor(getColorFromUserTotalBalanceLoses(new BinanceUserBalanceLosesOptions(walletResult, userData)));
-            changeUserTotalBalanceLosesText(new BinanceCurrencyValueFormatter().Format(walletResult.Value - userData.Balance));
+            if (!userData.UserStartedApplicationFirstTime())
+            {
+                changeUserTotalBalanceLosesText(new BinanceCurrencyValueFormatter().Format(walletResult.Value - userData.Balance));
+                changeUserTotalBalanceLosesTextColor(getColorFromUserTotalBalanceLoses(new BinanceUserBalanceLosesOptions(walletResult, userData)));
+            }
 
             onCompletedCallback?.Invoke();
         }
@@ -74,7 +78,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 throw new ArgumentNullException(nameof(content));
             }
 
-            UserTotalBalanceText.Text = content;
+            this.UserTotalBalanceText.Text = content;
         }
 
         private void changeUserTotalBalanceLosesText(string content)
@@ -84,7 +88,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 throw new ArgumentNullException(nameof(content));
             }
 
-            UserTotalBalanceLosesText.Text = content;
+            this.UserTotalBalanceLosesText.Text = content;
         }
 
         private void changeUserTotalBalanceLosesTextColor(Color color)
@@ -94,7 +98,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 throw new ArgumentNullException(nameof(color));
             }
 
-            UserTotalBalanceLosesText.ForeColor = color;
+            this.UserTotalBalanceLosesText.ForeColor = color;
         }
 
         private Color getColorFromUserTotalBalanceLoses(BinanceUserBalanceLosesOptions options)
@@ -108,9 +112,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             base.Activated -= onFormActivated;
 
-            startup = new BinanceStartup(await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData);
+            IBinanceUserData data = await new BinanceUserDataReader().ReadDataAsync();
+            startup = new BinanceStartup(data);
 
-            new BinanceTrackerUserDataSaver(this, startup.Wallet);
+            new BinanceTrackerUserDataLossProtector(this, startup.Wallet);
 
             refreshUserTotalBalanceAsync();
             refreshUserBalanceLoses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);

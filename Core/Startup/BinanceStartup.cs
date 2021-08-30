@@ -13,19 +13,19 @@ namespace BinanceTrackerDesktop.Core.Startup
 
 
 
-        public BinanceStartup(BinanceUserData data)
+        public BinanceStartup(IBinanceUserData userData)
         {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
+            if (userData == null)
+                throw new ArgumentNullException(nameof(userData));
 
             BinanceClient.SetDefaultOptions(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials(data.Key, data.Secret),
+                ApiCredentials = new ApiCredentials(userData.Key, userData.Secret),
             });
 
             BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
             {
-                ApiCredentials = new ApiCredentials(data.Key, data.Secret),
+                ApiCredentials = new ApiCredentials(userData.Key, userData.Secret),
             });
 
             Wallet = new BinanceUserWallet(new BinanceClient());

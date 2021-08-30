@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
+﻿namespace BinanceTrackerDesktop.Forms.SystemTray.Tray.Data
 {
     public class TrayDataContainer
     {

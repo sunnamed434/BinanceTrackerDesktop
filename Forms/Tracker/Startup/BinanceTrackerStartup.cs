@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.Window.Extension;
 using BinanceTrackerDesktop.Forms.Authorization;
-using BinanceTrackerDesktop.Forms.Tracker.Startup.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -13,20 +13,20 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup
         public async Task InitializeAsync()
         {
             Process process = Process.GetCurrentProcess();
-
             if (process.TryGetArleadyStartedSimilarProcess(out Process anotherProcess))
             {
                 process.UnhideSimilarProcess();
                 return;
             }
 
-            if (await new BinanceUserDataReader().ReadDataAsync() != null)
+            IBinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync();
+            if (userData == null)
             {
-                Application.Run(new BinanceTrackerForm());
+                Application.Run(new BinanceTrackerAuthorizationForm());
             }
             else
             {
-                Application.Run(new BinanceTrackerAuthorizationForm());
+                Application.Run(new BinanceTrackerForm());
             }
         }
     }

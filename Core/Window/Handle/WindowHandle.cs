@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Startup
+namespace BinanceTrackerDesktop.Core.Window.Handle
 {
     public class WindowHandle
     {

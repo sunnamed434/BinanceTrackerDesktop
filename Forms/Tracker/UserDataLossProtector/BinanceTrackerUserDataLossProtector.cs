@@ -4,11 +4,12 @@ using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.UserData
+namespace BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector
 {
-    public class BinanceTrackerUserDataSaver
+    public class BinanceTrackerUserDataLossProtector
     {
         private readonly IFormControl formControl;
 
@@ -16,7 +17,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserData
 
 
 
-        public BinanceTrackerUserDataSaver(IFormControl formControl, BinanceUserWallet wallet)
+        public BinanceTrackerUserDataLossProtector(IFormControl formControl, BinanceUserWallet wallet)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
@@ -27,15 +28,15 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserData
             this.formControl = formControl;
             this.wallet = wallet;
 
-            formControl.FormClosing += onFormClosing;
+            this.formControl.FormClosing += onFormClosing;
         }
 
 
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
-            formControl.FormClosing -= onFormClosing;
-
+            this.formControl.FormClosing -= onFormClosing;
+            
             e.Cancel = true;
 
             BinanceUserWalletResult walletResult = await wallet.GetTotalBalanceAsync();
@@ -43,11 +44,11 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserData
 
             userData
                 .With(s => s.Balance = walletResult.Value)
-                .With(s => s.BestBalance = walletResult.Value, walletResult.Value > userData.BestBalance);
+                .With(s => s.BestBalance = walletResult.Value, userData.BestBalance < walletResult.Value);
 
             await new BinanceUserDataWriter().WriteDataAsync(userData);
 
-            formControl.Close();
+            Environment.Exit(0);
         }
     }
 }

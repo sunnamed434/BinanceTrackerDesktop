@@ -1,9 +1,12 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.Window.API;
+using BinanceTrackerDesktop.Core.Window.Extension;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
+using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
-using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
@@ -63,22 +66,21 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
 
 
-        private void unHideForm()
+        private void setWindowToForegound()
         {
-            this.formControl.Show();
-            this.formControl.WindowState = FormWindowState.Normal;
+            new BinanceProcessWindow().SetWindowToForeground();
         }
 
 
 
         private void onTrayDoubleClicked(object sender, EventArgs e)
         {
-            unHideForm();
+            setWindowToForegound();
         }
 
         private void onApplicationOpenClicked(object sender, EventArgs e)
         {
-            unHideForm();
+            setWindowToForegound();
         }
 
         private async void onDisableNotificationsClicked(object sender, EventArgs e)

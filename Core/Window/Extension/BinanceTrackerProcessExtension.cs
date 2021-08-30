@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.Window.Handle;
+using System;
 using System.Diagnostics;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Extension
+namespace BinanceTrackerDesktop.Core.Window.Extension
 {
-    public static class BinanceTrackerWindowExtension
+    public static class BinanceTrackerProcessExtension
     {
         private const int FirstArrayElement = 0;
 

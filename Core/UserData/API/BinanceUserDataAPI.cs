@@ -10,10 +10,6 @@ namespace BinanceTrackerDesktop.Core.UserData.API
         string Key { get; set; }
 
         string Secret { get; set; }
-
-        decimal Balance { get; set; }
-
-        bool NotificationsEnabled { get; set; }
     }
 
     public interface IBinanceUserDataWriter
