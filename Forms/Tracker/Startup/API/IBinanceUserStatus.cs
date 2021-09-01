@@ -45,6 +45,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.API
 
         public BinanceUserWallet Wallet { get; }
 
+        
 
 
         protected BinanceUserStatusBase(BinanceUserData data, BinanceUserWallet wallet)
@@ -102,17 +103,19 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.API
 
         public override async Task<IBinanceUserStatusResult> CalculateUserTotalBalanceAsync()
         {
-            return await new Task<BinanceUserStatusResult>(default);
+            BinanceUserWalletResult walletResult = await Wallet.GetTotalBalanceAsync();
+
+            return new BinanceUserStatusResult(walletResult.Value);
         }
 
         public override async Task<IBinanceUserStatusResult> CalculateUserBalanceLossesAsync()
         {
-            return await new Task<BinanceUserStatusResult>(default);
+            return await Task.FromResult<IBinanceUserStatusResult>(new BinanceUserStatusResult(decimal.Zero));
         }
 
         public override string Format(decimal value)
         {
-            return new BinanceEmptyFormatter().Format();
+            return new BinanceCurrencyValueFormatter().Format(value);
         }
     }
 

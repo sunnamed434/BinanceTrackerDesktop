@@ -11,6 +11,7 @@ using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
 
@@ -58,6 +59,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             IBinanceUserStatusResult totalBalanceResult = await userStatus.CalculateUserTotalBalanceAsync();
 
             changeUserTotalBalanceText(userStatus.Format(totalBalanceResult.Value));
+
+            await Task.CompletedTask;
         }
 
         private async void refreshUserBalanceLosses(Action onStartedCallback = null, Action onCompletedCallback = null)
@@ -75,31 +78,16 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private void changeUserTotalBalanceText(string content)
         {
-            if (string.IsNullOrEmpty(content))
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
             this.UserTotalBalanceText.Text = content;
         }
 
         private void changeUserTotalBalanceLosesText(string content)
         {
-            if (string.IsNullOrEmpty(content))
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
             this.UserTotalBalanceLosesText.Text = content;
         }
 
         private void changeUserTotalBalanceLosesTextColor(Color color)
         {
-            if (color == Color.Empty)
-            {
-                throw new ArgumentNullException(nameof(color));
-            }
-
             this.UserTotalBalanceLosesText.ForeColor = color;
         }
 
@@ -116,8 +104,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             BinanceUserData data = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
             startup = new BinanceStartup(data);
-            userStatus = new BinanceUserStatusDetector(data, this.startup.Wallet).GetStatus();
 
+            userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
             new BinanceTrackerApplicationControl(this, startup.Wallet);
 
             refreshUserTotalBalanceAsync();

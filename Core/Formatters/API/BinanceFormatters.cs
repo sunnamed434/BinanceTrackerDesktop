@@ -13,9 +13,13 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
 
     public class BinanceCurrencyValueFormatter : IBinanceValueFormatter<string, decimal>
     {
+        private const string Default = "0.00";
+
+
+
         public string Format(decimal value)
         {
-            return CurrencySymbol.EUR + value.ToString(StringFormats.Default);
+            return CurrencySymbol.EUR + value.ToString(Default);
         }
     }
 
@@ -23,7 +27,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
     {
         public string Format(string content)
         {
-            if (string.IsNullOrEmpty(content))
+            if (content == null)
                 throw new ArgumentNullException(nameof(content));
 
             return content + CurrencyName.EUR;
@@ -60,14 +64,6 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
                 Value = value;
                 Data = data;
             }
-        }
-    }
-
-    public class BinanceEmptyFormatter : IBinanceValueFormatter<string, string>
-    {
-        public string Format(string value = "")
-        {
-            return string.Empty;
         }
     }
 }
