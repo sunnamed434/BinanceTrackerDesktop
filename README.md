@@ -37,5 +37,5 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 
 
 ## Downoload
-[Click](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.0/BinanceTrackerDesktop.rar)
+[Click](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.1/BinanceTrackerDesktop.rar)
 
