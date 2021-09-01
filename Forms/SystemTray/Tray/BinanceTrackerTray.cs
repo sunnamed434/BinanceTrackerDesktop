@@ -1,12 +1,10 @@
 ﻿using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Window.API;
-using BinanceTrackerDesktop.Core.Window.Extension;
+using BinanceTrackerDesktop.Forms.API;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
-using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
-using System.Diagnostics;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {

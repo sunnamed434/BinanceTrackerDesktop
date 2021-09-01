@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.API
+namespace BinanceTrackerDesktop.Forms.API
 {
     public interface IFormEventListener
     {

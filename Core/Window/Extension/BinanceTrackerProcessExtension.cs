@@ -8,7 +8,7 @@ namespace BinanceTrackerDesktop.Core.Window.Extension
     {
         private const int FirstArrayElement = 0;
 
-        private const int ContainsSameWindow = 1;
+        private const int ContainsSimiralWindow = 1;
 
 
 
@@ -18,7 +18,7 @@ namespace BinanceTrackerDesktop.Core.Window.Extension
                 throw new ArgumentNullException(nameof(source));
 
             Process[] processes = Process.GetProcessesByName(source.ProcessName);
-            if (processes.Length > ContainsSameWindow)
+            if (processes.Length > ContainsSimiralWindow)
             {
                 int processIndex = 0;
                 if (processes[FirstArrayElement].Id == source.Id)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.API
+namespace BinanceTrackerDesktop.Forms.API
 {
     public interface IFormControl
     {

@@ -1,13 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Core.UserData.API.Extension;
+using BinanceTrackerDesktop.Forms.API;
 using BinanceTrackerDesktop.Forms.SystemTray;
 using BinanceTrackerDesktop.Forms.SystemTray.API;
-using BinanceTrackerDesktop.Forms.Tracker.API;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
-using BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector;
+using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
+using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
 using System.Drawing;
@@ -20,6 +20,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
     {
         private BinanceStartup startup;
 
+        private IBinanceUserStatus userStatus;
+
 
 
         public BinanceTrackerForm()
@@ -27,6 +29,9 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             InitializeComponent();
 
             intitializeForm();
+
+            changeUserTotalBalanceText("-----------");
+            changeUserTotalBalanceLosesText("-----------");
 
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
@@ -50,23 +55,20 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private async void refreshUserTotalBalanceAsync()
         {
-            BinanceUserWalletResult result = await startup.Wallet.GetTotalBalanceAsync();
+            IBinanceUserStatusResult totalBalanceResult = await userStatus.CalculateUserTotalBalanceAsync();
 
-            changeUserTotalBalanceText(new BinanceCurrencyValueFormatter().Format(result.Value));
+            changeUserTotalBalanceText(userStatus.Format(totalBalanceResult.Value));
         }
 
-        private async void refreshUserBalanceLoses(Action onStartedCallback = null, Action onCompletedCallback = null)
+        private async void refreshUserBalanceLosses(Action onStartedCallback = null, Action onCompletedCallback = null)
         {
             onStartedCallback?.Invoke();
 
-            BinanceUserWalletResult walletResult = await startup.Wallet.GetTotalBalanceAsync();
-            BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+            BinanceUserData data = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
 
-            if (!userData.UserStartedApplicationFirstTime())
-            {
-                changeUserTotalBalanceLosesText(new BinanceCurrencyValueFormatter().Format(walletResult.Value - userData.Balance));
-                changeUserTotalBalanceLosesTextColor(getColorFromUserTotalBalanceLoses(new BinanceUserBalanceLosesOptions(walletResult, userData)));
-            }
+            IBinanceUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
+            changeUserTotalBalanceLosesText(userStatus.Format(balanceLossesResult.Value));
+            changeUserTotalBalanceLosesTextColor(getColorFromUserTotalBalanceLoses(new BinanceUserBalanceLossesOptions(balanceLossesResult.Value, data)));
 
             onCompletedCallback?.Invoke();
         }
@@ -101,7 +103,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.UserTotalBalanceLosesText.ForeColor = color;
         }
 
-        private Color getColorFromUserTotalBalanceLoses(BinanceUserBalanceLosesOptions options)
+        private Color getColorFromUserTotalBalanceLoses(BinanceUserBalanceLossesOptions options)
         {
             return new BinanceUserBalanceLosesColorFormatter().Format(options);
         }
@@ -112,19 +114,20 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             base.Activated -= onFormActivated;
 
-            IBinanceUserData data = await new BinanceUserDataReader().ReadDataAsync();
+            BinanceUserData data = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
             startup = new BinanceStartup(data);
+            userStatus = new BinanceUserStatusDetector(data, this.startup.Wallet).GetStatus();
 
-            new BinanceTrackerUserDataLossProtector(this, startup.Wallet);
+            new BinanceTrackerApplicationControl(this, startup.Wallet);
 
             refreshUserTotalBalanceAsync();
-            refreshUserBalanceLoses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
+            refreshUserBalanceLosses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
         }
 
         private void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
         {
             refreshUserTotalBalanceAsync();
-            refreshUserBalanceLoses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
+            refreshUserBalanceLosses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
         }
 
         private void onFormClosing(object sender, FormClosingEventArgs e)
@@ -132,8 +135,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormClosing -= onFormClosing;
 
             this.RefreshTotalBalanceButton.Click -= onRefreshTotalBalanceButtonClick;
-
-            base.Hide();
         }
     }
 }

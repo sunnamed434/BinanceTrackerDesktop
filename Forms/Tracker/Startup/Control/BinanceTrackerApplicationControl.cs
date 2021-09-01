@@ -1,15 +1,14 @@
 ﻿using BinanceTrackerDesktop.Core.Extension;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Forms.Tracker.API;
+using BinanceTrackerDesktop.Forms.API;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector
+namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
 {
-    public class BinanceTrackerUserDataLossProtector
+    public class BinanceTrackerApplicationControl
     {
         private readonly IFormControl formControl;
 
@@ -17,7 +16,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector
 
 
 
-        public BinanceTrackerUserDataLossProtector(IFormControl formControl, BinanceUserWallet wallet)
+        public BinanceTrackerApplicationControl(IFormControl formControl, BinanceUserWallet wallet)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
@@ -28,15 +27,17 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UserDataLossProtector
             this.formControl = formControl;
             this.wallet = wallet;
 
-            this.formControl.FormClosing += onFormClosing;
+            formControl.FormClosing += onFormClosing;
         }
 
 
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
-            this.formControl.FormClosing -= onFormClosing;
-            
+            formControl.FormClosing -= onFormClosing;
+
+            formControl.Hide();
+
             e.Cancel = true;
 
             BinanceUserWalletResult walletResult = await wallet.GetTotalBalanceAsync();

@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
 using BinanceTrackerDesktop.Core.UserData.API;
-using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
 using System.Drawing;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
@@ -31,16 +30,16 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
         }
     }
 
-    public class BinanceUserBalanceLosesColorFormatter : IBinanceValueFormatter<Color, BinanceUserBalanceLosesOptions>
+    public class BinanceUserBalanceLosesColorFormatter : IBinanceValueFormatter<Color, BinanceUserBalanceLossesOptions>
     {
-        public Color Format(BinanceUserBalanceLosesOptions options)
+        public Color Format(BinanceUserBalanceLossesOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            if (options.WalletResult.Value > options.Data.Balance)
+            if (options.Value > options.Data.Balance)
                 return Color.Green;
-            else if (options.WalletResult.Value < options.Data.Balance)
+            else if (options.Value < options.Data.Balance)
                 return Color.Red;
             else
                 return Color.Gray;
@@ -48,19 +47,27 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
 
 
 
-        public class BinanceUserBalanceLosesOptions
+        public class BinanceUserBalanceLossesOptions
         {
-            public readonly BinanceUserWalletResult WalletResult;
+            public readonly decimal Value;
 
             public readonly BinanceUserData Data;
 
 
 
-            public BinanceUserBalanceLosesOptions(BinanceUserWalletResult walletResult, BinanceUserData data)
+            public BinanceUserBalanceLossesOptions(decimal value, BinanceUserData data)
             {
-                WalletResult = walletResult;
+                Value = value;
                 Data = data;
             }
+        }
+    }
+
+    public class BinanceEmptyFormatter : IBinanceValueFormatter<string, string>
+    {
+        public string Format(string value = "")
+        {
+            return string.Empty;
         }
     }
 }
