@@ -4,7 +4,7 @@
 [Binance.Net](https://github.com/JKorf/Binance.Net)
 
 ### About
-This app can help you to fast check your balance or check the loses. Something like Binance Lite on pc.
+This app can help you to fast check your balance or check the losses. Something like Binance Lite on pc.
 
 ### Reasons to use it?
 Did you see something here or understand? My eyes is just running everywhere, where is my Dogecoin i cant see him!
