@@ -8,6 +8,7 @@ This app can help you to fast check your balance or check the loses. Something l
 
 ### Reasons to use it?
 Did you see something here or understand? My eyes is just running everywhere, and where is my Dogecoin i cant see him!
+
 ![Overview](https://user-images.githubusercontent.com/65300126/131895236-d6efd236-da64-4eeb-ab6c-cf3a5b161d99.png)
 
 
