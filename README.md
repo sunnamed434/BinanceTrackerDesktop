@@ -16,7 +16,7 @@ Did you see something here or understand? Im not. My eyes is just running everyw
 Warning, this is a beta version, here you can see bugs. (write them here in [Issues](https://github.com/z1net/BinanceTrackerDesktop/issues))
 
 ### How to use?
-1. Create Binance API;
+1. Create Binance API
 
 2. Set in API restrictions. (* Enable Reading)
 
