@@ -1,14 +1,11 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.API;
+using System;
 
 namespace BinanceTrackerDesktop.Forms.API
 {
-    public interface IFormEventListener
+    public interface IFormEventListener : ITriggerableEventHandler
     {
-        event EventHandler OnTriggerEventHandler;
-
-
-
-        void TriggerEvent(object sender, EventArgs e);
+        
     }
 
     public class FormEventListener : IFormEventListener

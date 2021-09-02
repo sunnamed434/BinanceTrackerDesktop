@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Formatters.API;
+﻿using BinanceTrackerDesktop.Core.Controls.FormButton.API;
+using BinanceTrackerDesktop.Core.Controls.FormText.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.API;
@@ -8,12 +9,9 @@ using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
-using ConsoleBinanceTracker.Core.Wallet.API;
+using BinanceTrackerDesktop.Forms.Tracker.UI;
 using System;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -23,6 +21,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private IBinanceUserStatus userStatus;
 
+        private IFormEventListener[] textClickEventListeners;
+
+        private IFormEventListener refreshTotalBalanceEventListener;
+
 
 
         public BinanceTrackerForm()
@@ -31,18 +33,23 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             intitializeForm();
 
-            changeUserTotalBalanceText("-----------");
-            changeUserTotalBalanceLosesText("-----------");
-
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
 
             this.RefreshTotalBalanceButton.Click += onRefreshTotalBalanceButtonClick;
+            this.UserTotalBalanceText.Click += onUserTotalBalanceTextClicked;
+            this.UserTotalBalanceLosesText.Click += onUserTotalBalanceLosesTextClicked;
 
+            textClickEventListeners = new IFormEventListener[]
+            {
+                new FormEventListener(),
+                new FormEventListener(),
+            };
+            
             new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(this) as ISystemTrayFormControl)?.NotifyIcon));
         }
 
-
+        
 
         private void intitializeForm()
         {
@@ -50,50 +57,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
             base.MaximizeBox = false;
-        }
-
-
-
-        private async void refreshUserTotalBalanceAsync()
-        {
-            IBinanceUserStatusResult totalBalanceResult = await userStatus.CalculateUserTotalBalanceAsync();
-
-            changeUserTotalBalanceText(userStatus.Format(totalBalanceResult.Value));
-
-            await Task.CompletedTask;
-        }
-
-        private async void refreshUserBalanceLosses(Action onStartedCallback = null, Action onCompletedCallback = null)
-        {
-            onStartedCallback?.Invoke();
-
-            BinanceUserData data = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
-
-            IBinanceUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
-            changeUserTotalBalanceLosesText(userStatus.Format(balanceLossesResult.Value));
-            changeUserTotalBalanceLosesTextColor(getColorFromUserTotalBalanceLoses(new BinanceUserBalanceLossesOptions(balanceLossesResult.Value, data)));
-
-            onCompletedCallback?.Invoke();
-        }
-
-        private void changeUserTotalBalanceText(string content)
-        {
-            this.UserTotalBalanceText.Text = content;
-        }
-
-        private void changeUserTotalBalanceLosesText(string content)
-        {
-            this.UserTotalBalanceLosesText.Text = content;
-        }
-
-        private void changeUserTotalBalanceLosesTextColor(Color color)
-        {
-            this.UserTotalBalanceLosesText.ForeColor = color;
-        }
-
-        private Color getColorFromUserTotalBalanceLoses(BinanceUserBalanceLossesOptions options)
-        {
-            return new BinanceUserBalanceLosesColorFormatter().Format(options);
         }
 
 
@@ -107,15 +70,32 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
             new BinanceTrackerApplicationControl(this, startup.Wallet);
-
-            refreshUserTotalBalanceAsync();
-            refreshUserBalanceLosses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
+            new BinanceTrackerUserBalanceUIControl
+            (this, userStatus,
+            new FormButtonControl[]
+            {
+                new FormButtonControl(RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
+            },
+            new FormTextControl[]
+            {
+                new FormTextControl(UserTotalBalanceText, textClickEventListeners[0]),
+                new FormTextControl(UserTotalBalanceLosesText, textClickEventListeners[1]),
+            });
         }
 
         private void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
         {
-            refreshUserTotalBalanceAsync();
-            refreshUserBalanceLosses(() => RefreshTotalBalanceButton.Enabled = false, () => RefreshTotalBalanceButton.Enabled = true);
+            refreshTotalBalanceEventListener.TriggerEvent(sender, e);
+        }
+
+        private void onUserTotalBalanceTextClicked(object sender, EventArgs e)
+        {
+            textClickEventListeners[0].TriggerEvent(sender, e);
+        }
+
+        private void onUserTotalBalanceLosesTextClicked(object sender, EventArgs e)
+        {
+            textClickEventListeners[1].TriggerEvent(sender, e);
         }
 
         private void onFormClosing(object sender, FormClosingEventArgs e)
@@ -123,6 +103,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormClosing -= onFormClosing;
 
             this.RefreshTotalBalanceButton.Click -= onRefreshTotalBalanceButtonClick;
+            this.UserTotalBalanceText.Click -= onUserTotalBalanceTextClicked;
+            this.UserTotalBalanceLosesText.Click -= onUserTotalBalanceLosesTextClicked;
         }
     }
 }

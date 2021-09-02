@@ -61,6 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Controls\API\IFormComponentClickListener.cs" />
+    <Compile Include="Core\Controls\API\IFormClickEventListenerHandle.cs" />
+    <Compile Include="Core\Controls\API\IFormTextColorControl.cs" />
+    <Compile Include="Core\Controls\FormButton\API\IFormButtonControl.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Extension\WithGenericExtension.cs" />
@@ -107,6 +112,8 @@
     <Compile Include="Forms\SystemTray\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
+    <Compile Include="Core\Controls\FormText\API\IFormTextControl.cs" />
+    <Compile Include="Forms\Tracker\UI\BinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
