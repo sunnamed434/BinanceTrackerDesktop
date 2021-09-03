@@ -19,12 +19,17 @@ namespace BinanceTrackerDesktop.Core.Controls.FormText.API
 
 
 
+        private Color defaultColor;
+
+
+
         public FormTextControl(Label label, IFormEventListener onClickEventListener) : base(onClickEventListener)
         {
             if (label == null)
                 throw new ArgumentNullException(nameof(label));
 
             Label = label;
+            defaultColor = Color.Empty;
         }
 
 
@@ -54,6 +59,19 @@ namespace BinanceTrackerDesktop.Core.Controls.FormText.API
                 throw new ArgumentNullException(nameof(color));
 
             Label.ForeColor = color;
+        }
+
+        public void SetDefaultTextColor(Color color)
+        {
+            if (color == Color.Empty)
+                throw new ArgumentNullException(nameof(color));
+
+            defaultColor = color;
+        }
+
+        public Color GetDefaultTextColor()
+        {
+            return defaultColor;
         }
     }
 }

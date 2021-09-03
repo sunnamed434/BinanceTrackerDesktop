@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Forms.Authorization
+﻿namespace BinanceTrackerDesktop.Forms.Authorization.API
 {
     public class BinanceAPIKeysCharactersLength
     {

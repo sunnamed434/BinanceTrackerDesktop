@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,7 +74,7 @@
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
-    <Compile Include="Forms\Authorization\BinanceAPIKeysCharactersLength.cs" />
+    <Compile Include="Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
     <Compile Include="Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
     <Compile Include="Forms\Tracker\Startup\Control\BinanceTrackerApplicationControl.cs" />
     <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />

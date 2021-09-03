@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
-using BinanceTrackerDesktop.Core.UserData.API;
 using System;
 using System.Drawing;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
@@ -41,11 +40,13 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            if (options.Value > options.Data.Balance)
-                return Color.Green;
-            else if (options.Value < options.Data.Balance)
+            if (options.BestBalance == decimal.Zero)
+                return Color.Gray;
+            else if (options.BestBalance > options.TotalBalance)
                 return Color.Red;
-            else
+            else if (options.BestBalance < options.TotalBalance)
+                return Color.Green;
+            else 
                 return Color.Gray;
         }
 
@@ -53,16 +54,16 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
 
         public class BinanceUserBalanceLossesOptions
         {
-            public readonly decimal Value;
+            public readonly decimal TotalBalance;
 
-            public readonly BinanceUserData Data;
+            public readonly decimal BestBalance;
 
 
 
-            public BinanceUserBalanceLossesOptions(decimal value, BinanceUserData data)
+            public BinanceUserBalanceLossesOptions(decimal totalBalance, decimal bestBalance)
             {
-                Value = value;
-                Data = data;
+                TotalBalance = totalBalance;
+                BestBalance = bestBalance;
             }
         }
     }

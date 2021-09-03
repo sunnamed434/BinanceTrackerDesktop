@@ -9,5 +9,9 @@ namespace BinanceTrackerDesktop.Core.Controls.API
         void SetText(string content);
 
         void SetTextColor(Color color);
+
+        void SetDefaultTextColor(Color color);
+
+        Color GetDefaultTextColor();
     }
 }

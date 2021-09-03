@@ -83,7 +83,10 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.API
         {
             IBinanceUserStatusResult result = await CalculateUserTotalBalanceAsync();
 
-            return new BinanceUserStatusResult(result.Value - Data.BestBalance);
+            if (Data.BestBalance > result.Value)
+                return new BinanceUserStatusResult(Data.BestBalance - result.Value);
+            else
+                return new BinanceUserStatusResult(result.Value - Data.BestBalance);
         }
 
         public override string Format(decimal value)

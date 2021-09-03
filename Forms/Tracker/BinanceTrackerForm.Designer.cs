@@ -43,7 +43,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.UserTotalBalanceText.Name = "UserTotalBalanceText";
             this.UserTotalBalanceText.Size = new System.Drawing.Size(352, 39);
             this.UserTotalBalanceText.TabIndex = 0;
-            this.UserTotalBalanceText.Text = "€0.0";
+            this.UserTotalBalanceText.Text = "€0.00";
             this.UserTotalBalanceText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TotalBalanceTooltipText

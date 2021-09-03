@@ -19,12 +19,17 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
 
 
 
+        private Color defaultColor;
+
+
+
         public FormButtonControl(Button button, IFormEventListener clickEventListener) : base(clickEventListener)
         {
             if (button == null)
                 throw new ArgumentNullException(nameof(button));
 
             Button = button;
+            defaultColor = Color.Empty;
         }
 
 
@@ -54,6 +59,19 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
                 throw new ArgumentNullException(nameof(color));
 
             Button.ForeColor = color;
+        }
+
+        public void SetDefaultTextColor(Color color)
+        {
+            if (color == Color.Empty)
+                throw new ArgumentNullException(nameof(color));
+
+            defaultColor = color;
+        }
+
+        public Color GetDefaultTextColor()
+        {
+            return defaultColor;
         }
     }
 }

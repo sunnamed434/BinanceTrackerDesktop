@@ -34,9 +34,9 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
-            formControl.FormClosing -= onFormClosing;
+            this.formControl.FormClosing -= onFormClosing;
 
-            formControl.Hide();
+            this.formControl.Hide();
 
             e.Cancel = true;
 

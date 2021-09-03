@@ -5,6 +5,7 @@ using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
+using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
@@ -48,18 +49,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
             this.notificationsControl = notificationsControl;
             this.formEventListeners = formEventListeners;
 
+            this.formControl.FormClosing += onFormClosing;
             this.formEventListeners[0].OnTriggerEventHandler += onTrayDoubleClicked;
             this.formEventListeners[1].OnTriggerEventHandler += onApplicationOpenClicked;
             this.formEventListeners[2].OnTriggerEventHandler += onDisableNotificationsClicked;
             this.formEventListeners[3].OnTriggerEventHandler += onApplicationQuitClicked;
-        }
-
-        ~BinanceTrackerTray()
-        {
-            this.formEventListeners[0].OnTriggerEventHandler -= onTrayDoubleClicked;
-            this.formEventListeners[1].OnTriggerEventHandler -= onApplicationOpenClicked;
-            this.formEventListeners[2].OnTriggerEventHandler -= onDisableNotificationsClicked;
-            this.formEventListeners[3].OnTriggerEventHandler -= onApplicationQuitClicked;
         }
 
 
@@ -96,6 +90,15 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
         {
             this.formControl.Close();
             this.systemTrayFormControl.Close();
+        }
+
+        private void onFormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.formControl.FormClosing -= onFormClosing;
+            this.formEventListeners[0].OnTriggerEventHandler -= onTrayDoubleClicked;
+            this.formEventListeners[1].OnTriggerEventHandler -= onApplicationOpenClicked;
+            this.formEventListeners[2].OnTriggerEventHandler -= onDisableNotificationsClicked;
+            this.formEventListeners[3].OnTriggerEventHandler -= onApplicationQuitClicked;
         }
     }
 }

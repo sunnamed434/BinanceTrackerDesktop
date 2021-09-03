@@ -45,7 +45,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 new FormEventListener(),
                 new FormEventListener(),
             };
-            
+
             new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(this) as ISystemTrayFormControl)?.NotifyIcon));
         }
 
@@ -74,12 +74,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             (this, userStatus,
             new FormButtonControl[]
             {
-                new FormButtonControl(RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
+                new FormButtonControl(this.RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
             },
             new FormTextControl[]
             {
-                new FormTextControl(UserTotalBalanceText, textClickEventListeners[0]),
-                new FormTextControl(UserTotalBalanceLosesText, textClickEventListeners[1]),
+                new FormTextControl(this.UserTotalBalanceText, textClickEventListeners[0]),
+                new FormTextControl(this.UserTotalBalanceLosesText, textClickEventListeners[1]),
             });
         }
 
