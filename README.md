@@ -4,10 +4,10 @@
 [Binance.Net](https://github.com/JKorf/Binance.Net)
 
 ### About
-This app can help you to fast check your balance or check the loses. Something like Binance Lite on pc.
+This app can help you to fast check your balance or check the losses. Something like Binance Lite on pc.
 
 ### Reasons to use it?
-Did you see something here or understand? My eyes is just running everywhere, where is my Dogecoin i cant see him!
+Did you see something here or understand? Im not. My eyes is just running everywhere, where is my Dogecoin i cant see it!
 
 ![Overview](https://user-images.githubusercontent.com/65300126/131895236-d6efd236-da64-4eeb-ab6c-cf3a5b161d99.png)
 
@@ -16,7 +16,7 @@ Did you see something here or understand? My eyes is just running everywhere, wh
 Warning, this is a beta version, here you can see bugs. (write them here in [Issues](https://github.com/z1net/BinanceTrackerDesktop/issues))
 
 ### How to use?
-1. Create Binance API;
+1. Create Binance API
 
 2. Set in API restrictions. (* Enable Reading)
 
@@ -40,8 +40,3 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 - Green color: your balance is up.
 - Red color: you have loses.
 - Gray color: nothing changed.
-
-
-## Downoload
-[Click](https://github.com/z1net/BinanceTrackerDesktop/releases/download/1.0.0.3/BinanceTrackerDesktop.rar)
-
