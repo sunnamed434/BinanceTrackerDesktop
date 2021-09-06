@@ -17,6 +17,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 {
     public partial class BinanceTrackerForm : Form, IFormControl
     {
+        public readonly FormSafelyCloseControl SafelyCloseControl;
+
+
+
         private BinanceStartup startup;
 
         private IBinanceUserStatus userStatus;
@@ -46,7 +50,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 new FormEventListener(),
             };
 
-            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(this) as ISystemTrayFormControl)?.NotifyIcon));
+            SafelyCloseControl = new FormSafelyCloseControl();
+            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(SafelyCloseControl) as ISystemTrayFormControl)?.NotifyIcon));
         }
 
         
@@ -69,9 +74,9 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             startup = new BinanceStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
-            new BinanceTrackerApplicationControl(this, startup.Wallet);
+            new BinanceTrackerApplicationControl(this, SafelyCloseControl, startup.Wallet);
             new BinanceTrackerUserBalanceUIControl
-            (this, userStatus,
+            (SafelyCloseControl, userStatus,
             new FormButtonControl[]
             {
                 new FormButtonControl(this.RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
@@ -98,13 +103,17 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             textClickEventListeners[1].TriggerEvent(sender, e);
         }
 
-        private void onFormClosing(object sender, FormClosingEventArgs e)
+        private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
             base.FormClosing -= onFormClosing;
 
             this.RefreshTotalBalanceButton.Click -= onRefreshTotalBalanceButtonClick;
             this.UserTotalBalanceText.Click -= onUserTotalBalanceTextClicked;
             this.UserTotalBalanceLosesText.Click -= onUserTotalBalanceLosesTextClicked;
+
+            e.Cancel = true;
+
+            await SafelyCloseControl.CloseApplicationSafelyAndNotifyListenersAsync();
         }
     }
 }

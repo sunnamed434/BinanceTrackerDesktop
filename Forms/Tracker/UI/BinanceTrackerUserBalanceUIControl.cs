@@ -7,14 +7,13 @@ using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.UI
 {
     public class BinanceTrackerUserBalanceUIControl
     {
-        private readonly IFormControl formControl;
+        private IFormSafelyCloseControl formSafelyCloseControl;
 
         private readonly IBinanceUserStatus userStatus;
 
@@ -32,10 +31,10 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
 
 
 
-        public BinanceTrackerUserBalanceUIControl(IFormControl formControl, IBinanceUserStatus userStatus, IFormButtonControl[] formButtonControls, IFormTextControl[] formTextControls)
+        public BinanceTrackerUserBalanceUIControl(IFormSafelyCloseControl formSafelyCloseControl, IBinanceUserStatus userStatus, IFormButtonControl[] formButtonControls, IFormTextControl[] formTextControls)
         {
-            if (formControl == null)
-                throw new ArgumentNullException(nameof(formControl));
+            if (formSafelyCloseControl == null)
+                throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
             if (userStatus == null)
                 throw new ArgumentNullException(nameof(userStatus));
@@ -52,7 +51,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
             if (formTextControls.Length < 0)
                 throw new InvalidOperationException();
 
-            this.formControl = formControl;
+            this.formSafelyCloseControl = formSafelyCloseControl;
             this.userStatus = userStatus;
             this.formButtonControls = formButtonControls;
             this.formTextControls = formTextControls;
@@ -78,7 +77,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
                 }
             }
 
-            formControl.FormClosing += onFormClosing;
+            formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
             formButtonControls[0].ClickEvent.OnTriggerEventHandler += onRefreshTotalBalanceButtonClicked;
             formTextControls[0].ClickEvent.OnTriggerEventHandler += onTextClicked;
             formTextControls[1].ClickEvent.OnTriggerEventHandler += onTextClicked;
@@ -184,12 +183,13 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
             await new BinanceUserDataWriter().WriteDataAsync(userData);
         }
 
-        private void onFormClosing(object sender, FormClosingEventArgs e)
+        private async Task onCloseCallbackAsync()
         {
-            formControl.FormClosing -= onFormClosing;
             formButtonControls[0].ClickEvent.OnTriggerEventHandler -= onRefreshTotalBalanceButtonClicked;
             formTextControls[0].ClickEvent.OnTriggerEventHandler -= onTextClicked;
             formTextControls[1].ClickEvent.OnTriggerEventHandler -= onTextClicked;
+
+            await Task.CompletedTask;
         }
     }
 }

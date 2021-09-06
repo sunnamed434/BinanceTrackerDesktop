@@ -5,13 +5,13 @@ using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
     public class BinanceTrackerTray
     {
-        private readonly IFormControl formControl;
+        private readonly IFormSafelyCloseControl formSafelyCloseControl;
 
         private readonly ISystemTrayFormControl systemTrayFormControl;
 
@@ -23,10 +23,10 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
 
 
-        public BinanceTrackerTray(IFormControl formControl, ISystemTrayFormControl systemTrayFormControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
+        public BinanceTrackerTray(IFormSafelyCloseControl formSafelyCloseControl, ISystemTrayFormControl systemTrayFormControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
         {
-            if (formControl == null)
-                throw new ArgumentNullException(nameof(formControl));
+            if (formSafelyCloseControl == null)
+                throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
             if (systemTrayFormControl == null)
                 throw new ArgumentNullException(nameof(systemTrayFormControl));
@@ -43,13 +43,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
             if (formEventListeners.Length < 0)
                 throw new InvalidOperationException();
 
-            this.formControl = formControl;
+            this.formSafelyCloseControl = formSafelyCloseControl;
             this.systemTrayFormControl = systemTrayFormControl;
             this.systemTrayForm = systemTrayForm;
             this.notificationsControl = notificationsControl;
             this.formEventListeners = formEventListeners;
 
-            this.formControl.FormClosing += onFormClosing;
+            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
             this.formEventListeners[0].OnTriggerEventHandler += onTrayDoubleClicked;
             this.formEventListeners[1].OnTriggerEventHandler += onApplicationOpenClicked;
             this.formEventListeners[2].OnTriggerEventHandler += onDisableNotificationsClicked;
@@ -88,17 +88,18 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
         private void onApplicationQuitClicked(object sender, EventArgs e)
         {
-            this.formControl.Close();
             this.systemTrayFormControl.Close();
+            this.formSafelyCloseControl.CloseApplicationSafelyAndNotifyListenersAsync();
         }
 
-        private void onFormClosing(object sender, FormClosingEventArgs e)
+        private async Task onCloseCallbackAsync()
         {
-            this.formControl.FormClosing -= onFormClosing;
             this.formEventListeners[0].OnTriggerEventHandler -= onTrayDoubleClicked;
             this.formEventListeners[1].OnTriggerEventHandler -= onApplicationOpenClicked;
             this.formEventListeners[2].OnTriggerEventHandler -= onDisableNotificationsClicked;
             this.formEventListeners[3].OnTriggerEventHandler -= onApplicationQuitClicked;
+
+            await Task.CompletedTask;
         }
     }
 }

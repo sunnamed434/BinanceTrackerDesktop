@@ -35,3 +35,13 @@ D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\aa\BinanceTrackerDesktop.resources.dll
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.exe
 D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.pdb
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.csprojAssemblyReference.cache
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.Forms.SystemTray.BinanceTrackerSystemTrayForm.resources
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.Properties.Resources.resources
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.csproj.GenerateResource.cache
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.csproj.CoreCompileInputs.cache
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.exe
+C:\Users\opilane\Desktop\BinanceTrackerDesktop\BinanceTrackerDesktop-main\obj\Debug\BinanceTrackerDesktop.pdb

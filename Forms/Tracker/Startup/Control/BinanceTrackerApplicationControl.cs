@@ -4,7 +4,7 @@ using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Forms.API;
 using ConsoleBinanceTracker.Core.Wallet.API;
 using System;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
 {
@@ -12,33 +12,35 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
     {
         private readonly IFormControl formControl;
 
+        private readonly IFormSafelyCloseControl formSafelyCloseControl;
+
         private readonly BinanceUserWallet wallet;
 
 
 
-        public BinanceTrackerApplicationControl(IFormControl formControl, BinanceUserWallet wallet)
+        public BinanceTrackerApplicationControl(IFormControl formControl, IFormSafelyCloseControl formSafelyCloseControl, BinanceUserWallet wallet)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
+
+            if (formSafelyCloseControl == null)
+                throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
             this.formControl = formControl;
+            this.formSafelyCloseControl = formSafelyCloseControl;
             this.wallet = wallet;
 
-            formControl.FormClosing += onFormClosing;
+            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
         }
 
 
 
-        private async void onFormClosing(object sender, FormClosingEventArgs e)
+        private async Task onCloseCallbackAsync()
         {
-            this.formControl.FormClosing -= onFormClosing;
-
             this.formControl.Hide();
-
-            e.Cancel = true;
 
             BinanceUserWalletResult walletResult = await wallet.GetTotalBalanceAsync();
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
@@ -48,8 +50,6 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
                 .With(s => s.BestBalance = walletResult.Value, userData.BestBalance < walletResult.Value);
 
             await new BinanceUserDataWriter().WriteDataAsync(userData);
-
-            Environment.Exit(0);
         }
     }
 }

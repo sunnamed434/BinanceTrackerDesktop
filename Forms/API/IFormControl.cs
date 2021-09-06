@@ -16,7 +16,5 @@ namespace BinanceTrackerDesktop.Forms.API
         event EventHandler Activated;
 
         event EventHandler Move;
-
-        event FormClosingEventHandler FormClosing;
     }
 }
