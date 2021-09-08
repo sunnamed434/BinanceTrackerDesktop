@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Forms.API;
 
-namespace BinanceTrackerDesktop.Core.Controls.API
+namespace BinanceTrackerDesktop.Core.Control.API
 {
     public interface IFormClickEventListenerHandle
     {

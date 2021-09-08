@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Controls.FormButton.API;
-using BinanceTrackerDesktop.Core.Controls.FormText.API;
+﻿using BinanceTrackerDesktop.Core.Control.FormButton.API;
+using BinanceTrackerDesktop.Core.Control.FormText.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.API;
@@ -17,9 +17,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 {
     public partial class BinanceTrackerForm : Form, IFormControl
     {
-        public readonly FormSafelyCloseControl SafelyCloseControl;
-
-
+        private IFormSafelyComponentControl safelyComponentControl;
 
         private BinanceStartup startup;
 
@@ -34,7 +32,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         public BinanceTrackerForm()
         {
             InitializeComponent();
-
             intitializeForm();
 
             base.Activated += onFormActivated;
@@ -50,8 +47,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 new FormEventListener(),
             };
 
-            SafelyCloseControl = new FormSafelyCloseControl();
-            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(SafelyCloseControl) as ISystemTrayFormControl)?.NotifyIcon));
+            safelyComponentControl = new FormSafelyCloseComponentControl();
+            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(safelyComponentControl) as IFormSystemTrayControl)?.NotifyIcon));
         }
 
         
@@ -74,9 +71,9 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             startup = new BinanceStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
-            new BinanceTrackerApplicationControl(this, SafelyCloseControl, startup.Wallet);
+            new BinanceTrackerApplicationControl(this, safelyComponentControl, startup.Wallet);
             new BinanceTrackerUserBalanceUIControl
-            (SafelyCloseControl, userStatus,
+            (safelyComponentControl, userStatus,
             new FormButtonControl[]
             {
                 new FormButtonControl(this.RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
@@ -113,7 +110,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             e.Cancel = true;
 
-            await SafelyCloseControl.CloseApplicationSafelyAndNotifyListenersAsync();
+            await safelyComponentControl.CallListenersAsync(() => Environment.Exit(0));
         }
     }
 }

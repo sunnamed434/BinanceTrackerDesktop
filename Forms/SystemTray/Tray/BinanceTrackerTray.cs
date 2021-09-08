@@ -5,25 +5,26 @@ using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 {
     public class BinanceTrackerTray
     {
-        private readonly IFormSafelyCloseControl formSafelyCloseControl;
+        private readonly IFormSafelyComponentControl formSafelyCloseControl;
 
-        private readonly ISystemTrayFormControl systemTrayFormControl;
+        private readonly IFormSystemTrayControl systemTrayFormControl;
 
         private readonly BinanceTrackerSystemTrayForm systemTrayForm;
 
         private readonly BinanceTrackerNotificationsControl notificationsControl;
 
-        private readonly IFormEventListener[] formEventListeners;
+        private readonly IFormTrayControl formTrayControl;
 
 
 
-        public BinanceTrackerTray(IFormSafelyCloseControl formSafelyCloseControl, ISystemTrayFormControl systemTrayFormControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, params IFormEventListener[] formEventListeners)
+        public BinanceTrackerTray(IFormSafelyComponentControl formSafelyCloseControl, IFormSystemTrayControl systemTrayFormControl, BinanceTrackerSystemTrayForm systemTrayForm, BinanceTrackerNotificationsControl notificationsControl, IFormTrayControl formTrayControl)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
@@ -37,26 +38,20 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
             if (notificationsControl == null)
                 throw new ArgumentNullException(nameof(notificationsControl));
 
-            if (formEventListeners == null)
-                throw new ArgumentNullException(nameof(formEventListeners));
-
-            if (formEventListeners.Length < 0)
-                throw new InvalidOperationException();
-
             this.formSafelyCloseControl = formSafelyCloseControl;
             this.systemTrayFormControl = systemTrayFormControl;
             this.systemTrayForm = systemTrayForm;
             this.notificationsControl = notificationsControl;
-            this.formEventListeners = formEventListeners;
+            this.formTrayControl = formTrayControl;
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
-            this.formEventListeners[0].OnTriggerEventHandler += onTrayDoubleClicked;
-            this.formEventListeners[1].OnTriggerEventHandler += onApplicationOpenClicked;
-            this.formEventListeners[2].OnTriggerEventHandler += onDisableNotificationsClicked;
-            this.formEventListeners[3].OnTriggerEventHandler += onApplicationQuitClicked;
+            this.formTrayControl.DoubleClickListener.ClickEvent.OnTriggerEventHandler += onTrayDoubleClicked;
+            this.formTrayControl.Items[0].ClickEvent.OnTriggerEventHandler += onApplicationOpenClicked;
+            this.formTrayControl.Items[1].ClickEvent.OnTriggerEventHandler += onDisableNotificationsClicked;
+            this.formTrayControl.Items[2].ClickEvent.OnTriggerEventHandler += onApplicationQuitClicked;
         }
 
-
+        
 
         private void setWindowToForegound()
         {
@@ -82,22 +77,22 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
             await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
 
-            this.systemTrayFormControl.ChangeMenuItemTitle(1, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
+            this.formTrayControl.Items[2].SetHeader(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
             this.notificationsControl.Show(TrayDataContainer.ApplicationName, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.NotificationsEnabled : TrayDataContainer.NotificationsDisabled);
         }
 
         private void onApplicationQuitClicked(object sender, EventArgs e)
         {
-            this.systemTrayFormControl.Close();
-            this.formSafelyCloseControl.CloseApplicationSafelyAndNotifyListenersAsync();
+            this.systemTrayFormControl.CloseAsync();
+            this.formSafelyCloseControl.CallListenersAsync();
         }
 
         private async Task onCloseCallbackAsync()
         {
-            this.formEventListeners[0].OnTriggerEventHandler -= onTrayDoubleClicked;
-            this.formEventListeners[1].OnTriggerEventHandler -= onApplicationOpenClicked;
-            this.formEventListeners[2].OnTriggerEventHandler -= onDisableNotificationsClicked;
-            this.formEventListeners[3].OnTriggerEventHandler -= onApplicationQuitClicked;
+            this.formTrayControl.DoubleClickListener.ClickEvent.OnTriggerEventHandler -= onTrayDoubleClicked;
+            this.formTrayControl.Items[0].ClickEvent.OnTriggerEventHandler -= onApplicationOpenClicked;
+            this.formTrayControl.Items[1].ClickEvent.OnTriggerEventHandler -= onDisableNotificationsClicked;
+            this.formTrayControl.Items[2].ClickEvent.OnTriggerEventHandler -= onApplicationQuitClicked;
 
             await Task.CompletedTask;
         }

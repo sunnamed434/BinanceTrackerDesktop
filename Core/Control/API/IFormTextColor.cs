@@ -1,17 +1,20 @@
 ﻿using System.Drawing;
 
-namespace BinanceTrackerDesktop.Core.Controls.API
+namespace BinanceTrackerDesktop.Core.Control.API
 {
-    public interface IFormTextColorControl
+    public interface IFormTextColor : IFormText
     {
         void SetTextSync(string content, Color color);
-
-        void SetText(string content);
 
         void SetTextColor(Color color);
 
         void SetDefaultTextColor(Color color);
 
         Color GetDefaultTextColor();
+    }
+
+    public interface IFormText
+    {
+        void SetText(string content);
     }
 }

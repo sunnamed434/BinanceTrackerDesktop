@@ -6,83 +6,63 @@ using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray
 {
-    public partial class BinanceTrackerSystemTrayForm : Form, ISystemTrayFormControl
+    public partial class BinanceTrackerSystemTrayForm : Form
     {
-        private readonly IFormEventListener[] formEventListeners;
+        private IFormTrayControl formTrayControl;
 
-        private readonly IFormSafelyCloseControl formSafelyCloseControl;
+        private IFormSafelyComponentControl formSafelyCloseControl;
+
+        private IFormSystemTrayControl systemTrayControl;
 
 
 
-        NotifyIcon ISystemTrayFormControl.NotifyIcon => this.NotifyIcon;
-
-        
-
-        public BinanceTrackerSystemTrayForm(IFormSafelyCloseControl formSafelyCloseControl)
+        public BinanceTrackerSystemTrayForm(IFormSafelyComponentControl formSafelyCloseControl)
         {
             InitializeComponent();
 
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
-
-            this.NotifyIcon.ContextMenuStrip = Tray;
+            
+            this.NotifyIcon.ContextMenuStrip = this.Tray;
             this.NotifyIcon.Text = TrayDataContainer.ApplicationName;
-            this.NotifyIcon.DoubleClick += (s, e) => formEventListeners[0].TriggerEvent(s, e);
+            this.NotifyIcon.DoubleClick += (s, e) => formTrayControl.DoubleClickListener.ClickEvent.TriggerEvent(s, e);
 
-            new BinanceTrackerTray(this.formSafelyCloseControl = formSafelyCloseControl, this, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(this.NotifyIcon)), 
-            formEventListeners = new IFormEventListener[]
-            {
-                new FormEventListener(),
-                new FormEventListener(),
-                new FormEventListener(),
-                new FormEventListener(),
-            });
-
-            initializeContextMenuStripAndReadUserDataAsync();
+            initializeAsync(formSafelyCloseControl);
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
         }
 
         
 
-        void ISystemTrayFormControl.Close()
+        private async void initializeAsync(IFormSafelyComponentControl formSafelyCloseControl)
         {
-            using (NotifyIcon)
-                this.NotifyIcon.Visible = false;
-        }
+            if (formSafelyCloseControl == null)
+                throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
-        void ISystemTrayFormControl.ChangeMenuItemTitle(int index, string to)
-        {
-            if (this.Tray.Items[index] == null)
-                throw new IndexOutOfRangeException(nameof(index));
+            systemTrayControl = new FormSystemTrayControl(this.NotifyIcon);
 
-            if (string.IsNullOrEmpty(to))
-                throw new ArgumentNullException(nameof(to));
-
-            this.Tray.Items[index].Text = to;
-        }
-
-
-
-        private async void initializeContextMenuStripAndReadUserDataAsync()
-        {
             BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+            formTrayControl = new FormTrayControl(systemTrayControl, new List<IFormTrayItemControl>
+            {
+                new FormTrayItemControl(TrayDataContainer.OpenApplication),
+                new FormTrayItemControl(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications),
+                new FormTrayItemControl(TrayDataContainer.QuitApplication),
+            });
 
-            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.OpenApplication, default, (s, e) => formEventListeners[1].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications, default, (s, e) => formEventListeners[2].TriggerEvent(s, e)));
-            this.Tray.Items.Add(new ToolStripMenuItem(TrayDataContainer.QuitApplication, default, (s, e) => formEventListeners[3].TriggerEvent(s, e)));
+            new BinanceTrackerTray(this.formSafelyCloseControl = formSafelyCloseControl, systemTrayControl, this, new BinanceTrackerNotificationsControl(new StableNotificationsControl(this.NotifyIcon)), formTrayControl);
         }
 
 
 
         private async Task onCloseCallbackAsync()
         {
-            ((ISystemTrayFormControl)this).Close();
+            await formSafelyCloseControl.CallListenersAsync();
 
             await Task.CompletedTask;
         }

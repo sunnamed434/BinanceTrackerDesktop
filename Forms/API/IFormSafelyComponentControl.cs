@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Forms.API
 {
-    public interface IFormSafelyCloseControl
+    public interface IFormSafelyComponentControl
     {
         IEnumerable<Func<Task>> Callbacks { get; }
 
         void RegisterListener(Func<Task> callback);
 
-        Task CloseApplicationSafelyAndNotifyListenersAsync();
+        Task CallListenersAsync(Action onFinishCallback = null);
     }
 
-    public class FormSafelyCloseControl : IFormSafelyCloseControl
+    public class FormSafelyCloseComponentControl : IFormSafelyComponentControl
     {
         private List<Func<Task>> closeCallbacks = new List<Func<Task>>();
 
@@ -31,7 +31,7 @@ namespace BinanceTrackerDesktop.Forms.API
             closeCallbacks.Add(callback);
         }
 
-        public async Task CloseApplicationSafelyAndNotifyListenersAsync()
+        public async Task CallListenersAsync(Action onFinishCallback = null)
         {
             if (closeCallbacks.Count < 0)
                 throw new InvalidOperationException();
@@ -47,7 +47,7 @@ namespace BinanceTrackerDesktop.Forms.API
 
             await Task.WhenAll(callbackTasks);
 
-            Environment.Exit(0);
+            onFinishCallback?.Invoke();
         }
     }
 }

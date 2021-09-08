@@ -6,8 +6,6 @@ namespace BinanceTrackerDesktop.Core.API
     {
         event EventHandler OnTriggerEventHandler;
 
-
-
         void TriggerEvent(object sender, EventArgs e);
     }
 }

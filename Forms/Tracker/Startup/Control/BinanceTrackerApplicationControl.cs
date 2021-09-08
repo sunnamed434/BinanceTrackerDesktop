@@ -12,28 +12,28 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
     {
         private readonly IFormControl formControl;
 
-        private readonly IFormSafelyCloseControl formSafelyCloseControl;
+        private readonly IFormSafelyComponentControl safelyComponentContro;
 
         private readonly BinanceUserWallet wallet;
 
 
 
-        public BinanceTrackerApplicationControl(IFormControl formControl, IFormSafelyCloseControl formSafelyCloseControl, BinanceUserWallet wallet)
+        public BinanceTrackerApplicationControl(IFormControl formControl, IFormSafelyComponentControl safelyComponentContro, BinanceUserWallet wallet)
         {
             if (formControl == null)
                 throw new ArgumentNullException(nameof(formControl));
 
-            if (formSafelyCloseControl == null)
-                throw new ArgumentNullException(nameof(formSafelyCloseControl));
+            if (safelyComponentContro == null)
+                throw new ArgumentNullException(nameof(safelyComponentContro));
 
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
             this.formControl = formControl;
-            this.formSafelyCloseControl = formSafelyCloseControl;
+            this.safelyComponentContro = safelyComponentContro;
             this.wallet = wallet;
 
-            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
+            this.safelyComponentContro.RegisterListener(onCloseCallbackAsync);
         }
 
 

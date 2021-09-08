@@ -63,10 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
-    <Compile Include="Core\Controls\API\IFormComponentClickListener.cs" />
-    <Compile Include="Core\Controls\API\IFormClickEventListenerHandle.cs" />
-    <Compile Include="Core\Controls\API\IFormTextColorControl.cs" />
-    <Compile Include="Core\Controls\FormButton\API\IFormButtonControl.cs" />
+    <Compile Include="Core\Control\API\IFormComponentClickListener.cs" />
+    <Compile Include="Core\Control\API\IFormClickEventListenerHandle.cs" />
+    <Compile Include="Core\Control\API\IFormTextColor.cs" />
+    <Compile Include="Core\Control\FormButton\API\IFormButtonControl.cs" />
+    <Compile Include="Core\Control\FormTray\API\IFormTrayControl.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Extension\WithGenericExtension.cs" />
@@ -74,12 +75,13 @@
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
-    <Compile Include="Forms\API\IFormSafelyCloseControl.cs" />
+    <Compile Include="Forms\API\IFormSafelyComponentControl.cs" />
     <Compile Include="Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
+    <Compile Include="Forms\SystemTray\API\IFormTrayControl.cs" />
     <Compile Include="Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
     <Compile Include="Forms\Tracker\Startup\Control\BinanceTrackerApplicationControl.cs" />
     <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
-    <Compile Include="Forms\SystemTray\API\ISystemTrayFormControl.cs" />
+    <Compile Include="Forms\SystemTray\API\IFormSystemTrayControl.cs" />
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,7 +116,7 @@
     <Compile Include="Forms\SystemTray\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
-    <Compile Include="Core\Controls\FormText\API\IFormTextControl.cs" />
+    <Compile Include="Core\Control\FormText\API\IFormTextControl.cs" />
     <Compile Include="Forms\Tracker\UI\BinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,19 +1,19 @@
-﻿using BinanceTrackerDesktop.Core.Controls.API;
+﻿using BinanceTrackerDesktop.Core.Control.API;
 using BinanceTrackerDesktop.Forms.API;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
+namespace BinanceTrackerDesktop.Core.Control.FormText.API
 {
-    public interface IFormButtonControl : IFormClickEventListenerHandle, IFormTextColorControl
+    public interface IFormTextControl : IFormClickEventListenerHandle, IFormTextColor
     {
-        Button Button { get; }
+        Label Label { get; }
     }
 
-    public class FormButtonControl : FormComponentClickListener, IFormButtonControl
+    public class FormTextControl : FormComponentClickListener, IFormTextControl
     {
-        public Button Button { get; }
+        public Label Label { get; }
 
         public IFormEventListener ClickEvent => base.ClickEventListener;
 
@@ -23,12 +23,12 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
 
 
 
-        public FormButtonControl(Button button, IFormEventListener clickEventListener) : base(clickEventListener)
+        public FormTextControl(Label label, IFormEventListener onClickEventListener) : base(onClickEventListener)
         {
-            if (button == null)
-                throw new ArgumentNullException(nameof(button));
+            if (label == null)
+                throw new ArgumentNullException(nameof(label));
 
-            Button = button;
+            Label = label;
             defaultColor = Color.Empty;
         }
 
@@ -36,7 +36,7 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
 
         public void SetTextSync(string content, Color color = default)
         {
-            if (content == null)
+            if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
             SetText(content);
@@ -50,7 +50,7 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
-            Button.Text = content;
+            Label.Text = content;
         }
 
         public void SetTextColor(Color color)
@@ -58,7 +58,7 @@ namespace BinanceTrackerDesktop.Core.Controls.FormButton.API
             if (color == Color.Empty)
                 throw new ArgumentNullException(nameof(color));
 
-            Button.ForeColor = color;
+            Label.ForeColor = color;
         }
 
         public void SetDefaultTextColor(Color color)
