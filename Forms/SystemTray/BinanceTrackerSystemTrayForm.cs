@@ -28,8 +28,9 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
- 
-            initializeAsync(this.formSafelyCloseControl = formSafelyCloseControl);
+
+            this.formSafelyCloseControl = formSafelyCloseControl;
+            initializeAsync(this.formSafelyCloseControl);
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
         }
@@ -71,7 +72,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
         private void Tray_Click(object sender, EventArgs e)
         {
-            this.Show();
+            this.formTrayControl.SystemTrayFormControl.Show();
         }
     }
 }
