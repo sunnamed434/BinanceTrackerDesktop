@@ -13,11 +13,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
         IFormTrayItemControl[] Items { get; }
 
-        IFormClickEventListenerHandle ClickListener { get; }
-
-        IFormClickEventListenerHandle DoubleClickListener { get; }
-
-        IFormClickEventListenerHandle CloseListener { get; }
+        FormTrayEventsContainerControl EventsContainerControl { get; }
 
 
 
@@ -37,17 +33,31 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
         void SetImage(Image image);
     }
 
+    public class FormTrayEventsContainerControl
+    {
+        public IFormEventListener ClickListener { get; }
+
+        public IFormEventListener DoubleClickListener { get; }
+
+        public IFormEventListener CloseListener { get; }
+
+
+
+        public FormTrayEventsContainerControl()
+        {
+            ClickListener = new FormEventListener();
+            DoubleClickListener = new FormEventListener();
+            CloseListener = new FormEventListener();
+        }
+    }
+
     public class FormTrayControl : IFormTrayControl
     {
         public IFormSystemTrayControl SystemTrayFormControl { get; }
 
         public IFormTrayItemControl[] Items => components.ToArray();
 
-        public IFormClickEventListenerHandle ClickListener { get; }
-
-        public IFormClickEventListenerHandle DoubleClickListener { get; }
-
-        public IFormClickEventListenerHandle CloseListener { get; }
+        public FormTrayEventsContainerControl EventsContainerControl { get; }
 
 
 
@@ -66,14 +76,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
             if (items.Count < 0)
                 throw new InvalidOperationException();
 
+            SystemTrayFormControl = trayFormControl;
+            EventsContainerControl = new FormTrayEventsContainerControl();
+
             foreach (IFormTrayItemControl item in items)
                 components.Add(item);
-        }
-
-        public FormTrayControl(IFormSystemTrayControl trayFormControl)
-        {
-            if (trayFormControl == null)
-                throw new ArgumentNullException(nameof(trayFormControl));
         }
 
 
@@ -113,7 +120,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
 
 
-        private Color defaulColor;
+        private Color defaultColor;
 
 
 
@@ -124,7 +131,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
             ClickEvent = new FormEventListener();
             ToolStrip = new ToolStripMenuItem(header, image, (s, e) => ClickEvent.TriggerEvent(s, e));
-            defaulColor = Color.Empty;
+            defaultColor = Color.Empty;
         }
 
 
@@ -177,12 +184,12 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
             if (color == Color.Empty)
                 throw new ArgumentNullException(nameof(color));
 
-            defaulColor = color;
+            defaultColor = color;
         }
 
         public Color GetDefaultTextColor()
         {
-            return defaulColor;
+            return defaultColor;
         }
     }
 }

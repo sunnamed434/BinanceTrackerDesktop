@@ -13,6 +13,10 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
 
 
+        void Show();
+
+        void Close();
+
         void AddItem(IFormTrayItemControl control);
 
         void RemoveItem(IFormTrayItemControl control);
@@ -39,6 +43,17 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
 
 
+        public void Show()
+        {
+            NotifyIcon.ContextMenuStrip.Show();
+        }
+
+        public void Close()
+        {
+            using (NotifyIcon)
+                this.NotifyIcon.Visible = false;
+        }
+
         public void AddItem(IFormTrayItemControl control)
         {
             if (control == null)
@@ -59,8 +74,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
         {
             await SafelyComponentControl.CallListenersAsync();
 
-            using (NotifyIcon)
-                NotifyIcon.Visible = false;
+            Close();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 {
     public partial class BinanceTrackerForm : Form, IFormControl
     {
-        private IFormSafelyComponentControl safelyComponentControl;
+        private readonly IFormSafelyComponentControl safelyComponentControl;
 
         private BinanceStartup startup;
 
@@ -48,7 +48,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             };
 
             safelyComponentControl = new FormSafelyCloseComponentControl();
-            new BinanceTrackerNotificationsControl(new StableNotificationsControl((new BinanceTrackerSystemTrayForm(safelyComponentControl) as IFormSystemTrayControl)?.NotifyIcon));
+            new BinanceTrackerSystemTrayForm(safelyComponentControl);
         }
 
         
@@ -110,7 +110,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             e.Cancel = true;
 
-            await safelyComponentControl.CallListenersAsync(() => Environment.Exit(0));
+            await safelyComponentControl.CallListenersAsync();
+            Application.Exit();
         }
     }
 }
