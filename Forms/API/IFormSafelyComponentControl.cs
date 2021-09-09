@@ -39,7 +39,7 @@ namespace BinanceTrackerDesktop.Forms.API
 
 
 
-        public FormSafelyComponentControl(IFormStartedEvent startedEvent = null, IFormCompletedEvent completedEvent = null)
+        public FormSafelyComponentControl(IFormStartedEvent startedEvent, IFormCompletedEvent completedEvent)
         {
             this.startedEvent = startedEvent;
             this.completedEvent = completedEvent;

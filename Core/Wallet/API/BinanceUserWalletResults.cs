@@ -1,4 +1,4 @@
-﻿namespace ConsoleBinanceTracker.Core.Wallet.API
+﻿namespace BinanceTrackerDesktop.Core.Wallet.API
 {
     public interface IBinanceUserWalletResult
     {
