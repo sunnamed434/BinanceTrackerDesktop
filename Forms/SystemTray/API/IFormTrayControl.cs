@@ -1,8 +1,10 @@
-﻿using BinanceTrackerDesktop.Core.Control.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Control.API;
 using BinanceTrackerDesktop.Forms.API;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.SystemTray.API
@@ -20,11 +22,15 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
         void AddComponent(IFormTrayItemControl item);
 
         void RemoveComponent(IFormTrayItemControl item);
+
+        IFormTrayItemControl GetComponentAt(byte uniqueIndex);
     }
 
     public interface IFormTrayItemControl : IFormClickEventListenerHandle, IFormTextColor
     {
         ToolStripMenuItem ToolStrip { get; }
+
+        byte UniqueIndex { get; }
 
 
 
@@ -33,9 +39,29 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
         void SetImage(Image image);
     }
 
+    public interface IFormTrayClickEventListener : ITriggerableEventHandler<MouseEventArgs>
+    {
+        
+    }
+
+    public class FormTrayClickEventListener : IFormTrayClickEventListener
+    {
+        public event Action<MouseEventArgs> OnTriggerEventHandler;
+
+
+
+        public void TriggerEvent(MouseEventArgs e)
+        {
+            if (e == null)
+                throw new ArgumentNullException(nameof(e));
+
+            OnTriggerEventHandler?.Invoke(e);
+        }
+    }
+
     public class FormTrayEventsContainerControl
     {
-        public IFormEventListener ClickListener { get; }
+        public IFormTrayClickEventListener MouseClick { get; }
 
         public IFormEventListener DoubleClickListener { get; }
 
@@ -45,7 +71,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
         public FormTrayEventsContainerControl()
         {
-            ClickListener = new FormEventListener();
+            MouseClick = new FormTrayClickEventListener();
             DoubleClickListener = new FormEventListener();
             CloseListener = new FormEventListener();
         }
@@ -65,10 +91,10 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
 
 
-        public FormTrayControl(IFormSystemTrayControl trayFormControl, List<IFormTrayItemControl> items)
+        public FormTrayControl(IFormSystemTrayControl systemTrayFormControl, List<IFormTrayItemControl> items)
         {
-            if (trayFormControl == null)
-                throw new ArgumentNullException(nameof(trayFormControl));
+            if (systemTrayFormControl == null)
+                throw new ArgumentNullException(nameof(systemTrayFormControl));
 
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -76,11 +102,11 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
             if (items.Count < 0)
                 throw new InvalidOperationException();
 
-            SystemTrayFormControl = trayFormControl;
+            SystemTrayFormControl = systemTrayFormControl;
             EventsContainerControl = new FormTrayEventsContainerControl();
 
             foreach (IFormTrayItemControl item in items)
-                components.Add(item);
+                AddComponent(item);
         }
 
 
@@ -99,8 +125,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            components.Remove(item);
-            SystemTrayFormControl.RemoveItem(item);
+            components.Add(item);
+            SystemTrayFormControl.AddItem(item);
+        }
+
+        public IFormTrayItemControl GetComponentAt(byte uniqueIndex)
+        {
+            return components.FirstOrDefault(c => c.UniqueIndex == uniqueIndex);
         }
 
         public void SetText(string content)
@@ -118,19 +149,22 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
 
         public IFormEventListener ClickEvent { get; }
 
+        public byte UniqueIndex { get; }
+
 
 
         private Color defaultColor;
 
 
 
-        public FormTrayItemControl(string header, Image image = default)
+        public FormTrayItemControl(string header, byte uniqueIndex, Image image = default)
         {
             if (string.IsNullOrEmpty(header))
                 throw new ArgumentNullException(nameof(header));
 
             ClickEvent = new FormEventListener();
-            ToolStrip = new ToolStripMenuItem(header, image, (s, e) => ClickEvent.TriggerEvent(s, e));
+            ToolStrip = new ToolStripMenuItem(header, image, (s, e) => ClickEvent.TriggerEvent(e));
+            UniqueIndex = uniqueIndex;
             defaultColor = Color.Empty;
         }
 

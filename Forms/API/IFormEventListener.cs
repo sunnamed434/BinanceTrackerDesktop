@@ -3,26 +3,23 @@ using System;
 
 namespace BinanceTrackerDesktop.Forms.API
 {
-    public interface IFormEventListener : ITriggerableEventHandler
+    public interface IFormEventListener : ITriggerableEventHandler<EventArgs>
     {
         
     }
 
     public class FormEventListener : IFormEventListener
     {
-        public event EventHandler OnTriggerEventHandler;
+        public event Action<EventArgs> OnTriggerEventHandler;
 
 
 
-        public void TriggerEvent(object sender, EventArgs e)
+        public void TriggerEvent(EventArgs e)
         {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-
             if (e == null)
                 throw new ArgumentNullException(nameof(e));
 
-            OnTriggerEventHandler?.Invoke(sender, e);
+            OnTriggerEventHandler?.Invoke(e);
         }
     }
 }

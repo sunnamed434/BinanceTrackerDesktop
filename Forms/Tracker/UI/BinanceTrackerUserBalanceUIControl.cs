@@ -77,10 +77,10 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
                 }
             }
 
-            formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
-            formButtonControls[0].ClickEvent.OnTriggerEventHandler += onRefreshTotalBalanceButtonClicked;
-            formTextControls[0].ClickEvent.OnTriggerEventHandler += onTextClicked;
-            formTextControls[1].ClickEvent.OnTriggerEventHandler += onTextClicked;
+            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
+            this.formButtonControls[0].ClickEvent.OnTriggerEventHandler += onRefreshTotalBalanceButtonClicked;
+            this.formTextControls[0].ClickEvent.OnTriggerEventHandler += onTextClicked;
+            this.formTextControls[1].ClickEvent.OnTriggerEventHandler += onTextClicked;
         }
 
 
@@ -161,12 +161,12 @@ namespace BinanceTrackerDesktop.Forms.Tracker.UI
 
 
 
-        private async void onRefreshTotalBalanceButtonClicked(object sender, EventArgs e)
+        private async void onRefreshTotalBalanceButtonClicked(EventArgs e)
         {
             await refreshBalancesFixedAsync();
         }
 
-        private async void onTextClicked(object sender, EventArgs e)
+        private async void onTextClicked(EventArgs e)
         {
             isBalancesHiden = !isBalancesHiden;
             if (isBalancesHiden)

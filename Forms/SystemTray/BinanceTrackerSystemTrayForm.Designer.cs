@@ -31,19 +31,18 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinanceTrackerSystemTrayForm));
-            this.Tray = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
-            // Tray
+            // ContextMenuStrip
             // 
-            this.Tray.Name = "Tray";
-            this.Tray.Size = new System.Drawing.Size(61, 4);
-            this.Tray.Click += new System.EventHandler(this.Tray_Click);
+            this.ContextMenuStrip.Name = "Tray";
+            this.ContextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
             // NotifyIcon
             // 
-            this.NotifyIcon.ContextMenuStrip = this.Tray;
+            this.NotifyIcon.ContextMenuStrip = this.ContextMenuStrip;
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
             this.NotifyIcon.Text = "notifyIcon1";
             this.NotifyIcon.Visible = true;
@@ -62,7 +61,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
 
         #endregion
 
-        private System.Windows.Forms.ContextMenuStrip Tray;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStrip;
         private System.Windows.Forms.NotifyIcon NotifyIcon;
     }
 }

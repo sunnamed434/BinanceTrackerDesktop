@@ -4,9 +4,6 @@ using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.API;
 using BinanceTrackerDesktop.Forms.SystemTray;
-using BinanceTrackerDesktop.Forms.SystemTray.API;
-using BinanceTrackerDesktop.Forms.Tracker.Notifications;
-using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
 using BinanceTrackerDesktop.Forms.Tracker.UI;
@@ -15,7 +12,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public partial class BinanceTrackerForm : Form, IFormControl
+    public partial class BinanceTrackerForm : Form, IFormControl, IFormCompletedEvent
     {
         private readonly IFormSafelyComponentControl safelyComponentControl;
 
@@ -47,7 +44,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 new FormEventListener(),
             };
 
-            safelyComponentControl = new FormSafelyCloseComponentControl();
+            safelyComponentControl = new FormSafelyComponentControl(this);
             new BinanceTrackerSystemTrayForm(safelyComponentControl);
         }
 
@@ -87,17 +84,17 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
         {
-            refreshTotalBalanceEventListener.TriggerEvent(sender, e);
+            refreshTotalBalanceEventListener.TriggerEvent(e);
         }
 
         private void onUserTotalBalanceTextClicked(object sender, EventArgs e)
         {
-            textClickEventListeners[0].TriggerEvent(sender, e);
+            textClickEventListeners[0].TriggerEvent(e);
         }
 
         private void onUserTotalBalanceLosesTextClicked(object sender, EventArgs e)
         {
-            textClickEventListeners[1].TriggerEvent(sender, e);
+            textClickEventListeners[1].TriggerEvent(e);
         }
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)
@@ -111,6 +108,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             e.Cancel = true;
 
             await safelyComponentControl.CallListenersAsync();
+        }
+
+        public void OnCompleted()
+        {
             Application.Exit();
         }
     }

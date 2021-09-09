@@ -25,6 +25,7 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         {
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            base.StartPosition = FormStartPosition.CenterScreen;
             base.MaximizeBox = false;
         }
 

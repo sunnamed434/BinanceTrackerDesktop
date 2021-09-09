@@ -13,13 +13,52 @@ namespace BinanceTrackerDesktop.Forms.API
         Task CallListenersAsync();
     }
 
-    public class FormSafelyCloseComponentControl : IFormSafelyComponentControl
+    public interface IFormStartedEvent
     {
+        void OnStarted();
+    }
+
+    public interface IFormCompletedEvent
+    {
+        void OnCompleted();
+    }
+
+    public class FormSafelyComponentControl : IFormSafelyComponentControl
+    {
+        private readonly IFormStartedEvent startedEvent;
+
+        private readonly IFormCompletedEvent completedEvent;
+
+
+
         private List<Func<Task>> closeCallbacks = new List<Func<Task>>();
 
 
 
         public IEnumerable<Func<Task>> Callbacks => closeCallbacks;
+
+
+
+        public FormSafelyComponentControl(IFormStartedEvent startedEvent = null, IFormCompletedEvent completedEvent = null)
+        {
+            this.startedEvent = startedEvent;
+            this.completedEvent = completedEvent;
+        }
+
+        public FormSafelyComponentControl(IFormStartedEvent startedEvent)
+        {
+            this.startedEvent = startedEvent;
+        }
+
+        public FormSafelyComponentControl(IFormCompletedEvent completedEvent)
+        {
+            this.completedEvent = completedEvent;
+        }
+
+        public FormSafelyComponentControl() : this(null, null)
+        {
+
+        }
 
 
 
@@ -33,6 +72,8 @@ namespace BinanceTrackerDesktop.Forms.API
 
         public async Task CallListenersAsync()
         {
+            this.startedEvent?.OnStarted();
+
             List<Task> callbackTasks = new List<Task>();
             foreach (Func<Task> callback in closeCallbacks)
             {
@@ -43,6 +84,8 @@ namespace BinanceTrackerDesktop.Forms.API
             }
 
             await Task.WhenAll(callbackTasks);
+
+            this.completedEvent?.OnCompleted();
         }
     }
 }

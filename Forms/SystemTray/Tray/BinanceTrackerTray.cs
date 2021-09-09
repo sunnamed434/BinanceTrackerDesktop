@@ -5,7 +5,6 @@ using BinanceTrackerDesktop.Forms.SystemTray.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray.Data;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +21,12 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
         private readonly BinanceTrackerNotificationsControl notificationsControl;
 
         private readonly IFormTrayControl formTrayControl;
+
+        private readonly IFormTrayItemControl openApplicationItemControl;
+
+        private readonly IFormTrayItemControl notificationsItemControl;
+
+        private readonly IFormTrayItemControl quitApplicationItemControl;
 
 
 
@@ -47,13 +52,16 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
             this.systemTrayForm = systemTrayForm;
             this.notificationsControl = notificationsControl;
             this.formTrayControl = formTrayControl;
+            openApplicationItemControl = this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.OpenApplicationUniqueIndex);
+            notificationsItemControl = this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.NotificationsUniqueIndex);
+            quitApplicationItemControl = this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.QuitApplicationUniqueIndex);
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
-            this.formTrayControl.EventsContainerControl.ClickListener.OnTriggerEventHandler += onTrayClicked;
+            this.formTrayControl.EventsContainerControl.MouseClick.OnTriggerEventHandler += onTrayClicked;
             this.formTrayControl.EventsContainerControl.DoubleClickListener.OnTriggerEventHandler += onTrayDoubleClicked;
-            this.formTrayControl.Items[0].ClickEvent.OnTriggerEventHandler += onApplicationOpenClicked;
-            this.formTrayControl.Items[1].ClickEvent.OnTriggerEventHandler += onDisableNotificationsClicked;
-            this.formTrayControl.Items[2].ClickEvent.OnTriggerEventHandler += onApplicationQuitClicked;
+            openApplicationItemControl.ClickEvent.OnTriggerEventHandler += onTrayOpenApplicationClicked;
+            notificationsItemControl.ClickEvent.OnTriggerEventHandler += onTrayNotificationsClicked;
+            quitApplicationItemControl.ClickEvent.OnTriggerEventHandler += onTrayQuitApplicationClicked;
         }
 
         
@@ -65,35 +73,34 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
 
 
 
-        private void onTrayClicked(object sender, EventArgs e)
+        private void onTrayClicked(MouseEventArgs e)
         {
-            MessageBox.Show(nameof(onTrayClicked));
-
-            this.formTrayControl.SystemTrayFormControl.Show();
+            if (e.Button == MouseButtons.Right)
+                this.formTrayControl.SystemTrayFormControl.Show();
         }
 
-        private void onTrayDoubleClicked(object sender, EventArgs e)
-        {
-            setWindowToForegound();
-        }
-
-        private void onApplicationOpenClicked(object sender, EventArgs e)
+        private void onTrayDoubleClicked(EventArgs e)
         {
             setWindowToForegound();
         }
 
-        private async void onDisableNotificationsClicked(object sender, EventArgs e)
+        private void onTrayOpenApplicationClicked(EventArgs e)
+        {
+            setWindowToForegound();
+        }
+
+        private async void onTrayNotificationsClicked(EventArgs e)
         {
             BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
             binanceUserData.NotificationsEnabled = !binanceUserData.NotificationsEnabled;
 
             await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
 
-            this.formTrayControl.Items[2].SetHeader(binanceUserData.NotificationsEnabled == true ? TrayDataContainer.DisableNotifications : TrayDataContainer.EnableNotifications);
-            this.notificationsControl.Show(TrayDataContainer.ApplicationName, binanceUserData.NotificationsEnabled == true ? TrayDataContainer.NotificationsEnabled : TrayDataContainer.NotificationsDisabled);
+            this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.NotificationsUniqueIndex).SetHeader(binanceUserData.NotificationsEnabled == true ? TrayItemsDataContainer.DisableNotifications : TrayItemsDataContainer.EnableNotifications);
+            this.notificationsControl.Show(TrayItemsDataContainer.ApplicationName, binanceUserData.NotificationsEnabled == true ? TrayItemsDataContainer.NotificationsEnabled : TrayItemsDataContainer.NotificationsDisabled);
         }
 
-        private async void onApplicationQuitClicked(object sender, EventArgs e)
+        private async void onTrayQuitApplicationClicked(EventArgs e)
         {
             await this.systemTrayFormControl.CloseAsync();
             await this.formSafelyCloseControl.CallListenersAsync();
@@ -102,9 +109,9 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.Tray
         private async Task onCloseCallbackAsync()
         {
             this.formTrayControl.EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClicked;
-            this.formTrayControl.Items[0].ClickEvent.OnTriggerEventHandler -= onApplicationOpenClicked;
-            this.formTrayControl.Items[1].ClickEvent.OnTriggerEventHandler -= onDisableNotificationsClicked;
-            this.formTrayControl.Items[2].ClickEvent.OnTriggerEventHandler -= onApplicationQuitClicked;
+            this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.OpenApplicationUniqueIndex).ClickEvent.OnTriggerEventHandler -= onTrayOpenApplicationClicked;
+            this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.NotificationsUniqueIndex).ClickEvent.OnTriggerEventHandler -= onTrayNotificationsClicked;
+            this.formTrayControl.GetComponentAt(TrayItemsUniquesDataContainer.QuitApplicationUniqueIndex).ClickEvent.OnTriggerEventHandler -= onTrayQuitApplicationClicked;
 
             await Task.CompletedTask;
         }

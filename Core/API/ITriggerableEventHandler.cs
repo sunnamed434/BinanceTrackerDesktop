@@ -2,10 +2,12 @@
 
 namespace BinanceTrackerDesktop.Core.API
 {
-    public interface ITriggerableEventHandler
+    public interface ITriggerableEventHandler<EventArgs>
     {
-        event EventHandler OnTriggerEventHandler;
+        event Action<EventArgs> OnTriggerEventHandler;
 
-        void TriggerEvent(object sender, EventArgs e);
+
+
+        void TriggerEvent(EventArgs e);
     }
 }

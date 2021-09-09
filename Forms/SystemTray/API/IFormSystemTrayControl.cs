@@ -38,7 +38,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray.API
                 throw new ArgumentNullException(nameof(notifyIcon));
 
             NotifyIcon = notifyIcon;
-            SafelyComponentControl = new FormSafelyCloseComponentControl();
+            SafelyComponentControl = new FormSafelyComponentControl();
         }
 
 
