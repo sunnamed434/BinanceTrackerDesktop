@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.SystemTray.API
+namespace BinanceTrackerDesktop.Core.Control.FormTray.API
 {
     public interface IFormSystemTrayControl
     {

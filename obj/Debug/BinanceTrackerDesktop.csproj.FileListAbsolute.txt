@@ -60,3 +60,4 @@ C:\Users\opilane\Documents\GitHub\BinanceTrackerDesktop\bin\Debug\BinanceTracker
 C:\Users\opilane\Documents\GitHub\BinanceTrackerDesktop\bin\Debug\aa\BinanceTrackerDesktop.resources.dll
 C:\Users\opilane\Documents\GitHub\BinanceTrackerDesktop\obj\Debug\aa\BinanceTrackerDesktop.resources.dll
 C:\Users\opilane\Documents\GitHub\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete
+D:\Github\Projects\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.AssemblyReference.cache

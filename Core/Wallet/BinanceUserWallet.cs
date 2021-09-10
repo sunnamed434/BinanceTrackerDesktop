@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.API;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
 using BinanceTrackerDesktop.Core.Formatters.API;
-using ConsoleBinanceTracker.Core.Wallet.API;
+using BinanceTrackerDesktop.Core.Wallet.API;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
