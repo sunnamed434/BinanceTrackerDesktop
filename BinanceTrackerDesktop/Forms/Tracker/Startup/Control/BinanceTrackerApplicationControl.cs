@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Extension;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Wallet;
+using BinanceTrackerDesktop.Core.Wallet.API;
 using BinanceTrackerDesktop.Forms.API;
 using System;
 using System.Threading.Tasks;

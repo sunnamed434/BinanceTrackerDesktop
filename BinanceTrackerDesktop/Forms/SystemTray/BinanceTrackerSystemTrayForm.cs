@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Control.FormTray.API;
+using BinanceTrackerDesktop.Core.Files.API;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.API;
 using BinanceTrackerDesktop.Forms.SystemTray.Tray;
@@ -7,6 +8,7 @@ using BinanceTrackerDesktop.Forms.Tracker.Notifications;
 using BinanceTrackerDesktop.Forms.Tracker.Notifications.API;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,9 +43,13 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
+            Icon applicationIcon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+
             this.NotifyIcon.ContextMenuStrip = this.ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
             this.NotifyIcon.Text = TrayItemsDataContainer.ApplicationName;
+            this.NotifyIcon.Icon = applicationIcon;
+            this.Icon = applicationIcon;
             systemTrayControl = new FormSystemTrayControl(this.NotifyIcon);
 
             BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;

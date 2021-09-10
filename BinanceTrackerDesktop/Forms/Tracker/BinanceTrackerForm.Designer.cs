@@ -29,7 +29,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinanceTrackerForm));
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
@@ -87,7 +86,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.Controls.Add(this.RefreshTotalBalanceButton);
             this.Controls.Add(this.TotalBalanceTooltipText);
             this.Controls.Add(this.UserTotalBalanceText);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BinanceTrackerForm";
             this.Text = "Binance Tracker Desktop";
             this.ResumeLayout(false);

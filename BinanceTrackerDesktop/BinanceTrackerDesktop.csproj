@@ -33,11 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>binance.ico</ApplicationIcon>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Binance.Net">
+      <HintPath>..\libs\Binance.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="CryptoExchange.Net">
+      <HintPath>..\libs\CryptoExchange.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>..\libs\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,6 +69,7 @@
     <Compile Include="Core\Control\API\IFormTextColor.cs" />
     <Compile Include="Core\Control\FormButton\API\IFormButtonControl.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
+    <Compile Include="Core\Files\API\ApplicationDirectoryControl.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Extension\WithGenericExtension.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
@@ -146,8 +157,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.ico" />
     <Content Include="binance.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

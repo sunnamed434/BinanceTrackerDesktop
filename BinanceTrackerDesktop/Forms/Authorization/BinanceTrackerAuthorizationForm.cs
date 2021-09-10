@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Authorization;
+using BinanceTrackerDesktop.Core.Files.API;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Forms.Authorization.API;
@@ -14,19 +15,13 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         {
             InitializeComponent();
 
-            intitializeForm();
-
-            this.AuthorizeButton.Click += onAuthorizeButtonClicked;
-        }
-
-
-
-        private void intitializeForm()
-        {
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
+            this.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
             base.MaximizeBox = false;
+
+            this.AuthorizeButton.Click += onAuthorizeButtonClicked;
         }
 
 

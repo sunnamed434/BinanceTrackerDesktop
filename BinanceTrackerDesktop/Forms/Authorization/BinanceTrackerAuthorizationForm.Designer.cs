@@ -29,7 +29,6 @@ namespace BinanceTrackerDesktop.Forms.Authorization
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinanceTrackerAuthorizationForm));
             this.UserKeyTextBox = new System.Windows.Forms.TextBox();
             this.UserSecretTextBox = new System.Windows.Forms.TextBox();
             this.AuthorizeButton = new System.Windows.Forms.Button();
@@ -68,7 +67,6 @@ namespace BinanceTrackerDesktop.Forms.Authorization
             this.Controls.Add(this.AuthorizeButton);
             this.Controls.Add(this.UserSecretTextBox);
             this.Controls.Add(this.UserKeyTextBox);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BinanceTrackerAuthorizationForm";
             this.Text = "Binance Tracker Authorization";
             this.ResumeLayout(false);

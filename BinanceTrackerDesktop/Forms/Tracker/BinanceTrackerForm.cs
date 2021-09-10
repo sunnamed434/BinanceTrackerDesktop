@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Control.FormButton.API;
 using BinanceTrackerDesktop.Core.Control.FormText.API;
+using BinanceTrackerDesktop.Core.Files.API;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Forms.API;
@@ -29,14 +30,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         public BinanceTrackerForm()
         {
             InitializeComponent();
-            intitializeForm();
 
-            base.Activated += onFormActivated;
-            base.FormClosing += onFormClosing;
-
-            this.RefreshTotalBalanceButton.Click += onRefreshTotalBalanceButtonClick;
-            this.UserTotalBalanceText.Click += onUserTotalBalanceTextClicked;
-            this.UserTotalBalanceLosesText.Click += onUserTotalBalanceLosesTextClicked;
+            base.FormBorderStyle = FormBorderStyle.FixedSingle;
+            base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            base.StartPosition = FormStartPosition.CenterScreen;
+            this.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.MaximizeBox = false;
 
             textClickEventListeners = new IFormEventListener[]
             {
@@ -46,16 +45,13 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             safelyComponentControl = new FormSafelyComponentControl(this);
             new BinanceTrackerSystemTrayForm(safelyComponentControl);
-        }
 
-        
+            base.Activated += onFormActivated;
+            base.FormClosing += onFormClosing;
 
-        private void intitializeForm()
-        {
-            base.FormBorderStyle = FormBorderStyle.FixedSingle;
-            base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            base.StartPosition = FormStartPosition.CenterScreen;
-            base.MaximizeBox = false;
+            this.RefreshTotalBalanceButton.Click += onRefreshTotalBalanceButtonClick;
+            this.UserTotalBalanceText.Click += onUserTotalBalanceTextClicked;
+            this.UserTotalBalanceLosesText.Click += onUserTotalBalanceLosesTextClicked;
         }
 
 
