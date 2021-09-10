@@ -80,7 +80,7 @@
     <Compile Include="Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
     <Compile Include="Core\Control\FormTray\API\IFormTrayControl.cs" />
     <Compile Include="Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
-    <Compile Include="Forms\Tracker\Startup\Control\BinanceTrackerApplicationControl.cs" />
+    <Compile Include="Forms\Tracker\Startup\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
     <Compile Include="Core\Control\FormTray\API\IFormSystemTrayControl.cs" />
     <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
@@ -118,11 +118,12 @@
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
     <Compile Include="Core\Control\FormText\API\IFormTextControl.cs" />
-    <Compile Include="Forms\Tracker\UI\BinanceTrackerUserBalanceUIControl.cs" />
+    <Compile Include="Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>

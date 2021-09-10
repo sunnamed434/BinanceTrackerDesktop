@@ -160,7 +160,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.API
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return source.Balance == decimal.Zero;
+            return source.BestBalance == decimal.Zero;
         }
     }
 }

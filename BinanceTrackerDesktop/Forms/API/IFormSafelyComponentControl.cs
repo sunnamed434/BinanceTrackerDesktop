@@ -4,30 +4,27 @@ using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Forms.API
 {
-    public interface IFormSafelyComponentControl
+    public interface IFormSafelyComponentControl : ICallbacksControl
     {
         IEnumerable<Func<Task>> Callbacks { get; }
 
         void RegisterListener(Func<Task> callback);
 
-        Task CallListenersAsync();
+        Task<ICallbacksControl> CallListenersAsync();
     }
 
-    public interface IFormStartedEvent
+    public interface ICallbacksControl
     {
-        void OnStarted();
-    }
+        IFormSafelyComponentControl OnStarted(Action callback);
 
-    public interface IFormCompletedEvent
-    {
-        void OnCompleted();
+        IFormSafelyComponentControl OnCompleted(Action callback);
     }
 
     public class FormSafelyComponentControl : IFormSafelyComponentControl
     {
-        private readonly IFormStartedEvent startedEvent;
+        private Action onStartedCallback = null;
 
-        private readonly IFormCompletedEvent completedEvent;
+        private Action onCompletedCallback = null;
 
 
 
@@ -39,29 +36,6 @@ namespace BinanceTrackerDesktop.Forms.API
 
 
 
-        public FormSafelyComponentControl(IFormStartedEvent startedEvent, IFormCompletedEvent completedEvent)
-        {
-            this.startedEvent = startedEvent;
-            this.completedEvent = completedEvent;
-        }
-
-        public FormSafelyComponentControl(IFormStartedEvent startedEvent)
-        {
-            this.startedEvent = startedEvent;
-        }
-
-        public FormSafelyComponentControl(IFormCompletedEvent completedEvent)
-        {
-            this.completedEvent = completedEvent;
-        }
-
-        public FormSafelyComponentControl() : this(null, null)
-        {
-
-        }
-
-
-
         public void RegisterListener(Func<Task> callback)
         {
             if (callback == null)
@@ -70,9 +44,9 @@ namespace BinanceTrackerDesktop.Forms.API
             closeCallbacks.Add(callback);
         }
 
-        public async Task CallListenersAsync()
+        public async Task<ICallbacksControl> CallListenersAsync()
         {
-            this.startedEvent?.OnStarted();
+            onStartedCallback?.Invoke();
 
             List<Task> callbackTasks = new List<Task>();
             foreach (Func<Task> callback in closeCallbacks)
@@ -85,7 +59,21 @@ namespace BinanceTrackerDesktop.Forms.API
 
             await Task.WhenAll(callbackTasks);
 
-            this.completedEvent?.OnCompleted();
+            onCompletedCallback?.Invoke();
+
+            return this;
+        }
+
+        public IFormSafelyComponentControl OnStarted(Action callback)
+        {
+            onStartedCallback = callback;
+            return this;
+        }
+
+        public IFormSafelyComponentControl OnCompleted(Action callback)
+        {
+            onCompletedCallback = callback;
+            return this;
         }
     }
 }

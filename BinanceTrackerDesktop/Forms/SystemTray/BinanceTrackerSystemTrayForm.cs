@@ -49,7 +49,7 @@ namespace BinanceTrackerDesktop.Forms.SystemTray
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
             this.NotifyIcon.Text = TrayItemsDataContainer.ApplicationName;
             this.NotifyIcon.Icon = applicationIcon;
-            this.Icon = applicationIcon;
+            base.Icon = applicationIcon;
             systemTrayControl = new FormSystemTrayControl(this.NotifyIcon);
 
             BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;

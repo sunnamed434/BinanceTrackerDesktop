@@ -43,13 +43,13 @@ namespace BinanceTrackerDesktop.Core.Files.API
 
         public class DirectoriesControl
         {
-            public DirectoryImages Images { get; }
+            public DirectoryFileImages Images { get; }
 
 
 
             public DirectoriesControl()
             {
-                Images = new DirectoryImages();
+                Images = new DirectoryFileImages();
             }
         }
     }
@@ -67,7 +67,7 @@ namespace BinanceTrackerDesktop.Core.Files.API
         public abstract T GetDirectoryFileAt(string name);
     }
 
-    public class DirectoryImages : DirectoryFileBase<IDirectoryImage>
+    public class DirectoryFileImages : DirectoryFileBase<IDirectoryImage>
     {
         public override string FileExtension => ".ico";
 
@@ -75,7 +75,7 @@ namespace BinanceTrackerDesktop.Core.Files.API
 
 
 
-        public DirectoryImages()
+        public DirectoryFileImages()
         {
             List<IDirectoryImage> icons = new List<IDirectoryImage>();
 

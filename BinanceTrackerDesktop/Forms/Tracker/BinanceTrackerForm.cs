@@ -7,13 +7,13 @@ using BinanceTrackerDesktop.Forms.API;
 using BinanceTrackerDesktop.Forms.SystemTray;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
 using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
-using BinanceTrackerDesktop.Forms.Tracker.UI;
+using BinanceTrackerDesktop.Forms.Tracker.UI.Balance;
 using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public partial class BinanceTrackerForm : Form, IFormControl, IFormCompletedEvent
+    public partial class BinanceTrackerForm : Form, IFormControl
     {
         private readonly IFormSafelyComponentControl safelyComponentControl;
 
@@ -34,16 +34,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            this.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
             base.MaximizeBox = false;
 
-            textClickEventListeners = new IFormEventListener[]
-            {
-                new FormEventListener(),
-                new FormEventListener(),
-            };
-
-            safelyComponentControl = new FormSafelyComponentControl(this);
+            safelyComponentControl = new FormSafelyComponentControl()
+                .OnStarted(onSafelyComponentControlStarted)
+                .OnCompleted(onSafelyComponentControlCompleted);
             new BinanceTrackerSystemTrayForm(safelyComponentControl);
 
             base.Activated += onFormActivated;
@@ -56,6 +52,18 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
 
 
+        private void onSafelyComponentControlStarted()
+        {
+            base.Hide();
+        }
+
+        private void onSafelyComponentControlCompleted()
+        {
+            Application.Exit();
+        }
+
+
+
         private async void onFormActivated(object sender, EventArgs e)
         {
             base.Activated -= onFormActivated;
@@ -64,7 +72,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             startup = new BinanceStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
-            new BinanceTrackerApplicationControl(this, safelyComponentControl, startup.Wallet);
+            new BinanceTrackerUserDataSaveControl(safelyComponentControl, startup.Wallet);
+            textClickEventListeners = new IFormEventListener[]
+            {
+                new FormEventListener(),
+                new FormEventListener(),
+            };
             new BinanceTrackerUserBalanceUIControl
             (safelyComponentControl, userStatus,
             new FormButtonControl[]
@@ -104,11 +117,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             e.Cancel = true;
 
             await safelyComponentControl.CallListenersAsync();
-        }
-
-        public void OnCompleted()
-        {
-            Application.Exit();
         }
     }
 }

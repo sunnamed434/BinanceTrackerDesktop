@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.UI
+namespace BinanceTrackerDesktop.Forms.Tracker.UI.Balance
 {
     public class BinanceTrackerUserBalanceUIControl
     {

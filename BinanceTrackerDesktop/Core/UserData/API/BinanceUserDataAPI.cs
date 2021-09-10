@@ -52,8 +52,6 @@ namespace BinanceTrackerDesktop.Core.UserData.API
 
         public string Secret { get; set; }
 
-        public decimal Balance { get; set; }
-
         public decimal BestBalance { get; set; }
 
         public bool BalancesHiden { get; set; }
@@ -66,7 +64,6 @@ namespace BinanceTrackerDesktop.Core.UserData.API
         {
             Key = key;
             Secret = secret;
-            Balance = decimal.Zero;
             BestBalance = decimal.Zero;
             BalancesHiden = false;
             NotificationsEnabled = true;
@@ -76,7 +73,6 @@ namespace BinanceTrackerDesktop.Core.UserData.API
         {
             Key = string.Empty;
             Secret = string.Empty;
-            Balance = decimal.Zero;
             BestBalance = decimal.Zero;
             BalancesHiden = false;
             NotificationsEnabled = true;
