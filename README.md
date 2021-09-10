@@ -45,9 +45,3 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 ![Overview](https://user-images.githubusercontent.com/65300126/132896474-64d44074-6b07-4a27-a4ba-fe1146c291a2.png)
 #### Initializing
 ![Overview](https://user-images.githubusercontent.com/65300126/132897125-b8dc853f-d9b5-4a7c-8f7a-6401f0d515fd.png)
-
-
-
-- Green color: your balance is up.
-- Red color: you have loses.
-- Gray color: nothing changed.
