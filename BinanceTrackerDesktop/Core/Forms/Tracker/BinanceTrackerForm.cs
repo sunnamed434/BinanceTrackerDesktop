@@ -4,10 +4,10 @@ using BinanceTrackerDesktop.Core.Files.API;
 using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API;
 using BinanceTrackerDesktop.Core.Forms.Tray;
+using BinanceTrackerDesktop.Core.Forms.UserDataControl;
 using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
-using BinanceTrackerDesktop.Forms.Tracker.Startup.Control;
+using BinanceTrackerDesktop.Core.UserStatus.API;
 using System;
 using System.Windows.Forms;
 

@@ -4,8 +4,9 @@ using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
+namespace BinanceTrackerDesktop.Core.Forms.UserDataControl
 {
     public class BinanceTrackerUserDataSaveControl
     {
@@ -31,15 +32,26 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup.Control
 
 
 
-        private async Task onCloseCallbackAsync()
+        private async Task saveUserDataAsync()
         {
-            BinanceUserWalletResult walletResult = await wallet.GetTotalBalanceAsync();
+            BinanceUserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
 
             if (userData.BestBalance < walletResult.Value)
                 userData.BestBalance = walletResult.Value;
 
             await new BinanceUserDataWriter().WriteDataAsync(userData);
+
+            await Task.CompletedTask;
+        }
+
+
+
+        private async Task onCloseCallbackAsync()
+        {
+            await saveUserDataAsync();
+
+            await Task.CompletedTask;
         }
     }
 }

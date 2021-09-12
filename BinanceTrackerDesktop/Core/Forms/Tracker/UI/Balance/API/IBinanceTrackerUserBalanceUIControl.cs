@@ -3,7 +3,7 @@ using BinanceTrackerDesktop.Core.ComponentControl.FormText.API;
 using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Forms.Tracker.Startup.API;
+using BinanceTrackerDesktop.Core.UserStatus.API;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;

@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.Core.Wallet.API;
 using System;
 using System.Threading.Tasks;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Startup.API
+namespace BinanceTrackerDesktop.Core.UserStatus.API
 {
     public interface IBinanceUserStatus
     {

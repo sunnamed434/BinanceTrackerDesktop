@@ -67,20 +67,19 @@
     <Compile Include="Core\ComponentControl\API\IFormComponentClickListener.cs" />
     <Compile Include="Core\ComponentControl\API\IFormClickEventListenerHandle.cs" />
     <Compile Include="Core\ComponentControl\API\IFormTextColor.cs" />
-    <Compile Include="Core\ComponentControl\FormButton\API\IFormButtonControl.cs" />
+    <Compile Include="Core\ComponentControl\FormButton\API\FormButtonAPI.cs" />
     <Compile Include="Core\ComponentControl\FormTray\API\FormTrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\Files\API\ApplicationDirectoryControl.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
+    <Compile Include="Core\Forms\UserDataControl\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
     <Compile Include="Core\Forms\API\IFormSafelyComponentControl.cs" />
-    <Compile Include="Core\Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
-    <Compile Include="Core\Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
-    <Compile Include="Core\Forms\Tracker\Startup\Control\BinanceTrackerUserDataSaveControl.cs" />
+    <Compile Include="Core\UserStatus\API\IBinanceUserStatus.cs" />
     <Compile Include="Core\Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
@@ -110,8 +109,7 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\Tracker\Notifications\API\INotificationsControl.cs" />
-    <Compile Include="Core\Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
+    <Compile Include="Core\ComponentControl\FormNotifications\API\NotificationsAPI.cs" />
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
     <Compile Include="Core\ComponentControl\FormText\API\IFormTextControl.cs" />

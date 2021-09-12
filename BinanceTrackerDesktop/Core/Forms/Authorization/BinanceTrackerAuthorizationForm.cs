@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Authorization;
 using BinanceTrackerDesktop.Core.Files.API;
-using BinanceTrackerDesktop.Core.Forms.Authorization.API;
 using BinanceTrackerDesktop.Core.UserData.API;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
@@ -47,5 +46,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                 base.Close();
             }
         }
+    }
+
+    public class BinanceAPIKeysCharactersLength
+    {
+        public const int MaxLengthAPIKey = 64;
+
+        public const int MaxLengthSecretKey = 64;
     }
 }
