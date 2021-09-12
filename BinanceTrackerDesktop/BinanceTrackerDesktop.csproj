@@ -64,38 +64,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
-    <Compile Include="Core\Control\API\IFormComponentClickListener.cs" />
-    <Compile Include="Core\Control\API\IFormClickEventListenerHandle.cs" />
-    <Compile Include="Core\Control\API\IFormTextColor.cs" />
-    <Compile Include="Core\Control\FormButton\API\IFormButtonControl.cs" />
+    <Compile Include="Core\ComponentControl\API\IFormComponentClickListener.cs" />
+    <Compile Include="Core\ComponentControl\API\IFormClickEventListenerHandle.cs" />
+    <Compile Include="Core\ComponentControl\API\IFormTextColor.cs" />
+    <Compile Include="Core\ComponentControl\FormButton\API\IFormButtonControl.cs" />
+    <Compile Include="Core\ComponentControl\FormTray\API\FormTrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\Files\API\ApplicationDirectoryControl.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
-    <Compile Include="Core\Extension\WithGenericExtension.cs" />
+    <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />
     <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
-    <Compile Include="Forms\API\IFormSafelyComponentControl.cs" />
-    <Compile Include="Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
-    <Compile Include="Core\Control\FormTray\API\IFormTrayControl.cs" />
-    <Compile Include="Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
-    <Compile Include="Forms\Tracker\Startup\Control\BinanceTrackerUserDataSaveControl.cs" />
-    <Compile Include="Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
-    <Compile Include="Core\Control\FormTray\API\IFormSystemTrayControl.cs" />
-    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.cs">
+    <Compile Include="Core\Forms\API\IFormSafelyComponentControl.cs" />
+    <Compile Include="Core\Forms\Authorization\API\BinanceAPIKeysCharactersLength.cs" />
+    <Compile Include="Core\Forms\Tracker\Startup\API\IBinanceUserStatus.cs" />
+    <Compile Include="Core\Forms\Tracker\Startup\Control\BinanceTrackerUserDataSaveControl.cs" />
+    <Compile Include="Core\Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
+    <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.Designer.cs">
-      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
+    <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.Designer.cs">
+      <DependentUpon>BinanceTrackerTrayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemTray\Tray\Data\TrayDataContainers.cs" />
-    <Compile Include="Forms\API\IFormControl.cs" />
-    <Compile Include="Forms\API\IFormEventListener.cs" />
-    <Compile Include="Forms\Tracker\BinanceTrackerForm.cs">
+    <Compile Include="Core\Forms\API\IFormControl.cs" />
+    <Compile Include="Core\Forms\API\IFormEventListener.cs" />
+    <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tracker\BinanceTrackerForm.Designer.cs">
+    <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.Designer.cs">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Calculator\API\IBinanceCoinOptions.cs" />
@@ -106,32 +104,31 @@
     <Compile Include="Core\Startup\BinanceStartup.cs" />
     <Compile Include="Core\Wallet\API\BinanceUserWalletResults.cs" />
     <Compile Include="Core\Wallet\BinanceUserWallet.cs" />
-    <Compile Include="Forms\Authorization\BinanceTrackerAuthorizationForm.cs">
+    <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
+    <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tracker\Notifications\API\INotificationsControl.cs" />
-    <Compile Include="Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
-    <Compile Include="Forms\SystemTray\Tray\BinanceTrackerTray.cs" />
+    <Compile Include="Core\Forms\Tracker\Notifications\API\INotificationsControl.cs" />
+    <Compile Include="Core\Forms\Tracker\Notifications\BinanceTrackerNotificationsControl.cs" />
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\BinanceTrackerProcessExtension.cs" />
-    <Compile Include="Core\Control\FormText\API\IFormTextControl.cs" />
-    <Compile Include="Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceUIControl.cs" />
+    <Compile Include="Core\ComponentControl\FormText\API\IFormTextControl.cs" />
+    <Compile Include="Core\Forms\Tracker\UI\Balance\API\IBinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
+    <EmbeddedResource Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Authorization\BinanceTrackerAuthorizationForm.resx">
+    <EmbeddedResource Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemTray\BinanceTrackerSystemTrayForm.resx">
-      <DependentUpon>BinanceTrackerSystemTrayForm.cs</DependentUpon>
+    <EmbeddedResource Include="Core\Forms\Tray\BinanceTrackerTrayForm.resx">
+      <DependentUpon>BinanceTrackerTrayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tracker\BinanceTrackerForm.resx">
+    <EmbeddedResource Include="Core\Forms\Tracker\BinanceTrackerForm.resx">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -160,5 +157,6 @@
   <ItemGroup>
     <Content Include="app.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

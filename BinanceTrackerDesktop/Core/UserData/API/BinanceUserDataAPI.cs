@@ -24,13 +24,18 @@ namespace BinanceTrackerDesktop.Core.UserData.API
 
     public class BinanceUserDataWriter : IBinanceUserDataWriter
     {
-        public Task WriteDataAsync(IBinanceUserData data)
+        public async Task WriteDataAsync(IBinanceUserData data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
             using (StreamWriter writer = new StreamWriter(BinanceUserDataFile.Path, false))
-                return writer.WriteAsync(JsonConvert.SerializeObject(data));
+            {
+                await writer.WriteAsync(JsonConvert.SerializeObject(data));
+                writer.Close();
+
+                await Task.CompletedTask;
+            }
         }
     }
 
@@ -42,7 +47,12 @@ namespace BinanceTrackerDesktop.Core.UserData.API
                 return null;
 
             using (StreamReader reader = new StreamReader(BinanceUserDataFile.Path))
-                return JsonConvert.DeserializeObject<BinanceUserData>(await reader.ReadToEndAsync());
+            {
+                string data = await reader.ReadToEndAsync();
+                reader.Close();
+
+                return JsonConvert.DeserializeObject<BinanceUserData>(data);
+            }
         }
     }
 

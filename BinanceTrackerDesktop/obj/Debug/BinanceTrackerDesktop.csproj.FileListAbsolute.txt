@@ -69,14 +69,14 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\Binance
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\CryptoExchange.Net.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\Newtonsoft.Json.dll
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Forms.SystemTray.BinanceTrackerSystemTrayForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Properties.Resources.resources
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.GenerateResource.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CoreCompileInputs.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\aa\BinanceTrackerDesktop.resources.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.exe
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.pdb
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete

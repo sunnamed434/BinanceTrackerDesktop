@@ -1,6 +1,7 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.SpotData;
+using Binance.Net.Objects.Spot.WalletData;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.API;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Wallet
 {
@@ -23,7 +25,9 @@ namespace BinanceTrackerDesktop.Core.Wallet
         internal BinanceUserWallet(BinanceClient client)
         {
             if (client == null)
+            {
                 throw new ArgumentNullException(nameof(client));
+            }
 
             this.client = client;
         }
@@ -36,7 +40,9 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
             decimal result = decimal.Zero;
             foreach (BinanceUserWalletCoinResult coin in buyedCoins)
+            {
                 result += coin.Price;
+            }
 
             return new BinanceUserWalletResult(result);
         }
@@ -47,7 +53,10 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
             List<BinanceUserWalletCoinResult> result = new List<BinanceUserWalletCoinResult>();
             foreach (BinanceBalance balance in binanceAccountInfo.Data.Balances.Where(b => b.Total.ValueFitsToCalculation()))
-                result.Add(await calculateAndFormatCoinPriceAsync(balance));
+            {
+                BinanceUserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(balance);
+                result.Add(coinResult);
+            }
 
             return result;
         }
