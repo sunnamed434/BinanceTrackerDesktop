@@ -33,10 +33,15 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 ![Screenshot_2](https://user-images.githubusercontent.com/65300126/131249080-a179aec0-426a-435b-9070-9ba41fceaf34.png)
 
 
+
 ### Overview
+#### Initializing
+![Overview](https://user-images.githubusercontent.com/65300126/132897125-b8dc853f-d9b5-4a7c-8f7a-6401f0d515fd.png)
+#### Balances Hiden
+![Overview](https://user-images.githubusercontent.com/65300126/132896474-64d44074-6b07-4a27-a4ba-fe1146c291a2.png)
+#### Balance Up
 ![Overview](https://user-images.githubusercontent.com/65300126/131248850-a68a0db1-0e5f-4728-b7ac-15ab68bb277b.png)
+#### Balance Down
 ![Overview](https://user-images.githubusercontent.com/65300126/131262991-34969db4-fa6b-44e5-9780-ba2313b39466.png)
+#### Balance Nothing
 ![Overview](https://user-images.githubusercontent.com/65300126/131310595-ab8ec52c-8463-43c7-8e83-7c6d2dc094a8.png)
-- Green color: your balance is up.
-- Red color: you have loses.
-- Gray color: nothing changed.
