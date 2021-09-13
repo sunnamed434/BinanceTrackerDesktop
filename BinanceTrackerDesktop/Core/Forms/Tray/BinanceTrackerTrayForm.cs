@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl, new FormNotificationsControl(new FormStableNotificationsControl(this.NotifyIcon)));
 
-            this.NotifyIcon.MouseClick += (s, e) => tray.EventsContainerControl.MouseClick.TriggerEvent(e);
+            this.NotifyIcon.MouseClick += (s, e) => tray.EventsContainerControl.MouseClickListener.TriggerEvent(e);
             this.NotifyIcon.DoubleClick += (s, e) => tray.EventsContainerControl.DoubleClickListener.TriggerEvent(e);
         }
     }

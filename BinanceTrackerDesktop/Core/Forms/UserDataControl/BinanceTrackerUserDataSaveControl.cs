@@ -32,7 +32,7 @@ namespace BinanceTrackerDesktop.Core.Forms.UserDataControl
 
 
 
-        private async Task saveUserDataAsync()
+        private async Task onCloseCallbackAsync()
         {
             BinanceUserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
             BinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
@@ -41,15 +41,6 @@ namespace BinanceTrackerDesktop.Core.Forms.UserDataControl
                 userData.BestBalance = walletResult.Value;
 
             await new BinanceUserDataWriter().WriteDataAsync(userData);
-
-            await Task.CompletedTask;
-        }
-
-
-
-        private async Task onCloseCallbackAsync()
-        {
-            await saveUserDataAsync();
 
             await Task.CompletedTask;
         }

@@ -21,10 +21,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         private IBinanceUserStatus userStatus;
 
-        private IFormEventListener[] textClickEventListeners;
-
-        private IFormEventListener refreshTotalBalanceEventListener;
-
 
 
         public BinanceTrackerForm()
@@ -44,10 +40,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
-
-            this.RefreshTotalBalanceButton.Click += onRefreshTotalBalanceButtonClick;
-            this.UserTotalBalanceText.Click += onUserTotalBalanceTextClicked;
-            this.UserTotalBalanceLosesText.Click += onUserTotalBalanceLosesTextClicked;
         }
 
 
@@ -62,48 +54,23 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
             new BinanceTrackerUserDataSaveControl(safelyComponentControl, startup.Wallet);
 
-            textClickEventListeners = new IFormEventListener[]
-            {
-                new FormEventListener(),
-                new FormEventListener(),
-            };
-
             new BinanceTrackerUserBalanceUIControl(safelyComponentControl, userStatus,
             new FormButtonControl[]
             {
-                new FormButtonControl(this.RefreshTotalBalanceButton, refreshTotalBalanceEventListener = new FormEventListener()),
+                new FormButtonControl(this.RefreshTotalBalanceButton),
             },
             new FormTextControl[]
             {
-                new FormTextControl(this.UserTotalBalanceText, textClickEventListeners[0]),
-                new FormTextControl(this.UserTotalBalanceLosesText, textClickEventListeners[1]),
+                new FormTextControl(this.UserTotalBalanceText),
+                new FormTextControl(this.UserTotalBalanceLosesText),
             });
 
             new BinanceTrackerTrayForm(safelyComponentControl);
         }
 
-        private void onRefreshTotalBalanceButtonClick(object sender, EventArgs e)
-        {
-            refreshTotalBalanceEventListener.TriggerEvent(e);
-        }
-
-        private void onUserTotalBalanceTextClicked(object sender, EventArgs e)
-        {
-            textClickEventListeners[0].TriggerEvent(e);
-        }
-
-        private void onUserTotalBalanceLosesTextClicked(object sender, EventArgs e)
-        {
-            textClickEventListeners[1].TriggerEvent(e);
-        }
-
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
             base.FormClosing -= onFormClosing;
-
-            this.RefreshTotalBalanceButton.Click -= onRefreshTotalBalanceButtonClick;
-            this.UserTotalBalanceText.Click -= onUserTotalBalanceTextClicked;
-            this.UserTotalBalanceLosesText.Click -= onUserTotalBalanceLosesTextClicked;
 
             e.Cancel = true;
 

@@ -6,16 +6,30 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.ComponentControl.FormText.API
 {
-    public interface IFormTextControl : IFormClickEventListenerHandle, IFormTextColor
+    public interface IFormTextControl : IFormTextColor
     {
         Label Label { get; }
+
+        FormTextEventsContainer EventsContainer { get; }
     }
 
-    public class FormTextControl : FormComponentClickListener, IFormTextControl
+    public class FormTextEventsContainer
+    {
+        public IFormEventListener ClickEventListener { get; }
+
+
+
+        public FormTextEventsContainer()
+        {
+            ClickEventListener = new FormEventListener();
+        }
+    }
+
+    public class FormTextControl : IFormTextControl
     {
         public Label Label { get; }
 
-        public IFormEventListener ClickEvent => base.ClickEventListener;
+        public FormTextEventsContainer EventsContainer { get; }
 
 
 
@@ -23,13 +37,16 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.FormText.API
 
 
 
-        public FormTextControl(Label label, IFormEventListener onClickEventListener) : base(onClickEventListener)
+        public FormTextControl(Label label)
         {
             if (label == null)
                 throw new ArgumentNullException(nameof(label));
 
+            EventsContainer = new FormTextEventsContainer();
             Label = label;
             defaultColor = Color.Empty;
+
+            Label.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
         }
 
 

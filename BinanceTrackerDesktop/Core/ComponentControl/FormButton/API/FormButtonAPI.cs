@@ -6,16 +6,30 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.ComponentControl.FormButton.API
 {
-    public interface IFormButtonControl : IFormClickEventListenerHandle, IFormTextColor
+    public interface IFormButtonControl : IFormTextColor
     {
         Button Button { get; }
+
+        FormButtonEventsContainer EventsContainer { get; }
     }
 
-    public class FormButtonControl : FormComponentClickListener, IFormButtonControl
+    public class FormButtonEventsContainer
+    {
+        public IFormEventListener ClickEventListener { get; }
+
+
+
+        public FormButtonEventsContainer()
+        {
+            ClickEventListener = new FormEventListener();
+        }
+    }
+
+    public class FormButtonControl : IFormButtonControl
     {
         public Button Button { get; }
 
-        public IFormEventListener ClickEvent => base.ClickEventListener;
+        public FormButtonEventsContainer EventsContainer { get; }
 
 
 
@@ -23,13 +37,16 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.FormButton.API
 
 
 
-        public FormButtonControl(Button button, IFormEventListener clickEventListener) : base(clickEventListener)
+        public FormButtonControl(Button button)
         {
             if (button == null)
                 throw new ArgumentNullException(nameof(button));
 
+            EventsContainer = new FormButtonEventsContainer();
             Button = button;
             defaultColor = Color.Empty;
+
+            button.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
         }
 
 

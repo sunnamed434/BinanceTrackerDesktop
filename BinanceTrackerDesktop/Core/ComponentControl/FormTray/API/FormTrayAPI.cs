@@ -134,7 +134,7 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.FormTray.API
 
     public class FormTrayEventsContainer
     {
-        public IFormTrayClickEventListener MouseClick { get; }
+        public IFormTrayClickEventListener MouseClickListener { get; }
 
         public IFormEventListener DoubleClickListener { get; }
 
@@ -142,7 +142,7 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.FormTray.API
 
         public FormTrayEventsContainer()
         {
-            MouseClick = new FormTrayClickEventListener();
+            MouseClickListener = new FormTrayClickEventListener();
             DoubleClickListener = new FormEventListener();
         }
     }
@@ -181,7 +181,7 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.FormTray.API
             this.notifyIcon = notifyIcon;
 
             EventsContainerControl = new FormTrayEventsContainer();
-            notifyIcon.MouseClick += (s, e) => EventsContainerControl.MouseClick.TriggerEvent(e);
+            notifyIcon.MouseClick += (s, e) => EventsContainerControl.MouseClickListener.TriggerEvent(e);
             notifyIcon.DoubleClick += (s, e) => EventsContainerControl.DoubleClickListener.TriggerEvent(e);
 
             foreach (IFormTrayItemControl item in InitializeItems())

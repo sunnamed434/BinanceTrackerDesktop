@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace BinanceTrackerDesktop.Core.Files.API
+namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 {
     public interface IDirectoryFile<T>
     {
@@ -131,9 +131,9 @@ namespace BinanceTrackerDesktop.Core.Files.API
 
     public class ApplicationDirectory
     {
-        public static readonly string Data = nameof(Data).ToLower();
+        public static readonly string Resources = nameof(Resources);
 
-        public static readonly string Icons = Path.Combine(Data, nameof(Icons).ToLower());
+        public static readonly string Icons = Path.Combine(Resources, nameof(Icons));
     }
 
     public class DirectoryIcons

@@ -64,13 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
-    <Compile Include="Core\ComponentControl\API\IFormComponentClickListener.cs" />
-    <Compile Include="Core\ComponentControl\API\IFormClickEventListenerHandle.cs" />
-    <Compile Include="Core\ComponentControl\API\IFormTextColor.cs" />
+    <Compile Include="Core\ComponentControl\API\FormTextColorAPI.cs" />
     <Compile Include="Core\ComponentControl\FormButton\API\FormButtonAPI.cs" />
     <Compile Include="Core\ComponentControl\FormTray\API\FormTrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\Files\API\ApplicationDirectoryControl.cs" />
+    <Compile Include="Core\DirectoryFiles\API\DirectoryFilesAPI.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
     <Compile Include="Core\Forms\UserDataControl\BinanceTrackerUserDataSaveControl.cs" />
