@@ -69,7 +69,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
     public class DirectoryFileImages : DirectoryFileBase<IDirectoryImage>
     {
-        public override string FileExtension => ".ico";
+        public override string FileExtension => FilesExtensions.Icon;
 
         public override IEnumerable<IDirectoryImage> Files { get; }
 

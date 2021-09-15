@@ -69,9 +69,9 @@
     <Compile Include="Core\ComponentControl\FormTray\API\FormTrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\API\DirectoryFilesAPI.cs" />
-    <Compile Include="Core\Formatters\API\BinanceFormatters.cs" />
+    <Compile Include="Core\Formatters\API\BinanceFormattersAPI.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
-    <Compile Include="Core\Forms\UserDataControl\BinanceTrackerUserDataSaveControl.cs" />
+    <Compile Include="Core\UserData\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\UserData\API\BinanceUserDataAPI.cs" />

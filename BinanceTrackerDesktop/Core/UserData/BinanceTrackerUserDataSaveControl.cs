@@ -4,9 +4,8 @@ using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Forms.UserDataControl
+namespace BinanceTrackerDesktop.Core.UserData
 {
     public class BinanceTrackerUserDataSaveControl
     {
