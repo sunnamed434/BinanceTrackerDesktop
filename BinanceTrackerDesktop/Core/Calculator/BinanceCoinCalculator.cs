@@ -7,7 +7,7 @@ namespace BinanceTrackerDesktop.Core.Calculator
 {
     public class BinanceCoinCalculator
     {
-        public static decimal GetPrice(BinanceCoinOptions options)
+        public static decimal GetPriceOf(BinanceCoinOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -15,7 +15,7 @@ namespace BinanceTrackerDesktop.Core.Calculator
             return options.Amount * options.Price;
         }
 
-        public static decimal GetPrice(IEnumerable<BinanceCoinOptions> options)
+        public static decimal GetPriceOf(IEnumerable<BinanceCoinOptions> options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -29,7 +29,7 @@ namespace BinanceTrackerDesktop.Core.Calculator
                 if (property == null)
                     throw new ArgumentNullException(nameof(property));
 
-                result += GetPrice(property);
+                result += GetPriceOf(property);
             }
 
             return result;

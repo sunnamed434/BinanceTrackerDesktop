@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Forms.Authorization;
-using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup
                 return;
             }
 
-            IBinanceUserData userData = await new BinanceUserDataReader().ReadDataAsync();
+            UserData userData = await new UserDataReader().ReadDataAsync();
             if (userData == null)
             {
                 Application.Run(new BinanceTrackerAuthorizationForm());

@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Authorization;
-using BinanceTrackerDesktop.Core.Files.API;
-using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
@@ -39,7 +39,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             {
                 this.AuthorizeButton.Click -= onAuthorizeButtonClicked;
 
-                await new BinanceUserDataWriter().WriteDataAsync(new BinanceUserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text));
+                await new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text).SaveUserDataAsync();
 
                 base.Hide();
                 new BinanceTrackerForm().ShowDialog();

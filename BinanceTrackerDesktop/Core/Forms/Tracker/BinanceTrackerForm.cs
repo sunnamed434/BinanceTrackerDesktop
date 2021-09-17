@@ -1,13 +1,13 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.FormButton.API;
-using BinanceTrackerDesktop.Core.ComponentControl.FormText.API;
+﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
+using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Startup;
-using BinanceTrackerDesktop.Core.UserData;
-using BinanceTrackerDesktop.Core.UserData.API;
-using BinanceTrackerDesktop.Core.UserStatus.API;
+using BinanceTrackerDesktop.Core.User.Control;
+using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data.Control;
 using System;
 using System.Windows.Forms;
 
@@ -48,21 +48,21 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             base.Activated -= onFormActivated;
 
-            BinanceUserData data = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+            UserData data = await new UserDataReader().ReadDataAsync() as UserData;
             startup = new BinanceStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
             new BinanceTrackerUserDataSaveControl(safelyComponentControl, startup.Wallet);
 
             new BinanceTrackerUserBalanceUIControl(safelyComponentControl, userStatus,
-            new FormButtonControl[]
+            new ButtonComponentControl[]
             {
-                new FormButtonControl(this.RefreshTotalBalanceButton),
+                new ButtonComponentControl(this.RefreshTotalBalanceButton),
             },
-            new FormTextControl[]
+            new LabelComponentControl[]
             {
-                new FormTextControl(this.UserTotalBalanceText),
-                new FormTextControl(this.UserTotalBalanceLosesText),
+                new LabelComponentControl(this.UserTotalBalanceText),
+                new LabelComponentControl(this.UserTotalBalanceLosesText),
             });
 
             new BinanceTrackerTrayForm(safelyComponentControl);

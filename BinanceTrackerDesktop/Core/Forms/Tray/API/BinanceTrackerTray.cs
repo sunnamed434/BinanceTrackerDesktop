@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.FormNotifications.API;
-using BinanceTrackerDesktop.Core.ComponentControl.FormTray.API;
+﻿using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Forms.API;
-using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.Notifications.API;
+using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.API;
 using System;
 using System.Collections.Generic;
@@ -10,23 +10,23 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 {
-    public class BinanceTrackerTray : FormTrayBase
+    public class BinanceTrackerTray : TrayBase
     {
-        private readonly FormNotificationsControl notificationsControl;
+        private readonly NotificationsControl notificationsControl;
 
         private readonly IFormSafelyComponentControl formSafelyCloseControl;
 
         private readonly BinanceProcessWindow processWindow;
 
-        private readonly IFormTrayItemControl applicationOpenItemControl;
+        private readonly TrayItemControl applicationOpenItemControl;
 
-        private readonly IFormTrayItemControl notificationsItemControl;
+        private readonly TrayItemControl notificationsItemControl;
 
-        private readonly IFormTrayItemControl applicationQuitItemControl;
+        private readonly TrayItemControl applicationQuitItemControl;
 
 
 
-        public BinanceTrackerTray(NotifyIcon notifyIcon, IFormSafelyComponentControl formSafelyCloseControl, FormNotificationsControl notificationsControl) : base(notifyIcon)
+        public BinanceTrackerTray(NotifyIcon notifyIcon, IFormSafelyComponentControl formSafelyCloseControl, NotificationsControl notificationsControl) : base(notifyIcon)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
@@ -55,7 +55,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private async void initializeAsync()
         {
-            BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
+            UserData binanceUserData = await new UserDataReader().ReadDataAsync();
             notificationsItemControl.SetText(binanceUserData.NotificationsEnabled == true ? TrayItemTextContainer.DisableNotifications : TrayItemTextContainer.EnableNotifications);
         }
 
@@ -66,13 +66,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        protected override IEnumerable<IFormTrayItemControl> InitializeItems()
+        protected override IEnumerable<TrayItemControl> InitializeItems()
         {
-            return new List<IFormTrayItemControl>()
+            return new List<TrayItemControl>()
             {
-                new FormTrayItemControl(TrayItemTextContainer.OpenApplication, TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex),
-                new FormTrayItemControl(TrayItemTextContainer.DisableNotifications, TrayItemsUniqueValueContainer.NotificationsUniqueIndex),
-                new FormTrayItemControl(TrayItemTextContainer.QuitApplication, TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex),
+                new TrayItemControl(TrayItemTextContainer.OpenApplication, TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex),
+                new TrayItemControl(TrayItemTextContainer.DisableNotifications, TrayItemsUniqueValueContainer.NotificationsUniqueIndex),
+                new TrayItemControl(TrayItemTextContainer.QuitApplication, TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex),
             };
         }
 
@@ -90,13 +90,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private async void onNotificationsItemControlClicked(EventArgs e)
         {
-            BinanceUserData binanceUserData = await new BinanceUserDataReader().ReadDataAsync() as BinanceUserData;
-            binanceUserData.NotificationsEnabled = !binanceUserData.NotificationsEnabled;
+            UserData userData = await new UserDataReader().ReadDataAsync();
+            userData.NotificationsEnabled = !userData.NotificationsEnabled;
 
-            await new BinanceUserDataWriter().WriteDataAsync(binanceUserData);
+            await new UserDataWriter().WriteDataAsync(userData);
 
-            notificationsItemControl.SetText(getNotificationsText(binanceUserData.NotificationsEnabled));
-            this.notificationsControl.Show(TrayItemTextContainer.ApplicationName, binanceUserData.NotificationsEnabled ? TrayItemTextContainer.NotificationsEnabled : TrayItemTextContainer.NotificationsDisabled);
+            notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
+            this.notificationsControl.ShowPopup(TrayItemTextContainer.ApplicationName, userData.NotificationsEnabled ? TrayItemTextContainer.NotificationsEnabled : TrayItemTextContainer.NotificationsDisabled);
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)

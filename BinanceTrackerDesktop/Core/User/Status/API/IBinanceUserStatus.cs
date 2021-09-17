@@ -1,15 +1,15 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.API;
-using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
 using System;
 using System.Threading.Tasks;
 
-namespace BinanceTrackerDesktop.Core.UserStatus.API
+namespace BinanceTrackerDesktop.Core.User.Control
 {
     public interface IBinanceUserStatus
     {
-        BinanceUserData Data { get; } 
+        UserData Data { get; } 
 
         BinanceUserWallet Wallet { get; }
 
@@ -41,13 +41,13 @@ namespace BinanceTrackerDesktop.Core.UserStatus.API
 
     public abstract class BinanceUserStatusBase : IBinanceUserStatus
     {
-        public BinanceUserData Data { get; }
+        public UserData Data { get; }
 
         public BinanceUserWallet Wallet { get; }
 
 
 
-        protected BinanceUserStatusBase(BinanceUserData data, BinanceUserWallet wallet)
+        protected BinanceUserStatusBase(UserData data, BinanceUserWallet wallet)
         {
             Data = data;
             Wallet = wallet;
@@ -64,7 +64,7 @@ namespace BinanceTrackerDesktop.Core.UserStatus.API
 
     public class BinanceUserStandartStatus : BinanceUserStatusBase
     {
-        public BinanceUserStandartStatus(BinanceUserData data, BinanceUserWallet wallet) : base(data, wallet)
+        public BinanceUserStandartStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
         {
 
         }
@@ -96,7 +96,7 @@ namespace BinanceTrackerDesktop.Core.UserStatus.API
 
     public class BinanceUserBeginnerStatus : BinanceUserStatusBase
     {
-        public BinanceUserBeginnerStatus(BinanceUserData data, BinanceUserWallet wallet) : base(data, wallet)
+        public BinanceUserBeginnerStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
         {
 
         }
@@ -123,13 +123,13 @@ namespace BinanceTrackerDesktop.Core.UserStatus.API
 
     public class BinanceUserStatusDetector
     {
-        private readonly BinanceUserData data;
+        private readonly UserData data;
 
         private readonly BinanceUserWallet wallet;
 
 
 
-        public BinanceUserStatusDetector(BinanceUserData data, BinanceUserWallet wallet)
+        public BinanceUserStatusDetector(UserData data, BinanceUserWallet wallet)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
@@ -154,7 +154,7 @@ namespace BinanceTrackerDesktop.Core.UserStatus.API
 
     public static class BinanceUserDataExtension
     {
-        public static bool UserStartedApplicationFirstTime(this BinanceUserData source)
+        public static bool UserStartedApplicationFirstTime(this UserData source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

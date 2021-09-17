@@ -1,6 +1,6 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects;
-using BinanceTrackerDesktop.Core.UserData.API;
+using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Wallet;
 using CryptoExchange.Net.Authentication;
 using System;
@@ -13,22 +13,22 @@ namespace BinanceTrackerDesktop.Core.Startup
 
 
 
-        public BinanceStartup(IBinanceUserData userData)
+        public BinanceStartup(UserData data)
         {
-            if (userData == null)
-                throw new ArgumentNullException(nameof(userData));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
 
             BinanceClient.SetDefaultOptions(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials(userData.Key, userData.Secret),
+                ApiCredentials = new ApiCredentials(data.Key, data.Secret),
             });
 
             BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
             {
-                ApiCredentials = new ApiCredentials(userData.Key, userData.Secret),
+                ApiCredentials = new ApiCredentials(data.Key, data.Secret),
             });
 
-            Wallet = new BinanceUserWallet(new BinanceClient());
+            Wallet = new BinanceUserWallet();
         }
     }
 }

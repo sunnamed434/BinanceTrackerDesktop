@@ -4,11 +4,9 @@ using System.Diagnostics;
 
 namespace BinanceTrackerDesktop.Core.Window.Extension
 {
-    public static class BinanceTrackerProcessExtension
+    public static class ProcessExtension
     {
-        private const int FirstArrayElement = 0;
-
-        private const int ContainsSimiralWindow = 1;
+        private const int ContainsSimiralWindowValue = 1;
 
 
 
@@ -18,10 +16,10 @@ namespace BinanceTrackerDesktop.Core.Window.Extension
                 throw new ArgumentNullException(nameof(source));
 
             Process[] processes = Process.GetProcessesByName(source.ProcessName);
-            if (processes.Length > ContainsSimiralWindow)
+            if (processes.Length > ContainsSimiralWindowValue)
             {
                 int processIndex = 0;
-                if (processes[FirstArrayElement].Id == source.Id)
+                if (processes[processIndex].Id == source.Id)
                 {
                     processIndex++;
                 }

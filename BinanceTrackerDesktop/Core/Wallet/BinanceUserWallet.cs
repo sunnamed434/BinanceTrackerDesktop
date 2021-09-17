@@ -1,7 +1,6 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.SpotData;
-using Binance.Net.Objects.Spot.WalletData;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.API;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
@@ -12,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Wallet
 {
@@ -22,14 +20,9 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
 
 
-        internal BinanceUserWallet(BinanceClient client)
+        internal BinanceUserWallet()
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-
-            this.client = client;
+            client = new BinanceClient();
         }
 
 
@@ -68,7 +61,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
             string formattedBalance = new BinanceCryptocurrencyStringFormatter().Format(balance.Asset);
             WebCallResult<BinancePrice> marketPriceResult = await client.Spot.Market.GetPriceAsync(formattedBalance);
 
-            return new BinanceUserWalletCoinResult(formattedBalance, BinanceCoinCalculator.GetPrice(new BinanceCoinOptions(marketPriceResult.Data.Price, balance.Total)));
+            return new BinanceUserWalletCoinResult(formattedBalance, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, balance.Total)));
         }
     }
 }

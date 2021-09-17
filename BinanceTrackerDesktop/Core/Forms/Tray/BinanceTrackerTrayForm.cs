@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.FormNotifications.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.Forms.Tray.API;
+using BinanceTrackerDesktop.Core.Notifications.API;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -33,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             this.NotifyIcon.Icon = applicationIcon;
             base.Icon = applicationIcon;
 
-            tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl, new FormNotificationsControl(new FormStableNotificationsControl(this.NotifyIcon)));
+            tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl, new NotificationsControl(this.NotifyIcon));
 
             this.NotifyIcon.MouseClick += (s, e) => tray.EventsContainerControl.MouseClickListener.TriggerEvent(e);
             this.NotifyIcon.DoubleClick += (s, e) => tray.EventsContainerControl.DoubleClickListener.TriggerEvent(e);

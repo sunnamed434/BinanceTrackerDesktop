@@ -3,12 +3,12 @@ using System;
 
 namespace BinanceTrackerDesktop.Core.Forms.API
 {
-    public interface IFormEventListener : ITriggerableEventHandler<EventArgs>
+    public interface IEventListener : ITriggerableEventHandler<EventArgs>
     {
         
     }
 
-    public class FormEventListener : IFormEventListener
+    public class EventListener : IEventListener
     {
         public event Action<EventArgs> OnTriggerEventHandler;
 
