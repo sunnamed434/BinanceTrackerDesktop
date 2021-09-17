@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.Formatters.API;
-using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using System;
@@ -13,7 +13,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
 {
     public class BinanceTrackerUserBalanceUIControl
     {
-        private IFormSafelyComponentControl formSafelyCloseControl;
+        private ISafelyComponentControl formSafelyCloseControl;
 
         private readonly IBinanceUserStatus userStatus;
 
@@ -25,7 +25,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
 
 
 
-        public BinanceTrackerUserBalanceUIControl(IFormSafelyComponentControl formSafelyCloseControl, IBinanceUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
+        public BinanceTrackerUserBalanceUIControl(ISafelyComponentControl formSafelyCloseControl, IBinanceUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));

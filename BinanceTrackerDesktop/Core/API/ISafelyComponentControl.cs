@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BinanceTrackerDesktop.Core.Forms.API
+namespace BinanceTrackerDesktop.Core.API
 {
-    public interface IFormSafelyComponentControl
+    public interface ISafelyComponentControl
     {
         IEnumerable<Func<Task>> Callbacks { get; }
+
+
 
         void RegisterListener(Func<Task> callback);
 
         Task CallListenersAsync();
 
-        IFormSafelyComponentControl OnCompleted(Action callback);
+        ISafelyComponentControl OnCompleted(Action callback);
 
-        IFormSafelyComponentControl OnStarted(Action callback);
+        ISafelyComponentControl OnStarted(Action callback);
     }
 
-    public class FormSafelyComponentControl : IFormSafelyComponentControl
+    public class SafelyComponentControl : ISafelyComponentControl
     {
         private List<Func<Task>> closeCallbacks = new List<Func<Task>>();
 
@@ -65,7 +67,7 @@ namespace BinanceTrackerDesktop.Core.Forms.API
             await Task.CompletedTask;
         }
 
-        public IFormSafelyComponentControl OnStarted(Action callback)
+        public ISafelyComponentControl OnStarted(Action callback)
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
@@ -74,7 +76,7 @@ namespace BinanceTrackerDesktop.Core.Forms.API
             return this;
         }
 
-        public IFormSafelyComponentControl OnCompleted(Action callback)
+        public ISafelyComponentControl OnCompleted(Action callback)
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));

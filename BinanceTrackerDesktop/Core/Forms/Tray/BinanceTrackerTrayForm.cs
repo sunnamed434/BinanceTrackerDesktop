@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
-using BinanceTrackerDesktop.Core.Forms.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.Forms.Tray.API;
 using BinanceTrackerDesktop.Core.Notifications.API;
 using System;
@@ -10,13 +10,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
     public partial class BinanceTrackerTrayForm : Form
     {
-        private readonly IFormSafelyComponentControl formSafelyCloseControl;
+        private readonly ISafelyComponentControl formSafelyCloseControl;
 
         private readonly BinanceTrackerTray tray;
 
 
 
-        public BinanceTrackerTrayForm(IFormSafelyComponentControl formSafelyCloseControl)
+        public BinanceTrackerTrayForm(ISafelyComponentControl formSafelyCloseControl)
         {
             InitializeComponent();
 

@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Components.TextControl.API;
-using BinanceTrackerDesktop.Core.Forms.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Components.TextControl.API;
 using System;
 using System.Windows.Forms;
 

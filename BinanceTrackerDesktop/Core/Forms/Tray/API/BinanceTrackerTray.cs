@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Components.TrayControl.API;
-using BinanceTrackerDesktop.Core.Forms.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Notifications.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.API;
@@ -14,7 +14,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
     {
         private readonly NotificationsControl notificationsControl;
 
-        private readonly IFormSafelyComponentControl formSafelyCloseControl;
+        private readonly ISafelyComponentControl formSafelyCloseControl;
 
         private readonly BinanceProcessWindow processWindow;
 
@@ -26,7 +26,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        public BinanceTrackerTray(NotifyIcon notifyIcon, IFormSafelyComponentControl formSafelyCloseControl, NotificationsControl notificationsControl) : base(notifyIcon)
+        public BinanceTrackerTray(NotifyIcon notifyIcon, ISafelyComponentControl formSafelyCloseControl, NotificationsControl notificationsControl) : base(notifyIcon)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));

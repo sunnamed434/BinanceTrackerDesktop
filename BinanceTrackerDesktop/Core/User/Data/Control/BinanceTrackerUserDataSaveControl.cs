@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Forms.API;
+﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
@@ -9,13 +9,13 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
 {
     public class BinanceTrackerUserDataSaveControl
     {
-        private readonly IFormSafelyComponentControl safelyComponentContro;
+        private readonly ISafelyComponentControl safelyComponentContro;
 
         private readonly BinanceUserWallet wallet;
 
 
 
-        public BinanceTrackerUserDataSaveControl(IFormSafelyComponentControl safelyComponentContro, BinanceUserWallet wallet)
+        public BinanceTrackerUserDataSaveControl(ISafelyComponentControl safelyComponentContro, BinanceUserWallet wallet)
         {
             if (safelyComponentContro == null)
                 throw new ArgumentNullException(nameof(safelyComponentContro));

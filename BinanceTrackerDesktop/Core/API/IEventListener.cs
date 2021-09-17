@@ -1,7 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using System;
+﻿using System;
 
-namespace BinanceTrackerDesktop.Core.Forms.API
+namespace BinanceTrackerDesktop.Core.API
 {
     public interface IEventListener : ITriggerableEventHandler<EventArgs>
     {

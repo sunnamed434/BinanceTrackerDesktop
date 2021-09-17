@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
+﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.DirectoryFiles.API;
-using BinanceTrackerDesktop.Core.Forms.API;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Startup;
@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public partial class BinanceTrackerForm : Form, IFormControl
+    public partial class BinanceTrackerForm : Form
     {
-        private readonly IFormSafelyComponentControl safelyComponentControl;
+        private readonly ISafelyComponentControl safelyComponentControl;
 
         private BinanceStartup startup;
 
@@ -34,7 +34,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
 
-            safelyComponentControl = new FormSafelyComponentControl()
+            safelyComponentControl = new SafelyComponentControl()
                 .OnStarted(() => base.Hide())
                 .OnCompleted(() => Application.Exit());
 
