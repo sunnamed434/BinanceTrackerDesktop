@@ -74,7 +74,7 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
     {
         public TrayClickEventListener MouseClickListener { get; }
 
-        public IEventListener DoubleClickListener { get; }
+        public EventListener DoubleClickListener { get; }
 
 
 
@@ -87,11 +87,11 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
     public class TrayItemEventsContainer
     {
-        public IEventListener ClickEvent { get; }
+        public EventListener ClickEvent { get; }
 
 
 
-        public TrayItemEventsContainer(IEventListener clickEvent)
+        public TrayItemEventsContainer(EventListener clickEvent)
         {
             ClickEvent = clickEvent;
         }

@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.Icon = new ApplicationDirectoryControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
             base.MaximizeBox = false;
 
             this.AuthorizeButton.Click += onAuthorizeButtonClicked;

@@ -20,7 +20,7 @@ namespace BinanceTrackerDesktop.Core.Calculator
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            if (options.Count() < 0)
+            if (!options.Any())
                 throw new InvalidOperationException();
 
             decimal result = decimal.Zero;

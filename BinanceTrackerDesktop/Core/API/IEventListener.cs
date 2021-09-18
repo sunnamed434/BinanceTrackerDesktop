@@ -2,12 +2,7 @@
 
 namespace BinanceTrackerDesktop.Core.API
 {
-    public interface IEventListener : ITriggerableEventHandler<EventArgs>
-    {
-        
-    }
-
-    public class EventListener : IEventListener
+    public class EventListener : ITriggerableEventHandler<EventArgs>
     {
         public event Action<EventArgs> OnTriggerEventHandler;
 

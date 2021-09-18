@@ -26,7 +26,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
     {
         public string Format(string content)
         {
-            if (content == null)
+            if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
             return content + CurrencyName.EUR;

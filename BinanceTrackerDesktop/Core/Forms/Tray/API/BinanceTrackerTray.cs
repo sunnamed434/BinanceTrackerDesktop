@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.API;
-using BinanceTrackerDesktop.Core.Notifications.API;
+using BinanceTrackerDesktop.Core.Popup.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.API;
 using System;
@@ -66,18 +66,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        protected override IEnumerable<TrayItemControl> InitializeItems()
-        {
-            return new List<TrayItemControl>()
-            {
-                new TrayItemControl(TrayItemTextContainer.OpenApplication, TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex),
-                new TrayItemControl(TrayItemTextContainer.DisableNotifications, TrayItemsUniqueValueContainer.NotificationsUniqueIndex),
-                new TrayItemControl(TrayItemTextContainer.QuitApplication, TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex),
-            };
-        }
-
-
-
         private void onTrayDoubleClick(EventArgs e)
         {
             processWindow.SetWindowToForeground();
@@ -93,10 +81,15 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
             UserData userData = await new UserDataReader().ReadDataAsync();
             userData.NotificationsEnabled = !userData.NotificationsEnabled;
 
-            await new UserDataWriter().WriteDataAsync(userData);
+            await userData.SaveUserDataAsync();
 
             notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
-            this.notificationsControl.ShowPopup(TrayItemTextContainer.ApplicationName, userData.NotificationsEnabled ? TrayItemTextContainer.NotificationsEnabled : TrayItemTextContainer.NotificationsDisabled);
+            this.notificationsControl.Show(
+                new PopupBuilder()
+                .WithTitle(TrayItemTextContainer.ApplicationName)
+                .WithMessage(userData.NotificationsEnabled ? TrayItemTextContainer.NotificationsEnabled : TrayItemTextContainer.NotificationsDisabled)
+                .WithInterval(90)
+                .WithImage(ToolTipIcon.Info));
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)
@@ -116,6 +109,18 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
             base.Close();
 
             await Task.CompletedTask;
+        }
+
+
+
+        protected override IEnumerable<TrayItemControl> InitializeItems()
+        {
+            return new List<TrayItemControl>()
+            {
+                new TrayItemControl(TrayItemTextContainer.OpenApplication, TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex),
+                new TrayItemControl(TrayItemTextContainer.DisableNotifications, TrayItemsUniqueValueContainer.NotificationsUniqueIndex),
+                new TrayItemControl(TrayItemTextContainer.QuitApplication, TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex),
+            };
         }
     }
 

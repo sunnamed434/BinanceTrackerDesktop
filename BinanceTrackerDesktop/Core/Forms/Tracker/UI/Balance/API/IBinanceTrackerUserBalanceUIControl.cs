@@ -54,22 +54,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
             formTextControls[1].SetDefaultTextColor(Color.Gray);
 
             setTextsInitializing();
-
             initializeAsync();
-            async void initializeAsync()
-            {
-                UserData data = await new UserDataReader().ReadDataAsync();
-                isBalancesHiden = data.BalancesHiden;
-
-                if (isBalancesHiden)
-                {
-                    setTextsHiden();
-                }
-                else
-                {
-                    await refreshBalancesFixedAsync();
-                }
-            }
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
             this.formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler += onRefreshTotalBalanceButtonClicked;
@@ -78,6 +63,21 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
         }
 
 
+
+        private async void initializeAsync()
+        {
+            UserData data = await new UserDataReader().ReadDataAsync();
+            isBalancesHiden = data.BalancesHiden;
+
+            if (isBalancesHiden)
+            {
+                setTextsHiden();
+            }
+            else
+            {
+                await refreshBalancesFixedAsync();
+            }
+        }
 
         private async Task refreshBalancesFixedAsync(bool lockButton = true)
         {
@@ -175,7 +175,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
 
             UserData userData = await new UserDataReader().ReadDataAsync();
             userData.BalancesHiden = isBalancesHiden;
-            await new UserDataWriter().WriteDataAsync(userData);
+            await userData.SaveUserDataAsync();
         }
 
         private async Task onCloseCallbackAsync()

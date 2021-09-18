@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryFileImages;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 {
@@ -19,27 +20,30 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
         T GetDirectoryFileAt(string name);
     }
 
-    public interface IDirectoryImage
-    {
-        Icon Icon { get; }
-
-        string FileName { get; }
-
-        string FilePath { get; }
-    }
-
     public class ApplicationDirectoryControl
     {
-        public DirectoriesControl Directories { get; }
+        public Directories Folders { get; }
 
 
 
         public ApplicationDirectoryControl()
         {
-            Directories = new DirectoriesControl();
+            Folders = new Directories();
         }
 
 
+
+        public class Directories
+        {
+            public DirectoriesControl Resources { get; }
+
+
+
+            public Directories()
+            {
+                Resources = new DirectoriesControl();
+            }
+        }
 
         public class DirectoriesControl
         {
@@ -67,17 +71,17 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
         public abstract T GetDirectoryFileAt(string name);
     }
 
-    public class DirectoryFileImages : DirectoryFileBase<IDirectoryImage>
+    public class DirectoryFileImages : DirectoryFileBase<DirectoryImage>
     {
         public override string FileExtension => FilesExtensions.Icon;
 
-        public override IEnumerable<IDirectoryImage> Files { get; }
+        public override IEnumerable<DirectoryImage> Files { get; }
 
 
 
         public DirectoryFileImages()
         {
-            List<IDirectoryImage> icons = new List<IDirectoryImage>();
+            List<DirectoryImage> icons = new List<DirectoryImage>();
 
             if (!Directory.Exists(ApplicationDirectory.Icons))
                 throw new DirectoryNotFoundException(nameof(ApplicationDirectory.Icons));
@@ -91,7 +95,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
 
 
-        public override IDirectoryImage GetDirectoryFileAt(string name)
+        public override DirectoryImage GetDirectoryFileAt(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(nameof(name));
@@ -101,7 +105,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
 
 
-        public class DirectoryImage : IDirectoryImage
+        public class DirectoryImage
         {
             public Icon Icon { get; }
 

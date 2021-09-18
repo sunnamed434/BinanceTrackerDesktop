@@ -2,6 +2,6 @@
 {
     public static class BinanceCalculationExtension
     {
-        public static bool ValueFitsToCalculation(this decimal source) => (double)source != BinanceCalculationPriceStandarts.DefaultValue;
+        public static bool ValueFitsToCalculation(this decimal source) => source != decimal.Zero;
     }
 }

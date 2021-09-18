@@ -7,7 +7,7 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
 {
     public class ButtonEventsContainer
     {
-        public IEventListener ClickEventListener { get; }
+        public EventListener ClickEventListener { get; }
 
 
 

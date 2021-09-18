@@ -87,7 +87,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
         public const string Path = "userdata.json";
     }
 
-    public static class UserDataSaveExtension
+    public static class UserDataExtension
     {
         public static async Task SaveUserDataAsync(this UserData source)
         {

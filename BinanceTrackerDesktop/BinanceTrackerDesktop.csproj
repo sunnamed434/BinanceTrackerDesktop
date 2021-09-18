@@ -49,6 +49,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
@@ -71,6 +72,7 @@
     <Compile Include="Core\DirectoryFiles\API\DirectoryFilesAPI.cs" />
     <Compile Include="Core\Formatters\API\BinanceFormattersAPI.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
+    <Compile Include="Core\Popup\API\PopupAPI.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
@@ -93,7 +95,6 @@
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Calculator\API\IBinanceCoinOptions.cs" />
-    <Compile Include="Core\Calculator\BinanceCalculationPriceStandarts.cs" />
     <Compile Include="Core\Calculator\BinanceCoinCalculator.cs" />
     <Compile Include="Core\Calculator\Extension\BinanceCalculationExtension.cs" />
     <Compile Include="Core\Currencies\CurrencySymbol.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Notifications\API\NotificationsAPI.cs" />
     <Compile Include="Core\Window\Handle\WindowHandle.cs" />
     <Compile Include="Core\Window\Extension\ProcessExtension.cs" />
     <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />

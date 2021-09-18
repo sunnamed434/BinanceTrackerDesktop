@@ -9,6 +9,7 @@ using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using System;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
@@ -30,7 +31,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoryControl().Directories.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.Icon = new ApplicationDirectoryControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
 

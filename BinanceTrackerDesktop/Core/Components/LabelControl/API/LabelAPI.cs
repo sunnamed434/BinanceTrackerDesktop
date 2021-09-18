@@ -7,7 +7,7 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
 {
     public class LabelComponentEventsContainer
     {
-        public IEventListener ClickEventListener { get; }
+        public EventListener ClickEventListener { get; }
 
 
 
