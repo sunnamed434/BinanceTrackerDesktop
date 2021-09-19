@@ -7,7 +7,7 @@ using BinanceTrackerDesktop.Core.User.Data.API;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
-using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
+using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
 {
@@ -151,7 +151,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance.API
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            return new BinanceUserBalanceLosesColorFormatter().Format(options);
+            return new UserBalanceLosesFormatter().Format(options);
         }
 
 

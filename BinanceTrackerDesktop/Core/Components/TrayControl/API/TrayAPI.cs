@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.TextControl.API;
+using BinanceTrackerDesktop.Core.Components.API;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,28 +8,13 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 {
-    public class TrayClickEventListener : ITriggerableEventHandler<MouseEventArgs>
-    {
-        public event Action<MouseEventArgs> OnTriggerEventHandler;
-
-
-
-        public void TriggerEvent(MouseEventArgs e)
-        {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            OnTriggerEventHandler?.Invoke(e);
-        }
-    }
-
     public class TrayItemControl : TextComponentControl
     {
-        public ToolStripMenuItem ToolStrip { get; }
+        public readonly ToolStripMenuItem ToolStrip;
 
-        public TrayItemEventsContainer EventsContainer { get; }
+        public readonly TrayItemEventsContainer EventsContainer;
 
-        public byte UniqueIndex { get; }
+        public readonly byte UniqueIndex;
 
 
 
@@ -63,51 +48,22 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
         public override void SetText(string content)
         {
-            if (content == null)
+            if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
             ToolStrip.Text = content;
         }
     }
 
-    public class TrayEventsContainer
-    {
-        public TrayClickEventListener MouseClickListener { get; }
-
-        public EventListener DoubleClickListener { get; }
-
-
-
-        public TrayEventsContainer()
-        {
-            MouseClickListener = new TrayClickEventListener();
-            DoubleClickListener = new EventListener();
-        }
-    }
-
-    public class TrayItemEventsContainer
-    {
-        public EventListener ClickEvent { get; }
-
-
-
-        public TrayItemEventsContainer(EventListener clickEvent)
-        {
-            ClickEvent = clickEvent;
-        }
-    }
-
     public abstract class TrayBase : TextComponentControl
     {
-        private NotifyIcon notifyIcon { get; }
+        public readonly TrayEventsContainer EventsContainerControl;
 
 
 
-        public TrayEventsContainer EventsContainerControl { get; }
+        private readonly NotifyIcon notifyIcon;
 
-
-
-        private List<TrayItemControl> components = new List<TrayItemControl>();
+        private readonly List<TrayItemControl> components = new List<TrayItemControl>();
 
 
 
@@ -172,6 +128,36 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
 
 
-        protected abstract IEnumerable<TrayItemControl> InitializeItems();
+        protected virtual IEnumerable<TrayItemControl> InitializeItems()
+        {
+            return new List<TrayItemControl>();
+        }
+    }
+
+    public class TrayEventsContainer
+    {
+        public readonly MouseClickEventListener MouseClickListener;
+
+        public readonly EventListener DoubleClickListener;
+
+
+
+        public TrayEventsContainer()
+        {
+            MouseClickListener = new MouseClickEventListener();
+            DoubleClickListener = new EventListener();
+        }
+    }
+
+    public class TrayItemEventsContainer
+    {
+        public readonly EventListener ClickEvent;
+
+
+
+        public TrayItemEventsContainer(EventListener clickEvent)
+        {
+            ClickEvent = clickEvent;
+        }
     }
 }

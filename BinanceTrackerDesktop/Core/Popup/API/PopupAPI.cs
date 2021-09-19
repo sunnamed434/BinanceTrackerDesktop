@@ -20,7 +20,7 @@ namespace BinanceTrackerDesktop.Core.Popup.API
 
     public class PopupBuilder
     {
-        private Popup popup = Popup.Empty;
+        private readonly Popup popup = Popup.Empty;
 
 
 

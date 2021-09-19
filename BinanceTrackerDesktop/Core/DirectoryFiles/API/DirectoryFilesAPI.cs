@@ -73,7 +73,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
     public class DirectoryFileImages : DirectoryFileBase<DirectoryImage>
     {
-        public override string FileExtension => FilesExtensions.Icon;
+        public override string FileExtension => FileExtensions.Icon;
 
         public override IEnumerable<DirectoryImage> Files { get; }
 
@@ -145,7 +145,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
         public static readonly string ApplicationIcon = "app";
     }
 
-    public class FilesExtensions
+    public class FileExtensions
     {
         public const string Icon = ".ico";
     }
@@ -167,7 +167,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
             string fileExtension = Path.GetExtension(source);
 
-            return !string.IsNullOrEmpty(fileExtension) && fileExtension == FilesExtensions.Icon;
+            return !string.IsNullOrEmpty(fileExtension) && fileExtension == FileExtensions.Icon;
         }
     }
 

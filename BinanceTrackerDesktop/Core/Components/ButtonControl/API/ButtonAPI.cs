@@ -1,25 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.TextControl.API;
+using BinanceTrackerDesktop.Core.Components.API;
 using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
 {
-    public class ButtonEventsContainer
-    {
-        public EventListener ClickEventListener { get; }
-
-
-
-        public ButtonEventsContainer()
-        {
-            ClickEventListener = new EventListener();
-        }
-    }
-
     public class ButtonComponentControl : TextComponentControl
     {
-        public ButtonEventsContainer EventsContainer { get; }
+        public readonly ButtonEventsContainer EventsContainer;
 
 
 
@@ -48,6 +36,18 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
         public void Unlock()
         {
             this.button.Enabled = true;
+        }
+    }
+
+    public class ButtonEventsContainer
+    {
+        public readonly EventListener ClickEventListener;
+
+
+
+        public ButtonEventsContainer()
+        {
+            ClickEventListener = new EventListener();
         }
     }
 }

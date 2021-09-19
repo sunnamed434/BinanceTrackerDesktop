@@ -90,7 +90,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override string Format(decimal value)
         {
-            return new BinanceCurrencyValueFormatter().Format(value);
+            return new CurrencyFormatter().Format(value);
         }
     }
 
@@ -117,7 +117,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override string Format(decimal value)
         {
-            return new BinanceCurrencyValueFormatter().Format(value);
+            return new CurrencyFormatter().Format(value);
         }
     }
 

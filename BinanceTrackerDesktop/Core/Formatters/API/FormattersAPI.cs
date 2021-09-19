@@ -1,16 +1,16 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
 using System;
 using System.Drawing;
-using static BinanceTrackerDesktop.Core.Formatters.API.BinanceUserBalanceLosesColorFormatter;
+using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter;
 
 namespace BinanceTrackerDesktop.Core.Formatters.API
 {
-    public interface IBinanceValueFormatter<Result, Argument>
+    public interface IFormatter<Result, Argument>
     {
         Result Format(Argument value);
     }
 
-    public class BinanceCurrencyValueFormatter : IBinanceValueFormatter<string, decimal>
+    public class CurrencyFormatter : IFormatter<string, decimal>
     {
         private const string Default = "0.00";
 
@@ -22,7 +22,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
         }
     }
 
-    public class BinanceCryptocurrencyStringFormatter : IBinanceValueFormatter<string, string>
+    public class CryptocurrencyFormatter : IFormatter<string, string>
     {
         public string Format(string content)
         {
@@ -33,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
         }
     }
 
-    public class BinanceUserBalanceLosesColorFormatter : IBinanceValueFormatter<Color, BinanceUserBalanceLossesOptions>
+    public class UserBalanceLosesFormatter : IFormatter<Color, BinanceUserBalanceLossesOptions>
     {
         public Color Format(BinanceUserBalanceLossesOptions options)
         {

@@ -1,25 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.TextControl.API;
+using BinanceTrackerDesktop.Core.Components.API;
 using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
 {
-    public class LabelComponentEventsContainer
-    {
-        public EventListener ClickEventListener { get; }
-
-
-
-        public LabelComponentEventsContainer()
-        {
-            ClickEventListener = new EventListener();
-        }
-    }
-
     public class LabelComponentControl : TextComponentControl
     {
-        public LabelComponentEventsContainer EventsContainer { get; }
+        public readonly LabelComponentEventsContainer EventsContainer;
 
 
 
@@ -32,10 +20,22 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
             if (label == null)
                 throw new ArgumentNullException(nameof(label));
 
-            EventsContainer = new LabelComponentEventsContainer();
             this.label = label;
 
-            this.label.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
+            EventsContainer = new LabelComponentEventsContainer();
+            this.label.MouseClick += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
+        }
+    }
+
+    public class LabelComponentEventsContainer
+    {
+        public readonly EventListener ClickEventListener;
+
+
+
+        public LabelComponentEventsContainer()
+        {
+            ClickEventListener = new EventListener();
         }
     }
 }

@@ -65,19 +65,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Components\API\MouseClickEventListener.cs" />
+    <Compile Include="Core\Components\API\TextAPI.cs" />
     <Compile Include="Core\Components\ButtonControl\API\ButtonAPI.cs" />
-    <Compile Include="Core\Components\TextControl\API\TextAPI.cs" />
     <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\API\DirectoryFilesAPI.cs" />
-    <Compile Include="Core\Formatters\API\BinanceFormattersAPI.cs" />
+    <Compile Include="Core\Formatters\API\FormattersAPI.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
     <Compile Include="Core\Popup\API\PopupAPI.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\User\Data\API\BinanceUserDataAPI.cs" />
-    <Compile Include="Core\Window\API\IBinanceProcessWindow.cs" />
     <Compile Include="Core\API\ISafelyComponentControl.cs" />
     <Compile Include="Core\User\Status\API\IBinanceUserStatus.cs" />
     <Compile Include="Core\Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.Designer.cs">
       <DependentUpon>BinanceTrackerTrayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\API\IEventListener.cs" />
+    <Compile Include="Core\API\EventListener.cs" />
     <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,8 +107,7 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Window\Handle\WindowHandle.cs" />
-    <Compile Include="Core\Window\Extension\ProcessExtension.cs" />
+    <Compile Include="Core\Window\API\WindowAPI.cs" />
     <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />
     <Compile Include="Core\Forms\Tracker\UI\Balance\API\IBinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />

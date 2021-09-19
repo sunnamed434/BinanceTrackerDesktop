@@ -16,7 +16,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private readonly ISafelyComponentControl formSafelyCloseControl;
 
-        private readonly BinanceProcessWindow processWindow;
+        private readonly ProcessWindow processWindow;
 
         private readonly TrayItemControl applicationOpenItemControl;
 
@@ -36,7 +36,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
             this.notificationsControl = notificationsControl;
             this.formSafelyCloseControl = formSafelyCloseControl;
-            processWindow = new BinanceProcessWindow();
+            processWindow = new ProcessWindow();
 
             applicationOpenItemControl = base.GetComponentAt(TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex);
             notificationsItemControl = base.GetComponentAt(TrayItemsUniqueValueContainer.NotificationsUniqueIndex);

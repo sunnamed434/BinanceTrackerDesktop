@@ -10,7 +10,6 @@ using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Wallet
 {
@@ -59,7 +58,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
         private async Task<BinanceUserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserCoin coin)
         {
-            string formattedCryptocurrency = new BinanceCryptocurrencyStringFormatter().Format(coin.Coin);
+            string formattedCryptocurrency = new CryptocurrencyFormatter().Format(coin.Coin);
             WebCallResult<BinancePrice> marketPriceResult = await client.Spot.Market.GetPriceAsync(formattedCryptocurrency);
 
             return new BinanceUserWalletCoinResult(formattedCryptocurrency, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, coin.Free)));

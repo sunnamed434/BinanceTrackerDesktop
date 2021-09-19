@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Components.TextControl.API
+namespace BinanceTrackerDesktop.Core.Components.API
 {
     public interface IText
     {
@@ -18,12 +18,7 @@ namespace BinanceTrackerDesktop.Core.Components.TextControl.API
         Color GetDefaultTextColor();
     }
 
-    public interface ITextColorControl : IText, ITextColor
-    {
-
-    }
-
-    public class TextComponentControl : ITextColorControl
+    public class TextComponentControl : ITextColor
     {
         private readonly Control control;
 
