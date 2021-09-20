@@ -3,19 +3,35 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Popup.API
 {
-    public class Popup
+    public interface IPopup
     {
-        public string Title;
+        string Title { get; set; }
 
-        public string Message;
+        string Message { get; set; }
 
-        public int Interval;
+        int Timeout { get; set; }
 
-        public ToolTipIcon Icon;
+        ToolTipIcon Icon { get; set; }
+    }
+
+    public class Popup : IPopup
+    {
+        public string Title { get; set; }
+
+        public string Message { get; set; }
+
+        public int Timeout { get; set; }
+
+        public ToolTipIcon Icon { get; set; }
 
 
 
-        public static readonly Popup Empty = new Popup();
+        public static readonly Popup Empty = new Popup
+        {
+            Title = string.Empty,
+            Message = string.Empty,
+            Icon = ToolTipIcon.None,
+        };
     }
 
     public class PopupBuilder
@@ -36,9 +52,9 @@ namespace BinanceTrackerDesktop.Core.Popup.API
             return this;
         }
 
-        public PopupBuilder WithInterval(int value)
+        public PopupBuilder WillCloseIn(int value)
         {
-            popup.Interval = value;
+            popup.Timeout = value;
             return this;
         }
 
@@ -63,26 +79,26 @@ namespace BinanceTrackerDesktop.Core.Popup.API
 
     public class NotificationsControl
     {
-        private readonly NotifyIcon notifyIcon;
+        private static NotifyIcon notifyIcon;
 
 
 
-        public NotificationsControl(NotifyIcon notifyIcon)
+        public static void Initialize(NotifyIcon notifyIcon)
         {
             if (notifyIcon == null)
                 throw new ArgumentNullException(nameof(notifyIcon));
 
-            this.notifyIcon = notifyIcon;
+            NotificationsControl.notifyIcon = notifyIcon;
         }
 
+      
 
-
-        public void Show(Popup popup)
+        public static void Show(Popup popup)
         {
             if (popup == null)
                 throw new ArgumentNullException(nameof(popup));
 
-            this.notifyIcon.ShowBalloonTip(popup.Interval, popup.Title, popup.Message, popup.Icon);
+            notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
         }
     }
 }

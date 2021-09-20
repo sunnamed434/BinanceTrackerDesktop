@@ -33,12 +33,13 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
             this.UserTotalBalanceLosesText = new System.Windows.Forms.Label();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
             // UserTotalBalanceText
             // 
             this.UserTotalBalanceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserTotalBalanceText.Location = new System.Drawing.Point(0, 22);
+            this.UserTotalBalanceText.Location = new System.Drawing.Point(2, 41);
             this.UserTotalBalanceText.Name = "UserTotalBalanceText";
             this.UserTotalBalanceText.Size = new System.Drawing.Size(352, 39);
             this.UserTotalBalanceText.TabIndex = 0;
@@ -50,7 +51,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.TotalBalanceTooltipText.AutoSize = true;
             this.TotalBalanceTooltipText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotalBalanceTooltipText.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TotalBalanceTooltipText.Location = new System.Drawing.Point(4, 9);
+            this.TotalBalanceTooltipText.Location = new System.Drawing.Point(7, 28);
             this.TotalBalanceTooltipText.Name = "TotalBalanceTooltipText";
             this.TotalBalanceTooltipText.Size = new System.Drawing.Size(86, 13);
             this.TotalBalanceTooltipText.TabIndex = 1;
@@ -70,12 +71,20 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             // 
             this.UserTotalBalanceLosesText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserTotalBalanceLosesText.ForeColor = System.Drawing.Color.Gray;
-            this.UserTotalBalanceLosesText.Location = new System.Drawing.Point(270, 3);
+            this.UserTotalBalanceLosesText.Location = new System.Drawing.Point(270, 22);
             this.UserTotalBalanceLosesText.Name = "UserTotalBalanceLosesText";
             this.UserTotalBalanceLosesText.Size = new System.Drawing.Size(124, 19);
             this.UserTotalBalanceLosesText.TabIndex = 3;
             this.UserTotalBalanceLosesText.Text = "€0.00";
             this.UserTotalBalanceLosesText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // MenuStrip
+            // 
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Size = new System.Drawing.Size(394, 24);
+            this.MenuStrip.TabIndex = 4;
+            this.MenuStrip.Text = "MenuStrip";
             // 
             // BinanceTrackerForm
             // 
@@ -86,6 +95,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.Controls.Add(this.RefreshTotalBalanceButton);
             this.Controls.Add(this.TotalBalanceTooltipText);
             this.Controls.Add(this.UserTotalBalanceText);
+            this.Controls.Add(this.MenuStrip);
+            this.MainMenuStrip = this.MenuStrip;
             this.Name = "BinanceTrackerForm";
             this.Text = "Binance Tracker Desktop";
             this.ResumeLayout(false);
@@ -98,6 +109,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         private System.Windows.Forms.Label TotalBalanceTooltipText;
         private System.Windows.Forms.Button RefreshTotalBalanceButton;
         private System.Windows.Forms.Label UserTotalBalanceLosesText;
+        private System.Windows.Forms.MenuStrip MenuStrip;
     }
 }
 

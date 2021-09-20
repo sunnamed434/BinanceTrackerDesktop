@@ -36,13 +36,16 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Binance.Net">
+    <Reference Include="Binance.Net, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Binance.Net.dll</HintPath>
     </Reference>
-    <Reference Include="CryptoExchange.Net">
+    <Reference Include="CryptoExchange.Net, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\CryptoExchange.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -65,19 +68,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Components\API\IExpandableComponent.cs" />
     <Compile Include="Core\Components\API\MouseClickEventListener.cs" />
     <Compile Include="Core\Components\API\TextAPI.cs" />
     <Compile Include="Core\Components\ButtonControl\API\ButtonAPI.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\API\ContextMenuStripAPI.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripExtension.cs" />
     <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\API\DirectoryFilesAPI.cs" />
     <Compile Include="Core\Formatters\API\FormattersAPI.cs" />
+    <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuUIControl.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
     <Compile Include="Core\Popup\API\PopupAPI.cs" />
+    <Compile Include="Core\Popup\Extension\PopupExtension.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\Validation\Validator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
-    <Compile Include="Core\User\Data\API\BinanceUserDataAPI.cs" />
+    <Compile Include="Core\User\Data\API\UserDataAPI.cs" />
     <Compile Include="Core\API\ISafelyComponentControl.cs" />
     <Compile Include="Core\User\Status\API\IBinanceUserStatus.cs" />
     <Compile Include="Core\Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
@@ -109,7 +117,7 @@
     </Compile>
     <Compile Include="Core\Window\API\WindowAPI.cs" />
     <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />
-    <Compile Include="Core\Forms\Tracker\UI\Balance\API\IBinanceTrackerUserBalanceUIControl.cs" />
+    <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceUIControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">

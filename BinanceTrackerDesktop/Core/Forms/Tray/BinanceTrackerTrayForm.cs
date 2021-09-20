@@ -29,11 +29,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
-            this.NotifyIcon.Text = TrayItemTextContainer.ApplicationName;
+            this.NotifyIcon.Text = TrayItemsTextContainer.ApplicationName;
             this.NotifyIcon.Icon = applicationIcon;
             base.Icon = applicationIcon;
 
-            tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl, new NotificationsControl(this.NotifyIcon));
+            NotificationsControl.Initialize(this.NotifyIcon);
+            tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl);
 
             this.NotifyIcon.MouseClick += (s, e) => tray.EventsContainerControl.MouseClickListener.TriggerEvent(e);
             this.NotifyIcon.DoubleClick += (s, e) => tray.EventsContainerControl.DoubleClickListener.TriggerEvent(e);

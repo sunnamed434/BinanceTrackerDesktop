@@ -1,6 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Popup.API;
+using BinanceTrackerDesktop.Core.Popup.Extension;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.API;
 using System;
@@ -10,44 +12,38 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 {
-    public class BinanceTrackerTray : TrayBase
+    public class BinanceTrackerTray : TrayControlBase
     {
-        private readonly NotificationsControl notificationsControl;
-
         private readonly ISafelyComponentControl formSafelyCloseControl;
 
         private readonly ProcessWindow processWindow;
 
-        private readonly TrayItemControl applicationOpenItemControl;
+        private readonly StripItemControl applicationOpenItemControl;
 
-        private readonly TrayItemControl notificationsItemControl;
+        private readonly StripItemControl notificationsItemControl;
 
-        private readonly TrayItemControl applicationQuitItemControl;
+        private readonly StripItemControl applicationQuitItemControl;
 
 
 
-        public BinanceTrackerTray(NotifyIcon notifyIcon, ISafelyComponentControl formSafelyCloseControl, NotificationsControl notificationsControl) : base(notifyIcon)
+        public BinanceTrackerTray(NotifyIcon notifyIcon, ISafelyComponentControl formSafelyCloseControl) : base(notifyIcon)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
-            if (notificationsControl == null)
-                throw new ArgumentNullException(nameof(notificationsControl));
-
-            this.notificationsControl = notificationsControl;
             this.formSafelyCloseControl = formSafelyCloseControl;
             processWindow = new ProcessWindow();
 
-            applicationOpenItemControl = base.GetComponentAt(TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex);
-            notificationsItemControl = base.GetComponentAt(TrayItemsUniqueValueContainer.NotificationsUniqueIndex);
-            applicationQuitItemControl = base.GetComponentAt(TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex);
+            applicationOpenItemControl = base.GetComponentAt(TrayItemsIdContainer.OpenApplicationUniqueIndex);
+            notificationsItemControl = base.GetComponentAt(TrayItemsIdContainer.NotificationsUniqueIndex);
+            applicationQuitItemControl = base.GetComponentAt(TrayItemsIdContainer.QuitApplicationUniqueIndex);
 
             initializeAsync();
 
             this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
-            applicationOpenItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler += onApplicationOpenItemClicked;
-            notificationsItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler += onNotificationsItemControlClicked;
-            applicationQuitItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler += onApplicationQuitItemClicked;
+            applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onApplicationOpenItemClicked;
+            notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onNotificationsItemControlClicked;
+            applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onApplicationQuitItemClicked;
             EventsContainerControl.DoubleClickListener.OnTriggerEventHandler += onTrayDoubleClick;
         }
 
@@ -56,12 +52,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
         private async void initializeAsync()
         {
             UserData binanceUserData = await new UserDataReader().ReadDataAsync();
-            notificationsItemControl.SetText(binanceUserData.NotificationsEnabled == true ? TrayItemTextContainer.DisableNotifications : TrayItemTextContainer.EnableNotifications);
+            notificationsItemControl.SetText(binanceUserData.NotificationsEnabled == true ? TrayItemsTextContainer.DisableNotifications : TrayItemsTextContainer.EnableNotifications);
         }
 
         private string getNotificationsText(bool isNotificationsEnabled)
         {
-            return isNotificationsEnabled == true ? TrayItemTextContainer.DisableNotifications : TrayItemTextContainer.EnableNotifications;
+            return isNotificationsEnabled == true ? TrayItemsTextContainer.DisableNotifications : TrayItemsTextContainer.EnableNotifications;
         }
 
 
@@ -84,12 +80,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
             await userData.SaveUserDataAsync();
 
             notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
-            this.notificationsControl.Show(
                 new PopupBuilder()
-                .WithTitle(TrayItemTextContainer.ApplicationName)
-                .WithMessage(userData.NotificationsEnabled ? TrayItemTextContainer.NotificationsEnabled : TrayItemTextContainer.NotificationsDisabled)
-                .WithInterval(90)
-                .WithImage(ToolTipIcon.Info));
+                .WithTitle(TrayItemsTextContainer.ApplicationName)
+                .WithMessage(userData.NotificationsEnabled ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
+                .WillCloseIn(90)
+                .Build()
+                .Show();
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)
@@ -101,9 +97,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private async Task onCloseCallbackAsync()
         {
-            applicationOpenItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler -= onApplicationOpenItemClicked;
-            notificationsItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler -= onNotificationsItemControlClicked;
-            applicationQuitItemControl.EventsContainer.ClickEvent.OnTriggerEventHandler -= onApplicationQuitItemClicked;
+            applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
+            notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;
+            applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationQuitItemClicked;
             EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClick;
 
             base.Close();
@@ -113,18 +109,18 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        protected override IEnumerable<TrayItemControl> InitializeItems()
+        protected override IEnumerable<StripItemControl> InitializeItems()
         {
-            return new List<TrayItemControl>()
+            return new List<StripItemControl>()
             {
-                new TrayItemControl(TrayItemTextContainer.OpenApplication, TrayItemsUniqueValueContainer.OpenApplicationUniqueIndex),
-                new TrayItemControl(TrayItemTextContainer.DisableNotifications, TrayItemsUniqueValueContainer.NotificationsUniqueIndex),
-                new TrayItemControl(TrayItemTextContainer.QuitApplication, TrayItemsUniqueValueContainer.QuitApplicationUniqueIndex),
+                new StripItemControl(TrayItemsTextContainer.OpenApplication, TrayItemsIdContainer.OpenApplicationUniqueIndex),
+                new StripItemControl(TrayItemsTextContainer.DisableNotifications, TrayItemsIdContainer.NotificationsUniqueIndex),
+                new StripItemControl(TrayItemsTextContainer.QuitApplication, TrayItemsIdContainer.QuitApplicationUniqueIndex),
             };
         }
     }
 
-    public class TrayItemTextContainer
+    public class TrayItemsTextContainer
     {
         public const string ApplicationName = "Binance Tracker Desktop";
 
@@ -141,7 +137,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
         public const string DisableNotifications = "Disable Notifications";
     }
 
-    public class TrayItemsUniqueValueContainer
+    public class TrayItemsIdContainer
     {
         public const byte OpenApplicationUniqueIndex = 1;
 

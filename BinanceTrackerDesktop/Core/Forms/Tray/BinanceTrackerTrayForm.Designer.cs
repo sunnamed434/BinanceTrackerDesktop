@@ -41,7 +41,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             // 
             // NotifyIcon
             // 
-            this.NotifyIcon.ContextMenuStrip = this.ContextMenuStrip;
             this.NotifyIcon.Text = "notifyIcon1";
             this.NotifyIcon.Visible = true;
             // 
