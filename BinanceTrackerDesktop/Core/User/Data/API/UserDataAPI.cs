@@ -92,6 +92,6 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
 
     public class UserDataFile
     {
-        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, RegisteredData.UserFile);
+        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, RegisteredData.UserFile + FileExtensions.Dat);
     }
 }
