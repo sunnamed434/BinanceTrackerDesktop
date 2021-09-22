@@ -17,9 +17,9 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         byte Id { get; }
     }
 
-    public class StripItemControl : TextComponentControl, IStripItem
+    public class MenuStripItemControl : TextComponentControl, IStripItem
     {
-        public readonly StripItemEventsContainer EventsContainer;
+        public readonly MenuStripItemEventsContainer EventsContainer;
 
         public readonly ToolStripMenuItem ToolStrip;
 
@@ -33,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
 
 
 
-        public StripItemControl(string header, Image image, byte id)
+        public MenuStripItemControl(string header, Image image, byte id)
         {
             if (string.IsNullOrEmpty(header))
                 throw new ArgumentNullException(nameof(header));
@@ -42,11 +42,11 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Image = image ?? default;
             Id = id;
 
-            EventsContainer = new StripItemEventsContainer();
+            EventsContainer = new MenuStripItemEventsContainer();
             ToolStrip = new ToolStripMenuItem(header, image, (s, e) => EventsContainer.OnClick.TriggerEvent(e));
         }
 
-        public StripItemControl(string header, byte id) : this(header, null, id)
+        public MenuStripItemControl(string header, byte id) : this(header, null, id)
         {
 
         }
@@ -70,27 +70,27 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         }
     }
 
-    public class StripItemEventsContainer
+    public class MenuStripItemEventsContainer
     {
         public readonly EventListener OnClick;
 
 
 
-        public StripItemEventsContainer()
+        public MenuStripItemEventsContainer()
         {
             OnClick = new EventListener();
         }
     }
 
-    public class MenuStripControlBase : TextComponentControl, IExpandableComponent<StripItemControl, byte>
+    public class MenuStripControlBase : TextComponentControl, IExpandableComponent<MenuStripItemControl, byte>
     {
         public readonly ContextMenuStrip Strip;
 
-        public IEnumerable<StripItemControl> AllComponents => Components;
+        public IEnumerable<MenuStripItemControl> AllComponents => Components;
 
 
 
-        protected List<StripItemControl> Components = new List<StripItemControl>();
+        protected List<MenuStripItemControl> Components = new List<MenuStripItemControl>();
 
 
 
@@ -109,7 +109,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
 
 
 
-        public virtual void AddComponent(StripItemControl item)
+        public virtual void AddComponent(MenuStripItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -118,7 +118,16 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Components.Add(item);
         }
 
-        public virtual void RemoveComponent(StripItemControl item)
+        public void AddComponents(IEnumerable<MenuStripItemControl> values)
+        {
+            if (!values.Any())
+                throw new InvalidOperationException(nameof(values));
+
+            foreach (MenuStripItemControl item in values)
+                AddComponent(item);
+        }
+
+        public virtual void RemoveComponent(MenuStripItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -127,16 +136,16 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Components.Remove(item);
         }
 
-        public StripItemControl GetComponentAt(byte id)
+        public MenuStripItemControl GetComponentAt(byte id)
         {
             return Components.FirstOrDefault(c => c.Id == id);
         }
 
 
 
-        protected virtual IEnumerable<StripItemControl> InitializeItems()
+        protected virtual IEnumerable<MenuStripItemControl> InitializeItems()
         {
-            return new List<StripItemControl>();
+            return new List<MenuStripItemControl>();
         }
     }
 }

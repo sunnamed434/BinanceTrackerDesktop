@@ -6,7 +6,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
 {
     public static class MenuStripExtension
     {
-        public static void SetImage(this StripItemControl source, Image to)
+        public static void SetImage(this MenuStripItemControl source, Image to)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

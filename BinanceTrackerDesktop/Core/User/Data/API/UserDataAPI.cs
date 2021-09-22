@@ -1,54 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using System;
 using System.IO;
-using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryDataControl;
 
 namespace BinanceTrackerDesktop.Core.User.Data.API
 {
-    public interface IUserDataWriter
-    {
-        Task WriteDataAsync(UserData data);
-    }
-
-    public interface IUserDataReader
-    {
-        Task<UserData> ReadDataAsync();
-    }
-
-    public class UserDataWriter : IUserDataWriter
-    {
-        public async Task WriteDataAsync(UserData data)
-        {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
-
-            using (StreamWriter writer = new StreamWriter(UserDataFile.Path, false))
-            {
-                await writer.WriteAsync(JsonConvert.SerializeObject(data));
-                writer.Close();
-
-                await Task.CompletedTask;
-            }
-        }
-    }
-
-    public class UserDataReader : IUserDataReader
-    {
-        public async Task<UserData> ReadDataAsync()
-        {
-            if (!File.Exists(UserDataFile.Path))
-                return null;
-
-            using (StreamReader reader = new StreamReader(UserDataFile.Path))
-            {
-                string data = await reader.ReadToEndAsync();
-                reader.Close();
-
-                return JsonConvert.DeserializeObject<UserData>(data);
-            }
-        }
-    }
-
+    [Serializable]
     public class UserData
     {
         public string Key;
@@ -72,29 +30,68 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
             NotificationsEnabled = true;
         }
 
-        public UserData()
+        public UserData(string key, string secret, decimal bestBalance, bool balancesHiden, bool notificationsEnabled) : this(key, secret)
         {
-            Key = string.Empty;
-            Secret = string.Empty;
-            BestBalance = decimal.Zero;
-            BalancesHiden = false;
-            NotificationsEnabled = true;
+            BestBalance = bestBalance;
+            BalancesHiden = balancesHiden;
+            NotificationsEnabled = notificationsEnabled;
+        }
+
+        public UserData() : this(string.Empty, string.Empty, decimal.Zero, false, true)
+        {
+
+        }
+    }
+
+    public interface IUserDataSaveReadSystem
+    {
+        void Save(UserData data);
+
+        UserData Read();
+    }
+
+    public class BinaryUserDataSaveReadSystem : IUserDataSaveReadSystem
+    {
+        private readonly BinaryFormatter formatter;
+
+
+
+        public BinaryUserDataSaveReadSystem()
+        {
+            formatter = new BinaryFormatter();
+        }
+
+
+
+        public void Save(UserData data)
+        {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
+            using (FileStream fileStream = File.Create(UserDataFile.FullPath))
+            {
+                formatter.Serialize(fileStream, data);
+                fileStream.Close();
+            }
+        }
+
+        public UserData Read()
+        {
+            if (!File.Exists(UserDataFile.FullPath))
+                return null;
+
+            using (FileStream fileStream = File.Open(UserDataFile.FullPath, FileMode.Open))
+            {
+                object deserializedObject = formatter.Deserialize(fileStream);
+                fileStream.Close();
+
+                return (UserData)deserializedObject;
+            }
         }
     }
 
     public class UserDataFile
     {
-        public const string Path = "userdata.json";
-    }
-
-    public static class UserDataExtension
-    {
-        public static async Task SaveUserDataAsync(this UserData source)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            await new UserDataWriter().WriteDataAsync(source);
-        }
+        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, RegisteredData.UserFile);
     }
 }

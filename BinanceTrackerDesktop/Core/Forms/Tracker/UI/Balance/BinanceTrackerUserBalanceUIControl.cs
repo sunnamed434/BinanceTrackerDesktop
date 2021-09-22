@@ -4,6 +4,7 @@ using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data.Extension;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -66,7 +67,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
         private async void initializeAsync()
         {
-            UserData data = await new UserDataReader().ReadDataAsync();
+            UserData data = new BinaryUserDataSaveReadSystem().Read();
             isBalancesHiden = data.BalancesHiden;
 
             if (isBalancesHiden)
@@ -77,6 +78,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             {
                 await refreshBalancesFixedAsync();
             }
+
+            await Task.CompletedTask;
         }
 
         private async Task refreshBalancesFixedAsync(bool lockButton = true)
@@ -108,7 +111,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
         private async Task refreshBalanceLossesAsync()
         {
-            UserData data = await new UserDataReader().ReadDataAsync();
+            UserData data = new BinaryUserDataSaveReadSystem().Read();
             IBinanceUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
             IBinanceUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
 
@@ -173,9 +176,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
                 await refreshBalancesFixedAsync();
             }
 
-            UserData userData = await new UserDataReader().ReadDataAsync();
+            UserData userData = new BinaryUserDataSaveReadSystem().Read();
             userData.BalancesHiden = isBalancesHiden;
-            await userData.SaveUserDataAsync();
+            userData.SaveUserData();
         }
 
         private async Task onCloseCallbackAsync()

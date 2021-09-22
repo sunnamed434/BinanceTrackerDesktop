@@ -5,6 +5,7 @@ using BinanceTrackerDesktop.Core.Popup.API;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
@@ -25,7 +26,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             this.formSafelyCloseControl = formSafelyCloseControl;
 
-            Icon applicationIcon = new ApplicationDirectoryControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            Icon applicationIcon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Icon;
 
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;

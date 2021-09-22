@@ -12,6 +12,7 @@ using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using System;
 using System.Windows.Forms;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -32,7 +33,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoryControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Icon;
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
 
@@ -48,11 +49,11 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
 
 
-        private async void onFormActivated(object sender, EventArgs e)
+        private void onFormActivated(object sender, EventArgs e)
         {
             base.Activated -= onFormActivated;
 
-            UserData data = await new UserDataReader().ReadDataAsync();
+            UserData data = new BinaryUserDataSaveReadSystem().Read();
             startup = new BinanceStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();

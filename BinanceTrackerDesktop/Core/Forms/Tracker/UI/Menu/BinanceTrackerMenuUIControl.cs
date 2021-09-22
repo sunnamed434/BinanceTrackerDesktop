@@ -15,7 +15,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private readonly BinanceClient client;
 
-        private readonly StripItemControl permissionsItemControl;
+        private readonly MenuStripItemControl permissionsItemControl;
 
 
 
@@ -28,7 +28,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
             this.client = client;
 
-            foreach (StripItemControl item in InitializeItems())
+            foreach (MenuStripItemControl item in InitializeItems())
                 AddComponent(item);
 
             permissionsItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
@@ -42,7 +42,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        public override void AddComponent(StripItemControl item)
+        public override void AddComponent(MenuStripItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -51,7 +51,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             base.Components.Add(item);
         }
 
-        public override void RemoveComponent(StripItemControl item)
+        public override void RemoveComponent(MenuStripItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -87,11 +87,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        protected override IEnumerable<StripItemControl> InitializeItems()
+        protected override IEnumerable<MenuStripItemControl> InitializeItems()
         {
-            return new List<StripItemControl>
+            return new List<MenuStripItemControl>
             {
-                new StripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API),
+                new MenuStripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API),
             };
         }
     }

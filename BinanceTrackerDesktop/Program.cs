@@ -13,7 +13,9 @@ namespace BinanceTrackerDesktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            await new BinanceTrackerStartup().InitializeAsync();
+            new BinanceTrackerStartup().Initialize();
+
+            await Task.CompletedTask;
         }
     }
 }

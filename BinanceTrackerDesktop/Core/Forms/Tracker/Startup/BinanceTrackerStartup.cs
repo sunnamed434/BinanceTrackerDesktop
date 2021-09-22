@@ -10,7 +10,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup
 {
     public class BinanceTrackerStartup
     {
-        public async Task InitializeAsync()
+        public void Initialize()
         {
             Process process = Process.GetCurrentProcess();
             if (process.TryGetArleadyStartedSimilarProcess(out Process anotherProcess))
@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Forms.Tracker.Startup
                 return;
             }
 
-            UserData userData = await new UserDataReader().ReadDataAsync();
+            UserData userData = new BinaryUserDataSaveReadSystem().Read();
             if (userData == null)
             {
                 Application.Run(new BinanceTrackerAuthorizationForm());

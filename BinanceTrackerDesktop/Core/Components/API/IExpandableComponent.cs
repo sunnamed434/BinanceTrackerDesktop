@@ -2,16 +2,18 @@
 
 namespace BinanceTrackerDesktop.Core.Components.API
 {
-    public interface IExpandableComponent<TAddRemove, TSearchArgument>
+    public interface IExpandableComponent<TAddGetRemove, TSearchArgument>
     {
-        IEnumerable<TAddRemove> AllComponents { get; }
+        IEnumerable<TAddGetRemove> AllComponents { get; }
 
 
 
-        void AddComponent(TAddRemove value);
+        void AddComponent(TAddGetRemove value);
 
-        void RemoveComponent(TAddRemove value);
+        void AddComponents(IEnumerable<TAddGetRemove> values);
 
-        TAddRemove GetComponentAt(TSearchArgument value);
+        void RemoveComponent(TAddGetRemove value);
+
+        TAddGetRemove GetComponentAt(TSearchArgument value);
     }
 }

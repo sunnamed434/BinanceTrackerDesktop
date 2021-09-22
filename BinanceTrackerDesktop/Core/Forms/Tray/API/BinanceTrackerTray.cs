@@ -4,6 +4,7 @@ using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Popup.API;
 using BinanceTrackerDesktop.Core.Popup.Extension;
 using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Window.API;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private readonly ProcessWindow processWindow;
 
-        private readonly StripItemControl applicationOpenItemControl;
+        private readonly MenuStripItemControl applicationOpenItemControl;
 
-        private readonly StripItemControl notificationsItemControl;
+        private readonly MenuStripItemControl notificationsItemControl;
 
-        private readonly StripItemControl applicationQuitItemControl;
+        private readonly MenuStripItemControl applicationQuitItemControl;
 
 
 
@@ -49,9 +50,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        private async void initializeAsync()
+        private void initializeAsync()
         {
-            UserData binanceUserData = await new UserDataReader().ReadDataAsync();
+            UserData binanceUserData = new BinaryUserDataSaveReadSystem().Read();
             notificationsItemControl.SetText(binanceUserData.NotificationsEnabled == true ? TrayItemsTextContainer.DisableNotifications : TrayItemsTextContainer.EnableNotifications);
         }
 
@@ -72,12 +73,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
             onTrayDoubleClick(e);
         }
 
-        private async void onNotificationsItemControlClicked(EventArgs e)
+        private void onNotificationsItemControlClicked(EventArgs e)
         {
-            UserData userData = await new UserDataReader().ReadDataAsync();
+            UserData userData = new BinaryUserDataSaveReadSystem().Read();
             userData.NotificationsEnabled = !userData.NotificationsEnabled;
 
-            await userData.SaveUserDataAsync();
+            userData.SaveUserData();
 
             notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
                 new PopupBuilder()
@@ -109,13 +110,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
 
 
-        protected override IEnumerable<StripItemControl> InitializeItems()
+        protected override IEnumerable<MenuStripItemControl> InitializeItems()
         {
-            return new List<StripItemControl>()
+            return new List<MenuStripItemControl>()
             {
-                new StripItemControl(TrayItemsTextContainer.OpenApplication, TrayItemsIdContainer.OpenApplicationUniqueIndex),
-                new StripItemControl(TrayItemsTextContainer.DisableNotifications, TrayItemsIdContainer.NotificationsUniqueIndex),
-                new StripItemControl(TrayItemsTextContainer.QuitApplication, TrayItemsIdContainer.QuitApplicationUniqueIndex),
+                new MenuStripItemControl(TrayItemsTextContainer.OpenApplication, TrayItemsIdContainer.OpenApplicationUniqueIndex),
+                new MenuStripItemControl(TrayItemsTextContainer.DisableNotifications, TrayItemsIdContainer.NotificationsUniqueIndex),
+                new MenuStripItemControl(TrayItemsTextContainer.QuitApplication, TrayItemsIdContainer.QuitApplicationUniqueIndex),
             };
         }
     }

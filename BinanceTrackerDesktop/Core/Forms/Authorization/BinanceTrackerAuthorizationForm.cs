@@ -1,10 +1,12 @@
 ﻿using BinanceTrackerDesktop.Core.Authorization;
 using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Windows.Forms;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {
@@ -17,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoryControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryIcons.ApplicationIcon).Icon;
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Icon;
             base.MaximizeBox = false;
 
             this.AuthorizeButton.Click += onAuthorizeButtonClicked;
@@ -25,7 +27,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
 
 
 
-        private async void onAuthorizeButtonClicked(object sender, EventArgs e)
+        private void onAuthorizeButtonClicked(object sender, EventArgs e)
         {
             Validator userKeyValidator = this.UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
@@ -39,7 +41,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             {
                 this.AuthorizeButton.Click -= onAuthorizeButtonClicked;
 
-                await new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text).SaveUserDataAsync();
+                new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text).SaveUserData();
 
                 base.Hide();
                 new BinanceTrackerForm().ShowDialog();

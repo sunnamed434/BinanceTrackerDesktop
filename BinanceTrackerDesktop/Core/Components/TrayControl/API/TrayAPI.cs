@@ -24,9 +24,9 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
     public class TrayControlBase : MenuStripControlBase
     {
-        public readonly TrayEventsContainer EventsContainerControl;
-
         public readonly NotifyIcon NotifyIcon;
+
+        public readonly TrayEventsContainer EventsContainerControl;
 
 
 
@@ -36,13 +36,12 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
                 throw new ArgumentNullException(nameof(notifyIcon));
 
             NotifyIcon = notifyIcon;
-
             EventsContainerControl = new TrayEventsContainer();
+
             notifyIcon.MouseClick += (s, e) => EventsContainerControl.MouseClickListener.TriggerEvent(e);
             notifyIcon.DoubleClick += (s, e) => EventsContainerControl.DoubleClickListener.TriggerEvent(e);
 
-            foreach (StripItemControl item in InitializeItems())
-                AddComponent(item);
+            base.AddComponents(InitializeItems());
         }
 
 

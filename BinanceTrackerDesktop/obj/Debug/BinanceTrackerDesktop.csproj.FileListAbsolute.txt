@@ -79,4 +79,5 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\Binance
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.SuggestedBindingRedirects.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete
