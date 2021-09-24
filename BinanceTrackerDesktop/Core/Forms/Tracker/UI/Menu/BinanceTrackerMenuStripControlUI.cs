@@ -1,7 +1,7 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects.Other;
+using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
-using BinanceTrackerDesktop.Core.Forms.Tray.API;
 using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
 using CryptoExchange.Net.Objects;
@@ -99,7 +99,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
                 $"{nameof(api.PermitUniversalTransfer)} = {api.PermitUniversalTransfer}, " +
                 $"{nameof(api.TradingAuthorityExpirationTime)} = {api.TradingAuthorityExpirationTime}",
 
-                TrayItemsTextContainer.ApplicationName, MessageBoxButtons.OK, MessageBoxIcon.Information
+                ApplicationEnviroment.GlobalName, MessageBoxButtons.OK, MessageBoxIcon.Information
             );
         }
 

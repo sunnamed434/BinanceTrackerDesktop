@@ -1,6 +1,6 @@
-﻿namespace BinanceTrackerDesktop.Core.Authorization
+﻿namespace BinanceTrackerDesktop.Core.Validation
 {
-    public class Validator
+    public class StringValidator
     {
         private readonly string content;
 
@@ -14,11 +14,11 @@
 
 
 
-        public Validator(string content) => this.content = content;
+        public StringValidator(string content) => this.content = content;
 
 
 
-        public Validator MinCharacters(int count)
+        public StringValidator MinCharacters(int count)
         {
             if (content.Length < count)
                 success = false;
@@ -26,7 +26,7 @@
             return this;
         }
 
-        public Validator ContentNotNullOrEmpty()
+        public StringValidator ContentNotNullOrEmpty()
         {
             if (string.IsNullOrEmpty(content))
                 success = false;

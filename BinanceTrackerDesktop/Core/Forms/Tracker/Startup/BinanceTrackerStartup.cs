@@ -3,14 +3,13 @@ using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.Window.API;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.Startup
 {
     public class BinanceTrackerStartup
     {
-        public void Initialize()
+        public BinanceTrackerStartup()
         {
             Process process = Process.GetCurrentProcess();
             if (process.TryGetArleadyStartedSimilarProcess(out Process anotherProcess))

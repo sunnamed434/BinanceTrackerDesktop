@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.Authorization;
-using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
+using BinanceTrackerDesktop.Core.Validation;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
@@ -29,11 +29,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
 
         private void onAuthorizeButtonClicked(object sender, EventArgs e)
         {
-            Validator userKeyValidator = this.UserKeyTextBox.Rules()
+            StringValidator userKeyValidator = this.UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey);
 
-            Validator userSecretValidator = this.UserSecretTextBox.Rules()
+            StringValidator userSecretValidator = this.UserSecretTextBox.Rules()
                .ContentNotNullOrEmpty()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey);
 

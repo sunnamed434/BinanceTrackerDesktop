@@ -82,7 +82,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
             notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
                 new PopupBuilder()
-                .WithTitle(TrayItemsTextContainer.ApplicationName)
+                .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage(userData.NotificationsEnabled ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
                 .WillCloseIn(90)
                 .Build()
@@ -123,8 +123,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
     public class TrayItemsTextContainer
     {
-        public const string ApplicationName = "Binance Tracker Desktop";
-
         public const string OpenApplication = "Open Binance Tracker";
 
         public const string QuitApplication = "Quit Binance Tracker";

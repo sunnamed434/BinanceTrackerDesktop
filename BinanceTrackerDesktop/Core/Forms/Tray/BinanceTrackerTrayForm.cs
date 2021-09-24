@@ -30,7 +30,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
-            this.NotifyIcon.Text = TrayItemsTextContainer.ApplicationName;
+            this.NotifyIcon.Text = ApplicationEnviroment.GlobalName;
             this.NotifyIcon.Icon = applicationIcon;
             base.Icon = applicationIcon;
 

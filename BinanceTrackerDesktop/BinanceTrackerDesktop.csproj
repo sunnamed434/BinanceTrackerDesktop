@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\CryptoExchange.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Authenticator">
+      <HintPath>..\libs\Google.Authenticator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
@@ -52,7 +55,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder">
+      <HintPath>..\libs\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
@@ -65,9 +72,17 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Forms\Authentication\AuthenticationForm.Designer.cs">
+      <DependentUpon>AuthenticationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Components\API\IExpandableComponent.cs" />
     <Compile Include="Core\Components\API\MouseClickEventListener.cs" />
     <Compile Include="Core\Components\API\TextAPI.cs" />
@@ -78,14 +93,22 @@
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\API\DirectoryFilesControlAPI.cs" />
     <Compile Include="Core\Formatters\API\FormattersAPI.cs" />
+    <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Forms\Authentication\AuthenticatorForm.Designer.cs">
+      <DependentUpon>AuthenticatorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuStripControlUI.cs" />
     <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
     <Compile Include="Core\Popup\API\PopupAPI.cs" />
     <Compile Include="Core\Popup\Extension\PopupExtension.cs" />
+    <Compile Include="Core\User\Authentication\API\UserAuthenticationAPI.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\User\Data\Extension\UserDataExtension.cs" />
     <Compile Include="Core\User\Status\Extension\BinanceUserDataExtension.cs" />
-    <Compile Include="Core\Validation\Validator.cs" />
+    <Compile Include="Core\Validation\API\FailedStringValidationException.cs" />
+    <Compile Include="Core\Validation\StringValidator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\User\Data\API\UserDataAPI.cs" />
     <Compile Include="Core\API\ISafelyComponentControl.cs" />
@@ -122,6 +145,12 @@
     <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Core\Forms\Authentication\AuthenticationForm.resx">
+      <DependentUpon>AuthenticationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Forms\Authentication\AuthenticatorForm.resx">
+      <DependentUpon>AuthenticatorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.aa.resx">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
       <SubType>Designer</SubType>

@@ -282,12 +282,12 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
     public class FileExtensionDoesNotMatchWithDesiredException : Exception
     {
-        public FileExtensionDoesNotMatchWithDesiredException()
+        public FileExtensionDoesNotMatchWithDesiredException(string message) : base(string.Format("File extension does not match with desired: {0}", message))
         {
 
         }
 
-        public FileExtensionDoesNotMatchWithDesiredException(string message) : base(string.Format("File extension does not match with desired: {0}", message))
+        public FileExtensionDoesNotMatchWithDesiredException()
         {
 
         }
