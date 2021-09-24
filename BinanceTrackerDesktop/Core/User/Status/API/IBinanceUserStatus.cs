@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Status.Extension;
 using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.API;
 using System;
@@ -149,17 +150,6 @@ namespace BinanceTrackerDesktop.Core.User.Control
                 return new BinanceUserStandartStatus(data, wallet);
             else
                 return new BinanceUserBeginnerStatus(data, wallet);
-        }
-    }
-
-    public static class BinanceUserDataExtension
-    {
-        public static bool UserStartedApplicationFirstTime(this UserData source)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            return source.BestBalance == decimal.Zero;
         }
     }
 }

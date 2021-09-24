@@ -2,42 +2,60 @@
 using Binance.Net.Objects.Other;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Forms.Tray.API;
+using BinanceTrackerDesktop.Core.Wallet;
+using BinanceTrackerDesktop.Core.Wallet.API;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 {
-    public class BinanceTrackerMenuUIControl : MenuStripControlBase
+    public class BinanceTrackerMenuStripControlUI : MenuStripControlBase
     {
         private readonly MenuStrip menuStrip;
 
         private readonly BinanceClient client;
 
-        private readonly MenuStripItemControl permissionsItemControl;
+        private readonly BinanceUserWallet wallet;
+
+        private readonly MenuStripItemControl apiItemControl;
+
+        private readonly MenuStripItemControl coinsItemControl;
 
 
 
-        public BinanceTrackerMenuUIControl(MenuStrip menuStrip, BinanceClient client)
+        public BinanceTrackerMenuStripControlUI(MenuStrip menuStrip, BinanceClient client, BinanceUserWallet wallet)
         {
             if (menuStrip == null)
                 throw new ArgumentNullException(nameof(menuStrip));
 
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+
+            if (wallet == null)
+                throw new ArgumentNullException(nameof(wallet));
+
             this.menuStrip = menuStrip;
             this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
             this.client = client;
+            this.wallet = wallet;
 
             foreach (MenuStripItemControl item in InitializeItems())
                 AddComponent(item);
 
-            permissionsItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
-            permissionsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onPermissionsClicked;
+            apiItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
+            coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
+
+            apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
+            coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onCoinsItemClicked;
         }
 
-        ~BinanceTrackerMenuUIControl()
+        ~BinanceTrackerMenuStripControlUI()
         {
-            permissionsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onPermissionsClicked;
+            apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onAPIItemClicked;
+            coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onCoinsItemClicked;
         }
 
 
@@ -62,9 +80,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        private async void onPermissionsClicked(EventArgs e)
+        private async void onAPIItemClicked(EventArgs e)
         {
-            WebCallResult<BinanceAPIKeyPermissions> result = await client.General.GetAPIKeyPermissionsAsync();
+            WebCallResult<BinanceAPIKeyPermissions> result = await this.client.General.GetAPIKeyPermissionsAsync();
             BinanceAPIKeyPermissions api = result.Data;
 
             MessageBox.Show
@@ -85,6 +103,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             );
         }
 
+        private async void onCoinsItemClicked(EventArgs e)
+        {
+            IEnumerable<BinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
+
+            MessageBox.Show(string.Join(", ", result.Select(r => $"{r.Asset } = {r.Price}")));
+        }
+
 
 
         protected override IEnumerable<MenuStripItemControl> InitializeItems()
@@ -92,6 +117,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             return new List<MenuStripItemControl>
             {
                 new MenuStripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API),
+                new MenuStripItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins),
             };
         }
     }
@@ -99,10 +125,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
     public class MenuItemsTextContainer
     {
         public static readonly string API = nameof(API);
+
+        public static readonly string Coins = nameof(Coins);
     }
 
     public class MenuItemsIdContainer
     {
         public const byte API = 1;
+
+        public const byte Coins = 2;
     }
 }

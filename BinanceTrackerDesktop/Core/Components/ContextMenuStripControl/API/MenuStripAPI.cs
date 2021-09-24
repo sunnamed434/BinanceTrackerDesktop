@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
 {
-    public interface IStripItem
+    public interface IMenuStripItem
     {
         string Header { get; }
 
@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         byte Id { get; }
     }
 
-    public class MenuStripItemControl : TextComponentControl, IStripItem
+    public class MenuStripItemControl : TextComponentControl, IMenuStripItem
     {
         public readonly MenuStripItemEventsContainer EventsContainer;
 
@@ -121,7 +121,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         public void AddComponents(IEnumerable<MenuStripItemControl> values)
         {
             if (!values.Any())
-                throw new InvalidOperationException(nameof(values));
+                throw new InvalidOperationException();
 
             foreach (MenuStripItemControl item in values)
                 AddComponent(item);

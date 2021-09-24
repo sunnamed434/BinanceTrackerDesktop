@@ -28,7 +28,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
 
         public async Task<BinanceUserWalletResult> GetTotalBalanceAsync()
         {
-            IEnumerable<BinanceUserWalletCoinResult> buyedCoins = await GetBuyedCoinsAsync();
+            IEnumerable<BinanceUserWalletCoinResult> buyedCoins = await GetAllBuyedCoinsAsync();
 
             decimal result = decimal.Zero;
 
@@ -40,7 +40,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
             return new BinanceUserWalletResult(result);
         }
 
-        public async Task<IEnumerable<BinanceUserWalletCoinResult>> GetBuyedCoinsAsync()
+        public async Task<IEnumerable<BinanceUserWalletCoinResult>> GetAllBuyedCoinsAsync()
         {
             WebCallResult<IEnumerable<BinanceUserCoin>> coins = await client.General.GetUserCoinsAsync();
 

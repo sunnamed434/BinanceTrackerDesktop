@@ -5,9 +5,9 @@ using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter
 
 namespace BinanceTrackerDesktop.Core.Formatters.API
 {
-    public interface IFormatter<Result, Argument>
+    public interface IFormatter<TResult, TArgument>
     {
-        Result Format(Argument value);
+        TResult Format(TArgument value);
     }
 
     public class CurrencyFormatter : IFormatter<string, decimal>

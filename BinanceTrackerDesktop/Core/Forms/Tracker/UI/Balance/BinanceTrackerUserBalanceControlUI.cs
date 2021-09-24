@@ -12,7 +12,7 @@ using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {
-    public class BinanceTrackerUserBalanceUIControl
+    public class BinanceTrackerUserBalanceControlUI
     {
         private ISafelyComponentControl formSafelyCloseControl;
 
@@ -26,7 +26,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
 
 
-        public BinanceTrackerUserBalanceUIControl(ISafelyComponentControl formSafelyCloseControl, IBinanceUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
+        public BinanceTrackerUserBalanceControlUI(ISafelyComponentControl formSafelyCloseControl, IBinanceUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
         {
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
