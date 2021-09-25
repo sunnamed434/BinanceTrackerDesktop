@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Validation;
 using BinanceTrackerDesktop.Core.Validation.API;
+using BinanceTrackerDesktop.Core.Validation.Extension;
 using Google.Authenticator;
 using System;
 using System.Drawing;
@@ -31,10 +31,14 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.API
 
         public Image Authenticate(string accountTitle, string secret)
         {
-            if (!validateString(accountTitle))
+            if (!accountTitle.Rules()
+                .ContentNotNullOrEmpty()
+                .MinCharacters(1).IsSuccess)
                 throw new FailedStringValidationException(nameof(accountTitle));
 
-            if (!validateString(secret))
+            if (!secret.Rules()
+                .ContentNotNullOrEmpty()
+                .MinCharacters(1).IsSuccess)
                 throw new FailedStringValidationException(nameof(secret));
 
             SetupCode setupCode = new TwoFactorAuthenticator().GenerateSetupCode(ApplicationEnviroment.GlobalName, accountTitle.Trim(), secret, false);
@@ -44,23 +48,17 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.API
 
         public ValidateResult ValidateTwoFactorPIN(string secret, string code)
         {
-            if (!validateString(secret))
+            if (!secret.Rules()
+                .ContentNotNullOrEmpty()
+                .MinCharacters(MinCharactersOfPIN).IsSuccess)
                 throw new FailedStringValidationException(nameof(secret));
 
-            if (!validateString(code, MinCharactersOfPIN))
+            if (!code.Rules()
+                .ContentNotNullOrEmpty()
+                .MinCharacters(MinCharactersOfPIN).IsSuccess)
                 throw new FailedStringValidationException(nameof(code));
 
             return new TwoFactorAuthenticator().ValidateTwoFactorPIN(secret, code) ? ValidateResult.Succesfully : ValidateResult.Failed;
-        }
-
-
-
-        private bool validateString(string value, int minCharacters = 1)
-        {
-            return new StringValidator(value)
-                            .ContentNotNullOrEmpty()
-                            .MinCharacters(minCharacters)
-                            .IsSuccess;
         }
     }
 }
