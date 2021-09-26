@@ -5,6 +5,18 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
 {
+    public class ButtonEventsContainer
+    {
+        public readonly EventListener ClickEventListener;
+
+
+
+        public ButtonEventsContainer()
+        {
+            ClickEventListener = new EventListener();
+        }
+    }
+
     public class ButtonComponentControl : TextComponentControl
     {
         public readonly ButtonEventsContainer EventsContainer;
@@ -36,18 +48,6 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
         public void Unlock()
         {
             this.button.Enabled = true;
-        }
-    }
-
-    public class ButtonEventsContainer
-    {
-        public readonly EventListener ClickEventListener;
-
-
-
-        public ButtonEventsContainer()
-        {
-            ClickEventListener = new EventListener();
         }
     }
 }

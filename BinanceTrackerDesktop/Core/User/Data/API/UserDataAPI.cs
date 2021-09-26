@@ -25,9 +25,6 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
         {
             Key = key;
             Secret = secret;
-            BestBalance = decimal.Zero;
-            BalancesHiden = false;
-            NotificationsEnabled = true;
         }
 
         public UserData(string key, string secret, decimal bestBalance, bool balancesHiden, bool notificationsEnabled) : this(key, secret)
