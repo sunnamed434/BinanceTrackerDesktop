@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
             EventsContainer = new ButtonEventsContainer();
             this.button = button;
 
-            button.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
+            this.button.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
         }
 
         

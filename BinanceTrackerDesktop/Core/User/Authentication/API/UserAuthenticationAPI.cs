@@ -27,18 +27,20 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.API
 
         private const int MinCharactersOfPIN = 6;
 
+        private const int NotSupportableCharactersCountOfPIN = 1;
+
 
 
         public Image Authenticate(string accountTitle, string secret)
         {
             if (!accountTitle.Rules()
                 .ContentNotNullOrEmpty()
-                .MinCharacters(1).IsSuccess)
+                .MinCharacters(NotSupportableCharactersCountOfPIN).IsSuccess)
                 throw new FailedStringValidationException(nameof(accountTitle));
 
             if (!secret.Rules()
                 .ContentNotNullOrEmpty()
-                .MinCharacters(1).IsSuccess)
+                .MinCharacters(NotSupportableCharactersCountOfPIN).IsSuccess)
                 throw new FailedStringValidationException(nameof(secret));
 
             SetupCode setupCode = new TwoFactorAuthenticator().GenerateSetupCode(ApplicationEnviroment.GlobalName, accountTitle.Trim(), secret, false);
