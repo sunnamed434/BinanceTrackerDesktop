@@ -5,25 +5,24 @@ using BinanceTrackerDesktop.Core.Wallet;
 using CryptoExchange.Net.Authentication;
 using System;
 
-namespace BinanceTrackerDesktop.Core.Startup
+namespace BinanceTrackerDesktop.Core.Client.Startup
 {
-    public class BinanceStartup
+    public class BinanceClientStartup
     {
         public readonly BinanceUserWallet Wallet;
 
 
 
-        public BinanceStartup(UserData data)
+        public BinanceClientStartup(UserData data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            BinanceClient.SetDefaultOptions(new BinanceClientOptions()
+            BinanceClient.SetDefaultOptions(new BinanceClientOptions
             {
                 ApiCredentials = new ApiCredentials(data.Key, data.Secret),
             });
-
-            BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
+            BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions
             {
                 ApiCredentials = new ApiCredentials(data.Key, data.Secret),
             });

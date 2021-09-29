@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Forms.Tracker.Startup;
+﻿using BinanceTrackerDesktop.Core.Client;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +13,7 @@ namespace BinanceTrackerDesktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            new BinanceTrackerStartup();
+            new BinanceTrackerEntryPoint();
 
             await Task.CompletedTask;
         }

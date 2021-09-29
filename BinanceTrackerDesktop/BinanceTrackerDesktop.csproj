@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Client\BinanceTrackerEntryPoint.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
@@ -114,7 +115,6 @@
     <Compile Include="Core\User\Data\API\UserDataAPI.cs" />
     <Compile Include="Core\API\ISafelyComponentControl.cs" />
     <Compile Include="Core\User\Status\API\IBinanceUserStatus.cs" />
-    <Compile Include="Core\Forms\Tracker\Startup\BinanceTrackerStartup.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,7 +132,7 @@
     <Compile Include="Core\Calculator\BinanceCoinCalculator.cs" />
     <Compile Include="Core\Calculator\Extension\BinanceCalculationExtension.cs" />
     <Compile Include="Core\Currencies\CurrencySymbol.cs" />
-    <Compile Include="Core\Startup\BinanceStartup.cs" />
+    <Compile Include="Core\Client\Startup\BinanceClientStartup.cs" />
     <Compile Include="Core\Wallet\API\BinanceWalletAPI.cs" />
     <Compile Include="Core\Wallet\BinanceUserWallet.cs" />
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.cs">

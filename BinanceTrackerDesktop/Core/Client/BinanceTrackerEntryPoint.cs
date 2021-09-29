@@ -5,21 +5,19 @@ using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Forms.Tracker.Startup
+namespace BinanceTrackerDesktop.Core.Client
 {
-    public class BinanceTrackerStartup
+    public class BinanceTrackerEntryPoint
     {
-        public BinanceTrackerStartup()
+        public BinanceTrackerEntryPoint()
         {
-            Process process = Process.GetCurrentProcess();
-            if (process.TryGetArleadyStartedSimilarProcess(out Process anotherProcess))
+            if (Process.GetCurrentProcess().TryGetArleadyStartedSimilarProcess(out Process anotherProcess))
             {
-                process.UnhideSimilarProcess();
+                anotherProcess.SetProcessWindowToForeground();
                 return;
             }
 
-            UserData userData = new BinaryUserDataSaveReadSystem().Read();
-            if (userData == null)
+            if (new BinaryUserDataSaveReadSystem().Read() == null)
             {
                 Application.Run(new BinanceTrackerAuthorizationForm());
             }

@@ -1,12 +1,12 @@
 ﻿using Binance.Net;
 using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Client.Startup;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.DirectoryFiles.API;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
-using BinanceTrackerDesktop.Core.Startup;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Control;
@@ -20,7 +20,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
     {
         private readonly ISafelyComponentControl safelyComponentControl;
 
-        private BinanceStartup startup;
+        private BinanceClientStartup startup;
 
         private IBinanceUserStatus userStatus;
 
@@ -54,7 +54,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.Activated -= onFormActivated;
 
             UserData data = new BinaryUserDataSaveReadSystem().Read();
-            startup = new BinanceStartup(data);
+            startup = new BinanceClientStartup(data);
 
             userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
             new BinanceTrackerUserDataSaveControl(safelyComponentControl, startup.Wallet);
