@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -262,21 +263,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
                 throw new FileNotFoundException(nameof(path));
 
             string fileExtension = Path.GetExtension(path);
-            result = fileExtension;
-            return !string.IsNullOrEmpty(fileExtension);
-        }
-    }
-
-    public static class FilePathExtension
-    {
-        public static bool IsIcon(this string source)
-        {
-            return FilePathUtility.TryGetExtensionOf(source, out string fileExtension) && fileExtension == FileExtensions.Icon;
-        }
-
-        public static bool IsDat(this string source)
-        {
-            return FilePathUtility.TryGetExtensionOf(source, out string fileExtension) && fileExtension == FileExtensions.Dat;
+            return !string.IsNullOrEmpty(result = fileExtension);
         }
     }
 

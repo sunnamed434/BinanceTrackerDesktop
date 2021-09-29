@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
     </Compile>
