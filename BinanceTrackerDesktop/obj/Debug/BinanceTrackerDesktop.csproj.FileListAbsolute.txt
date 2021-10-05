@@ -81,3 +81,8 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\Binance
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.SuggestedBindingRedirects.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\Google.Authenticator.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\QRCoder.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.AssemblyReference.cache

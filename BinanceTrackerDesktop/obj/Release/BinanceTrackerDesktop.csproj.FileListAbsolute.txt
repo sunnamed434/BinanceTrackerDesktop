@@ -58,4 +58,5 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Googl
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\QRCoder.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.AssemblyReference.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CopyComplete
