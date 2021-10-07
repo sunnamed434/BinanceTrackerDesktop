@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.User.Data.API;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Popup.API
@@ -122,9 +121,7 @@ namespace BinanceTrackerDesktop.Core.Popup.API
         public static void Initialize(NotifyIcon notifyIcon)
         {
             if (notifyIcon == null)
-            {
                 throw new ArgumentNullException(nameof(notifyIcon));
-            }
 
             NotificationsControl.notifyIcon = notifyIcon;
 
@@ -145,15 +142,10 @@ namespace BinanceTrackerDesktop.Core.Popup.API
         public static void Show(Popup popup)
         {
             if (popup == null)
-            {
                 throw new ArgumentNullException(nameof(popup));
-            }
 
-            if (new BinaryUserDataSaveReadSystem().Read().NotificationsEnabled)
-            {
-                lastUsedPopup = popup;
-                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
-            }
+            lastUsedPopup = popup;
+            notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
         }
 
 
