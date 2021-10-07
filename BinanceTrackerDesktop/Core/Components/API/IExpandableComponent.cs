@@ -4,7 +4,7 @@ namespace BinanceTrackerDesktop.Core.Components.API
 {
     public interface IExpandableComponent<TAddGetRemove, TSearchArgument>
     {
-        IEnumerable<TAddGetRemove> AllComponents { get; }
+        IReadOnlyCollection<TAddGetRemove> AllComponents { get; }
 
 
 

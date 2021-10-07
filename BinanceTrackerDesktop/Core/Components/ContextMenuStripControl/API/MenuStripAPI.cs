@@ -86,7 +86,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
     {
         public readonly ContextMenuStrip Strip;
 
-        public IEnumerable<MenuStripItemControl> AllComponents => Components;
+        public IReadOnlyCollection<MenuStripItemControl> AllComponents => Components;
 
 
 
