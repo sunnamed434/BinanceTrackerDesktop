@@ -122,7 +122,9 @@ namespace BinanceTrackerDesktop.Core.Popup.API
         public static void Initialize(NotifyIcon notifyIcon)
         {
             if (notifyIcon == null)
+            {
                 throw new ArgumentNullException(nameof(notifyIcon));
+            }
 
             NotificationsControl.notifyIcon = notifyIcon;
 
@@ -143,7 +145,9 @@ namespace BinanceTrackerDesktop.Core.Popup.API
         public static void Show(Popup popup)
         {
             if (popup == null)
+            {
                 throw new ArgumentNullException(nameof(popup));
+            }
 
             if (new BinaryUserDataSaveReadSystem().Read().NotificationsEnabled)
             {
