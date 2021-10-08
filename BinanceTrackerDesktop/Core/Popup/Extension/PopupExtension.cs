@@ -5,12 +5,12 @@ namespace BinanceTrackerDesktop.Core.Popup.Extension
 {
     public static class PopupExtension
     {
-        public static void Show(this Popup.API.Popup source)
+        public static void Show(this Popup.API.Popup source, bool sendAnyway = false)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            NotificationsControl.Show(source);
+            NotificationsControl.Show(source, sendAnyway);
         }
     }
 }

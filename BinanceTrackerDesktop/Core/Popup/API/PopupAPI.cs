@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.User.Data.API;
+using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Popup.API
@@ -139,13 +140,21 @@ namespace BinanceTrackerDesktop.Core.Popup.API
 
 
 
-        public static void Show(Popup popup)
+        public static void Show(Popup popup, bool sendAnyway = false)
         {
             if (popup == null)
                 throw new ArgumentNullException(nameof(popup));
 
             lastUsedPopup = popup;
-            notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
+
+            if (sendAnyway)
+            {
+                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
+            }
+            else if (new BinaryUserDataSaveReadSystem().Read().NotificationsEnabled)
+            {
+                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
+            }
         }
 
 
