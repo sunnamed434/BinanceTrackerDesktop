@@ -114,11 +114,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         protected override IEnumerable<MenuStripItemControl> InitializeItems()
         {
-            return new List<MenuStripItemControl>
-            {
-                new MenuStripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API),
-                new MenuStripItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins),
-            };
+            yield return new MenuStripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API);
+            yield return new MenuStripItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins);
         }
     }
 
