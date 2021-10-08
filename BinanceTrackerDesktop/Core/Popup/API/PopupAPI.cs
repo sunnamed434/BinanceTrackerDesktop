@@ -148,13 +148,10 @@ namespace BinanceTrackerDesktop.Core.Popup.API
             lastUsedPopup = popup;
 
             if (sendAnyway)
-            {
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
-            }
+
             else if (new BinaryUserDataSaveReadSystem().Read().NotificationsEnabled)
-            {
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
-            }
         }
 
 
