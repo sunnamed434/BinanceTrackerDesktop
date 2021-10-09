@@ -8,6 +8,7 @@ using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
@@ -87,17 +88,18 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
             MessageBox.Show
             (
-                $"{nameof(api.CreateTime)} = {api.CreateTime}, " +
-                $"{nameof(api.IpRestrict)} = {api.IpRestrict}, " +
-                $"{nameof(api.EnableFutures)} = {api.EnableFutures}, " +
-                $"{nameof(api.EnableWithdrawals)} = {api.EnableWithdrawals}, " +
-                $"{nameof(api.EnableMargin)} = {api.EnableMargin}, " +
-                $"{nameof(api.EnableVanillaOptions)} = {api.EnableVanillaOptions}, " +
-                $"{nameof(api.EnableSpotAndMarginTrading)} = {api.EnableSpotAndMarginTrading}, " +
-                $"{nameof(api.EnableInternalTransfer)} = {api.EnableInternalTransfer}, " +
-                $"{nameof(api.EnableReading)} = {api.EnableReading}, " +
-                $"{nameof(api.PermitUniversalTransfer)} = {api.PermitUniversalTransfer}, " +
-                $"{nameof(api.TradingAuthorityExpirationTime)} = {api.TradingAuthorityExpirationTime}",
+                new StringBuilder()
+                    .Append($"{nameof(api.IpRestrict)} = {api.IpRestrict}, ")
+                    .Append($"{nameof(api.EnableFutures)} = {api.EnableFutures}, ")
+                    .Append($"{nameof(api.EnableWithdrawals)} = {api.EnableWithdrawals}, ")
+                    .Append($"{nameof(api.EnableMargin)} = {api.EnableMargin}, ")
+                    .Append($"{nameof(api.EnableVanillaOptions)} = {api.EnableVanillaOptions}, ")
+                    .Append($"{nameof(api.EnableSpotAndMarginTrading)} = {api.EnableSpotAndMarginTrading}, ")
+                    .Append($"{nameof(api.EnableInternalTransfer)} = {api.EnableInternalTransfer}, ")
+                    .Append($"{nameof(api.EnableReading)} = {api.EnableReading}, ")
+                    .Append($"{nameof(api.PermitUniversalTransfer)} = {api.PermitUniversalTransfer}, ")
+                    .Append($"{nameof(api.TradingAuthorityExpirationTime)} = {api.TradingAuthorityExpirationTime}")
+                    .ToString(),
 
                 ApplicationEnviroment.GlobalName, MessageBoxButtons.OK, MessageBoxIcon.Information
             );
