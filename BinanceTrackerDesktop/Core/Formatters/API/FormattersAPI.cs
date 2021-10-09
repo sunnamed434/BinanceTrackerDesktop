@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
 using System;
 using System.Drawing;
+using System.Text;
 using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter;
 
 namespace BinanceTrackerDesktop.Core.Formatters.API
@@ -12,13 +13,16 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
 
     public class CurrencyFormatter : IFormatter<string, decimal>
     {
-        private const string Default = "0.00";
+        private const string DefaultFormat = "0.00";
 
 
 
         public string Format(decimal value)
         {
-            return CurrencySymbol.EUR + value.ToString(Default);
+            return new StringBuilder()
+                .Append(CurrencySymbol.EUR)
+                .Append(value.ToString(DefaultFormat))
+                .ToString();
         }
     }
 
@@ -29,7 +33,10 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
-            return content + CurrencyName.EUR;
+            return new StringBuilder()
+                .Append(content)
+                .Append(CurrencyName.EUR)
+                .ToString();
         }
     }
 

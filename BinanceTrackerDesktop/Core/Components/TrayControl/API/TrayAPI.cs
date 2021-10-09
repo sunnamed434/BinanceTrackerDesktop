@@ -2,7 +2,6 @@
 using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
@@ -24,9 +23,9 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
     public class TrayControlBase : MenuStripControlBase
     {
-        public readonly NotifyIcon NotifyIcon;
-
         public readonly TrayEventsContainer EventsContainerControl;
+
+        public readonly NotifyIcon NotifyIcon;
 
 
 
@@ -35,8 +34,8 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
             if (notifyIcon == null)
                 throw new ArgumentNullException(nameof(notifyIcon));
 
-            NotifyIcon = notifyIcon;
             EventsContainerControl = new TrayEventsContainer();
+            NotifyIcon = notifyIcon;
 
             notifyIcon.MouseClick += (s, e) => EventsContainerControl.MouseClickListener.TriggerEvent(e);
             notifyIcon.DoubleClick += (s, e) => EventsContainerControl.DoubleClickListener.TriggerEvent(e);
@@ -52,17 +51,6 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
                 throw new ArgumentNullException(content);
 
             NotifyIcon.Text = content; 
-        }
-
-        public void Show()
-        {
-            NotifyIcon.ContextMenuStrip.Show();
-        }
-
-        public void Close()
-        {
-            using (NotifyIcon)
-                NotifyIcon.Visible = false;
         }
     }
 }

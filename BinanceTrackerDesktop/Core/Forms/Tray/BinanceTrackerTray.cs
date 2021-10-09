@@ -1,23 +1,24 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.API;
+using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
 using BinanceTrackerDesktop.Core.Popup.API;
 using BinanceTrackerDesktop.Core.Popup.Extension;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.Window.API;
+using BinanceTrackerDesktop.Core.Window;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Forms.Tray.API
+namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
     public class BinanceTrackerTray : TrayControlBase
     {
         private readonly ISafelyComponentControl formSafelyCloseControl;
 
-        private readonly ProcessWindowHelper processWindow;
+        private readonly ProcessWindowHelper processWindowHelper;
 
         private readonly MenuStripItemControl applicationOpenItemControl;
 
@@ -33,7 +34,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
             this.formSafelyCloseControl = formSafelyCloseControl;
-            processWindow = new ProcessWindowHelper();
+            processWindowHelper = new ProcessWindowHelper();
 
             applicationOpenItemControl = base.GetComponentAt(TrayItemsIdContainer.OpenApplicationUniqueIndex);
             notificationsItemControl = base.GetComponentAt(TrayItemsIdContainer.NotificationsUniqueIndex);
@@ -73,7 +74,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
 
         private void onTrayDoubleClick(EventArgs e)
         {
-            processWindow.SetWindowToForeground();
+            processWindowHelper.SetWindowToForeground();
         }
 
         private void onApplicationOpenItemClicked(EventArgs e)
@@ -95,12 +96,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
                 .Show(true);
 
             notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled));
-
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)
         {
-            base.Close();
+            this.HideTray();
 
             await this.formSafelyCloseControl.CallListenersAsync();
         }
@@ -112,7 +112,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray.API
             applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationQuitItemClicked;
             EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClick;
 
-            base.Close();
+            this.HideTray();
 
             await Task.CompletedTask;
         }

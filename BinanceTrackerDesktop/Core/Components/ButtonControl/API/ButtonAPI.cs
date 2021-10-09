@@ -21,9 +21,7 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
     {
         public readonly ButtonEventsContainer EventsContainer;
 
-
-
-        private readonly Button button;
+        public readonly Button Button;
 
 
 
@@ -33,21 +31,9 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
                 throw new ArgumentNullException(nameof(button));
 
             EventsContainer = new ButtonEventsContainer();
-            this.button = button;
+            Button = button;
 
-            this.button.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
-        }
-
-        
-
-        public void Lock()
-        {
-            this.button.Enabled = false;
-        }
-
-        public void Unlock()
-        {
-            this.button.Enabled = true;
+            Button.Click += (s, e) => EventsContainer.ClickEventListener.TriggerEvent(e);
         }
     }
 }

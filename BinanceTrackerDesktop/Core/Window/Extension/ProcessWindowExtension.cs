@@ -1,10 +1,9 @@
-﻿using BinanceTrackerDesktop.Core.Window.API;
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace BinanceTrackerDesktop.Core.Window.Extension
 {
-    public static class ProcessExtension
+    public static class ProcessWindowExtension
     {
         private const int ContainsSimiralWindowValue = 1;
 

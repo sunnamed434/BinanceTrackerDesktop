@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryDataControl;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
 
@@ -84,7 +85,17 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
 
         public abstract IEnumerable<T> Files { get; }
 
-        public string SearchPattern => FileSearchPatternSymbol.Asterisk + FileExtension;
+        public string SearchPattern { get; }
+
+
+
+        public DirectoryFilesControlBase()
+        {
+            SearchPattern = new StringBuilder()
+                .Append(FileSearchPatternSymbol.Asterisk)
+                .Append(FileExtension)
+                .ToString();
+        }
 
 
 
@@ -101,13 +112,9 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
             if (!Directory.Exists(FolderPath))
                 Directory.CreateDirectory(FolderPath);
 
-            List<string> files = new List<string>();
-
             string[] filesPaths = Directory.GetFiles(FolderPath, SearchPattern);
             for (int i = 0; i < filesPaths.Length; i++)
-                files.Add(filesPaths[i]);
-
-            return files;
+                yield return filesPaths[i];
         }
     }
 

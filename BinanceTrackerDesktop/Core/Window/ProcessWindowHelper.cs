@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Window.Extension;
 using System.Diagnostics;
 
-namespace BinanceTrackerDesktop.Core.Window.API
+namespace BinanceTrackerDesktop.Core.Window
 {
     public interface IProcessWindowHelper
     {

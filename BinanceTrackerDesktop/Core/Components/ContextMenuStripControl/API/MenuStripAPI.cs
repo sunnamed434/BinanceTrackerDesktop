@@ -118,12 +118,12 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Components.Add(item);
         }
 
-        public void AddComponents(IEnumerable<MenuStripItemControl> values)
+        public void AddComponents(IEnumerable<MenuStripItemControl> items)
         {
-            if (!values.Any())
+            if (!items.Any())
                 throw new InvalidOperationException();
 
-            foreach (MenuStripItemControl item in values)
+            foreach (MenuStripItemControl item in items)
                 AddComponent(item);
         }
 

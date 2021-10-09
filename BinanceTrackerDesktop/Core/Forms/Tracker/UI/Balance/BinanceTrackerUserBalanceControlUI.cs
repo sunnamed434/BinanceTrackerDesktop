@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
+using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
 using BinanceTrackerDesktop.Core.Formatters.API;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.API;
@@ -90,7 +91,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
                 if (lockButton)
                 {
-                    await refreshBalancesSyncAsync(() => formButtonControls[0].Lock(), () => formButtonControls[0].Unlock());
+                    await refreshBalancesSyncAsync(() => formButtonControls[0].LockButton(), () => formButtonControls[0].UnlockButton());
                 }
                 else
                 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace BinanceTrackerDesktop.Core.Window.API
+namespace BinanceTrackerDesktop.Core.Window
 {
     public class WindowControl
     {

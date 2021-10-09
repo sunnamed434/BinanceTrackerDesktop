@@ -78,6 +78,8 @@
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
     <Compile Include="Core\Client\BinanceTrackerEntryPoint.cs" />
+    <Compile Include="Core\Components\ButtonControl\Extension\ButtonComponentControlExtension.cs" />
+    <Compile Include="Core\Components\TrayControl\Extension\TrayControlExtension.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
@@ -102,7 +104,7 @@
       <DependentUpon>AuthenticatorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuStripControlUI.cs" />
-    <Compile Include="Core\Forms\Tray\API\BinanceTrackerTray.cs" />
+    <Compile Include="Core\Forms\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Core\Popup\API\PopupAPI.cs" />
     <Compile Include="Core\Popup\Extension\PopupExtension.cs" />
     <Compile Include="Core\User\Authentication\API\UserAuthenticationAPI.cs" />
@@ -141,11 +143,11 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Window\API\ProcessWindowHelper.cs" />
-    <Compile Include="Core\Window\API\WindowControl.cs" />
+    <Compile Include="Core\Window\ProcessWindowHelper.cs" />
+    <Compile Include="Core\Window\WindowControl.cs" />
     <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />
     <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
-    <Compile Include="Core\Window\Extension\ProcessExtension.cs" />
+    <Compile Include="Core\Window\Extension\ProcessWindowExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\Forms\Authentication\AuthenticationForm.resx">
