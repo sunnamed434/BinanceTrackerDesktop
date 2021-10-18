@@ -27,7 +27,7 @@ Warning, this is a beta version, here you can see bugs. (write them here in [Iss
 ![Screenshot_3](https://user-images.githubusercontent.com/65300126/131249064-3e6831de-c1ec-462d-9e15-503c97df2df6.png)
 
 ![Screenshot_2](https://user-images.githubusercontent.com/65300126/137768729-bff35f12-c26a-44bc-8b14-4e84b4a6a9d8.png)
-###OR
+
 ![Screenshot_4](https://user-images.githubusercontent.com/65300126/131249068-1931e06c-dffd-40c4-bf00-eb13dae999ab.png)
 
 ![Screenshot_5](https://user-images.githubusercontent.com/65300126/131249072-adb1c68a-0adc-4dc0-b3d6-f3d9672471b2.png)
