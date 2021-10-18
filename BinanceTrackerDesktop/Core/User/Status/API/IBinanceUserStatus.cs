@@ -113,7 +113,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override async Task<IBinanceUserStatusResult> CalculateUserBalanceLossesAsync()
         {
-            return await Task.FromResult<IBinanceUserStatusResult>(new BinanceUserStatusResult(decimal.Zero));
+            return await Task.FromResult<IBinanceUserStatusResult>(new BinanceUserStatusResult(default(decimal)));
         }
 
         public override string Format(decimal value)
@@ -146,10 +146,9 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public IBinanceUserStatus GetStatus()
         {
-            if (!data.UserStartedApplicationFirstTime())
-                return new BinanceUserStandartStatus(data, wallet);
-            else
-                return new BinanceUserBeginnerStatus(data, wallet);
+            return this.data.UserStartedApplicationFirstTime() 
+                ? new BinanceUserBeginnerStatus(data, wallet) 
+                : new BinanceUserStandartStatus(data, wallet);
         }
     }
 }

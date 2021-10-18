@@ -9,32 +9,32 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
     [Serializable]
     public class UserData
     {
-        public string Key;
+        public string? Key;
 
-        public string Secret;
+        public string? Secret;
 
         public decimal BestBalance;
 
-        public bool BalancesHiden;
+        public bool? BalancesHiden;
 
-        public bool NotificationsEnabled;
+        public bool? NotificationsEnabled;
 
 
 
-        public UserData(string key, string secret)
+        public UserData(string? key, string? secret)
         {
             Key = key;
             Secret = secret;
         }
 
-        public UserData(string key, string secret, decimal bestBalance, bool balancesHiden, bool notificationsEnabled) : this(key, secret)
+        public UserData(string? key, string secret, decimal bestBalance, bool? balancesHiden, bool? notificationsEnabled) : this(key, secret)
         {
             BestBalance = bestBalance;
             BalancesHiden = balancesHiden;
             NotificationsEnabled = notificationsEnabled;
         }
 
-        public UserData() : this(string.Empty, string.Empty, decimal.Zero, false, true)
+        public UserData() : this(null, null, default(decimal), null, null)
         {
 
         }
@@ -60,29 +60,25 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
 
 
 
-        public void Save(UserData data)
+        public void Save(UserData? data)
         {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
-
-            using (FileStream fileStream = File.Create(UserDataFile.FullPath))
+            if (data != null)
             {
-                formatter.Serialize(fileStream, data);
-                fileStream.Close();
+                using (FileStream fileStream = File.Create(UserDataFile.FullPath))
+                {
+                    formatter.Serialize(fileStream, data);
+                }
             }
         }
 
-        public UserData Read()
+        public UserData? Read()
         {
             if (!File.Exists(UserDataFile.FullPath))
                 return null;
 
             using (FileStream fileStream = File.Open(UserDataFile.FullPath, FileMode.Open))
             {
-                object deserializedObject = formatter.Deserialize(fileStream);
-                fileStream.Close();
-
-                return (UserData)deserializedObject;
+                return (UserData)formatter.Deserialize(fileStream);
             }
         }
     }

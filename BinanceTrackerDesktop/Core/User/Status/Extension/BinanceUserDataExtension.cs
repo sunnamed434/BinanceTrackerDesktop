@@ -10,7 +10,7 @@ namespace BinanceTrackerDesktop.Core.User.Status.Extension
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return source.BestBalance == decimal.Zero;
+            return source.BestBalance == default;
         }
     }
 }

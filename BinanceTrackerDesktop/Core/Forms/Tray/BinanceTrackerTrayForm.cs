@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.DirectoryFiles.API;
-using BinanceTrackerDesktop.Core.Popup.API;
+using BinanceTrackerDesktop.Core.Popup;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

@@ -69,7 +69,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         private async void initializeAsync()
         {
             UserData data = new BinaryUserDataSaveReadSystem().Read();
-            isBalancesHiden = data.BalancesHiden;
+            isBalancesHiden = data.BalancesHiden ?? default(bool);
 
             if (isBalancesHiden)
             {

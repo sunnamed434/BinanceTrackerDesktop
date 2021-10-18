@@ -45,7 +45,7 @@ namespace BinanceTrackerDesktop.Core.Wallet
             WebCallResult<IEnumerable<BinanceUserCoin>> coins = await client.General.GetUserCoinsAsync();
 
             List<BinanceUserWalletCoinResult> result = new List<BinanceUserWalletCoinResult>();
-            foreach (BinanceUserCoin coin in coins.Data.Where(b => b.Free.ValueFitsToCalculation()))
+            foreach (BinanceUserCoin coin in coins.Data.Where(c => c.Free.ValueFitsToCalculation()))
             {
                 BinanceUserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
                 result.Add(coinResult);

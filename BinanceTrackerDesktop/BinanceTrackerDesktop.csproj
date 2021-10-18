@@ -2,6 +2,11 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{89A3322C-366E-41BA-9C8F-349B81E125F7}</ProjectGuid>
@@ -106,7 +111,9 @@
     <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuStripControlUI.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Core\Popup\API\PopupAPI.cs" />
+    <Compile Include="Core\Popup\Builder\PopupBuilder.cs" />
     <Compile Include="Core\Popup\Extension\PopupExtension.cs" />
+    <Compile Include="Core\Popup\NotificationsControl.cs" />
     <Compile Include="Core\User\Authentication\API\UserAuthenticationAPI.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\User\Data\Extension\UserDataExtension.cs" />
