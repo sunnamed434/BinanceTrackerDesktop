@@ -85,17 +85,17 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         private void onNotificationsItemControlClicked(EventArgs e)
         {
             UserData userData = new BinaryUserDataSaveReadSystem().Read();
-            userData.NotificationsEnabled = !userData.NotificationsEnabled;
+            userData.NotificationsEnabled = userData.NotificationsEnabled == true ? false : true;
             userData.SaveUserData();
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage(userData.NotificationsEnabled ?? default(bool) ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
+                .WithMessage(userData.NotificationsEnabled == true ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
                 .WillCloseIn(90)
                 .Build()
                 .Show(true);
 
-            notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled ?? default(bool)));
+            notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled ?? default));
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)

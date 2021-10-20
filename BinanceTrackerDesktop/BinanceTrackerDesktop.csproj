@@ -5,6 +5,7 @@
     <LangVersion>preview</LangVersion>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +14,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>BinanceTrackerDesktop</RootNamespace>
     <AssemblyName>BinanceTrackerDesktop</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
