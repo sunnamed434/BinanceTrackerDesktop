@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Client
+namespace BinanceTrackerDesktop.Core.Entry
 {
     public class BinanceTrackerEntryPoint
     {
@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.Client
                 return;
             }
 
-            if (new BinaryUserDataSaveReadSystem().Read() == null)
+            if (new BinaryUserDataSaveSystem().Read() == null)
             {
                 Application.Run(new BinanceTrackerAuthorizationForm());
             }

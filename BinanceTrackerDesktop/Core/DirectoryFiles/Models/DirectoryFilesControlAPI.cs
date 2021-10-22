@@ -1,14 +1,15 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Exception;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryDataControl;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryDataControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
 
-namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
+namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 {
     public interface IDirectoryFilesControl<T>
     {
@@ -81,7 +82,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
     {
         public abstract string FolderPath { get; }
 
-        public abstract string FileExtension { get; }
+        public virtual string FileExtension { get; } = string.Empty;
 
         public abstract IEnumerable<T> Files { get; }
 
@@ -187,7 +188,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
     public class DirectoryDataControl : DirectoryFilesControlBase<DirectoryDataItem>
     {
         public override string FolderPath => ApplicationDirectoryPaths.User;
-
+        
         public override string FileExtension => FileExtensions.Dat;
 
         public override IEnumerable<DirectoryDataItem> Files { get; }
@@ -257,33 +258,5 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.API
     public class FileSearchPatternSymbol
     {
         public const string Asterisk = "*";
-    }
-
-    public class FilePathUtility
-    {
-        public static bool TryGetExtensionOf(string path, out string result)
-        {
-            if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException(nameof(path));
-
-            if (!File.Exists(path))
-                throw new FileNotFoundException(nameof(path));
-
-            string fileExtension = Path.GetExtension(path);
-            return !string.IsNullOrEmpty(result = fileExtension);
-        }
-    }
-
-    public class FileExtensionDoesNotMatchWithDesiredException : Exception
-    {
-        public FileExtensionDoesNotMatchWithDesiredException(string message) : base(string.Format("File extension does not match with desired: {0}", message))
-        {
-
-        }
-
-        public FileExtensionDoesNotMatchWithDesiredException()
-        {
-
-        }
     }
 }

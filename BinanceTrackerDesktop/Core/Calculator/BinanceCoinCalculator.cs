@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Calculator.API;
+﻿using BinanceTrackerDesktop.Core.Calculator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

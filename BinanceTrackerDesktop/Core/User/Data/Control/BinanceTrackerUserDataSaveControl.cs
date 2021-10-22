@@ -2,7 +2,7 @@
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Core.Wallet.API;
+using BinanceTrackerDesktop.Core.Wallet.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
         private async Task onCloseCallbackAsync()
         {
             BinanceUserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
-            UserData userData = new BinaryUserDataSaveReadSystem().Read();
+            UserData userData = new BinaryUserDataSaveSystem().Read();
 
             if (userData.BestBalance < walletResult.Value)
                 userData.BestBalance = walletResult.Value;

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace BinanceTrackerDesktop.Core.Validation.API
+﻿namespace BinanceTrackerDesktop.Core.Validation.Exception
 {
-    public class FailedStringValidationException : Exception
+    public class FailedStringValidationException : System.Exception
     {
         public FailedStringValidationException(string message) : base(string.Format("String failed validation of validator: {0}", message))
         {

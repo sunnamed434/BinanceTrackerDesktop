@@ -43,7 +43,7 @@ namespace BinanceTrackerDesktop.Core.Popup
             if (sendAnyway)
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
 
-            else if (new BinaryUserDataSaveReadSystem().Read().NotificationsEnabled ?? default(bool) == true)
+            else if (new BinaryUserDataSaveSystem().Read().NotificationsEnabled ?? default(bool) == true)
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
         }
 

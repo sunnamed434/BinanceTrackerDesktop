@@ -1,18 +1,17 @@
 ﻿using Binance.Net;
 using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Client.Startup;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
+using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
-using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using System;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -20,9 +19,9 @@ namespace BinanceTrackerDesktop.Tracker.Forms
     {
         private readonly ISafelyComponentControl safelyComponentControl;
 
-        private BinanceClientStartup startup;
+        private UserClient userClient;
 
-        private IBinanceUserStatus userStatus;
+        private IUserStatus userStatus;
 
 
 
@@ -53,11 +52,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             base.Activated -= onFormActivated;
 
-            UserData data = new BinaryUserDataSaveReadSystem().Read();
-            startup = new BinanceClientStartup(data);
+            userClient = new UserClient();
 
-            userStatus = new BinanceUserStatusDetector(data, startup.Wallet).GetStatus();
-            new BinanceTrackerUserDataSaveControl(safelyComponentControl, startup.Wallet);
+            userStatus = new UserStatusDetector(userClient.SaveDataSystem.Read(), userClient.Wallet).GetStatus();
+            new BinanceTrackerUserDataSaveControl(safelyComponentControl, userClient.Wallet);
 
             new BinanceTrackerUserBalanceControlUI(safelyComponentControl, userStatus,
             new ButtonComponentControl[]
@@ -70,7 +68,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 new LabelComponentControl(this.UserTotalBalanceLosesText),
             });
 
-            new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), startup.Wallet);
+            new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
         }
 
         private async void onFormClosing(object sender, FormClosingEventArgs e)

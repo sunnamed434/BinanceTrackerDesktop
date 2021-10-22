@@ -1,17 +1,18 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryDataControl;
+using System.Text;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryDataControl;
 
 namespace BinanceTrackerDesktop.Core.User.Data.API
 {
     [Serializable]
     public class UserData
     {
-        public string? Key;
+        public string Key;
 
-        public string? Secret;
+        public string Secret;
 
         public decimal BestBalance;
 
@@ -21,46 +22,46 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
 
 
 
-        public UserData(string? key, string? secret)
+        public UserData(string key, string secret)
         {
             Key = key;
             Secret = secret;
         }
 
-        public UserData(string? key, string secret, decimal bestBalance, bool? balancesHiden, bool? notificationsEnabled) : this(key, secret)
+        public UserData(string key, string secret, decimal bestBalance, bool? balancesHiden, bool? notificationsEnabled) : this(key, secret)
         {
             BestBalance = bestBalance;
             BalancesHiden = balancesHiden;
             NotificationsEnabled = notificationsEnabled;
         }
 
-        public UserData() : this(null, null, default(decimal), null, null)
+        public UserData() : this(null, null, default, null, null)
         {
 
         }
     }
 
-    public interface IUserDataSaveReadSystem
+    public interface IUserDataSaveSystem
     {
         void Save(UserData data);
 
         UserData Read();
     }
 
-    public class BinaryUserDataSaveReadSystem : IUserDataSaveReadSystem
+    public class BinaryUserDataSaveSystem : IUserDataSaveSystem
     {
         private readonly BinaryFormatter formatter;
 
 
 
-        public BinaryUserDataSaveReadSystem()
+        public BinaryUserDataSaveSystem()
         {
             formatter = new BinaryFormatter();
         }
 
 
 
-        public void Save(UserData? data)
+        public void Save(UserData data)
         {
             if (data != null)
             {
@@ -71,7 +72,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
             }
         }
 
-        public UserData? Read()
+        public UserData Read()
         {
             if (!File.Exists(UserDataFile.FullPath))
                 return null;
@@ -85,6 +86,9 @@ namespace BinanceTrackerDesktop.Core.User.Data.API
 
     public class UserDataFile
     {
-        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, RegisteredData.UserFile + FileExtensions.Dat);
+        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, new StringBuilder()
+            .Append(RegisteredData.UserFile)
+            .Append(FileExtensions.Dat)
+            .ToString());
     }
 }

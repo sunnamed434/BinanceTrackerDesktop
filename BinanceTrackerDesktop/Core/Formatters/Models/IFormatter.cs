@@ -2,9 +2,9 @@
 using System;
 using System.Drawing;
 using System.Text;
-using static BinanceTrackerDesktop.Core.Formatters.API.UserBalanceLosesFormatter;
+using static BinanceTrackerDesktop.Core.Formatters.Models.UserBalanceLosesFormatter;
 
-namespace BinanceTrackerDesktop.Core.Formatters.API
+namespace BinanceTrackerDesktop.Core.Formatters.Models
 {
     public interface IFormatter<TResult, TArgument>
     {
@@ -53,7 +53,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.API
                 return Color.Red;
             else if (options.BestBalance < options.TotalBalance)
                 return Color.Green;
-            else 
+            else
                 return Color.Gray;
         }
 

@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.User.Authentication.API;
-using BinanceTrackerDesktop.Core.Validation.API;
+using BinanceTrackerDesktop.Core.Validation.Exception;
 using System;
 using System.Windows.Forms;
 

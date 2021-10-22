@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Calculator.API
+﻿namespace BinanceTrackerDesktop.Core.Calculator.Models
 {
     public interface IBinanceCoinOptions
     {

@@ -53,7 +53,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
         private void initializeAsync()
         {
-            UserData binanceUserData = new BinaryUserDataSaveReadSystem().Read();
+            UserData binanceUserData = new BinaryUserDataSaveSystem().Read();
             notificationsItemControl.SetText(getNotificationsText(binanceUserData.NotificationsEnabled ?? default(bool)));
 
             new PopupBuilder()
@@ -84,7 +84,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
         private void onNotificationsItemControlClicked(EventArgs e)
         {
-            UserData userData = new BinaryUserDataSaveReadSystem().Read();
+            UserData userData = new BinaryUserDataSaveSystem().Read();
             userData.NotificationsEnabled = userData.NotificationsEnabled == true ? false : true;
             userData.SaveUserData();
 

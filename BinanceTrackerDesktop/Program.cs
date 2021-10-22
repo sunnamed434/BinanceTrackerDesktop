@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Client;
+﻿using BinanceTrackerDesktop.Core.Entry;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;

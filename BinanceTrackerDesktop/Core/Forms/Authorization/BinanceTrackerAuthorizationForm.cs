@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Validation;
@@ -6,7 +6,7 @@ using BinanceTrackerDesktop.Core.Validation.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {

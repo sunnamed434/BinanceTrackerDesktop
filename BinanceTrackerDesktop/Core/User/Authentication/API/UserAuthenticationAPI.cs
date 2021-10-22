@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Validation.API;
+using BinanceTrackerDesktop.Core.Validation.Exception;
 using BinanceTrackerDesktop.Core.Validation.Extension;
 using Google.Authenticator;
 using System;

@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Utility;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Extension
 {

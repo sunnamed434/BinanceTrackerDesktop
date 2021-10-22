@@ -3,7 +3,7 @@ using Binance.Net.Objects.Other;
 using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Core.Wallet.API;
+using BinanceTrackerDesktop.Core.Wallet.Models;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;

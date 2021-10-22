@@ -1,10 +1,10 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles.API;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
 using BinanceTrackerDesktop.Core.Popup;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.API.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {

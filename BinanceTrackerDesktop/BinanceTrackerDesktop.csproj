@@ -83,10 +83,13 @@
   <ItemGroup>
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
-    <Compile Include="Core\Client\BinanceTrackerEntryPoint.cs" />
+    <Compile Include="Core\DirectoryFiles\Exception\FileExtensionDoesNotMatchWithDesiredException.cs" />
+    <Compile Include="Core\DirectoryFiles\Utility\FilePathUtility.cs" />
+    <Compile Include="Core\Entry\BinanceTrackerEntryPoint.cs" />
     <Compile Include="Core\Components\ButtonControl\Extension\ButtonComponentControlExtension.cs" />
     <Compile Include="Core\Components\TrayControl\Extension\TrayControlExtension.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
+    <Compile Include="Core\Formatters\Models\IFormatter.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,8 +104,7 @@
     <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripExtension.cs" />
     <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\DirectoryFiles\API\DirectoryFilesControlAPI.cs" />
-    <Compile Include="Core\Formatters\API\FormattersAPI.cs" />
+    <Compile Include="Core\DirectoryFiles\Models\DirectoryFilesControlAPI.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,15 +118,16 @@
     <Compile Include="Core\Popup\Extension\PopupExtension.cs" />
     <Compile Include="Core\Popup\NotificationsControl.cs" />
     <Compile Include="Core\User\Authentication\API\UserAuthenticationAPI.cs" />
+    <Compile Include="Core\User\Client\UserClient.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
-    <Compile Include="Core\User\Data\Extension\UserDataExtension.cs" />
+    <Compile Include="Core\User\Data\Extension\UserDataSaveExtension.cs" />
     <Compile Include="Core\User\Status\Extension\BinanceUserDataExtension.cs" />
-    <Compile Include="Core\Validation\API\FailedStringValidationException.cs" />
+    <Compile Include="Core\Validation\Exception\FailedStringValidationException.cs" />
     <Compile Include="Core\Validation\StringValidator.cs" />
     <Compile Include="Core\Validation\Extension\ValidationExtension.cs" />
     <Compile Include="Core\User\Data\API\UserDataAPI.cs" />
     <Compile Include="Core\API\ISafelyComponentControl.cs" />
-    <Compile Include="Core\User\Status\API\IBinanceUserStatus.cs" />
+    <Compile Include="Core\User\Status\API\IUserStatus.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,12 +141,11 @@
     <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.Designer.cs">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Calculator\API\IBinanceCoinOptions.cs" />
+    <Compile Include="Core\Calculator\Models\IBinanceCoinOptions.cs" />
     <Compile Include="Core\Calculator\BinanceCoinCalculator.cs" />
     <Compile Include="Core\Calculator\Extension\BinanceCalculationExtension.cs" />
     <Compile Include="Core\Currencies\CurrencySymbol.cs" />
-    <Compile Include="Core\Client\Startup\BinanceClientStartup.cs" />
-    <Compile Include="Core\Wallet\API\BinanceWalletAPI.cs" />
+    <Compile Include="Core\Wallet\Models\BinanceWalletAPI.cs" />
     <Compile Include="Core\Wallet\BinanceUserWallet.cs" />
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.cs">
       <SubType>Form</SubType>
