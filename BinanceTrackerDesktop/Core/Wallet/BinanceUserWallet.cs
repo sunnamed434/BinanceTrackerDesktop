@@ -2,8 +2,8 @@
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using BinanceTrackerDesktop.Core.Calculator;
-using BinanceTrackerDesktop.Core.Calculator.Models;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
+using BinanceTrackerDesktop.Core.Calculator.Models;
 using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.Wallet.Models;
 using CryptoExchange.Net.Objects;

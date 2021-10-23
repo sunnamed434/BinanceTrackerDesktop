@@ -1,8 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
 using BinanceTrackerDesktop.Core.User.Data.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.Validation;
-using BinanceTrackerDesktop.Core.Validation.Extension;
+using BinanceTrackerDesktop.Core.Validator;
+using BinanceTrackerDesktop.Core.Validator.String.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Windows.Forms;

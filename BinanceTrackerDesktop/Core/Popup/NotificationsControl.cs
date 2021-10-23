@@ -8,7 +8,7 @@ namespace BinanceTrackerDesktop.Core.Popup
     {
         private static NotifyIcon notifyIcon;
 
-        private static Popup.API.Popup lastUsedPopup;
+        private static API.Popup lastUsedPopup;
 
 
 
@@ -33,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.Popup
 
 
 
-        public static void Show(Popup.API.Popup popup, bool sendAnyway = false)
+        public static void Show(API.Popup popup, bool sendAnyway = false)
         {
             if (popup == null)
                 throw new ArgumentNullException(nameof(popup));

@@ -55,7 +55,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         {
             UserData binanceUserData = new BinaryUserDataSaveSystem().Read();
             notificationsItemControl.SetText(getNotificationsText(binanceUserData.NotificationsEnabled ?? default(bool)));
-
+            
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Tracker Running")

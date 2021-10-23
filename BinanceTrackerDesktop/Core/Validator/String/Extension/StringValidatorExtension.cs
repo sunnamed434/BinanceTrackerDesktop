@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Validation.Extension
+namespace BinanceTrackerDesktop.Core.Validator.String.Extension
 {
-    public static class ValidationExtension
+    public static class StringValidatorExtension
     {
         public static StringValidator Rules(this TextBox source) => new StringValidator(source.Text);
 
