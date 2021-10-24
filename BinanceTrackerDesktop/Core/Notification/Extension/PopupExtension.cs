@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.Notification.API;
+using System;
 
-namespace BinanceTrackerDesktop.Core.Popup.Extension
+namespace BinanceTrackerDesktop.Core.Notification.Extension
 {
     public static class PopupExtension
     {
-        public static void Show(this API.Popup source, bool sendAnyway = false)
+        public static void Show(this Popup source, bool sendAnyway = false)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Popup.Builder;
-using BinanceTrackerDesktop.Core.Popup.Extension;
+using BinanceTrackerDesktop.Core.Notification.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.Models;
 using BinanceTrackerDesktop.Core.Validator.String.Exception;
 using System;
@@ -31,8 +30,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
                     .WithTitle(ApplicationEnviroment.GlobalName)
                     .WithMessage("Cannot to authenticate, check your Account Title or Secret Key")
                     .WillCloseIn(90)
-                    .Build()
-                    .Show(true);
+                    .Build(true);
             }
         }
     }

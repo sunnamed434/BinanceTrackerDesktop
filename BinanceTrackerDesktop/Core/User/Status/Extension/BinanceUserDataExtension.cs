@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.User.Data.API;
+﻿using BinanceTrackerDesktop.Core.User.Data;
 using System;
 
 namespace BinanceTrackerDesktop.Core.User.Status.Extension

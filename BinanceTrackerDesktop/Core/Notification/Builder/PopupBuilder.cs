@@ -1,11 +1,13 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.Notification.API;
+using BinanceTrackerDesktop.Core.Notification.Extension;
+using System;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Popup.Builder
+namespace BinanceTrackerDesktop.Core.Notification.Builder
 {
     public class PopupBuilder
     {
-        private readonly Popup.API.Popup popup = Popup.API.Popup.Empty;
+        private readonly Popup popup = Popup.Empty;
 
 
 
@@ -51,14 +53,21 @@ namespace BinanceTrackerDesktop.Core.Popup.Builder
             return this;
         }
 
-        public Popup.API.Popup Build()
+        public Popup Build()
         {
             return popup;
         }
 
+        public Popup Build(bool sendAnyway)
+        {
+            popup.Show(sendAnyway);
+
+            return Build();
+        }
 
 
-        public static implicit operator Popup.API.Popup(PopupBuilder builder)
+
+        public static implicit operator Popup(PopupBuilder builder)
         {
             return builder.Build();
         }

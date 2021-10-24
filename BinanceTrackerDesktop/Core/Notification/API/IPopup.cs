@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Popup.API
+namespace BinanceTrackerDesktop.Core.Notification.API
 {
     public interface IPopup
     {

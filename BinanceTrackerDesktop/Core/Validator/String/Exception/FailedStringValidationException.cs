@@ -2,12 +2,12 @@
 {
     public class FailedStringValidationException : System.Exception
     {
-        public FailedStringValidationException(string message) : base(string.Format("String validation failed: {0}", message))
+        public FailedStringValidationException(string argument) : base(string.Format("String validation failed: {0}", argument))
         {
 
         }
 
-        public FailedStringValidationException()
+        public FailedStringValidationException() : this(default)
         {
 
         }

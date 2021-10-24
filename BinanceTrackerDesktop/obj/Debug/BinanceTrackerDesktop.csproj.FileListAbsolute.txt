@@ -84,7 +84,6 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\Google.
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\QRCoder.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.AssemblyReference.cache
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\BinanceTrackerDesktop.exe.config
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\BinanceTrackerDesktop.exe
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Debug\BinanceTrackerDesktop.pdb
@@ -108,3 +107,4 @@ C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\ob
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.exe
 C:\Users\Opilane\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.pdb
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\BinanceTrackerDesktop.csproj.CopyComplete

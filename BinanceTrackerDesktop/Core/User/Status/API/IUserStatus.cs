@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Models;
-using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Status.Extension;
 using BinanceTrackerDesktop.Core.Wallet;
 using BinanceTrackerDesktop.Core.Wallet.Models;

@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
-using BinanceTrackerDesktop.Core.User.Data.API;
+using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Validator;
 using BinanceTrackerDesktop.Core.Validator.String.Extension;
