@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         string FileName { get; }
     }
 
-    public class ApplicationDirectoriesControl
+    public sealed class ApplicationDirectoriesControl
     {
         public readonly Directories Folders;
 
@@ -119,7 +119,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         }
     }
 
-    public class DirectoryImagesControl : DirectoryFilesControlBase<DirectoryImageItem>
+    public sealed class DirectoryImagesControl : DirectoryFilesControlBase<DirectoryImageItem>
     {
         public override string FolderPath => ApplicationDirectoryPaths.Icons;
 
@@ -185,7 +185,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         }
     }
 
-    public class DirectoryDataControl : DirectoryFilesControlBase<DirectoryDataItem>
+    public sealed class DirectoryDataControl : DirectoryFilesControlBase<DirectoryDataItem>
     {
         public override string FolderPath => ApplicationDirectoryPaths.User;
         
@@ -239,7 +239,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         }
     }
 
-    public class ApplicationDirectoryPaths
+    public sealed class ApplicationDirectoryPaths
     {
         public static readonly string Resources = nameof(Resources);
 
@@ -248,14 +248,14 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         public static readonly string Icons = Path.Combine(Resources, nameof(Icons));
     }
 
-    public class FileExtensions
+    public sealed class FileExtensions
     {
         public const string Icon = ".ico";
 
         public const string Dat = ".dat";
     }
 
-    public class FileSearchPatternSymbol
+    public sealed class FileSearchPatternSymbol
     {
         public const string Asterisk = "*";
     }

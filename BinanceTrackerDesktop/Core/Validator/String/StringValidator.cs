@@ -3,7 +3,7 @@ using System;
 
 namespace BinanceTrackerDesktop.Core.Validator
 {
-    public class StringValidator
+    public sealed class StringValidator
     {
         private readonly string content;
 

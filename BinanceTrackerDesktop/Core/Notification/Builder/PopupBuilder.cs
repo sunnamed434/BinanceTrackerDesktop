@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Notification.Builder
 {
-    public class PopupBuilder
+    public sealed class PopupBuilder
     {
         private readonly Popup popup = Popup.Empty;
 

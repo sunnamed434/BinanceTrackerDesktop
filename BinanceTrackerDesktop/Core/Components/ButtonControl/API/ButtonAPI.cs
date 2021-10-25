@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
 {
-    public class ButtonEventsContainer
+    public sealed class ButtonEventsContainer
     {
         public readonly EventListener ClickEventListener;
 
@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
         }
     }
 
-    public class ButtonComponentControl : TextComponentControl
+    public sealed class ButtonComponentControl : TextComponentControl
     {
         public readonly ButtonEventsContainer EventsContainer;
 

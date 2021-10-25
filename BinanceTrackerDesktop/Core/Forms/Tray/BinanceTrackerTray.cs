@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
-    public class BinanceTrackerTray : TrayControlBase
+    public sealed class BinanceTrackerTray : TrayControlBase
     {
         private readonly ISafelyComponentControl formSafelyCloseControl;
 
@@ -125,7 +125,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         }
     }
 
-    public class TrayItemsTextContainer
+    public sealed class TrayItemsTextContainer
     {
         public const string OpenApplication = "Open Binance Tracker";
 
@@ -140,7 +140,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         public const string DisableNotifications = "Disable Notifications";
     }
 
-    public class TrayItemsIdContainer
+    public sealed class TrayItemsIdContainer
     {
         public const byte OpenApplicationUniqueIndex = 1;
 

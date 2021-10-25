@@ -1,6 +1,6 @@
 ﻿namespace BinanceTrackerDesktop.Core.Currencies
 {
-    public class CurrencySymbol
+    public sealed class CurrencySymbol
     {
         public const char EUR = '€';
     }

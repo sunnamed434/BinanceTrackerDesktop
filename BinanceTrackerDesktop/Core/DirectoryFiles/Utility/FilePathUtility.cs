@@ -3,7 +3,7 @@ using System.IO;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Utility
 {
-    public class FilePathUtility
+    public sealed class FilePathUtility
     {
         public static bool TryGetExtensionOf(string path, out string result)
         {

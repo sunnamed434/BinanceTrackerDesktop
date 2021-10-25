@@ -8,7 +8,7 @@ namespace BinanceTrackerDesktop.Core.Window
         void SetWindowToForeground();
     }
 
-    public class ProcessWindowHelper : IProcessWindowHelper
+    public sealed class ProcessWindowHelper : IProcessWindowHelper
     {
         public void SetWindowToForeground()
         {

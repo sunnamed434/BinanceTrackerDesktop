@@ -1,8 +1,9 @@
 ﻿using System;
+
 namespace BinanceTrackerDesktop.Core.User.Data
 {
     [Serializable]
-    public class UserData
+    public sealed class UserData
     {
         public string Key;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Control
 {
-    public class BinanceTrackerUserDataSaveControl
+    public sealed class BinanceTrackerUserDataSaveControl
     {
         private readonly ISafelyComponentControl safelyComponentContro;
 

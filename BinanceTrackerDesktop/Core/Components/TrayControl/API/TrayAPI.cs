@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 {
-    public class TrayEventsContainer
+    public sealed class TrayEventsContainer
     {
         public readonly MouseClickEventListener MouseClickListener;
 

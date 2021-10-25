@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.Wallet
 {
-    public class BinanceUserWallet
+    public sealed class BinanceUserWallet
     {
         private readonly BinanceClient client;
 

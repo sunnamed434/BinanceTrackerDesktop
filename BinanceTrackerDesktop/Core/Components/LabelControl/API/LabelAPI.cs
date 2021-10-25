@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
 {
-    public class LabelComponentEventsContainer
+    public sealed class LabelComponentEventsContainer
     {
         public readonly EventListener ClickEventListener;
 
@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
         }
     }
 
-    public class LabelComponentControl : TextComponentControl
+    public sealed class LabelComponentControl : TextComponentControl
     {
         public readonly LabelComponentEventsContainer EventsContainer;
 

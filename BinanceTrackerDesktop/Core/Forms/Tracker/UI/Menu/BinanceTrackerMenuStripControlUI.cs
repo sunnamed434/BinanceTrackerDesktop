@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 {
-    public class BinanceTrackerMenuStripControlUI : MenuStripControlBase
+    public sealed class BinanceTrackerMenuStripControlUI : MenuStripControlBase
     {
         private readonly MenuStrip menuStrip;
 
@@ -27,10 +27,10 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        public BinanceTrackerMenuStripControlUI(MenuStrip menuStrip, BinanceClient client, BinanceUserWallet wallet)
+        public BinanceTrackerMenuStripControlUI(MenuStrip self, BinanceClient client, BinanceUserWallet wallet)
         {
-            if (menuStrip == null)
-                throw new ArgumentNullException(nameof(menuStrip));
+            if (self == null)
+                throw new ArgumentNullException(nameof(self));
 
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -38,7 +38,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
-            this.menuStrip = menuStrip;
+            this.menuStrip = self;
             this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
             this.client = client;
             this.wallet = wallet;
@@ -121,14 +121,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         }
     }
 
-    public class MenuItemsTextContainer
+    public sealed class MenuItemsTextContainer
     {
         public static readonly string API = nameof(API);
 
         public static readonly string Coins = nameof(Coins);
     }
 
-    public class MenuItemsIdContainer
+    public sealed class MenuItemsIdContainer
     {
         public const byte API = 1;
 

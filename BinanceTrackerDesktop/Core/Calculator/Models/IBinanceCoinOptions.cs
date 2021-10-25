@@ -7,7 +7,7 @@
         decimal Amount { get; }
     }
 
-    public class BinanceCoinOptions : IBinanceCoinOptions
+    public sealed class BinanceCoinOptions : IBinanceCoinOptions
     {
         public decimal Price { get; }
 

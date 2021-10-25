@@ -28,7 +28,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
         decimal Value { get; }
     }
 
-    public class UserStatusResult : IUserStatusResult
+    public sealed class UserStatusResult : IUserStatusResult
     {
         public decimal Value { get; }
 
@@ -63,7 +63,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
         public abstract string Format(decimal value);
     }
 
-    public class UserStandartStatus : UserStatusBase
+    public sealed class UserStandartStatus : UserStatusBase
     {
         public UserStandartStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
         {
@@ -95,7 +95,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
         }
     }
 
-    public class UserBeginnerStatus : UserStatusBase
+    public sealed class UserBeginnerStatus : UserStatusBase
     {
         public UserBeginnerStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
         {
@@ -122,7 +122,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
         }
     }
 
-    public class UserStatusDetector
+    public sealed class UserStatusDetector
     {
         private readonly UserData data;
 

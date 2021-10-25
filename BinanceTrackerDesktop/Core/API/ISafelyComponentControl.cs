@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.API
         ISafelyComponentControl OnStarted(Action callback);
     }
 
-    public class SafelyComponentControl : ISafelyComponentControl
+    public sealed class SafelyComponentControl : ISafelyComponentControl
     {
         private List<Func<Task>> closeCallbacks = new List<Func<Task>>();
 

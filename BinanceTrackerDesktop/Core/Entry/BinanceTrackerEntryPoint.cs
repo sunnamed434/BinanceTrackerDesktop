@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Entry
 {
-    public class BinanceTrackerEntryPoint
+    public sealed class BinanceTrackerEntryPoint
     {
         public BinanceTrackerEntryPoint()
         {

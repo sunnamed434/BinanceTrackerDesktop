@@ -20,7 +20,7 @@ namespace BinanceTrackerDesktop.Core.Notification.API
         Action OnClick { get; set; }
     }
 
-    public class Popup : IPopup
+    public sealed class Popup : IPopup
     {
         public string Title { get; set; }
 

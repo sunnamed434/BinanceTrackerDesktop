@@ -13,7 +13,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Save
         UserData Read();
     }
 
-    public class BinaryUserDataSaveSystem : IUserDataSaveSystem
+    public sealed class BinaryUserDataSaveSystem : IUserDataSaveSystem
     {
         private readonly BinaryFormatter formatter;
 
@@ -49,7 +49,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Save
         }
     }
 
-    public class UserDataFile
+    public sealed class UserDataFile
     {
         public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, new StringBuilder()
             .Append(RegisteredData.UserFile)

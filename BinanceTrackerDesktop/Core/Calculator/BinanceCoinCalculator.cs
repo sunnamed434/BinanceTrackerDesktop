@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BinanceTrackerDesktop.Core.Calculator
 {
-    public class BinanceCoinCalculator
+    public sealed class BinanceCoinCalculator
     {
         public static decimal GetPriceOf(BinanceCoinOptions options)
         {

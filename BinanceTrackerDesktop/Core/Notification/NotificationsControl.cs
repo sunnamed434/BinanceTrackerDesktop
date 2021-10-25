@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Notification
 {
-    public class NotificationsControl
+    public sealed class NotificationsControl
     {
         private static NotifyIcon notifyIcon;
 

@@ -12,7 +12,7 @@
         decimal Price { get; }
     }
 
-    public class BinanceUserWalletResult : IBinanceUserWalletResult
+    public sealed class BinanceUserWalletResult : IBinanceUserWalletResult
     {
         public decimal Value { get; }
 
@@ -24,7 +24,7 @@
         }
     }
 
-    public class BinanceUserWalletCoinResult : IBinanceUserWalletCoinResult
+    public sealed class BinanceUserWalletCoinResult : IBinanceUserWalletCoinResult
     {
         public string Asset { get; }
 

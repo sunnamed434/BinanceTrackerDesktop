@@ -9,7 +9,7 @@ using System;
 
 namespace BinanceTrackerDesktop.Core.User.Client
 {
-    public class UserClient
+    public sealed class UserClient
     {
         public readonly IUserDataSaveSystem SaveDataSystem;
 

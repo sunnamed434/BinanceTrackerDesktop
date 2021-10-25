@@ -17,7 +17,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         byte Id { get; }
     }
 
-    public class MenuStripItemControl : TextComponentControl, IMenuStripItem
+    public sealed class MenuStripItemControl : TextComponentControl, IMenuStripItem
     {
         public readonly MenuStripItemEventsContainer EventsContainer;
 
@@ -70,7 +70,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         }
     }
 
-    public class MenuStripItemEventsContainer
+    public sealed class MenuStripItemEventsContainer
     {
         public readonly EventListener OnClick;
 
