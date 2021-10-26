@@ -11,7 +11,7 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesCon
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 {
-    public interface IDirectoryFilesControl<T>
+    public interface IDirectoryFilesControl<TFileItem> where TFileItem : IDirectoryFileItem
     {
         string FolderPath { get; }
 
@@ -19,11 +19,11 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
         string SearchPattern { get; }
 
-        IEnumerable<T> Files { get; }
+        IEnumerable<TFileItem> Files { get; }
 
 
 
-        T GetDirectoryFileAt(string name);
+        TFileItem GetDirectoryFileAt(string name);
 
         IEnumerable<string> GetAllFilePathFromDirectory();
     }
@@ -48,7 +48,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-        public class Directories
+        public sealed class Directories
         {
             public readonly DirectoryOfResources Resources;
 
@@ -61,7 +61,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-            public class DirectoryOfResources
+            public sealed class DirectoryOfResources
             {
                 public readonly DirectoryImagesControl Images;
 
@@ -143,7 +143,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-        public class DirectoryImageItem : IDirectoryFileItem
+        public sealed class DirectoryImageItem : IDirectoryFileItem
         {
             public Icon Icon { get; }
 
@@ -171,7 +171,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-            public class DefaultSizeOfImages
+            public sealed class DefaultSizeOfImages
             {
                 public const int Width = 32;
 
@@ -179,7 +179,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
             }
         }
 
-        public class RegisteredImages
+        public sealed class RegisteredImages
         {
             public static readonly string ApplicationIcon = "app";
         }
@@ -209,7 +209,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-        public class DirectoryDataItem : IDirectoryFileItem
+        public sealed class DirectoryDataItem : IDirectoryFileItem
         {
             public string FilePath { get; }
 
@@ -233,7 +233,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
             }
         }
 
-        public class RegisteredData
+        public sealed class RegisteredData
         {
             public const string UserFile = "userdata";
         }
