@@ -154,11 +154,12 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Window\ProcessWindowHelper.cs" />
-    <Compile Include="Core\Window\WindowControl.cs" />
+    <Compile Include="Core\Window\Helper\ProcessWindowHelper.cs" />
+    <Compile Include="Core\Window\External\ExternalWindowControl.cs" />
     <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />
     <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
     <Compile Include="Core\Window\Extension\ProcessWindowExtension.cs" />
+    <Compile Include="Core\Window\WindowControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\Forms\Authentication\AuthenticationForm.resx">

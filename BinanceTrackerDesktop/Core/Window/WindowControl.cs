@@ -1,27 +1,19 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using static BinanceTrackerDesktop.Core.Window.External.ExternalWindowControl;
 
 namespace BinanceTrackerDesktop.Core.Window
 {
-    internal sealed class WindowControl
+    public sealed class WindowControl
     {
-        [DllImport("user32.dll")] internal static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+        public static bool Show(IntPtr handle, WindowCommand command) => ShowWindowAsync(handle, (int)command);
 
-        [DllImport("user32.dll")] internal static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static bool GetIsMinimized(IntPtr handle) => IsIconic(handle);
 
-        [DllImport("user32.dll")] internal static extern bool IsIconic(IntPtr hWnd);
-
-
-
-        internal static bool Show(IntPtr handle, WindowCommand command) => ShowWindowAsync(handle, (int)command);
-
-        internal static bool GetIsMinimized(IntPtr handle) => IsIconic(handle);
-
-        internal static bool SetToForeground(IntPtr handle) => SetForegroundWindow(handle);
+        public static bool SetToForeground(IntPtr handle) => SetForegroundWindow(handle);
 
 
 
-        internal enum WindowCommand : int
+        public enum WindowCommand : int
         {
             Hide = 0,
             ShowNormal = 1,
