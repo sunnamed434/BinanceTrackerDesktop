@@ -11,7 +11,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.Models
         TResult Format(TArgument value);
     }
 
-    public class CurrencyFormatter : IFormatter<string, decimal>
+    public sealed class CurrencyFormatter : IFormatter<string, decimal>
     {
         private const string DefaultFormat = "0.00";
 
@@ -26,7 +26,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.Models
         }
     }
 
-    public class CryptocurrencyFormatter : IFormatter<string, string>
+    public sealed class CryptocurrencyFormatter : IFormatter<string, string>
     {
         public string Format(string content)
         {
@@ -40,7 +40,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.Models
         }
     }
 
-    public class UserBalanceLosesFormatter : IFormatter<Color, BinanceUserBalanceLossesOptions>
+    public sealed class UserBalanceLosesFormatter : IFormatter<Color, BinanceUserBalanceLossesOptions>
     {
         public Color Format(BinanceUserBalanceLossesOptions options)
         {
