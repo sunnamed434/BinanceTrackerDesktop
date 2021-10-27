@@ -2,8 +2,8 @@
 using Binance.Net.Objects.Other;
 using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
-using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Core.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet;
+using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private readonly BinanceClient client;
 
-        private readonly BinanceUserWallet wallet;
+        private readonly UserWallet wallet;
 
         private readonly MenuStripItemControl apiItemControl;
 
@@ -27,7 +27,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        public BinanceTrackerMenuStripControlUI(MenuStrip self, BinanceClient client, BinanceUserWallet wallet)
+        public BinanceTrackerMenuStripControlUI(MenuStrip self, BinanceClient client, UserWallet wallet)
         {
             if (self == null)
                 throw new ArgumentNullException(nameof(self));
@@ -107,7 +107,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private async void onCoinsItemClicked(EventArgs e)
         {
-            IEnumerable<BinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
+            IEnumerable<IBinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
             MessageBox.Show(string.Join(", ", result.Select(r => $"{r.Asset } = {r.Price}")));
         }

@@ -78,13 +78,13 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         }
     }
 
-    public abstract class DirectoryFilesControlBase<T> : IDirectoryFilesControl<T> where T : IDirectoryFileItem
+    public abstract class DirectoryFilesControlBase<TDirectoryFileItem> : IDirectoryFilesControl<TDirectoryFileItem> where TDirectoryFileItem : IDirectoryFileItem
     {
         public abstract string FolderPath { get; }
 
         public virtual string FileExtension { get; } = string.Empty;
 
-        public abstract IEnumerable<T> Files { get; }
+        public abstract IEnumerable<TDirectoryFileItem> Files { get; }
 
         public string SearchPattern { get; }
 
@@ -100,7 +100,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-        public virtual T GetDirectoryFileAt(string name)
+        public virtual TDirectoryFileItem GetDirectoryFileAt(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException(nameof(name));

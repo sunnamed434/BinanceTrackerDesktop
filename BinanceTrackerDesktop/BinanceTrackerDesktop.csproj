@@ -146,8 +146,8 @@
     <Compile Include="Core\Calculator\BinanceCoinCalculator.cs" />
     <Compile Include="Core\Calculator\Extension\BinanceCalculationExtension.cs" />
     <Compile Include="Core\Currencies\CurrencySymbol.cs" />
-    <Compile Include="Core\Wallet\Models\BinanceUserWalletResult.cs" />
-    <Compile Include="Core\Wallet\BinanceUserWallet.cs" />
+    <Compile Include="Core\User\Wallet\Models\UserWalletResult.cs" />
+    <Compile Include="Core\User\Wallet\UserWallet.cs" />
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>

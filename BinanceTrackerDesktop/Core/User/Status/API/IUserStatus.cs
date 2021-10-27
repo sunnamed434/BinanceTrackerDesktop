@@ -1,8 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Status.Extension;
-using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Core.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet;
+using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
     {
         UserData Data { get; } 
 
-        BinanceUserWallet Wallet { get; }
+        UserWallet Wallet { get; }
 
 
 
@@ -44,11 +44,11 @@ namespace BinanceTrackerDesktop.Core.User.Control
     {
         public UserData Data { get; }
 
-        public BinanceUserWallet Wallet { get; }
+        public UserWallet Wallet { get; }
 
 
 
-        protected UserStatusBase(UserData data, BinanceUserWallet wallet)
+        protected UserStatusBase(UserData data, UserWallet wallet)
         {
             Data = data;
             Wallet = wallet;
@@ -65,7 +65,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
     public sealed class UserStandartStatus : UserStatusBase
     {
-        public UserStandartStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
+        public UserStandartStatus(UserData data, UserWallet wallet) : base(data, wallet)
         {
 
         }
@@ -74,7 +74,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override async Task<IUserStatusResult> CalculateUserTotalBalanceAsync()
         {
-            BinanceUserWalletResult result = await Wallet.GetTotalBalanceAsync();
+            UserWalletResult result = await Wallet.GetTotalBalanceAsync();
 
             return new UserStatusResult(result.Value);
         }
@@ -97,7 +97,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
     public sealed class UserBeginnerStatus : UserStatusBase
     {
-        public UserBeginnerStatus(UserData data, BinanceUserWallet wallet) : base(data, wallet)
+        public UserBeginnerStatus(UserData data, UserWallet wallet) : base(data, wallet)
         {
 
         }
@@ -106,7 +106,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override async Task<IUserStatusResult> CalculateUserTotalBalanceAsync()
         {
-            BinanceUserWalletResult walletResult = await Wallet.GetTotalBalanceAsync();
+            UserWalletResult walletResult = await Wallet.GetTotalBalanceAsync();
 
             return new UserStatusResult(walletResult.Value);
         }
@@ -126,11 +126,11 @@ namespace BinanceTrackerDesktop.Core.User.Control
     {
         private readonly UserData data;
 
-        private readonly BinanceUserWallet wallet;
+        private readonly UserWallet wallet;
 
 
 
-        public UserStatusDetector(UserData data, BinanceUserWallet wallet)
+        public UserStatusDetector(UserData data, UserWallet wallet)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));

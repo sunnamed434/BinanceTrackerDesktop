@@ -1,8 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save;
-using BinanceTrackerDesktop.Core.Wallet;
-using BinanceTrackerDesktop.Core.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet;
+using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -12,11 +12,11 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
     {
         private readonly ISafelyComponentControl safelyComponentContro;
 
-        private readonly BinanceUserWallet wallet;
+        private readonly UserWallet wallet;
 
 
 
-        public BinanceTrackerUserDataSaveControl(ISafelyComponentControl safelyComponentContro, BinanceUserWallet wallet)
+        public BinanceTrackerUserDataSaveControl(ISafelyComponentControl safelyComponentContro, UserWallet wallet)
         {
             if (safelyComponentContro == null)
                 throw new ArgumentNullException(nameof(safelyComponentContro));
@@ -34,7 +34,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
 
         private async Task onCloseCallbackAsync()
         {
-            BinanceUserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
+            UserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
             UserData userData = new BinaryUserDataSaveSystem().Read();
 
             if (userData.BestBalance < walletResult.Value)

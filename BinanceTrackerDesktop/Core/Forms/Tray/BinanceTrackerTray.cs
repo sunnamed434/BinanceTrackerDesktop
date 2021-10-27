@@ -3,9 +3,11 @@ using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
 using BinanceTrackerDesktop.Core.Notification.Builder;
+using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save;
+using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using BinanceTrackerDesktop.Core.Window;
 using System;
 using System.Collections.Generic;
@@ -51,17 +53,26 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
-        private void initializeAsync()
+        private async void initializeAsync()
         {
             UserData binanceUserData = new BinaryUserDataSaveSystem().Read();
             notificationsItemControl.SetText(getNotificationsText(binanceUserData.NotificationsEnabled ?? default(bool)));
+
+            UserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Tracker Running")
                 .WillCloseIn(90)
                 .WithOnClickAction(() => new ProcessWindowHelper().SetWindowToForeground())
+                .WithOnCloseAction(() => new PopupBuilder()
+                                              .WithTitle(ApplicationEnviroment.GlobalName)
+                                              .WithMessage("Your best for today: " + coinResult.Asset)
+                                              .WillCloseIn(90)
+                                              .Build(false))
                 .Build(false);
+
+            
         }
 
         private string getNotificationsText(bool isNotificationsEnabled)

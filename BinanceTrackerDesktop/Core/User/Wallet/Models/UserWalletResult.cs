@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Wallet.Models
+﻿namespace BinanceTrackerDesktop.Core.User.Wallet.Models
 {
     public interface IBinanceUserWalletResult
     {
@@ -12,19 +12,19 @@
         decimal Price { get; }
     }
 
-    public sealed class BinanceUserWalletResult : IBinanceUserWalletResult
+    public sealed class UserWalletResult : IBinanceUserWalletResult
     {
         public decimal Value { get; }
 
 
 
-        public BinanceUserWalletResult(decimal value)
+        public UserWalletResult(decimal value)
         {
             Value = value;
         }
     }
 
-    public sealed class BinanceUserWalletCoinResult : IBinanceUserWalletCoinResult
+    public sealed class UserWalletCoinResult : IBinanceUserWalletCoinResult
     {
         public string Asset { get; }
 
@@ -32,7 +32,7 @@
 
 
 
-        public BinanceUserWalletCoinResult(string asset, decimal price)
+        public UserWalletCoinResult(string asset, decimal price)
         {
             Asset = asset;
             Price = price;

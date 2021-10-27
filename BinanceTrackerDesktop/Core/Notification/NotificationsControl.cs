@@ -21,15 +21,15 @@ namespace BinanceTrackerDesktop.Core.Notification
             NotificationsControl.notifyIcon = notifyIcon;
 
             notifyIcon.BalloonTipShown += onPopupShown;
-            notifyIcon.BalloonTipClosed += onPopupClosed;
             notifyIcon.BalloonTipClicked += onPopupClicked;
+            notifyIcon.BalloonTipClosed += onPopupClosed;
         }
 
         ~NotificationsControl()
         {
+            notifyIcon.BalloonTipShown -= onPopupShown;
             notifyIcon.BalloonTipClicked -= onPopupClicked;
             notifyIcon.BalloonTipClosed -= onPopupClosed;
-            notifyIcon.BalloonTipShown -= onPopupShown;
         }
 
 
@@ -50,14 +50,15 @@ namespace BinanceTrackerDesktop.Core.Notification
 
 
 
-        private static void onPopupClicked(object sender, EventArgs e)
-        {
-            lastUsedPopup?.OnClick?.Invoke();
-        }
-
         private static void onPopupShown(object sender, EventArgs e)
         {
             lastUsedPopup?.OnShow?.Invoke();
+        }
+
+        private static void onPopupClicked(object sender, EventArgs e)
+        {
+            lastUsedPopup?.OnClick?.Invoke();
+            onPopupClosed(sender, e);
         }
 
         private static void onPopupClosed(object sender, EventArgs e)

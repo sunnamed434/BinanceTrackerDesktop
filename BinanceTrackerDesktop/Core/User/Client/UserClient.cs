@@ -3,7 +3,7 @@ using Binance.Net.Objects;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save;
-using BinanceTrackerDesktop.Core.Wallet;
+using BinanceTrackerDesktop.Core.User.Wallet;
 using CryptoExchange.Net.Authentication;
 using System;
 
@@ -13,7 +13,7 @@ namespace BinanceTrackerDesktop.Core.User.Client
     {
         public readonly IUserDataSaveSystem SaveDataSystem;
 
-        public readonly BinanceUserWallet Wallet;
+        public readonly UserWallet Wallet;
 
         public readonly IUserStatus Status;
 
@@ -37,7 +37,7 @@ namespace BinanceTrackerDesktop.Core.User.Client
                 ApiCredentials = new ApiCredentials(data.Key, data.Secret),
             });
 
-            Wallet = new BinanceUserWallet();
+            Wallet = new UserWallet();
             Status = new UserStatusDetector(SaveDataSystem.Read(), Wallet).GetStatus();
         }
     }
