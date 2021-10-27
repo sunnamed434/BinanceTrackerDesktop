@@ -90,6 +90,7 @@
     <Compile Include="Core\Components\TrayControl\Extension\TrayControlExtension.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
     <Compile Include="Core\Formatters\Models\IFormatter.cs" />
+    <Compile Include="Core\Formatters\Utility\FormatterUtility.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +208,8 @@
   <ItemGroup>
     <Content Include="app.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\User\Loses\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

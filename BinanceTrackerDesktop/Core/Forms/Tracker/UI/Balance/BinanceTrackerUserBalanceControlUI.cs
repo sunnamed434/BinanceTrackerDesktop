@@ -2,7 +2,6 @@
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
-using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
@@ -10,7 +9,6 @@ using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
-using static BinanceTrackerDesktop.Core.Formatters.Models.UserBalanceLosesFormatter;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {
@@ -117,7 +115,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             IUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
             IUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
 
-            formTextControls[1].SetTextAndColor(userStatus.Format(balanceLossesResult.Value), getColorFromBalanceLosses(new BinanceUserBalanceLossesOptions(balanceTotalResult.Value, data.BestBalance)));
+            formTextControls[1].SetTextAndColor(userStatus.Format(balanceLossesResult.Value), getColorFromBalanceLosses(balanceTotalResult.Value, data.BestBalance));
 
             await Task.CompletedTask;
         }
@@ -151,12 +149,16 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             }
         }
 
-        private Color getColorFromBalanceLosses(BinanceUserBalanceLossesOptions options)
+        private Color getColorFromBalanceLosses(decimal totalBalance, decimal bestBalance)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
-
-            return new UserBalanceLosesFormatter().Format(options);
+            if (bestBalance == decimal.Zero)
+                return Color.Gray;
+            else if (bestBalance > totalBalance)
+                return Color.Red;
+            else if (bestBalance < totalBalance)
+                return Color.Green;
+            else
+                return Color.Gray;
         }
 
 

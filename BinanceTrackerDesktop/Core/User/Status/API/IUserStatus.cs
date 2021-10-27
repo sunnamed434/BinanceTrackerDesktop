@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Models;
+using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Status.Extension;
 using BinanceTrackerDesktop.Core.User.Wallet;
@@ -91,7 +92,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override string Format(decimal value)
         {
-            return new CurrencyFormatter().Format(value);
+            return FormatterUtility<decimal, CurrencyFormatter>.Format(value).ToString();
         }
     }
 
@@ -118,7 +119,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override string Format(decimal value)
         {
-            return new CurrencyFormatter().Format(value);
+            return FormatterUtility<decimal, CurrencyFormatter>.Format(value).ToString();
         }
     }
 

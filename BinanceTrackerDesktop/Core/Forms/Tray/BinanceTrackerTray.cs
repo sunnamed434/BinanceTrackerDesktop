@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.API;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;

@@ -2,6 +2,8 @@
 using Binance.Net.Objects.Other;
 using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
+using BinanceTrackerDesktop.Core.Formatters.Models;
+using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
@@ -109,7 +111,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         {
             IEnumerable<IBinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
-            MessageBox.Show(string.Join(", ", result.Select(r => $"{r.Asset } = {r.Price}")));
+            MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<decimal, CurrencyFormatter>.Format(r.Price)}")));
         }
 
 

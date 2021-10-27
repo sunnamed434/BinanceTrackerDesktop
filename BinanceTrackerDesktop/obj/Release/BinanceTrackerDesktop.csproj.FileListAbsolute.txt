@@ -41,9 +41,14 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Binan
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\aa\BinanceTrackerDesktop.resources.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Binance.Net.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\CryptoExchange.Net.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Google.Authenticator.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Newtonsoft.Json.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\QRCoder.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.AssemblyReference.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.SuggestedBindingRedirects.cache
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
@@ -52,10 +57,6 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\Binan
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.GenerateResource.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CoreCompileInputs.cache
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\aa\BinanceTrackerDesktop.resources.dll
+D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CopyComplete
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.exe
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.pdb
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\Google.Authenticator.dll
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\QRCoder.dll
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CopyComplete
