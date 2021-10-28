@@ -2,28 +2,68 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Utility
 {
-    public sealed class FormatterUtility<TArgument, TFormatterType> where TFormatterType : IFormatter<TArgument>
+    public sealed class FormatterUtility<TFormatterType>
     {
-        private static IList<IFormatter<TArgument>> formatters = new List<IFormatter<TArgument>>
+        private static IList<TemporaryFormatter> formatters = new List<TemporaryFormatter>
         {
-
+            new TemporaryFormatter(Activator.CreateInstance<ValueStringFormatter>(), typeof(ValueStringFormatter)),
+            new TemporaryFormatter(Activator.CreateInstance<CurrencyFormatter>(), typeof(CurrencyFormatter)),
+            new TemporaryFormatter(Activator.CreateInstance<CryptocurrencyFormatter>(), typeof(CryptocurrencyFormatter)),
         };
 
 
-        
-        public static object Format(TArgument argument)
+
+        public static object Format(object argument)
         {
-            IFormatter<TArgument> instance = formatters.FirstOrDefault(f => f.GetType().Equals(typeof(TFormatterType)));
-            if (instance == null)
+            TemporaryFormatter formatter = formatters.FirstOrDefault(f => f.Type.Equals(typeof(TFormatterType)));
+
+            if (formatter == null)
+                formatters.Add(formatter = new TemporaryFormatter(Activator.CreateInstance<TFormatterType>(), typeof(TFormatterType)));
+
+            return formatter.Format(argument);
+        }
+
+
+
+        private sealed class TemporaryFormatter : IFormatter<object>
+        {
+            public readonly object Target;
+
+            public readonly Type Type;
+
+
+
+            private MethodInfo typeMethodInfo;
+
+
+
+            public TemporaryFormatter(object target, Type type)
             {
-                instance = (IFormatter<TArgument>)Activator.CreateInstance(typeof(TFormatterType));
-                formatters.Add(instance);
+                if (target == null)
+                    throw new ArgumentNullException(nameof(target));
+
+                if (type == null)
+                    throw new ArgumentNullException(nameof(type));
+
+                Target = target;
+                Type = type;
+
+                typeMethodInfo = type.GetMethod(nameof(Format));
             }
 
-            return instance.Format(argument);
+
+
+            public object Format(object argument)
+            {
+                return typeMethodInfo.Invoke(this.Target, new object[] 
+                { 
+                    argument
+                });
+            }
         }
     }
 }

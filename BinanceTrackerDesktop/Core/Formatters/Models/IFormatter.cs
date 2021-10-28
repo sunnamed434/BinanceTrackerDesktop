@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
+using BinanceTrackerDesktop.Core.Formatters.Utility;
 using System;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.Models
         object Format(TArgument value);
     }
 
-    public sealed class CurrencyFormatter : IFormatter<decimal>
+    public sealed class ValueStringFormatter : IFormatter<decimal>
     {
         private const string DefaultFormat = "0.00";
 
@@ -18,8 +19,18 @@ namespace BinanceTrackerDesktop.Core.Formatters.Models
         public object Format(decimal value)
         {
             return new StringBuilder()
-                .Append(CurrencySymbol.EUR)
                 .Append(value.ToString(DefaultFormat))
+                .ToString();
+        }
+    }
+
+    public sealed class CurrencyFormatter : IFormatter<decimal>
+    {
+        public object Format(decimal value)
+        {
+            return new StringBuilder()
+                .Append(CurrencySymbol.EUR)
+                .Append(FormatterUtility<ValueStringFormatter>.Format(value).ToString())
                 .ToString();
         }
     }

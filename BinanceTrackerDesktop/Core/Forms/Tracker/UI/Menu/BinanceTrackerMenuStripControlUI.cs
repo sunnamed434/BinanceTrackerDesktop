@@ -111,7 +111,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         {
             IEnumerable<IBinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
-            MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<decimal, CurrencyFormatter>.Format(r.Price)}")));
+            MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<CurrencyFormatter>.Format(r.Price)}")));
         }
 
 

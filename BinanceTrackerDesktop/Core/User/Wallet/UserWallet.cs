@@ -65,7 +65,7 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
         private async Task<UserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserCoin coin)
         {
-            string formattedCryptocurrency = FormatterUtility<string, CryptocurrencyFormatter>.Format(coin.Coin).ToString();
+            string formattedCryptocurrency = FormatterUtility<CryptocurrencyFormatter>.Format(coin.Coin).ToString();
             WebCallResult<BinancePrice> marketPriceResult = await client.Spot.Market.GetPriceAsync(formattedCryptocurrency);
 
             return new UserWalletCoinResult(formattedCryptocurrency, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, coin.Free)));
