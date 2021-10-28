@@ -51,7 +51,7 @@ namespace BinanceTrackerDesktop.Core.Validator
 
         public StringValidator ThrowIfFailed(string message)
         {
-            if (!IsFailed)
+            if (IsFailed)
                 throw new FailedStringValidationException(message);
 
             return this;
@@ -59,7 +59,7 @@ namespace BinanceTrackerDesktop.Core.Validator
 
         public StringValidator ThrowIfFailed(Exception exception)
         {
-            if (!IsFailed)
+            if (IsFailed)
                 throw exception;
 
             return this;

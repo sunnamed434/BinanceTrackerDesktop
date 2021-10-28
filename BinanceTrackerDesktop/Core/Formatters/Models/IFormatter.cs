@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Currencies;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Models

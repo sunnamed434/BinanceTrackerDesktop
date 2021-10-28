@@ -14,7 +14,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>BinanceTrackerDesktop</RootNamespace>
     <AssemblyName>BinanceTrackerDesktop</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -123,7 +123,8 @@
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\User\Data\Extension\UserDataSaveExtension.cs" />
     <Compile Include="Core\User\Data\Save\IUserDataSaveSystem.cs" />
-    <Compile Include="Core\User\Status\Extension\BinanceUserDataExtension.cs" />
+    <Compile Include="Core\User\Status\Extension\UserDataExtension.cs" />
+    <Compile Include="Core\User\Status\Extension\UserStatusDetectorExtension.cs" />
     <Compile Include="Core\Validator\String\Exception\FailedStringValidationException.cs" />
     <Compile Include="Core\Validator\String\StringValidator.cs" />
     <Compile Include="Core\Validator\String\Extension\StringValidatorExtension.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,8 +210,6 @@
   <ItemGroup>
     <Content Include="app.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\User\Loses\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

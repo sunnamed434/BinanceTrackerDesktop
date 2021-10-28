@@ -1,10 +1,11 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Utility
 {
-    public sealed class FormatterUtility<TArgument, TType> where TType : IFormatter<TArgument>
+    public sealed class FormatterUtility<TArgument, TFormatterType> where TFormatterType : IFormatter<TArgument>
     {
         private static IList<IFormatter<TArgument>> formatters = new List<IFormatter<TArgument>>
         {
@@ -12,22 +13,13 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
         };
 
 
-
+        
         public static object Format(TArgument argument)
         {
-            IFormatter<TArgument> instance = null;
-            foreach (IFormatter<TArgument> formatter in formatters)
-            {
-                if (formatter.GetType().Equals(typeof(TType)))
-                {
-                    instance = formatter;
-                    break;
-                }
-            }
-
+            IFormatter<TArgument> instance = formatters.FirstOrDefault(f => f.GetType().Equals(typeof(TFormatterType)));
             if (instance == null)
             {
-                instance = (IFormatter<TArgument>)Activator.CreateInstance(typeof(TType));
+                instance = (IFormatter<TArgument>)Activator.CreateInstance(typeof(TFormatterType));
                 formatters.Add(instance);
             }
 

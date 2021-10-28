@@ -104,7 +104,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         private async Task refreshBalanceAsync()
         {
             IUserStatusResult totalBalanceResult = await userStatus.CalculateUserTotalBalanceAsync();
-            formTextControls[0].SetText(userStatus.Format(totalBalanceResult.Value));
+            formTextControls[0].SetText(userStatus.Format((decimal)totalBalanceResult.Value));
 
             await Task.CompletedTask;
         }
@@ -115,7 +115,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             IUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
             IUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
 
-            formTextControls[1].SetTextAndColor(userStatus.Format(balanceLossesResult.Value), getColorFromBalanceLosses(balanceTotalResult.Value, data.BestBalance));
+            formTextControls[1].SetTextAndColor(userStatus.Format((decimal)balanceLossesResult.Value), getColorFromBalanceLosses((decimal)balanceTotalResult.Value, data.BestBalance));
 
             await Task.CompletedTask;
         }
