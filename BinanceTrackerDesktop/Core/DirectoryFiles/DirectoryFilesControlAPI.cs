@@ -1,25 +1,24 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Exception;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Format;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Utility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryDataControl;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryFilesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryImagesControl;
 
-namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
+namespace BinanceTrackerDesktop.Core.DirectoryFiles
 {
     public interface IDirectoryFilesControl<TFileItem> where TFileItem : IDirectoryFileItem
     {
         string FolderPath { get; }
 
-        string FileExtension { get; }
-
-        string SearchPattern { get; }
-
         IEnumerable<TFileItem> Files { get; }
+
+        IEnumerable<string> FileExtensions { get; }
 
 
 
@@ -30,6 +29,8 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
     public interface IDirectoryFileItem
     {
+        object Result { get; }
+
         string FilePath { get; }
 
         string FileName { get; }
@@ -65,14 +66,14 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
             {
                 public readonly DirectoryImagesControl Images;
 
-                public readonly DirectoryDataControl User;
+                public readonly DirectoryFilesControl User;
 
 
 
                 public DirectoryOfResources()
                 {
                     Images = new DirectoryImagesControl();
-                    User = new DirectoryDataControl();
+                    User = new DirectoryFilesControl();
                 }
             }
         }
@@ -82,21 +83,9 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
     {
         public abstract string FolderPath { get; }
 
-        public virtual string FileExtension { get; } = string.Empty;
-
         public abstract IEnumerable<TDirectoryFileItem> Files { get; }
 
-        public string SearchPattern { get; }
-
-
-
-        public DirectoryFilesControlBase()
-        {
-            SearchPattern = new StringBuilder()
-                .Append(FileSearchPatternSymbol.Asterisk)
-                .Append(FileExtension)
-                .ToString();
-        }
+        public virtual IEnumerable<string> FileExtensions => new List<string>();
 
 
 
@@ -113,17 +102,23 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
             if (!Directory.Exists(FolderPath))
                 Directory.CreateDirectory(FolderPath);
 
-            string[] filesPaths = Directory.GetFiles(FolderPath, SearchPattern);
+            string[] filesPaths = Directory.GetFiles(FolderPath);
             for (int i = 0; i < filesPaths.Length; i++)
-                yield return filesPaths[i];
+                if (FilePathUtility.TryGetExtensionOf(filesPaths[i], out string extension) && FileExtensions.Contains(extension))
+                    yield return filesPaths[i];
         }
     }
 
     public sealed class DirectoryImagesControl : DirectoryFilesControlBase<DirectoryImageItem>
     {
-        public override string FolderPath => ApplicationDirectoryPaths.Icons;
+        public override string FolderPath => ApplicationDirectoryPaths.Images;
 
-        public override string FileExtension => FileExtensions.Icon;
+        public override IEnumerable<string> FileExtensions => new List<string>
+        {
+            FilesFormatExtensions.Icon,
+            FilesFormatExtensions.JPG,
+            FilesFormatExtensions.PNG
+        };
 
         public override IEnumerable<DirectoryImageItem> Files { get; }
 
@@ -145,7 +140,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
         public sealed class DirectoryImageItem : IDirectoryFileItem
         {
-            public Icon Icon { get; }
+            public object Result { get; }
 
             public string FileName { get; }
 
@@ -153,7 +148,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
 
 
-            public DirectoryImageItem(string filePath, int width = DefaultSizeOfImages.Width, int height = DefaultSizeOfImages.Height)
+            public DirectoryImageItem(string filePath)
             {
                 if (string.IsNullOrEmpty(filePath))
                     throw new ArgumentNullException(nameof(filePath));
@@ -161,21 +156,9 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
                 if (!File.Exists(filePath))
                     throw new FileNotFoundException(nameof(filePath));
 
-                if (!filePath.IsIcon())
-                    throw new FileExtensionDoesNotMatchWithDesiredException(nameof(filePath));
-
-                Icon = new Icon(filePath, width, height);
+                Result = filePath.IsIcon() ? new Icon(filePath) : Image.FromFile(filePath);
                 FileName = Path.GetFileName(filePath);
                 FilePath = filePath;
-            }
-
-
-
-            public sealed class DefaultSizeOfImages
-            {
-                public const int Width = 32;
-
-                public const int Height = 32;
             }
         }
 
@@ -185,17 +168,21 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
         }
     }
 
-    public sealed class DirectoryDataControl : DirectoryFilesControlBase<DirectoryDataItem>
+    public sealed class DirectoryFilesControl : DirectoryFilesControlBase<DirectoryDataItem>
     {
         public override string FolderPath => ApplicationDirectoryPaths.User;
-        
-        public override string FileExtension => FileExtensions.Dat;
+
+        public override IEnumerable<string> FileExtensions => new List<string> 
+        { 
+            FilesFormatExtensions.Dat,
+            FilesFormatExtensions.TXT
+        };
 
         public override IEnumerable<DirectoryDataItem> Files { get; }
 
 
 
-        public DirectoryDataControl()
+        public DirectoryFilesControl()
         {
             if (!Directory.Exists(FolderPath))
                 Directory.CreateDirectory(FolderPath);
@@ -211,6 +198,8 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
         public sealed class DirectoryDataItem : IDirectoryFileItem
         {
+            public object Result => default;
+
             public string FilePath { get; }
 
             public string FileName { get; }
@@ -245,18 +234,6 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Models
 
         public static readonly string User = Path.Combine(Resources, nameof(User));
 
-        public static readonly string Icons = Path.Combine(Resources, nameof(Icons));
-    }
-
-    public sealed class FileExtensions
-    {
-        public const string Icon = ".ico";
-
-        public const string Dat = ".dat";
-    }
-
-    public sealed class FileSearchPatternSymbol
-    {
-        public const string Asterisk = "*";
+        public static readonly string Images = Path.Combine(Resources, nameof(Images));
     }
 }

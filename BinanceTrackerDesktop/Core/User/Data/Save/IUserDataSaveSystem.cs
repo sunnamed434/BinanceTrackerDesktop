@@ -1,8 +1,9 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Format;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryDataControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Save
 {
@@ -53,7 +54,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Save
     {
         public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, new StringBuilder()
             .Append(RegisteredData.UserFile)
-            .Append(FileExtensions.Dat)
+            .Append(FilesFormatExtensions.Dat)
             .ToString());
     }
 }

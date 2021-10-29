@@ -2,7 +2,7 @@
 using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
+using BinanceTrackerDesktop.Core.DirectoryFiles;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
@@ -10,8 +10,8 @@ using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -32,7 +32,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Icon;
+            base.Icon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryImagesControl.RegisteredImages.ApplicationIcon).Result;
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
 

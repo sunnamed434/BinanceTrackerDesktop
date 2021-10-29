@@ -1,12 +1,14 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Models;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Validator;
 using BinanceTrackerDesktop.Core.Validator.String.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Models.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {
@@ -19,7 +21,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Icon;
+            base.Icon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Result;
             base.MaximizeBox = false;
 
             this.AuthorizeButton.Click += onAuthorizeButtonClicked;

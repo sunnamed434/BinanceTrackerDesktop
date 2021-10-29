@@ -84,6 +84,8 @@
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
     <Compile Include="Core\DirectoryFiles\Exception\FileExtensionDoesNotMatchWithDesiredException.cs" />
+    <Compile Include="Core\DirectoryFiles\Format\FilesFormatExtensions.cs" />
+    <Compile Include="Core\DirectoryFiles\Format\FileSearchPatternSymbol.cs" />
     <Compile Include="Core\DirectoryFiles\Utility\FilePathUtility.cs" />
     <Compile Include="Core\Entry\BinanceTrackerEntryPoint.cs" />
     <Compile Include="Core\Components\ButtonControl\Extension\ButtonComponentControlExtension.cs" />
@@ -105,7 +107,7 @@
     <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripItemControlExtension.cs" />
     <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\DirectoryFiles\Models\DirectoryFilesControlAPI.cs" />
+    <Compile Include="Core\DirectoryFiles\DirectoryFilesControlAPI.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
       <SubType>Form</SubType>
     </Compile>

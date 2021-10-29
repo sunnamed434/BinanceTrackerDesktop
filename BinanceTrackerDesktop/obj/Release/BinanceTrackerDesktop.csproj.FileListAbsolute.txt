@@ -59,4 +59,3 @@ D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\aa\Bi
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.CopyComplete
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.exe
 D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.pdb
-D:\Github\Projects\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\BinanceTrackerDesktop.csproj.AssemblyReference.cache
