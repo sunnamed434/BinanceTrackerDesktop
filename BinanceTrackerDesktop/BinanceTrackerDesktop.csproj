@@ -118,7 +118,7 @@
     <Compile Include="Core\Notification\Builder\PopupBuilder.cs" />
     <Compile Include="Core\Notification\Extension\PopupExtension.cs" />
     <Compile Include="Core\Notification\NotificationsControl.cs" />
-    <Compile Include="Core\User\Authentication\Models\UserAuthenticatiorSystem.cs" />
+    <Compile Include="Core\User\Authentication\UserAuthenticatiorSystem.cs" />
     <Compile Include="Core\User\Client\UserClient.cs" />
     <Compile Include="Core\User\Data\Control\BinanceTrackerUserDataSaveControl.cs" />
     <Compile Include="Core\User\Data\Extension\UserDataSaveExtension.cs" />

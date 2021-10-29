@@ -5,11 +5,11 @@ using System;
 using System.Drawing;
 using System.IO;
 
-namespace BinanceTrackerDesktop.Core.User.Authentication.Models
+namespace BinanceTrackerDesktop.Core.User.Authentication
 {
     public enum ValidateResult
     {
-        Succesfully,
+        Successfully,
         Failed
     }
 
@@ -33,14 +33,14 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.Models
         public Image Authenticate(string accountTitle, string secret)
         {
             accountTitle.Rules()
-            .ContentNotNullOrEmpty()
-            .MinCharacters(NotSupportableCharactersCountOfPIN)
-            .ThrowIfFailed(accountTitle);
+                .ContentNotNullOrEmpty()
+                .MinCharacters(NotSupportableCharactersCountOfPIN)
+                .ThrowIfFailed(nameof(accountTitle));
 
             secret.Rules()
-            .ContentNotNullOrEmpty()
-            .MinCharacters(NotSupportableCharactersCountOfPIN)
-            .ThrowIfFailed(nameof(secret));
+                .ContentNotNullOrEmpty()
+                .MinCharacters(NotSupportableCharactersCountOfPIN)
+                .ThrowIfFailed(nameof(secret));
 
             SetupCode setupCode = new TwoFactorAuthenticator().GenerateSetupCode(ApplicationEnviroment.GlobalName, accountTitle.Trim(), secret, false);
             using (MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(setupCode.QrCodeSetupImageUrl.Replace(IgnoringStringValue, string.Empty))))
@@ -50,17 +50,17 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.Models
         public ValidateResult ValidateTwoFactorPIN(string secret, string code)
         {
             secret.Rules()
-            .ContentNotNullOrEmpty()
-            .MinCharacters(MinCharactersOfPIN)
-            .ThrowIfFailed(secret);
+                .ContentNotNullOrEmpty()
+                .MinCharacters(MinCharactersOfPIN)
+                .ThrowIfFailed(nameof(secret));
 
             code.Rules()
-            .ContentNotNullOrEmpty()
-            .MinCharacters(MinCharactersOfPIN)
-            .ThrowIfFailed(code);
+                .ContentNotNullOrEmpty()
+                .MinCharacters(MinCharactersOfPIN)
+                .ThrowIfFailed(nameof(code));
 
             return new TwoFactorAuthenticator().ValidateTwoFactorPIN(secret, code) 
-                ? ValidateResult.Succesfully 
+                ? ValidateResult.Successfully 
                 : ValidateResult.Failed;
         }
     }

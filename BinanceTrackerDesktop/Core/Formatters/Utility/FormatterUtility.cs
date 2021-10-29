@@ -20,7 +20,6 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
         public static object Format(object argument)
         {
             TemporaryFormatter formatter = formatters.FirstOrDefault(f => f.Type.Equals(typeof(TFormatterType)));
-
             if (formatter == null)
                 formatters.Add(formatter = new TemporaryFormatter(Activator.CreateInstance<TFormatterType>(), typeof(TFormatterType)));
 
@@ -35,9 +34,7 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
 
             public readonly Type Type;
 
-
-
-            private MethodInfo typeMethodInfo;
+            public readonly MethodInfo TypeMethodInfo;
 
 
 
@@ -51,15 +48,14 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
 
                 Target = target;
                 Type = type;
-
-                typeMethodInfo = type.GetMethod(nameof(Format));
+                TypeMethodInfo = type.GetMethod(nameof(Format));
             }
 
 
 
             public object Format(object argument)
             {
-                return typeMethodInfo.Invoke(this.Target, new object[] 
+                return TypeMethodInfo.Invoke(Target, new object[] 
                 { 
                     argument
                 });

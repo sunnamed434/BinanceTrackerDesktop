@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Notification.Builder;
-using BinanceTrackerDesktop.Core.User.Authentication.Models;
+using BinanceTrackerDesktop.Core.User.Authentication;
 using BinanceTrackerDesktop.Core.Validator.String.Exception;
 using System;
 using System.Windows.Forms;
