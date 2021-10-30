@@ -24,13 +24,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
             Icon applicationIcon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Result;
+
             this.formSafelyCloseControl = formSafelyCloseControl;
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
             this.NotifyIcon.Text = ApplicationEnviroment.GlobalName;
             this.NotifyIcon.Icon = applicationIcon;
             base.Icon = applicationIcon;
-            
 
             NotificationsControl.Initialize(this.NotifyIcon);
             tray = new BinanceTrackerTray(this.NotifyIcon, this.formSafelyCloseControl);

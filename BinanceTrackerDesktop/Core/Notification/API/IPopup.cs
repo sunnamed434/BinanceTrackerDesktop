@@ -1,5 +1,6 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles;
+using System;
+using System.Drawing;
 
 namespace BinanceTrackerDesktop.Core.Notification.API
 {
@@ -11,7 +12,7 @@ namespace BinanceTrackerDesktop.Core.Notification.API
 
         int Timeout { get; set; }
 
-        ToolTipIcon Icon { get; set; }
+        Icon Icon { get; set; }
 
         Action OnShow { get; set; }
 
@@ -28,7 +29,7 @@ namespace BinanceTrackerDesktop.Core.Notification.API
 
         public int Timeout { get; set; }
 
-        public ToolTipIcon Icon { get; set; }
+        public Icon Icon { get; set; }
 
         public Action OnShow { get; set; }
 
@@ -42,7 +43,7 @@ namespace BinanceTrackerDesktop.Core.Notification.API
         {
             Title = string.Empty,
             Message = string.Empty,
-            Icon = ToolTipIcon.None,
+            Icon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryImagesControl.RegisteredImages.ApplicationIcon).Result,
             OnShow = null,
             OnClose = null,
             OnClick = null,

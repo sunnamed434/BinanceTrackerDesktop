@@ -107,7 +107,7 @@
     <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripItemControlExtension.cs" />
     <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
-    <Compile Include="Core\DirectoryFiles\DirectoryFilesControlAPI.cs" />
+    <Compile Include="Core\DirectoryFiles\IDirectoryFilesControl.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Notification.API;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Notification
@@ -39,13 +40,14 @@ namespace BinanceTrackerDesktop.Core.Notification
             if (popup == null)
                 throw new ArgumentNullException(nameof(popup));
 
+            notifyIcon.Icon = popup.Icon;
             lastUsedPopup = popup;
 
             if (sendAnyway)
-                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
+                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, ToolTipIcon.None);
 
             else if (new BinaryUserDataSaveSystem().Read().NotificationsEnabled ?? default(bool) == true)
-                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, popup.Icon);
+                notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, ToolTipIcon.None);
         }
 
 

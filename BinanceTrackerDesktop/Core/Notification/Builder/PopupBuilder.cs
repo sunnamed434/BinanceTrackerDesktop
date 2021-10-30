@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.Notification.API;
 using BinanceTrackerDesktop.Core.Notification.Extension;
 using System;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace BinanceTrackerDesktop.Core.Notification.Builder
 {
@@ -29,7 +29,7 @@ namespace BinanceTrackerDesktop.Core.Notification.Builder
             return this;
         }
 
-        public PopupBuilder WithImage(ToolTipIcon icon)
+        public PopupBuilder WithIcon(Icon icon)
         {
             popup.Icon = icon;
             return this;
