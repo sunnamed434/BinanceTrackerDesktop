@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.API;
+using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.DirectoryFiles;
 using BinanceTrackerDesktop.Core.Notification;
 using System;

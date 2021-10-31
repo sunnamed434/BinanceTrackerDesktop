@@ -1,12 +1,11 @@
-﻿using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
-using System;
+﻿using System;
 using System.Drawing;
 
 namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extension
 {
-    public static class MenuStripItemControlExtension
+    public static class MenuStripItemComponentControlExtension
     {
-        public static void SetImage(this MenuStripItemControl source, Image to)
+        public static void SetImage(this MenuStripComponentItemControl source, Image to)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -17,7 +16,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
             source.ToolStrip.Image = to;
         }
 
-        public static void Enable(this MenuStripItemControl source)
+        public static void Enable(this MenuStripComponentItemControl source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -25,7 +24,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
             source.ToolStrip.Enabled = true;
         }
 
-        public static void Disable(this MenuStripItemControl source)
+        public static void Disable(this MenuStripComponentItemControl source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

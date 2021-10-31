@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BinanceTrackerDesktop.Core.API
+namespace BinanceTrackerDesktop.Core.Components.API
 {
     public interface ISafelyComponentControl
     {

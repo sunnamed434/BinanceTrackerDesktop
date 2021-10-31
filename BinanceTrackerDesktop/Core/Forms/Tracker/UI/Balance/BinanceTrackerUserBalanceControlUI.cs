@@ -1,6 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
-using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
+﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
+using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
@@ -115,7 +115,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             IUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
             IUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
 
-            formTextControls[1].SetTextAndColor(userStatus.Format((decimal)balanceLossesResult.Value), getColorFromBalanceLosses((decimal)balanceTotalResult.Value, data.BestBalance));
+            formTextControls[1].SetText(userStatus.Format((decimal)balanceLossesResult.Value), getColorFromBalanceLosses((decimal)balanceTotalResult.Value, data.BestBalance));
 
             await Task.CompletedTask;
         }
@@ -145,7 +145,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         {
             for (int i = 0; i < formTextControls.Length; i++)
             {
-                formTextControls[i].SetTextAndColor(BinanceTrackerBalanceTextValues.Initialize, formTextControls[i].GetDefaultTextColor());
+                formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Initialize, formTextControls[i].GetDefaultTextColor());
             }
         }
 

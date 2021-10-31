@@ -83,13 +83,14 @@
   <ItemGroup>
     <Compile Include="Core\API\ApplicationEnviroment.cs" />
     <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\Components\TextControl\TextComponentControl.cs" />
     <Compile Include="Core\DirectoryFiles\Exception\FileExtensionDoesNotMatchWithDesiredException.cs" />
     <Compile Include="Core\DirectoryFiles\Format\FilesFormatExtensions.cs" />
     <Compile Include="Core\DirectoryFiles\Format\FileSearchPatternSymbol.cs" />
     <Compile Include="Core\DirectoryFiles\Utility\FilePathUtility.cs" />
     <Compile Include="Core\Entry\BinanceTrackerEntryPoint.cs" />
     <Compile Include="Core\Components\ButtonControl\Extension\ButtonComponentControlExtension.cs" />
-    <Compile Include="Core\Components\TrayControl\Extension\TrayControlExtension.cs" />
+    <Compile Include="Core\Components\TrayControl\Extension\TrayComponentControlExtension.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
     <Compile Include="Core\Formatters\Models\IFormatter.cs" />
     <Compile Include="Core\Formatters\Utility\FormatterUtility.cs" />
@@ -101,11 +102,11 @@
     </Compile>
     <Compile Include="Core\Components\API\IExpandableComponent.cs" />
     <Compile Include="Core\Components\API\MouseClickEventListener.cs" />
-    <Compile Include="Core\Components\API\TextAPI.cs" />
-    <Compile Include="Core\Components\ButtonControl\API\ButtonAPI.cs" />
-    <Compile Include="Core\Components\ContextMenuStripControl\API\MenuStripAPI.cs" />
-    <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripItemControlExtension.cs" />
-    <Compile Include="Core\Components\TrayControl\API\TrayAPI.cs" />
+    <Compile Include="Core\Components\API\ITextable.cs" />
+    <Compile Include="Core\Components\ButtonControl\ButtonComponentControl.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\MenuStripComponentControl.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripItemComponentControlExtension.cs" />
+    <Compile Include="Core\Components\TrayControl\TrayComponentControlBase.cs" />
     <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\IDirectoryFilesControl.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
@@ -114,6 +115,7 @@
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.Designer.cs">
       <DependentUpon>AuthenticatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
     <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuStripControlUI.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTray.cs" />
     <Compile Include="Core\Notification\API\IPopup.cs" />
@@ -131,7 +133,7 @@
     <Compile Include="Core\Validator\String\StringValidator.cs" />
     <Compile Include="Core\Validator\String\Extension\StringValidatorExtension.cs" />
     <Compile Include="Core\User\Data\UserData.cs" />
-    <Compile Include="Core\API\ISafelyComponentControl.cs" />
+    <Compile Include="Core\Components\API\ISafelyComponentControl.cs" />
     <Compile Include="Core\User\Status\API\IUserStatus.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
@@ -160,8 +162,7 @@
     </Compile>
     <Compile Include="Core\Window\Helper\ProcessWindowHelper.cs" />
     <Compile Include="Core\Window\External\ExternalWindowControl.cs" />
-    <Compile Include="Core\Components\LabelControl\API\LabelAPI.cs" />
-    <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
+    <Compile Include="Core\Components\LabelControl\LabelComponentControl.cs" />
     <Compile Include="Core\Window\Extension\ProcessWindowExtension.cs" />
     <Compile Include="Core\Window\WindowControl.cs" />
     <Compile Include="Program.cs" />

@@ -1,6 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
-using BinanceTrackerDesktop.Core.Components.TrayControl.API;
+using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
+using BinanceTrackerDesktop.Core.Components.TrayControl;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
 using BinanceTrackerDesktop.Core.Notification.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
@@ -16,17 +17,17 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
-    public sealed class BinanceTrackerTray : TrayControlBase
+    public sealed class BinanceTrackerTray : TrayComponentControlBase
     {
         private readonly ISafelyComponentControl formSafelyCloseControl;
 
         private readonly ProcessWindowHelper processWindowHelper;
 
-        private readonly MenuStripItemControl applicationOpenItemControl;
+        private readonly MenuStripComponentItemControl applicationOpenItemControl;
 
-        private readonly MenuStripItemControl notificationsItemControl;
+        private readonly MenuStripComponentItemControl notificationsItemControl;
 
-        private readonly MenuStripItemControl applicationQuitItemControl;
+        private readonly MenuStripComponentItemControl applicationQuitItemControl;
 
 
 
@@ -128,11 +129,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
-        protected override IEnumerable<MenuStripItemControl> InitializeItems()
+        protected override IEnumerable<MenuStripComponentItemControl> InitializeItems()
         {
-            yield return new MenuStripItemControl(TrayItemsTextContainer.OpenApplication, TrayItemsIdContainer.OpenApplicationUniqueIndex);
-            yield return new MenuStripItemControl(TrayItemsTextContainer.DisableNotifications, TrayItemsIdContainer.NotificationsUniqueIndex);
-            yield return new MenuStripItemControl(TrayItemsTextContainer.QuitApplication, TrayItemsIdContainer.QuitApplicationUniqueIndex);
+            yield return new MenuStripComponentItemControl(TrayItemsTextContainer.OpenApplication, TrayItemsIdContainer.OpenApplicationUniqueIndex);
+            yield return new MenuStripComponentItemControl(TrayItemsTextContainer.DisableNotifications, TrayItemsIdContainer.NotificationsUniqueIndex);
+            yield return new MenuStripComponentItemControl(TrayItemsTextContainer.QuitApplication, TrayItemsIdContainer.QuitApplicationUniqueIndex);
         }
     }
 

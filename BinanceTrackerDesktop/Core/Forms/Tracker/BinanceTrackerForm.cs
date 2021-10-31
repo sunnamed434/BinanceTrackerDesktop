@@ -1,7 +1,7 @@
 ﻿using Binance.Net;
-using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API;
-using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
+using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
+using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.DirectoryFiles;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;

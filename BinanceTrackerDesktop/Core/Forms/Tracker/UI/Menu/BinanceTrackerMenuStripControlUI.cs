@@ -1,7 +1,7 @@
 ﻿using Binance.Net;
 using Binance.Net.Objects.Other;
 using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
 using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Wallet;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 {
-    public sealed class BinanceTrackerMenuStripControlUI : MenuStripControlBase
+    public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase
     {
         private readonly MenuStrip menuStrip;
 
@@ -23,9 +23,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private readonly UserWallet wallet;
 
-        private readonly MenuStripItemControl apiItemControl;
+        private readonly MenuStripComponentItemControl apiItemControl;
 
-        private readonly MenuStripItemControl coinsItemControl;
+        private readonly MenuStripComponentItemControl coinsItemControl;
 
 
 
@@ -45,7 +45,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             this.client = client;
             this.wallet = wallet;
 
-            foreach (MenuStripItemControl item in InitializeItems())
+            foreach (MenuStripComponentItemControl item in InitializeItems())
                 AddComponent(item);
 
             apiItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
@@ -63,7 +63,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        public override void AddComponent(MenuStripItemControl item)
+        public override void AddComponent(MenuStripComponentItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -72,7 +72,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             base.Components.Add(item);
         }
 
-        public override void RemoveComponent(MenuStripItemControl item)
+        public override void RemoveComponent(MenuStripComponentItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -116,10 +116,10 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        protected override IEnumerable<MenuStripItemControl> InitializeItems()
+        protected override IEnumerable<MenuStripComponentItemControl> InitializeItems()
         {
-            yield return new MenuStripItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API);
-            yield return new MenuStripItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins);
+            yield return new MenuStripComponentItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API);
+            yield return new MenuStripComponentItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins);
         }
     }
 

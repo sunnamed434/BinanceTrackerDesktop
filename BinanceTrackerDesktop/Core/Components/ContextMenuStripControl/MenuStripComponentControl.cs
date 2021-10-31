@@ -1,12 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.TextControl;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
+namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl
 {
     public interface IMenuStripItem
     {
@@ -17,9 +18,9 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
         byte Id { get; }
     }
 
-    public sealed class MenuStripItemControl : TextComponentControl, IMenuStripItem
+    public sealed class MenuStripComponentItemControl : TextComponentControl, IMenuStripItem
     {
-        public readonly MenuStripItemEventsContainer EventsContainer;
+        public readonly MenuStripComponentItemEventsContainer EventsContainer;
 
         public readonly ToolStripMenuItem ToolStrip;
 
@@ -33,7 +34,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
 
 
 
-        public MenuStripItemControl(string header, Image image, byte id)
+        public MenuStripComponentItemControl(string header, Image image, byte id)
         {
             if (string.IsNullOrEmpty(header))
                 throw new ArgumentNullException(nameof(header));
@@ -42,59 +43,58 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Image = image ?? default;
             Id = id;
 
-            EventsContainer = new MenuStripItemEventsContainer();
+            EventsContainer = new MenuStripComponentItemEventsContainer();
             ToolStrip = new ToolStripMenuItem(header, image, (s, e) => EventsContainer.OnClick.TriggerEvent(e));
         }
 
-        public MenuStripItemControl(string header, byte id) : this(header, null, id)
+        public MenuStripComponentItemControl(string header, byte id) : this(header, null, id)
         {
 
         }
 
 
 
-        public override void SetText(string content)
+        public override void SetText(string content, Color? color = null)
         {
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(nameof(content));
 
             ToolStrip.Text = content;
+            SetTextColor(color);
         }
 
-        public override void SetTextColor(Color color)
+        public override void SetTextColor(Color? color)
         {
-            if (color == Color.Empty)
-                throw new ArgumentNullException(nameof(color));
-
-            ToolStrip.ForeColor = color;
+            if (color != null)
+                ToolStrip.ForeColor = (Color)color;
         }
     }
 
-    public sealed class MenuStripItemEventsContainer
+    public sealed class MenuStripComponentItemEventsContainer
     {
         public readonly EventListener OnClick;
 
 
 
-        public MenuStripItemEventsContainer()
+        public MenuStripComponentItemEventsContainer()
         {
             OnClick = new EventListener();
         }
     }
 
-    public class MenuStripControlBase : TextComponentControl, IExpandableComponent<MenuStripItemControl, byte>
+    public class MenuStripComponentControlBase : TextComponentControl, IExpandableComponent<MenuStripComponentItemControl, byte>
     {
         public readonly ContextMenuStrip Strip;
 
-        public IReadOnlyCollection<MenuStripItemControl> AllComponents => Components;
+        public IReadOnlyCollection<MenuStripComponentItemControl> AllComponents => Components;
 
 
 
-        protected List<MenuStripItemControl> Components = new List<MenuStripItemControl>();
+        protected List<MenuStripComponentItemControl> Components = new List<MenuStripComponentItemControl>();
 
 
 
-        public MenuStripControlBase(ContextMenuStrip strip) : base(strip)
+        public MenuStripComponentControlBase(ContextMenuStrip strip) : base(strip)
         {
             if (strip == null)
                 throw new ArgumentNullException(nameof(strip));
@@ -102,14 +102,14 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Strip = strip;
         }
 
-        public MenuStripControlBase()
+        public MenuStripComponentControlBase()
         {
 
         }
 
 
 
-        public virtual void AddComponent(MenuStripItemControl item)
+        public virtual void AddComponent(MenuStripComponentItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -118,16 +118,16 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Components.Add(item);
         }
 
-        public void AddComponents(IEnumerable<MenuStripItemControl> items)
+        public void AddComponents(IEnumerable<MenuStripComponentItemControl> items)
         {
             if (!items.Any())
                 throw new InvalidOperationException();
 
-            foreach (MenuStripItemControl item in items)
+            foreach (MenuStripComponentItemControl item in items)
                 AddComponent(item);
         }
 
-        public virtual void RemoveComponent(MenuStripItemControl item)
+        public virtual void RemoveComponent(MenuStripComponentItemControl item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -136,16 +136,16 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API
             Components.Remove(item);
         }
 
-        public MenuStripItemControl GetComponentAt(byte id)
+        public MenuStripComponentItemControl GetComponentAt(byte id)
         {
             return Components.FirstOrDefault(c => c.Id == id);
         }
 
 
 
-        protected virtual IEnumerable<MenuStripItemControl> InitializeItems()
+        protected virtual IEnumerable<MenuStripComponentItemControl> InitializeItems()
         {
-            return new List<MenuStripItemControl>();
+            return new List<MenuStripComponentItemControl>();
         }
     }
 }

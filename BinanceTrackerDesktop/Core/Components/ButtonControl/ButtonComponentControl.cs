@@ -1,9 +1,9 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.TextControl;
 using System;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Components.ButtonControl.API
+namespace BinanceTrackerDesktop.Core.Components.ButtonControl
 {
     public sealed class ButtonEventsContainer
     {

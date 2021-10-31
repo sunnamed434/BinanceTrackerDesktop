@@ -1,9 +1,9 @@
 ﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.API;
+using BinanceTrackerDesktop.Core.Components.TextControl;
 using System;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl.API
+namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl
 {
     public sealed class LabelComponentEventsContainer
     {

@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.API;
+﻿using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Wallet;

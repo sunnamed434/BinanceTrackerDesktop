@@ -1,12 +1,13 @@
 ﻿using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.API;
-using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.API;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
+namespace BinanceTrackerDesktop.Core.Components.TrayControl
 {
-    public sealed class TrayEventsContainer
+    public sealed class TrayComponentEventsContainer
     {
         public readonly MouseClickEventListener MouseClickListener;
 
@@ -14,27 +15,27 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
 
 
-        public TrayEventsContainer()
+        public TrayComponentEventsContainer()
         {
             MouseClickListener = new MouseClickEventListener();
             DoubleClickListener = new EventListener();
         }
     }
 
-    public class TrayControlBase : MenuStripControlBase
+    public class TrayComponentControlBase : MenuStripComponentControlBase
     {
-        public readonly TrayEventsContainer EventsContainerControl;
+        public readonly TrayComponentEventsContainer EventsContainerControl;
 
         public readonly NotifyIcon NotifyIcon;
 
 
 
-        public TrayControlBase(NotifyIcon notifyIcon) : base(notifyIcon.ContextMenuStrip)
+        public TrayComponentControlBase(NotifyIcon notifyIcon) : base(notifyIcon.ContextMenuStrip)
         {
             if (notifyIcon == null)
                 throw new ArgumentNullException(nameof(notifyIcon));
 
-            EventsContainerControl = new TrayEventsContainer();
+            EventsContainerControl = new TrayComponentEventsContainer();
             NotifyIcon = notifyIcon;
 
             notifyIcon.MouseClick += (s, e) => EventsContainerControl.MouseClickListener.TriggerEvent(e);
@@ -45,12 +46,12 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.API
 
 
 
-        public override void SetText(string content)
+        public override void SetText(string content, Color? color = null)
         {
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException(content);
 
-            NotifyIcon.Text = content; 
+            NotifyIcon.Text = content;
         }
     }
 }

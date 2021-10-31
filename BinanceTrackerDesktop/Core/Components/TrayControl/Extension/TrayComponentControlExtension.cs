@@ -1,11 +1,10 @@
-﻿using BinanceTrackerDesktop.Core.Components.TrayControl.API;
-using System;
+﻿using System;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.Extension
 {
-    public static class TrayControlExtension
+    public static class TrayComponentControlExtension
     {
-        public static void ShowTray(this TrayControlBase source)
+        public static void ShowTray(this TrayComponentControlBase source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -13,7 +12,7 @@ namespace BinanceTrackerDesktop.Core.Components.TrayControl.Extension
             source.NotifyIcon.ContextMenuStrip.Show();
         }
 
-        public static void HideTray(this TrayControlBase source)
+        public static void HideTray(this TrayComponentControlBase source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

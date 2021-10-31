@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Components.ButtonControl.API;
-using System;
+﻿using System;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl.Extension
 {
