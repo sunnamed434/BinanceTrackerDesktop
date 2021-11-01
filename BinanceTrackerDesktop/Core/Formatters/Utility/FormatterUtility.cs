@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Utility
 {
-    public sealed class FormatterUtility<TFormatterType>
+    public sealed class FormatterUtility<TFormatterType> where TFormatterType : new()
     {
         private static IList<TemporaryFormatter> formatters = new List<TemporaryFormatter>
         {
