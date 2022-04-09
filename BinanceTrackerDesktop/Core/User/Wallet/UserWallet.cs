@@ -1,6 +1,5 @@
-﻿using Binance.Net;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.WalletData;
+﻿using Binance.Net.Clients;
+using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
 using BinanceTrackerDesktop.Core.Calculator.Models;
@@ -42,11 +41,17 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
         public async Task<IEnumerable<UserWalletCoinResult>> GetAllBuyedCoinsAsync()
         {
-            WebCallResult<IEnumerable<BinanceUserCoin>> coins = await client.General.GetUserCoinsAsync();
+            WebCallResult<IEnumerable<BinanceUserAsset>> coins = await client.SpotApi.Account.GetUserAssetsAsync();
 
+            const string NotExsistableCoin = "Sologenic";
             List<UserWalletCoinResult> result = new List<UserWalletCoinResult>();
-            foreach (BinanceUserCoin coin in coins.Data.Where(c => c.Free.ValueFitsToCalculation()))
+            foreach (BinanceUserAsset coin in coins.Data.Where(c => c.Available.ValueFitsToCalculation()))
             {
+                if (coin.Name == NotExsistableCoin)
+                {
+                    continue;
+                }
+
                 UserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
                 result.Add(coinResult);
             }
@@ -63,12 +68,13 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
 
 
-        private async Task<UserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserCoin coin)
+        private async Task<UserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserAsset coin)
         {
-            string formattedCryptocurrency = FormatterUtility<CryptocurrencyFormatter>.Format(coin.Coin).ToString();
-            WebCallResult<BinancePrice> marketPriceResult = await client.Spot.Market.GetPriceAsync(formattedCryptocurrency);
+            string formattedCryptocurrency = FormatterUtility<CryptocurrencyFormatter>.Format(coin.Asset).ToString();
 
-            return new UserWalletCoinResult(formattedCryptocurrency, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, coin.Free)));
+            WebCallResult<BinancePrice> marketPriceResult = await client.SpotApi.ExchangeData.GetPriceAsync(formattedCryptocurrency);
+
+            return new UserWalletCoinResult(formattedCryptocurrency, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, coin.Available)));
         }
     }
 }

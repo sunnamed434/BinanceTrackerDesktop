@@ -1,4 +1,5 @@
-﻿using Binance.Net;
+﻿using Binance.Net.Clients;
+using Binance.Net.Enums;
 using Binance.Net.Objects;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
@@ -31,6 +32,17 @@ namespace BinanceTrackerDesktop.Core.User.Client
             BinanceClient.SetDefaultOptions(new BinanceClientOptions
             {
                 ApiCredentials = new ApiCredentials(data.Key, data.Secret),
+                SpotApiOptions = new BinanceApiClientOptions
+                {
+                    BaseAddress = BinanceApiAddresses.Default.RestClientAddress,
+                    AutoTimestamp = false
+                },
+                UsdFuturesApiOptions = new BinanceApiClientOptions
+                {
+                    TradeRulesBehaviour = TradeRulesBehaviour.ThrowError,
+                    BaseAddress = BinanceApiAddresses.Default.UsdFuturesRestClientAddress,
+                    AutoTimestamp = true
+                }
             });
 
             BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions

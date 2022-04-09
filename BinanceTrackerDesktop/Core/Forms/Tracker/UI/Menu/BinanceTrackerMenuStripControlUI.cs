@@ -1,5 +1,5 @@
-﻿using Binance.Net;
-using Binance.Net.Objects.Other;
+﻿using Binance.Net.Clients;
+using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
 using BinanceTrackerDesktop.Core.Formatters.Models;
@@ -85,7 +85,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private async void onAPIItemClicked(EventArgs e)
         {
-            WebCallResult<BinanceAPIKeyPermissions> result = await this.client.General.GetAPIKeyPermissionsAsync();
+            WebCallResult<BinanceAPIKeyPermissions> result = await this.client.SpotApi.Account.GetAPIKeyPermissionsAsync();
             BinanceAPIKeyPermissions api = result.Data;
 
             MessageBox.Show
@@ -99,7 +99,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
                     .Append($"{nameof(api.EnableSpotAndMarginTrading)} = {api.EnableSpotAndMarginTrading}, ")
                     .Append($"{nameof(api.EnableInternalTransfer)} = {api.EnableInternalTransfer}, ")
                     .Append($"{nameof(api.EnableReading)} = {api.EnableReading}, ")
-                    .Append($"{nameof(api.PermitUniversalTransfer)} = {api.PermitUniversalTransfer}, ")
+                    .Append($"{nameof(api.PermitsUniversalTransfer)} = {api.PermitsUniversalTransfer}, ")
                     .Append($"{nameof(api.TradingAuthorityExpirationTime)} = {api.TradingAuthorityExpirationTime}")
                     .ToString(),
 

@@ -1,7 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Notification.API;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Notification

@@ -1,4 +1,4 @@
-﻿using Binance.Net;
+﻿using Binance.Net.Clients;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
 using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
