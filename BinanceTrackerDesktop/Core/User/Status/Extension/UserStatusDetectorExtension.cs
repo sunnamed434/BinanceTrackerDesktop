@@ -11,7 +11,7 @@ namespace BinanceTrackerDesktop.Core.User.Status.Extension
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return new UserStatusDetector(source.SaveDataSystem.Read(), source.Wallet).GetStatus();
+            return new UserStatusDetector(source.SaveDataSystem, source.Wallet).GetStatus();
         }
     }
 }

@@ -4,6 +4,7 @@ using BinanceTrackerDesktop.Core.API;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
 using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
+using BinanceTrackerDesktop.Core.Forms.Settings;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
@@ -26,6 +27,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         private readonly MenuStripComponentItemControl apiItemControl;
 
         private readonly MenuStripComponentItemControl coinsItemControl;
+
+        private readonly MenuStripComponentItemControl settingsItemControl;
 
 
 
@@ -50,15 +53,20 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
             apiItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
             coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
+            settingsItemControl = base.GetComponentAt(MenuItemsIdContainer.Settings);
 
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
             coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onCoinsItemClicked;
+            settingsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onSettingsItemClicked;
         }
+
+        
 
         ~BinanceTrackerMenuStripControlUI()
         {
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onAPIItemClicked;
             coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onCoinsItemClicked;
+            settingsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onSettingsItemClicked;
         }
 
 
@@ -86,21 +94,21 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         private async void onAPIItemClicked(EventArgs e)
         {
             WebCallResult<BinanceAPIKeyPermissions> result = await this.client.SpotApi.Account.GetAPIKeyPermissionsAsync();
-            BinanceAPIKeyPermissions api = result.Data;
+            BinanceAPIKeyPermissions permissions = result.Data;
 
             MessageBox.Show
             (
                 new StringBuilder()
-                    .Append($"{nameof(api.IpRestrict)} = {api.IpRestrict}, ")
-                    .Append($"{nameof(api.EnableFutures)} = {api.EnableFutures}, ")
-                    .Append($"{nameof(api.EnableWithdrawals)} = {api.EnableWithdrawals}, ")
-                    .Append($"{nameof(api.EnableMargin)} = {api.EnableMargin}, ")
-                    .Append($"{nameof(api.EnableVanillaOptions)} = {api.EnableVanillaOptions}, ")
-                    .Append($"{nameof(api.EnableSpotAndMarginTrading)} = {api.EnableSpotAndMarginTrading}, ")
-                    .Append($"{nameof(api.EnableInternalTransfer)} = {api.EnableInternalTransfer}, ")
-                    .Append($"{nameof(api.EnableReading)} = {api.EnableReading}, ")
-                    .Append($"{nameof(api.PermitsUniversalTransfer)} = {api.PermitsUniversalTransfer}, ")
-                    .Append($"{nameof(api.TradingAuthorityExpirationTime)} = {api.TradingAuthorityExpirationTime}")
+                    .Append($"{nameof(permissions.IpRestrict)} = {permissions.IpRestrict}, ")
+                    .Append($"{nameof(permissions.EnableFutures)} = {permissions.EnableFutures}, ")
+                    .Append($"{nameof(permissions.EnableWithdrawals)} = {permissions.EnableWithdrawals}, ")
+                    .Append($"{nameof(permissions.EnableMargin)} = {permissions.EnableMargin}, ")
+                    .Append($"{nameof(permissions.EnableVanillaOptions)} = {permissions.EnableVanillaOptions}, ")
+                    .Append($"{nameof(permissions.EnableSpotAndMarginTrading)} = {permissions.EnableSpotAndMarginTrading}, ")
+                    .Append($"{nameof(permissions.EnableInternalTransfer)} = {permissions.EnableInternalTransfer}, ")
+                    .Append($"{nameof(permissions.EnableReading)} = {permissions.EnableReading}, ")
+                    .Append($"{nameof(permissions.PermitsUniversalTransfer)} = {permissions.PermitsUniversalTransfer}, ")
+                    .Append($"{nameof(permissions.TradingAuthorityExpirationTime)} = {permissions.TradingAuthorityExpirationTime}")
                     .ToString(),
 
                 ApplicationEnviroment.GlobalName, MessageBoxButtons.OK, MessageBoxIcon.Information
@@ -111,7 +119,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         {
             IEnumerable<IBinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
-            MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<CurrencyFormatter>.Format(r.Price)}")));
+            MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(r.Price)}")));
+        }
+
+        private void onSettingsItemClicked(EventArgs e)
+        {
+            new BinanceTrackerSettingsForm(wallet).ShowDialog();
         }
 
 
@@ -120,6 +133,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         {
             yield return new MenuStripComponentItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API);
             yield return new MenuStripComponentItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins);
+            yield return new MenuStripComponentItemControl(MenuItemsTextContainer.Settings, MenuItemsIdContainer.Settings);
         }
     }
 
@@ -128,6 +142,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         public static readonly string API = nameof(API);
 
         public static readonly string Coins = nameof(Coins);
+
+        public static readonly string Settings = nameof(Settings);
     }
 
     public sealed class MenuItemsIdContainer
@@ -135,5 +151,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         public const byte API = 1;
 
         public const byte Coins = 2;
+
+        public const byte Settings = 3;
     }
 }

@@ -10,18 +10,20 @@ namespace BinanceTrackerDesktop.Core.Notification.Builder
 
         IPopupBuilder WithMessage(string content);
 
-        PopupBuilder WillCloseIn(int value);
+        IPopupBuilder WillCloseIn(int value);
 
-        PopupBuilder WithIcon(Icon icon);
+        IPopupBuilder WithIcon(Icon icon);
 
-        PopupBuilder WithOnShowAction(Action callback);
+        IPopupBuilder WithOnShowAction(Action callback);
 
-        PopupBuilder WithOnCloseAction(Action callback);
+        IPopupBuilder WithOnCloseAction(Action callback);
 
         IPopupBuilder WithOnClickAction(Action callback);
 
-        Popup Build();
+        IPopupBuilder WithCarefully();
 
-        Popup Build(bool sendAnyway);
+        IPopup Build();
+
+        IPopup Build(bool sendAnyway);
     }
 }

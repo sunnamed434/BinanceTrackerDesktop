@@ -57,7 +57,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         private async void initializeAsync()
         {
             UserData binanceUserData = new BinaryUserDataSaveSystem().Read();
-            notificationsItemControl.SetText(getNotificationsText(binanceUserData.NotificationsEnabled ?? default(bool)));
+            notificationsItemControl.SetText(getNotificationsText(binanceUserData.IsNotificationsEnabled ?? default(bool)));
 
             UserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
 
@@ -72,8 +72,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
                                               .WillCloseIn(90)
                                               .Build(false))
                 .Build(false);
-
-            
         }
 
         private string getNotificationsText(bool isNotificationsEnabled)
@@ -96,16 +94,17 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         private void onNotificationsItemControlClicked(EventArgs e)
         {
             UserData userData = new BinaryUserDataSaveSystem().Read();
-            userData.NotificationsEnabled = userData.NotificationsEnabled == true ? false : true;
+            userData.IsNotificationsEnabled = userData.IsNotificationsEnabled == true ? false : true;
             userData.SaveUserData();
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage(userData.NotificationsEnabled == true ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
+                .WithMessage(userData.IsNotificationsEnabled == true ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
                 .WillCloseIn(90)
-                .Build(true);
+                .WithCarefully()
+                .Build(false);
 
-            notificationsItemControl.SetText(getNotificationsText(userData.NotificationsEnabled ?? default));
+            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled ?? default));
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)

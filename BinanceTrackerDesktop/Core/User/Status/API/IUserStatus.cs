@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Models;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
-using BinanceTrackerDesktop.Core.User.Data;
+using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Status.Extension;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
@@ -11,7 +11,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 {
     public interface IUserStatus
     {
-        UserData Data { get; } 
+        IUserDataSaveSystem UserDataSaveSystem { get; } 
 
         UserWallet Wallet { get; }
 
@@ -46,15 +46,15 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
     public abstract class UserStatusBase : IUserStatus
     {
-        public UserData Data { get; }
+        public IUserDataSaveSystem UserDataSaveSystem { get; }
 
         public UserWallet Wallet { get; }
 
 
 
-        protected UserStatusBase(UserData data, UserWallet wallet)
+        protected UserStatusBase(IUserDataSaveSystem userDataSaveSystem, UserWallet wallet)
         {
-            Data = data;
+            UserDataSaveSystem = userDataSaveSystem;
             Wallet = wallet;
         }
 
@@ -69,7 +69,7 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
     public sealed class UserStandartStatus : UserStatusBase
     {
-        public UserStandartStatus(UserData data, UserWallet wallet) : base(data, wallet)
+        public UserStandartStatus(IUserDataSaveSystem userDataSaveSystem, UserWallet wallet) : base(userDataSaveSystem, wallet)
         {
 
         }
@@ -87,21 +87,22 @@ namespace BinanceTrackerDesktop.Core.User.Control
         {
             IUserStatusResult result = await CalculateUserTotalBalanceAsync();
 
-            if (Data.BestBalance > (decimal)result.Value)
-                return new UserStatusResult(Data.BestBalance - (decimal)result.Value);
+            decimal userBestBalance = UserDataSaveSystem.Read().BestBalance;
+            if (UserDataSaveSystem.Read().BestBalance > (decimal)result.Value)
+                return new UserStatusResult(userBestBalance - (decimal)result.Value);
             else
-                return new UserStatusResult((decimal)result.Value - Data.BestBalance);
+                return new UserStatusResult((decimal)result.Value - userBestBalance);
         }
 
         public override string Format(decimal value)
         {
-            return FormatterUtility<CurrencyFormatter>.Format(value).ToString();
+            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value).ToString();
         }
     }
 
     public sealed class UserBeginnerStatus : UserStatusBase
     {
-        public UserBeginnerStatus(UserData data, UserWallet wallet) : base(data, wallet)
+        public UserBeginnerStatus(IUserDataSaveSystem userDataSaveSystem, UserWallet wallet) : base(userDataSaveSystem, wallet)
         {
 
         }
@@ -122,27 +123,27 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public override string Format(decimal value)
         {
-            return FormatterUtility<CurrencyFormatter>.Format(value).ToString();
+            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value).ToString();
         }
     }
 
     public sealed class UserStatusDetector
     {
-        private readonly UserData data;
+        private readonly IUserDataSaveSystem userDataSaveSystem;
 
         private readonly UserWallet wallet;
 
 
 
-        public UserStatusDetector(UserData data, UserWallet wallet)
+        public UserStatusDetector(IUserDataSaveSystem userDataSaveSystem, UserWallet wallet)
         {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
+            if (userDataSaveSystem == null)
+                throw new ArgumentNullException(nameof(userDataSaveSystem));
 
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
-            this.data = data;
+            this.userDataSaveSystem = userDataSaveSystem;
             this.wallet = wallet;
         }
 
@@ -150,9 +151,9 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         public IUserStatus GetStatus()
         {
-            return this.data.UserStartedApplicationFirstTime() 
-                ? new UserBeginnerStatus(this.data, this.wallet) 
-                : new UserStandartStatus(this.data, this.wallet);
+            return this.userDataSaveSystem.Read().UserStartedApplicationFirstTime() 
+                ? new UserBeginnerStatus(this.userDataSaveSystem, this.wallet) 
+                : new UserStandartStatus(this.userDataSaveSystem, this.wallet);
         }
     }
 }

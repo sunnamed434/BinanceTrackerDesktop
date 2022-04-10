@@ -54,7 +54,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             userClient = new UserClient();
 
-            userStatus = new UserStatusDetector(userClient.SaveDataSystem.Read(), userClient.Wallet).GetStatus();
+            userStatus = new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus();
             new BinanceTrackerUserDataSaveControl(safelyComponentControl, userClient.Wallet);
 
             new BinanceTrackerUserBalanceControlUI(safelyComponentControl, userStatus,

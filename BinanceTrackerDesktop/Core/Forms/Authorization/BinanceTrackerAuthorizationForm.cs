@@ -1,9 +1,9 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.Validator;
 using BinanceTrackerDesktop.Core.Validator.String.Extension;
+using BinanceTrackerDesktop.Core.Validator.String.Utility;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
 using System.Drawing;
@@ -39,11 +39,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                .ContentNotNullOrEmpty()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey);
 
-            if (userKeyValidator.IsSuccess && userSecretValidator.IsSuccess)
+            StringValidator userCurrencyValidator = this.UserCurrenyTextBox.Rules()
+                .ContentNotNullOrEmpty();
+
+            if (StringValidatorUtility.IsAllSuccess(userKeyValidator, userSecretValidator, userCurrencyValidator))
             {
                 this.AuthorizeButton.Click -= onAuthorizeButtonClicked;
 
-                new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text).SaveUserData();
+                new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text).SaveUserData();
 
                 base.Hide();
                 new BinanceTrackerForm().ShowDialog();

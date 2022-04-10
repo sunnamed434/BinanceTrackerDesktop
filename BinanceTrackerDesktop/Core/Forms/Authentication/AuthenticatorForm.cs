@@ -32,7 +32,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
                     .WithTitle(ApplicationEnviroment.GlobalName)
                     .WithMessage("Cannot to authenticate, check your Secret Key or PIN")
                     .WillCloseIn(90)
-                    .Build(true);
+                    .WithCarefully()
+                    .Build(false);
 
                 return;
             }
@@ -41,7 +42,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
                     .WithTitle(ApplicationEnviroment.GlobalName)
                     .WithMessage(result.ToString())
                     .WillCloseIn(90)
-                    .Build(true);
+                    .WithCarefully()
+                    .Build(false);
         }
     }
 }

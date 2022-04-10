@@ -8,6 +8,7 @@ using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
@@ -37,13 +38,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             if (formButtonControls == null)
                 throw new ArgumentNullException(nameof(formButtonControls));
 
-            if (formButtonControls.Length < 0)
+            if (formButtonControls.Any() == false)
                 throw new InvalidOperationException();
 
             if (formTextControls == null)
                 throw new ArgumentNullException(nameof(formButtonControls));
 
-            if (formTextControls.Length < 0)
+            if (formTextControls.Any() == false)
                 throw new InvalidOperationException();
 
             this.formSafelyCloseControl = formSafelyCloseControl;
@@ -68,7 +69,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         private async void initializeAsync()
         {
             UserData data = new BinaryUserDataSaveSystem().Read();
-            isBalancesHiden = data.BalancesHiden ?? default(bool);
+            isBalancesHiden = data.IsBalancesHiden ?? default(bool);
 
             if (isBalancesHiden)
             {
@@ -181,7 +182,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             }
 
             UserData userData = new BinaryUserDataSaveSystem().Read();
-            userData.BalancesHiden = isBalancesHiden;
+            userData.IsBalancesHiden = isBalancesHiden;
             userData.SaveUserData();
         }
 

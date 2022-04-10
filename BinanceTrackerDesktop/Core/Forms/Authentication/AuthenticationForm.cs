@@ -30,7 +30,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
                     .WithTitle(ApplicationEnviroment.GlobalName)
                     .WithMessage("Cannot to authenticate, check your Account Title or Secret Key")
                     .WillCloseIn(90)
-                    .Build(true);
+                    .WithCarefully()
+                    .Build(false);
             }
         }
     }

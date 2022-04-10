@@ -11,8 +11,8 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
         private static IList<TemporaryFormatter> formatters = new List<TemporaryFormatter>
         {
             new TemporaryFormatter(Activator.CreateInstance<ValueStringFormatter>(), typeof(ValueStringFormatter)),
-            new TemporaryFormatter(Activator.CreateInstance<CurrencyFormatter>(), typeof(CurrencyFormatter)),
-            new TemporaryFormatter(Activator.CreateInstance<CryptocurrencyFormatter>(), typeof(CryptocurrencyFormatter)),
+            new TemporaryFormatter(Activator.CreateInstance<BasedOnUserDataCurrencyFormatter>(), typeof(BasedOnUserDataCurrencyFormatter)),
+            new TemporaryFormatter(Activator.CreateInstance<BasedOnUserDataCryptocurrencyFormatter>(), typeof(BasedOnUserDataCryptocurrencyFormatter)),
         };
 
 

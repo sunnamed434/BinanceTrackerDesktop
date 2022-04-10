@@ -1,65 +1,89 @@
 ﻿using BinanceTrackerDesktop.Core.Notification.API;
 using BinanceTrackerDesktop.Core.Notification.Extension;
+using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Notification.Builder
 {
-    public sealed class PopupBuilder
+    public sealed class PopupBuilder : IPopupBuilder
     {
         private readonly Popup popup = Popup.Empty;
 
+        private bool isCarefully = false;
 
 
-        public PopupBuilder WithTitle(string name)
+
+        public IPopupBuilder WithTitle(string name)
         {
             popup.Title = name;
             return this;
         }
 
-        public PopupBuilder WithMessage(string content)
+        public IPopupBuilder WithMessage(string content)
         {
             popup.Message = content;
             return this;
         }
 
-        public PopupBuilder WillCloseIn(int value)
+        public IPopupBuilder WillCloseIn(int value)
         {
             popup.Timeout = value;
             return this;
         }
 
-        public PopupBuilder WithIcon(Icon icon)
+        public IPopupBuilder WithIcon(Icon icon)
         {
             popup.Icon = icon;
             return this;
         }
 
-        public PopupBuilder WithOnShowAction(Action callback)
+        public IPopupBuilder WithOnShowAction(Action callback)
         {
             popup.OnShow = callback;
             return this;
         }
 
-        public PopupBuilder WithOnCloseAction(Action callback)
+        public IPopupBuilder WithOnCloseAction(Action callback)
         {
             popup.OnClose = callback;
             return this;
         }
 
-        public PopupBuilder WithOnClickAction(Action callback)
+        public IPopupBuilder WithOnClickAction(Action callback)
         {
             popup.OnClick = callback;
             return this;
         }
 
-        public Popup Build()
+        public IPopupBuilder WithCarefully()
         {
+            if (new BinaryUserDataSaveSystem().Read().IsNotificationsDisabled)
+            {
+                isCarefully = true;
+            }
+
+            return this;
+        }
+
+        public IPopup Build()
+        {
+            if (isCarefully)
+            {
+                MessageBox.Show(popup.Message, popup.Title);
+            }
+
             return popup;
         }
 
-        public Popup Build(bool sendAnyway)
+        public IPopup Build(bool sendAnyway)
         {
+            if (isCarefully)
+            {
+                return Build();
+            }
+
             popup.Show(sendAnyway);
 
             return Build();
@@ -69,7 +93,7 @@ namespace BinanceTrackerDesktop.Core.Notification.Builder
 
         public static implicit operator Popup(PopupBuilder builder)
         {
-            return builder.Build();
+            return (Popup)builder.Build();
         }
     }
 }
