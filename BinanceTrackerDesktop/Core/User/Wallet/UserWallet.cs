@@ -2,8 +2,7 @@
 using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.Core.Calculator;
 using BinanceTrackerDesktop.Core.Calculator.Extension;
-using BinanceTrackerDesktop.Core.Calculator.Models;
-using BinanceTrackerDesktop.Core.Formatters.Models;
+using BinanceTrackerDesktop.Core.Formatters.Currency.Crypto;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;

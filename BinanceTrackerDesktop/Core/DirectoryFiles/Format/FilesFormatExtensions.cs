@@ -2,13 +2,13 @@
 {
     public sealed class FilesFormatExtensions
     {
-        public const string Icon = ".ico";
+        public const string ICO = ".ico";
 
         public const string PNG = ".png";
 
         public const string JPG = ".jpg";
 
-        public const string Dat = ".dat";
+        public const string DAT = ".dat";
 
         public const string TXT = ".txt";
     }

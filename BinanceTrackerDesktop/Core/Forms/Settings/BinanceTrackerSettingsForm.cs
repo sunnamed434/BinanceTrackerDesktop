@@ -1,14 +1,14 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles;
-using BinanceTrackerDesktop.Core.Notification.Builder;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Control;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
-using BinanceTrackerDesktop.Core.Validator;
-using BinanceTrackerDesktop.Core.Validator.String.Extension;
+using BinanceTrackerDesktop.Core.Validators;
+using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using System;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -27,7 +27,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Settings
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(DirectoryImagesControl.RegisteredImages.ApplicationIcon).Result;
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
 
             this.ChangeCurrencyButton.Click += onChangeCurrencyButtonClicked;
@@ -38,20 +38,20 @@ namespace BinanceTrackerDesktop.Core.Forms.Settings
 
         private async void onChangeCurrencyButtonClicked(object sender, EventArgs e)
         {
-            StringValidator userCurrencyValidator = this.NewCurrenyTextBox.Rules()
+            IStringValidator userCurrencyValidator = this.NewCurrenyTextBox.Rules()
                 .ContentNotNullOrEmpty();
 
             if (userCurrencyValidator.IsFailed)
             {
                 new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage(new StringBuilder()
+                    .WithTitle(ApplicationEnviroment.GlobalName)
+                    .WithMessage(new StringBuilder()
                                  .Append("[=(] Failed to change currency to ")
                                  .Append(NewCurrenyTextBox.Text)
                                  .ToString())
-                .WillCloseIn(90)
-                .WithCarefully()
-                .Build(false);
+                    .WillCloseIn(90)
+                    .WithCarefully()
+                    .Build(false);
                 return;
             }
 

@@ -1,14 +1,13 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.Validator;
-using BinanceTrackerDesktop.Core.Validator.String.Extension;
-using BinanceTrackerDesktop.Core.Validator.String.Utility;
+using BinanceTrackerDesktop.Core.Validators;
+using BinanceTrackerDesktop.Core.Validators.String.Extension;
+using BinanceTrackerDesktop.Core.Validators.String.Utility;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {
@@ -21,7 +20,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Result;
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
 
             this.AuthorizeButton.Click += onAuthorizeButtonClicked;
@@ -31,15 +30,15 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
 
         private void onAuthorizeButtonClicked(object sender, EventArgs e)
         {
-            StringValidator userKeyValidator = this.UserKeyTextBox.Rules()
+            IStringValidator userKeyValidator = this.UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey);
 
-            StringValidator userSecretValidator = this.UserSecretTextBox.Rules()
+            IStringValidator userSecretValidator = this.UserSecretTextBox.Rules()
                .ContentNotNullOrEmpty()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey);
 
-            StringValidator userCurrencyValidator = this.UserCurrenyTextBox.Rules()
+            IStringValidator userCurrencyValidator = this.UserCurrenyTextBox.Rules()
                 .ContentNotNullOrEmpty();
 
             if (StringValidatorUtility.IsAllSuccess(userKeyValidator, userSecretValidator, userCurrencyValidator))

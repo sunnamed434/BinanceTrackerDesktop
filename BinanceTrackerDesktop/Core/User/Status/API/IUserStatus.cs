@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Formatters.Models;
+﻿using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Status.Extension;

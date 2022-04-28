@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Notification.Builder;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication;
-using BinanceTrackerDesktop.Core.Validator.String.Exception;
+using BinanceTrackerDesktop.Core.Validators.String.Exception;
 using System;
 using System.Windows.Forms;
 

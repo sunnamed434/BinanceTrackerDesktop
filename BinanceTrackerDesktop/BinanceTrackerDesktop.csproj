@@ -95,33 +95,48 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\API\ApplicationEnviroment.cs" />
-    <Compile Include="Core\API\ITriggerableEventHandler.cs" />
+    <Compile Include="Core\ApplicationInfo\Environment\ApplicationEnvironment.cs" />
+    <Compile Include="Core\Components\ButtonControl\EventsContainer\ButtonEventsContainer.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Base\MenuStripComponentControlBase.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Item\Control\MenuStripComponentItemControl.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Item\EventsContainer\MenuStripComponentItemEventsContainer.cs" />
+    <Compile Include="Core\Components\LabelControl\EventsContainer\LabelComponentEventsContainer.cs" />
+    <Compile Include="Core\Components\TrayControl\Base\TrayComponentControlBase.cs" />
+    <Compile Include="Core\Components\TrayControl\EventsContainer\TrayComponentEventsContainer.cs" />
+    <Compile Include="Core\Trigger\ITriggerableEventHandler.cs" />
     <Compile Include="Core\Components\TextControl\TextComponentControl.cs" />
+    <Compile Include="Core\DirectoryFiles\Base\DirectoryFilesControlBase.cs" />
+    <Compile Include="Core\DirectoryFiles\Control\DirectoryFilesControl.cs" />
+    <Compile Include="Core\DirectoryFiles\Control\DirectoryImagesControl.cs" />
+    <Compile Include="Core\DirectoryFiles\Directories\ApplicationDirectoriesControl.cs" />
     <Compile Include="Core\DirectoryFiles\Exception\FileExtensionDoesNotMatchWithDesiredException.cs" />
     <Compile Include="Core\DirectoryFiles\Format\FilesFormatExtensions.cs" />
     <Compile Include="Core\DirectoryFiles\Format\FileSearchPatternSymbol.cs" />
+    <Compile Include="Core\DirectoryFiles\Item\IDirectoryFileItem.cs" />
+    <Compile Include="Core\DirectoryFiles\Paths\ApplicationDirectoryPaths.cs" />
     <Compile Include="Core\DirectoryFiles\Utility\FilePathUtility.cs" />
     <Compile Include="Core\Entry\BinanceTrackerEntryPoint.cs" />
     <Compile Include="Core\Components\ButtonControl\Extension\ButtonComponentControlExtension.cs" />
     <Compile Include="Core\Components\TrayControl\Extension\TrayComponentControlExtension.cs" />
     <Compile Include="Core\DirectoryFiles\Extension\FilePathExtension.cs" />
-    <Compile Include="Core\Formatters\Models\IFormatter.cs" />
+    <Compile Include="Core\Formatters\Currency\BasedOnUserDataCurrencyFormatter.cs" />
+    <Compile Include="Core\Formatters\Currency\Crypto\BasedOnUserDataCryptocurrencyFormatter.cs" />
+    <Compile Include="Core\Formatters\IFormatter.cs" />
     <Compile Include="Core\Formatters\Utility\FormatterUtility.cs" />
+    <Compile Include="Core\Formatters\ValueString\ValueStringFormatter.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\Forms\Authentication\AuthenticationForm.Designer.cs">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Components\API\IExpandableComponent.cs" />
-    <Compile Include="Core\Components\API\MouseClickEventListener.cs" />
-    <Compile Include="Core\Components\API\ITextable.cs" />
+    <Compile Include="Core\Components\Expandable\IExpandableComponent.cs" />
+    <Compile Include="Core\Components\Events\MouseClickEventListener.cs" />
+    <Compile Include="Core\Components\TextControl\ITextable.cs" />
     <Compile Include="Core\Components\ButtonControl\ButtonComponentControl.cs" />
-    <Compile Include="Core\Components\ContextMenuStripControl\MenuStripComponentControl.cs" />
+    <Compile Include="Core\Components\ContextMenuStripControl\Item\IMenuStripItem.cs" />
     <Compile Include="Core\Components\ContextMenuStripControl\Extension\MenuStripItemComponentControlExtension.cs" />
     <Compile Include="Core\Components\TrayControl\TrayComponentControlBase.cs" />
-    <Compile Include="Core\Currencies\CurrencyName.cs" />
     <Compile Include="Core\DirectoryFiles\IDirectoryFilesControl.cs" />
     <Compile Include="Core\Forms\Authentication\AuthenticatorForm.cs">
       <SubType>Form</SubType>
@@ -138,10 +153,10 @@
     <Compile Include="Core\Forms\Tracker\UI\Balance\BinanceTrackerUserBalanceControlUI.cs" />
     <Compile Include="Core\Forms\Tracker\UI\Menu\BinanceTrackerMenuStripControlUI.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTray.cs" />
-    <Compile Include="Core\Notification\API\IPopup.cs" />
-    <Compile Include="Core\Notification\Builder\IPopupBuilder.cs" />
-    <Compile Include="Core\Notification\Builder\PopupBuilder.cs" />
-    <Compile Include="Core\Notification\Extension\PopupExtension.cs" />
+    <Compile Include="Core\Notification\Popup\IPopup.cs" />
+    <Compile Include="Core\Notification\Popup\Builder\IPopupBuilder.cs" />
+    <Compile Include="Core\Notification\Popup\Builder\PopupBuilder.cs" />
+    <Compile Include="Core\Notification\Popup\Extension\PopupExtension.cs" />
     <Compile Include="Core\Notification\NotificationsControl.cs" />
     <Compile Include="Core\User\Authentication\UserAuthenticatiorSystem.cs" />
     <Compile Include="Core\User\Client\UserClient.cs" />
@@ -150,11 +165,12 @@
     <Compile Include="Core\User\Data\Save\IUserDataSaveSystem.cs" />
     <Compile Include="Core\User\Status\Extension\UserDataExtension.cs" />
     <Compile Include="Core\User\Status\Extension\UserStatusDetectorExtension.cs" />
-    <Compile Include="Core\Validator\String\Exception\FailedStringValidationException.cs" />
-    <Compile Include="Core\Validator\String\StringValidator.cs" />
-    <Compile Include="Core\Validator\String\Extension\StringValidatorExtension.cs" />
+    <Compile Include="Core\Validators\String\Exception\FailedStringValidationException.cs" />
+    <Compile Include="Core\Validators\String\IStringValidator.cs" />
+    <Compile Include="Core\Validators\String\StringValidator.cs" />
+    <Compile Include="Core\Validators\String\Extension\StringValidatorExtension.cs" />
     <Compile Include="Core\User\Data\UserData.cs" />
-    <Compile Include="Core\Components\API\ISafelyComponentControl.cs" />
+    <Compile Include="Core\Components\Safely\ISafelyComponentControl.cs" />
     <Compile Include="Core\User\Status\API\IUserStatus.cs" />
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
@@ -162,17 +178,16 @@
     <Compile Include="Core\Forms\Tray\BinanceTrackerTrayForm.Designer.cs">
       <DependentUpon>BinanceTrackerTrayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\API\EventListener.cs" />
+    <Compile Include="Core\Event\EventListener.cs" />
     <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\Forms\Tracker\BinanceTrackerForm.Designer.cs">
       <DependentUpon>BinanceTrackerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Calculator\Models\IBinanceCoinOptions.cs" />
+    <Compile Include="Core\Calculator\IBinanceCoinOptions.cs" />
     <Compile Include="Core\Calculator\BinanceCoinCalculator.cs" />
     <Compile Include="Core\Calculator\Extension\BinanceCalculationExtension.cs" />
-    <Compile Include="Core\Currencies\CurrencySymbol.cs" />
     <Compile Include="Core\User\Wallet\Models\UserWalletResult.cs" />
     <Compile Include="Core\User\Wallet\UserWallet.cs" />
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.cs">
@@ -181,7 +196,7 @@
     <Compile Include="Core\Forms\Authorization\BinanceTrackerAuthorizationForm.Designer.cs">
       <DependentUpon>BinanceTrackerAuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Validator\String\Utility\StringValidatorUtility.cs" />
+    <Compile Include="Core\Validators\String\Utility\StringValidatorUtility.cs" />
     <Compile Include="Core\Window\Helper\ProcessWindowHelper.cs" />
     <Compile Include="Core\Window\External\ExternalWindowControl.cs" />
     <Compile Include="Core\Components\LabelControl\LabelComponentControl.cs" />

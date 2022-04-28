@@ -1,8 +1,9 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Objects.Models.Spot;
-using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
-using BinanceTrackerDesktop.Core.Formatters.Models;
+using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
+using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.Forms.Settings;
 using BinanceTrackerDesktop.Core.User.Wallet;

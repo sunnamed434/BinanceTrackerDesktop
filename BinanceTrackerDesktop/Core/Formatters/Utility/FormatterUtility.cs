@@ -1,4 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.Formatters.Models;
+﻿using BinanceTrackerDesktop.Core.Formatters.Currency;
+using BinanceTrackerDesktop.Core.Formatters.Currency.Crypto;
+using BinanceTrackerDesktop.Core.Formatters.ValueString;
 using System;
 using System.Collections.Generic;
 using System.Linq;

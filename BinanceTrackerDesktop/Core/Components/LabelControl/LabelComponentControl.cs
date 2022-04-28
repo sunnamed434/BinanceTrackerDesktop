@@ -1,22 +1,10 @@
-﻿using BinanceTrackerDesktop.Core.API;
+﻿using BinanceTrackerDesktop.Core.Components.LabelControl.EventsContainer;
 using BinanceTrackerDesktop.Core.Components.TextControl;
 using System;
 using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.ComponentControl.LabelControl
 {
-    public sealed class LabelComponentEventsContainer
-    {
-        public readonly EventListener ClickEventListener;
-
-
-
-        public LabelComponentEventsContainer()
-        {
-            ClickEventListener = new EventListener();
-        }
-    }
-
     public sealed class LabelComponentControl : TextComponentControl
     {
         public readonly LabelComponentEventsContainer EventsContainer;

@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Calculator.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.Calculator
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            if (!options.Any())
+            if (options.Any() == false)
                 throw new InvalidOperationException();
 
             decimal result = decimal.Zero;

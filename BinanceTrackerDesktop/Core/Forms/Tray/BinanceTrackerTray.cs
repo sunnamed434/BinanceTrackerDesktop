@@ -1,9 +1,9 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.API;
-using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl;
-using BinanceTrackerDesktop.Core.Components.TrayControl;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
+using BinanceTrackerDesktop.Core.Components.Safely;
+using BinanceTrackerDesktop.Core.Components.TrayControl.Base;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
-using BinanceTrackerDesktop.Core.Notification.Builder;
+using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;

@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Notification.API;
-using BinanceTrackerDesktop.Core.User.Data.Save;
+﻿using BinanceTrackerDesktop.Core.User.Data.Save;
 using System;
 using System.Windows.Forms;
 
@@ -9,7 +8,7 @@ namespace BinanceTrackerDesktop.Core.Notification
     {
         private static NotifyIcon notifyIcon;
 
-        private static Popup lastUsedPopup;
+        private static Popup.Popup lastUsedPopup;
 
 
 
@@ -34,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.Notification
 
 
 
-        public static void Show(Popup popup, bool sendAnyway = false)
+        public static void Show(Popup.Popup popup, bool sendAnyway = false)
         {
             if (popup == null)
             {

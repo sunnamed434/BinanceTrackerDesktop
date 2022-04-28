@@ -15,13 +15,13 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Extension
 
         public static bool IsIcon(this string source)
         {
-            return FilePathUtility.TryGetExtensionOf(source, out string fileExtension) && fileExtension == FilesFormatExtensions.Icon;
+            return FilePathUtility.TryGetExtensionOf(source, out string fileExtension) && fileExtension == FilesFormatExtensions.ICO;
         }
 
         public static bool IsDat(this string source)
         {
             return FilePathUtility.TryGetExtensionOf(source, out string fileExtension) && 
-                fileExtension == FilesFormatExtensions.Dat;
+                fileExtension == FilesFormatExtensions.DAT;
         }
     }
 }

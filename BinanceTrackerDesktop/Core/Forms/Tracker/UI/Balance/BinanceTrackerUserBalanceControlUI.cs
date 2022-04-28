@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
-using BinanceTrackerDesktop.Core.Components.API;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
+using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;

@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Validator.String.Extension;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using Google.Authenticator;
 using System;
 using System.Drawing;

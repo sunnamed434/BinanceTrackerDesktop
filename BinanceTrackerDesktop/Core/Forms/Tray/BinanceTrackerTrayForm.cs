@@ -1,11 +1,11 @@
-﻿using BinanceTrackerDesktop.Core.API;
-using BinanceTrackerDesktop.Core.Components.API;
-using BinanceTrackerDesktop.Core.DirectoryFiles;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Components.Safely;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
@@ -24,7 +24,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             if (formSafelyCloseControl == null)
                 throw new ArgumentNullException(nameof(formSafelyCloseControl));
 
-            Icon applicationIcon = (Icon)new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFileAt(RegisteredImages.ApplicationIcon).Result;
+            Icon applicationIcon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
 
             this.formSafelyCloseControl = formSafelyCloseControl;
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.Components.TrayControl.Base;
+using System;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.Extension
 {
