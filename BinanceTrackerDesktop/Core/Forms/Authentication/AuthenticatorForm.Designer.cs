@@ -30,84 +30,88 @@
         {
             this.CheckAuthenticationPINButton = new System.Windows.Forms.Button();
             this.UserPINTextBox = new System.Windows.Forms.TextBox();
-            this.InfoLabel = new System.Windows.Forms.Label();
+            this.HeaderLabel = new System.Windows.Forms.Label();
             this.UserSecretTextBot = new System.Windows.Forms.TextBox();
-            this.UserPINInfoLabel = new System.Windows.Forms.Label();
-            this.SecretInfoLabel = new System.Windows.Forms.Label();
+            this.UserPINLabel = new System.Windows.Forms.Label();
+            this.SecretLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CheckAuthenticationPINButton
             // 
-            this.CheckAuthenticationPINButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckAuthenticationPINButton.Location = new System.Drawing.Point(94, 171);
-            this.CheckAuthenticationPINButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CheckAuthenticationPINButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CheckAuthenticationPINButton.Location = new System.Drawing.Point(132, 195);
+            this.CheckAuthenticationPINButton.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.CheckAuthenticationPINButton.Name = "CheckAuthenticationPINButton";
-            this.CheckAuthenticationPINButton.Size = new System.Drawing.Size(204, 27);
+            this.CheckAuthenticationPINButton.Size = new System.Drawing.Size(272, 42);
             this.CheckAuthenticationPINButton.TabIndex = 8;
             this.CheckAuthenticationPINButton.Text = "Check Authentication PIN";
             this.CheckAuthenticationPINButton.UseVisualStyleBackColor = true;
             // 
             // UserPINTextBox
             // 
-            this.UserPINTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserPINTextBox.Location = new System.Drawing.Point(13, 121);
-            this.UserPINTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.UserPINTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UserPINTextBox.Location = new System.Drawing.Point(18, 157);
+            this.UserPINTextBox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.UserPINTextBox.Name = "UserPINTextBox";
-            this.UserPINTextBox.Size = new System.Drawing.Size(367, 22);
+            this.UserPINTextBox.Size = new System.Drawing.Size(488, 26);
             this.UserPINTextBox.TabIndex = 6;
             // 
-            // InfoLabel
+            // HeaderLabel
             // 
-            this.InfoLabel.AutoSize = true;
-            this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.InfoLabel.Location = new System.Drawing.Point(115, 9);
-            this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(163, 20);
-            this.InfoLabel.TabIndex = 10;
-            this.InfoLabel.Text = "Authenticate Yourself";
+            this.HeaderLabel.AutoSize = true;
+            this.HeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.HeaderLabel.Location = new System.Drawing.Point(131, 23);
+            this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.HeaderLabel.Name = "HeaderLabel";
+            this.HeaderLabel.Size = new System.Drawing.Size(262, 25);
+            this.HeaderLabel.TabIndex = 10;
+            this.HeaderLabel.Text = "Authenticate Yourself Please";
             // 
             // UserSecretTextBot
             // 
-            this.UserSecretTextBot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserSecretTextBot.Location = new System.Drawing.Point(13, 67);
-            this.UserSecretTextBot.Margin = new System.Windows.Forms.Padding(4);
+            this.UserSecretTextBot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UserSecretTextBot.Location = new System.Drawing.Point(18, 87);
+            this.UserSecretTextBot.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.UserSecretTextBot.Name = "UserSecretTextBot";
-            this.UserSecretTextBot.Size = new System.Drawing.Size(367, 22);
+            this.UserSecretTextBot.Size = new System.Drawing.Size(488, 26);
             this.UserSecretTextBot.TabIndex = 11;
             // 
-            // UserPINInfoLabel
+            // UserPINLabel
             // 
-            this.UserPINInfoLabel.AutoSize = true;
-            this.UserPINInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.UserPINInfoLabel.Location = new System.Drawing.Point(180, 101);
-            this.UserPINInfoLabel.Name = "UserPINInfoLabel";
-            this.UserPINInfoLabel.Size = new System.Drawing.Size(32, 16);
-            this.UserPINInfoLabel.TabIndex = 12;
-            this.UserPINInfoLabel.Text = "PIN:";
+            this.UserPINLabel.AutoSize = true;
+            this.UserPINLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UserPINLabel.Location = new System.Drawing.Point(249, 125);
+            this.UserPINLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.UserPINLabel.Name = "UserPINLabel";
+            this.UserPINLabel.Size = new System.Drawing.Size(35, 20);
+            this.UserPINLabel.TabIndex = 12;
+            this.UserPINLabel.Text = "PIN:";
             // 
-            // SecretInfoLabel
+            // SecretLabel
             // 
-            this.SecretInfoLabel.AutoSize = true;
-            this.SecretInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.SecretInfoLabel.Location = new System.Drawing.Point(172, 47);
-            this.SecretInfoLabel.Name = "SecretInfoLabel";
-            this.SecretInfoLabel.Size = new System.Drawing.Size(49, 16);
-            this.SecretInfoLabel.TabIndex = 13;
-            this.SecretInfoLabel.Text = "Secret:";
+            this.SecretLabel.AutoSize = true;
+            this.SecretLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SecretLabel.Location = new System.Drawing.Point(240, 55);
+            this.SecretLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SecretLabel.Name = "SecretLabel";
+            this.SecretLabel.Size = new System.Drawing.Size(53, 20);
+            this.SecretLabel.TabIndex = 13;
+            this.SecretLabel.Text = "Secret:";
             // 
             // AuthenticatorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 204);
-            this.Controls.Add(this.SecretInfoLabel);
-            this.Controls.Add(this.UserPINInfoLabel);
+            this.ClientSize = new System.Drawing.Size(524, 247);
+            this.Controls.Add(this.SecretLabel);
+            this.Controls.Add(this.UserPINLabel);
             this.Controls.Add(this.UserSecretTextBot);
-            this.Controls.Add(this.InfoLabel);
+            this.Controls.Add(this.HeaderLabel);
             this.Controls.Add(this.CheckAuthenticationPINButton);
             this.Controls.Add(this.UserPINTextBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AuthenticatorForm";
-            this.Text = "AuthenticatorForm";
+            this.Text = "Authenticator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,9 +121,9 @@
 
         private System.Windows.Forms.Button CheckAuthenticationPINButton;
         private System.Windows.Forms.TextBox UserPINTextBox;
-        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Label HeaderLabel;
         private System.Windows.Forms.TextBox UserSecretTextBot;
-        private System.Windows.Forms.Label UserPINInfoLabel;
-        private System.Windows.Forms.Label SecretInfoLabel;
+        private System.Windows.Forms.Label UserPINLabel;
+        private System.Windows.Forms.Label SecretLabel;
     }
 }

@@ -3,14 +3,12 @@ using BinanceTrackerDesktop.Core.DirectoryFiles.Control;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
-using BinanceTrackerDesktop.Core.User.Data.Save;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
-using System;
 using System.Text;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Settings
 {
@@ -50,7 +48,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Settings
                                  .Append(NewCurrenyTextBox.Text)
                                  .ToString())
                     .WillCloseIn(90)
-                    .WithCarefully()
+                    .TryWithCarefully()
                     .Build(false);
                 return;
             }
@@ -58,11 +56,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Settings
             BinaryUserDataSaveSystem userDataSaveSystem = new BinaryUserDataSaveSystem();
             UserData data = userDataSaveSystem.Read();
             data.Currency = NewCurrenyTextBox.Text;
-            userDataSaveSystem.Save(data);
+            userDataSaveSystem.Write(data);
 
             UserWalletResult userWalletResult = await userWallet.GetTotalBalanceAsync();
             data.BestBalance = userWalletResult.Value;
-            userDataSaveSystem.Save(data);
+            userDataSaveSystem.Write(data);
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
@@ -71,7 +69,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Settings
                                  .Append(data.Currency)
                                  .ToString())
                 .WillCloseIn(90)
-                .WithCarefully()
+                .TryWithCarefully()
                 .Build(false);
         }
     }

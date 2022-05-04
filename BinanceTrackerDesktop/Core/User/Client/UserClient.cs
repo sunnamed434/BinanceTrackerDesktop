@@ -4,10 +4,10 @@ using Binance.Net.Objects;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Status.Extension;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using CryptoExchange.Net.Authentication;
-using System;
 
 namespace BinanceTrackerDesktop.Core.User.Client
 {

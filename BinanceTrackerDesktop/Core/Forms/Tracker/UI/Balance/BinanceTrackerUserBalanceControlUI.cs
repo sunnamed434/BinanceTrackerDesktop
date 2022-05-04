@@ -5,11 +5,7 @@ using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.User.Data.Save;
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {

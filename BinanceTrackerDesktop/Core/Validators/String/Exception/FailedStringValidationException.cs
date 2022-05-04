@@ -7,7 +7,7 @@
 
         }
 
-        public FailedStringValidationException() : this(default)
+        public FailedStringValidationException() : this(string.Empty)
         {
 
         }

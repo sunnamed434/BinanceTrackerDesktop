@@ -1,16 +1,10 @@
-﻿using System;
-
-namespace BinanceTrackerDesktop.Core.Validators
+﻿namespace BinanceTrackerDesktop.Core.Validators
 {
-    public interface IStringValidator
+    public interface IStringValidator : IValidator
     {
-        bool IsSuccess { get; }
-
-        bool IsFailed { get; }
-
-
-
         IStringValidator MinCharacters(int count);
+
+        IStringValidator MaxCharacters(int count);
 
         IStringValidator ContentNotNullOrEmpty();
 

@@ -1,6 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.User.Data.Save;
-using System;
-using System.Windows.Forms;
+﻿using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Core.Notification
 {

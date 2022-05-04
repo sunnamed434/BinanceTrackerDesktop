@@ -7,13 +7,9 @@ using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.User.Data.Save;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using BinanceTrackerDesktop.Core.Window;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
@@ -101,7 +97,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage(userData.IsNotificationsEnabled == true ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
                 .WillCloseIn(90)
-                .WithCarefully()
+                .TryWithCarefully()
                 .Build(false);
 
             notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled ?? default));

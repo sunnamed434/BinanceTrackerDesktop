@@ -1,21 +1,14 @@
-﻿using BinanceTrackerDesktop.Core.Entry;
-using System;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using BinanceTrackerDesktop.Core.Entry;
 
 namespace BinanceTrackerDesktop
 {
-    public static class Program
+    internal static class Program
     {
         [STAThread]
-        private async static Task Main()
+        private static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
+            ApplicationConfiguration.Initialize();
             new BinanceTrackerEntryPoint();
-
-            await Task.CompletedTask;
         }
     }
 }

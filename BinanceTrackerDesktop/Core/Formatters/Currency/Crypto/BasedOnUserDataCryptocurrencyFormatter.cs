@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.User.Data;
-using BinanceTrackerDesktop.Core.User.Data.Save;
-using System;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using System.Text;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Currency.Crypto

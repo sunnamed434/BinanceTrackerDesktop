@@ -1,8 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Notification.Popup.Extension;
-using BinanceTrackerDesktop.Core.User.Data.Save;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
 {
@@ -56,7 +53,7 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
             return this;
         }
 
-        public IPopupBuilder WithCarefully()
+        public IPopupBuilder TryWithCarefully()
         {
             if (new BinaryUserDataSaveSystem().Read().IsNotificationsDisabled)
             {
@@ -66,11 +63,18 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
             return this;
         }
 
+        public IPopup BuildAsMessageBox()
+        {
+            MessageBox.Show(popup.Message, popup.Title);
+
+            return popup;
+        }
+
         public IPopup Build()
         {
             if (isCarefully)
             {
-                MessageBox.Show(popup.Message, popup.Title);
+                return BuildAsMessageBox();
             }
 
             return popup;

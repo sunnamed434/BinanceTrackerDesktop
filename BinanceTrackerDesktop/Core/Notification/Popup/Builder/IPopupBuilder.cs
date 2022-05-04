@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing;
-
-namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
+﻿namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
 {
     public interface IPopupBuilder
     {
@@ -19,7 +16,9 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
 
         IPopupBuilder WithOnClickAction(Action callback);
 
-        IPopupBuilder WithCarefully();
+        IPopupBuilder TryWithCarefully();
+
+        IPopup BuildAsMessageBox();
 
         IPopup Build();
 

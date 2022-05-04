@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "cApSB88Au9EY93ngeqyQhkNdRihKShdWUFNyXt8ZCGhHkfej9kJOg7HhYUj2J5wkHVV6C9ruZDT71xZM3U1BOQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sunnamed\\.nuget\\packages\\binance.net\\8.0.12\\binance.net.8.0.12.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\cryptoexchange.net\\5.1.8\\cryptoexchange.net.5.1.8.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\googleauthenticator\\2.5.0\\googleauthenticator.2.5.0.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.0\\microsoft.extensions.dependencyinjection.abstractions.3.1.0.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.0\\microsoft.extensions.logging.abstractions.3.1.0.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\qrcoder\\1.4.3\\qrcoder.1.4.3.nupkg.sha512",
+    "C:\\Users\\sunnamed\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

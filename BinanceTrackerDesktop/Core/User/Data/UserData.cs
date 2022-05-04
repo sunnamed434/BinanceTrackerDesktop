@@ -1,4 +1,4 @@
-﻿using System;
+﻿using BinanceTrackerDesktop.Core.User.Authentication.Data;
 
 namespace BinanceTrackerDesktop.Core.User.Data
 {
@@ -11,6 +11,8 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
         public string Currency;
 
+        public UserTwoFactorAuthenticationData AuthenticationData;
+
         public decimal BestBalance;
 
         public bool? IsBalancesHiden;
@@ -19,23 +21,29 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
 
 
-        public UserData(string key, string secret, string currency)
+        public UserData(string key, string secret, string currency, UserTwoFactorAuthenticationData authenticationData)
         {
             Key = key;
             Secret = secret;
             Currency = currency;
+            AuthenticationData = authenticationData;
         }
 
-        public UserData(string key, string secret, string currency, decimal bestBalance, bool? isBalancesHiden, bool? isNotificationsEnabled) : this(key, secret, currency)
+        public UserData(string key, string secret, string currency) : this(key, secret, currency, null)
+        {
+           
+        }
+
+        public UserData(string key, string secret, string currency, UserTwoFactorAuthenticationData authenticationData, decimal bestBalance, bool? isBalancesHiden, bool? isNotificationsEnabled) : this(key, secret, currency, authenticationData)
         {
             BestBalance = bestBalance;
             IsBalancesHiden = isBalancesHiden;
             IsNotificationsEnabled = isNotificationsEnabled;
         }
 
-        public UserData() : this(key: null, secret: null, currency: null, bestBalance: default, isBalancesHiden: null, isNotificationsEnabled: null)
+        public UserData()
+            : this(key: null, secret: null, currency: null, null, bestBalance: default, isBalancesHiden: null, isNotificationsEnabled: null)
         {
-
         }
 
 

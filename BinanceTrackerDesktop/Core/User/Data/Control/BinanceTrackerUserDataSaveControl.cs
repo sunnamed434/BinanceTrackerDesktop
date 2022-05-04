@@ -1,10 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.User.Data.Save;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Control
 {

@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.Validators.String.Exception;
-using System;
 
 namespace BinanceTrackerDesktop.Core.Validators
 {
@@ -9,13 +8,14 @@ namespace BinanceTrackerDesktop.Core.Validators
 
 
 
-        private bool success = true;
+        private bool success;
 
 
 
         public StringValidator(string content) 
         {
             this.content = content;
+            success = true;
         }
 
 
@@ -34,9 +34,17 @@ namespace BinanceTrackerDesktop.Core.Validators
             return this;
         }
 
+        public IStringValidator MaxCharacters(int count)
+        {
+            if (this.content.Length > count)
+                success = false;
+
+            return this;
+        }
+
         public IStringValidator ContentNotNullOrEmpty()
         {
-            if (string.IsNullOrEmpty(this.content))
+            if (string.IsNullOrWhiteSpace(this.content))
                 success = false;
 
             return this;
@@ -44,6 +52,9 @@ namespace BinanceTrackerDesktop.Core.Validators
 
         public IStringValidator ThrowIfFailed(Type type)
         {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
             ThrowIfFailed(type.Name);
 
             return this;
@@ -51,14 +62,20 @@ namespace BinanceTrackerDesktop.Core.Validators
 
         public IStringValidator ThrowIfFailed(string message)
         {
+            if (message == null)
+                throw new ArgumentNullException(nameof(message));
+
             if (IsFailed)
-                throw new FailedStringValidationException(message);
+                return ThrowIfFailed(new FailedStringValidationException(message));
 
             return this;
         }
 
         public IStringValidator ThrowIfFailed(Exception exception)
         {
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
+
             if (IsFailed)
                 throw exception;
 

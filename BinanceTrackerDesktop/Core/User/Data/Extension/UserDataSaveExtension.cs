@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.User.Data.Save;
-using System;
+﻿using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Extension
 {
@@ -10,7 +9,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Extension
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            new BinaryUserDataSaveSystem().Save(source);
+            new BinaryUserDataSaveSystem().Write(source);
         }
     }
 }

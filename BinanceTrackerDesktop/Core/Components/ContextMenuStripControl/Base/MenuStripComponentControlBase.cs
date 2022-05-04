@@ -1,10 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
 using BinanceTrackerDesktop.Core.Components.Expandable;
 using BinanceTrackerDesktop.Core.Components.TextControl;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base
 {
@@ -30,7 +26,6 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base
 
         public MenuStripComponentControlBase()
         {
-
         }
 
 

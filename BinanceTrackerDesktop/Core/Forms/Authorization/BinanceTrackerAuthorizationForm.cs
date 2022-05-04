@@ -1,12 +1,13 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Core.Forms.Authentication;
+using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
-using BinanceTrackerDesktop.Core.Validators.String.Utility;
 using BinanceTrackerDesktop.Tracker.Forms;
-using System;
-using System.Windows.Forms;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
@@ -24,11 +25,17 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             base.MaximizeBox = false;
 
             this.AuthorizeButton.Click += onAuthorizeButtonClicked;
+            this.AddAuthenticatorButton.Click += onAddAuthenticatorButtonClicked;
+
+            this.UserCurrenyTextBox.Text = "EUR";
+            this.UserKeyTextBox.TextAlign = HorizontalAlignment.Center;
+            this.UserSecretTextBox.TextAlign = HorizontalAlignment.Center;
+            this.UserCurrenyTextBox.TextAlign = HorizontalAlignment.Center;
         }
 
+        
 
-
-        private void onAuthorizeButtonClicked(object sender, EventArgs e)
+        private void onAuthorizeButtonClicked(object? sender, EventArgs e)
         {
             IStringValidator userKeyValidator = this.UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
@@ -41,16 +48,62 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             IStringValidator userCurrencyValidator = this.UserCurrenyTextBox.Rules()
                 .ContentNotNullOrEmpty();
 
-            if (StringValidatorUtility.IsAllSuccess(userKeyValidator, userSecretValidator, userCurrencyValidator))
+            if (userKeyValidator.IsFailed)
             {
-                this.AuthorizeButton.Click -= onAuthorizeButtonClicked;
+                new PopupBuilder()
+                    .WithTitle(ApplicationEnviroment.GlobalName)
+                    .WithMessage("Cannot to authorizate, check your Key please!")
+                    .BuildAsMessageBox();
+                return;
+            }
 
-                new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text).SaveUserData();
+            if (userSecretValidator.IsFailed)
+            {
+                new PopupBuilder()
+                    .WithTitle(ApplicationEnviroment.GlobalName)
+                    .WithMessage("Cannot to authorizate, check your Secret please!")
+                    .BuildAsMessageBox();
+                return;
+            }
+
+            if (userCurrencyValidator.IsFailed)
+            {
+                new PopupBuilder()
+                    .WithTitle(ApplicationEnviroment.GlobalName)
+                    .WithMessage("Cannot to authorizate, check your Currency please!")
+                    .BuildAsMessageBox();
+                return;
+            }
+
+            try
+            {
+                UserData userData = new BinaryUserDataSaveSystem().Read();
+                if (userData != null)
+                {
+                    if (userData.AuthenticationData != null)
+                    {
+                        new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text, userData.AuthenticationData).SaveUserData();
+                    }
+                }
+                else
+                {
+                    new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text).SaveUserData();
+                }
 
                 base.Hide();
                 new BinanceTrackerForm().ShowDialog();
                 base.Close();
             }
+            finally
+            {
+                this.AuthorizeButton.Click -= onAuthorizeButtonClicked;
+                this.AddAuthenticatorButton.Click -= onAddAuthenticatorButtonClicked;
+            }
+        }
+
+        private void onAddAuthenticatorButtonClicked(object? sender, EventArgs e)
+        {
+            new AuthenticationForm().ShowDialog();
         }
     }
 
