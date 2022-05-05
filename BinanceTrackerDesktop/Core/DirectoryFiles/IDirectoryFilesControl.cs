@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Item;
-using System.Collections.Generic;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles
 {

@@ -3,7 +3,7 @@ using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.Safely;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
@@ -12,9 +12,7 @@ using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
-using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Control;
-using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -33,29 +31,19 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         public BinanceTrackerForm()
         {
             InitializeComponent();
-
+            
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
-
+            
             safelyComponentControl = new SafelyComponentControl()
                 .OnStarted(() => base.Hide())
                 .OnCompleted(() => Environment.FailFast("Close!"));
 
             new BinanceTrackerTrayForm(safelyComponentControl);
-
-            BinaryUserDataSaveSystem userDataSaveSystem = new BinaryUserDataSaveSystem();
-            UserData data = userDataSaveSystem.Read();
-
-            new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage("Your secret: " + data.AuthenticationData.Secret)
-                .WillCloseIn(90)
-                .TryWithCarefully()
-                .Build(false);
 
             authenticatorForm = new AuthenticatorForm();
             authenticatorForm.FormClosed += onAuthenticationFormClosed;
@@ -67,7 +55,14 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         }
 
 
-        
+
+        private void onAuthenticationCompletedSuccessfully()
+        {
+            authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
+
+            authenticatorForm.Hide();
+        }
+
         private void onAuthenticationFormClosed(object? sender, FormClosedEventArgs e)
         {
             new PopupBuilder()
@@ -78,13 +73,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             authenticatorForm.FormClosed -= onAuthenticationFormClosed;
             Environment.FailFast("Authentication failed!");
-        }
-
-        private void onAuthenticationCompletedSuccessfully()
-        {
-            authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
-
-            authenticatorForm.Hide();
         }
 
         private void onFormActivated(object? sender, EventArgs e)

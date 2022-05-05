@@ -1,4 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Control;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Files;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Themes;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Directories
 {
@@ -34,12 +36,15 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Directories
 
                 public readonly DirectoryFilesControl User;
 
+                public readonly DirectoryThemesControl Themes;
+
 
 
                 public DirectoryOfResources()
                 {
                     Images = new DirectoryImagesControl();
                     User = new DirectoryFilesControl();
+                    Themes = new DirectoryThemesControl();
                 }
             }
         }

@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.User.Authentication.System.Result;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {

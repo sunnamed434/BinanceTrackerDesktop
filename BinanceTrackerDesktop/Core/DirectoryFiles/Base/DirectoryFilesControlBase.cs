@@ -1,13 +1,10 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Item;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Utility;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Base
 {
-    public abstract class DirectoryFilesControlBase<TDirectoryFileItem> : IDirectoryFilesControl<TDirectoryFileItem> where TDirectoryFileItem : IDirectoryFileItem
+    public abstract class DirectoryFilesControlBase<TDirectoryFileItem> 
+        : IDirectoryFilesControl<TDirectoryFileItem> where TDirectoryFileItem : IDirectoryFileItem
     {
         public abstract string FolderPath { get; }
 
