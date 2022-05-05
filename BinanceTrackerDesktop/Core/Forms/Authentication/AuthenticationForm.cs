@@ -5,11 +5,10 @@ using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.Data;
 using BinanceTrackerDesktop.Core.User.Authentication.System;
-using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {

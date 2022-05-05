@@ -11,5 +11,7 @@
         public const string DAT = ".dat";
 
         public const string TXT = ".txt";
+        
+        public const string THEME = ".theme";
     }
 }

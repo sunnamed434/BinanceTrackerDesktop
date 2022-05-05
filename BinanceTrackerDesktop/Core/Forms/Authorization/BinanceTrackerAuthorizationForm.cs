@@ -9,7 +9,7 @@ using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {

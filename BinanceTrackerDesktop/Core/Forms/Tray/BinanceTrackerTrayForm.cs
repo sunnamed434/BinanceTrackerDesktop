@@ -2,10 +2,7 @@
 using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {

@@ -48,10 +48,10 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Con
                 throw new ArgumentNullException(nameof(content));
 
             ToolStrip.Text = content;
-            SetTextColor(color);
+            SetForegroundColor(color);
         }
 
-        public override void SetTextColor(Color? color)
+        public override void SetForegroundColor(Color? color)
         {
             if (color != null)
                 ToolStrip.ForeColor = (Color)color;

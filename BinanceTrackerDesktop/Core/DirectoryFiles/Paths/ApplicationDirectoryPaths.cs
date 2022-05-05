@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace BinanceTrackerDesktop.Core.DirectoryFiles.Paths
+﻿namespace BinanceTrackerDesktop.Core.DirectoryFiles.Paths
 {
     public sealed class ApplicationDirectoryPaths
     {
@@ -9,5 +7,7 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Paths
         public static readonly string User = Path.Combine(Resources, nameof(User));
 
         public static readonly string Images = Path.Combine(Resources, nameof(Images));
+
+        public static readonly string Themes = Path.Combine(Resources, nameof(Themes));
     }
 }

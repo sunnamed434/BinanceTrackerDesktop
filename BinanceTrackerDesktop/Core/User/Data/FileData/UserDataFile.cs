@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Format;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Paths;
 using System.Text;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryFilesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Files.DirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.User.Data.FileData
 {

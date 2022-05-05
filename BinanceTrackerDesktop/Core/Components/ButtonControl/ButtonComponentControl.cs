@@ -1,7 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Components.ButtonControl.EventsContainer;
 using BinanceTrackerDesktop.Core.Components.TextControl;
-using System;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl
 {

@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;

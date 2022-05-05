@@ -1,12 +1,8 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace BinanceTrackerDesktop.Core.Components.TextControl
+﻿namespace BinanceTrackerDesktop.Core.Components.TextControl
 {
     public class TextComponentControl : ITextable
     {
-        private readonly Control control;
+        private readonly Control control = null;
 
         private Color? defaultColor = null;
 
@@ -31,7 +27,6 @@ namespace BinanceTrackerDesktop.Core.Components.TextControl
 
         public TextComponentControl()
         {
-            this.control = null;
         }
 
 
@@ -42,12 +37,12 @@ namespace BinanceTrackerDesktop.Core.Components.TextControl
                 throw new ArgumentNullException(nameof(content));
 
             if (color != null)
-                SetTextColor(color);
+                SetForegroundColor(color);
 
             this.control.Text = content;
         }
 
-        public virtual void SetTextColor(Color? color)
+        public virtual void SetForegroundColor(Color? color)
         {
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
@@ -55,20 +50,38 @@ namespace BinanceTrackerDesktop.Core.Components.TextControl
             this.control.ForeColor = (Color)color;
         }
 
-        public void SetColor(Color? color)
+        public virtual void SetBackgroundColor(Color? color)
         {
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
 
-            this.control.ForeColor = (Color)color;
+            this.control.BackColor = (Color)color;
         }
 
-        public void SetDefaultTextColor(Color? color)
+        public virtual void SetDefaultTextColor(Color? color)
         {
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
 
             defaultColor = (Color)color;
+        }
+
+        public void SetDefaultTextColorAndAsCurrentForegroundColor(Color? color)
+        {
+            if (color == null)
+                throw new ArgumentNullException(nameof(color));
+
+            SetDefaultTextColor(color);
+            SetForegroundColor(color);
+        }
+
+        public void SetDefaultTextColorAndAsCurrentBackgroundColor(Color? color)
+        {
+            if (color == null)
+                throw new ArgumentNullException(nameof(color));
+
+            SetDefaultTextColor(color);
+            SetBackgroundColor(color);
         }
 
         public Color? GetDefaultTextColor()

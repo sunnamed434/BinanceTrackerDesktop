@@ -136,7 +136,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             for (int i = 0; i < formTextControls.Length; i++)
             {
                 formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Hiden);
-                formTextControls[i].SetTextColor(Color.Black);
+                formTextControls[i].SetForegroundColor(Color.Black);
             }
         }
 

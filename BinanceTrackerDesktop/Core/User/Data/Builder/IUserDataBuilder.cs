@@ -63,7 +63,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         IUserDataBuilder AddBalancesStateBasedOnData(bool? value);
 
         /// <summary>
-        /// Set balances state to hiden (true) to the <see cref="UserData"/>
+        /// Set balances state to hiden <see langword="true"/> to the <see cref="UserData"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetBalancesHiden();
@@ -81,7 +81,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         IUserDataBuilder SetNotificationsDisabled();
 
         /// <summary>
-        /// Set notifications state to enabled (true) to the <see cref="UserData"/>
+        /// Set notifications state to enabled <see langword="true"/> to the <see cref="UserData"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetNotificationsEnabled();
