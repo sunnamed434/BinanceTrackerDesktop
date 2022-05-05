@@ -4,7 +4,9 @@ using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
 using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
+using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
+using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
@@ -133,7 +135,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         {
             for (int i = 0; i < formTextControls.Length; i++)
             {
-                formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Hide);
+                formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Hiden);
                 formTextControls[i].SetTextColor(Color.Black);
             }
         }
@@ -142,7 +144,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         {
             for (int i = 0; i < formTextControls.Length; i++)
             {
-                formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Initialize, formTextControls[i].GetDefaultTextColor());
+                formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Initializing, formTextControls[i].GetDefaultTextColor());
             }
         }
 
@@ -177,9 +179,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
                 await refreshBalancesFixedAsync();
             }
 
-            UserData userData = new BinaryUserDataSaveSystem().Read();
-            userData.IsBalancesHiden = isBalancesHiden;
-            userData.SaveUserData();
+            new UserDataBuilder()
+                .ReadExistingUserDataAndCacheAll(new BinaryUserDataSaveSystem())
+                .AddBalancesStateBasedOnData(isBalancesHiden)
+                .GetLastUsedSaveSystem(out IUserDataSaveSystem saveSystem)
+                .Build()
+                .WriteUserData(saveSystem);
         }
 
         private async Task onCloseCallbackAsync()
@@ -194,8 +199,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
     public class BinanceTrackerBalanceTextValues
     {
-        public const string Initialize = "-----";
+        public const string Initializing = "-----";
 
-        public const string Hide = "*****";
+        public const string Hiden = "*****";
     }
 }

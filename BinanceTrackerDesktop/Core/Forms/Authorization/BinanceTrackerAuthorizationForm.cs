@@ -3,6 +3,7 @@ using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
+using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.Validators;
@@ -82,12 +83,26 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                 {
                     if (userData.AuthenticationData != null)
                     {
-                        new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text, userData.AuthenticationData).SaveUserData();
+                        new UserDataBuilder()
+                            .AddKey(this.UserKeyTextBox.Text)
+                            .AddSecret(this.UserSecretTextBox.Text)
+                            .AddCurrency(this.UserCurrenyTextBox.Text)
+                            .AddTwoFactor(userData.AuthenticationData)
+                            .AddBalancesStateBasedOnData(userData.IsBalancesHiden)
+                            .AddBestBalance(userData.BestBalance)
+                            .AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled)
+                            .Build()
+                            .WriteUserData(new BinaryUserDataSaveSystem());
                     }
                 }
                 else
                 {
-                    new UserData(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text).SaveUserData();
+                    new UserDataBuilder()
+                        .AddKey(this.UserKeyTextBox.Text)
+                        .AddSecret(this.UserKeyTextBox.Text)
+                        .AddCurrency(this.UserCurrenyTextBox.Text)
+                        .Build()
+                        .WriteUserData(new BinaryUserDataSaveSystem());
                 }
 
                 base.Hide();

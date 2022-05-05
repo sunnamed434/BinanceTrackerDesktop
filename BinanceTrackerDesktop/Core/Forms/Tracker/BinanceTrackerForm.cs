@@ -59,6 +59,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             authenticatorForm = new AuthenticatorForm();
             authenticatorForm.FormClosed += onAuthenticationFormClosed;
+            authenticatorForm.OnAuthenticationCompletedSuccessfully += onAuthenticationCompletedSuccessfully;
             authenticatorForm.ShowDialog();
 
             base.Activated += onFormActivated;
@@ -66,7 +67,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         }
 
 
-
+        
         private void onAuthenticationFormClosed(object? sender, FormClosedEventArgs e)
         {
             new PopupBuilder()
@@ -75,8 +76,15 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 .TryWithCarefully()
                 .Build(false);
 
-            Environment.FailFast("Authentication failed!");
             authenticatorForm.FormClosed -= onAuthenticationFormClosed;
+            Environment.FailFast("Authentication failed!");
+        }
+
+        private void onAuthenticationCompletedSuccessfully()
+        {
+            authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
+
+            authenticatorForm.Hide();
         }
 
         private void onFormActivated(object? sender, EventArgs e)
