@@ -21,33 +21,6 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
 
 
-        public UserData(string key, string secret, string currency, UserTwoFactorAuthenticationData authenticationData)
-        {
-            Key = key;
-            Secret = secret;
-            Currency = currency;
-            AuthenticationData = authenticationData;
-        }
-
-        public UserData(string key, string secret, string currency) : this(key, secret, currency, null)
-        {
-           
-        }
-
-        public UserData(string key, string secret, string currency, UserTwoFactorAuthenticationData authenticationData, decimal bestBalance, bool? isBalancesHiden, bool? isNotificationsEnabled) : this(key, secret, currency, authenticationData)
-        {
-            BestBalance = bestBalance;
-            IsBalancesHiden = isBalancesHiden;
-            IsNotificationsEnabled = isNotificationsEnabled;
-        }
-
-        public UserData()
-            : this(key: null, secret: null, currency: null, null, bestBalance: default, isBalancesHiden: null, isNotificationsEnabled: null)
-        {
-        }
-
-
-
         public bool IsNotificationsDisabled => IsNotificationsEnabled == false;
     }
 }

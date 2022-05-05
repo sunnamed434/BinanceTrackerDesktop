@@ -6,6 +6,7 @@ using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
+using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
@@ -89,9 +90,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
         private void onNotificationsItemControlClicked(EventArgs e)
         {
-            UserData userData = new BinaryUserDataSaveSystem().Read();
-            userData.IsNotificationsEnabled = userData.IsNotificationsEnabled == true ? false : true;
-            userData.SaveUserData();
+            IUserDataBuilder userDataBuilder = new UserDataBuilder()
+                .ReadExistingUserDataAndCacheAll(new BinaryUserDataSaveSystem());
+
+            UserData userData = userDataBuilder.Build();
+            userDataBuilder
+                .AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled == true ? false : true);
+            userData = userDataBuilder.Build()
+                .WriteUserDataThenRead(userDataBuilder.GetLastUsedSaveSystem());
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)

@@ -6,6 +6,8 @@ using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.Data;
 using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.User.Data;
+using BinanceTrackerDesktop.Core.User.Data.Builder;
+using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.DirectoryImagesControl;
 
@@ -65,19 +67,21 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
                 .BuildAsMessageBox();
 
             BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
-
-            UserData userData = null;
-            if ((userData = saveSystem.Read()) != null)
+            if (saveSystem.Read() != null)
             {
-                userData.AuthenticationData = new UserTwoFactorAuthenticationData(SecretKeyTextBox.Text);
-                saveSystem.Write(userData);
+                new UserDataBuilder()
+                    .ReadExistingUserDataAndCacheAll(saveSystem)
+                    .AddTwoFactor(new UserTwoFactorAuthenticationData(this.SecretKeyTextBox.Text))
+                    .Build()
+                    .WriteUserData(new BinaryUserDataSaveSystem());
+                
                 return;
             }
 
-            new BinaryUserDataSaveSystem().Write(new UserData
-            {
-                AuthenticationData = new UserTwoFactorAuthenticationData(SecretKeyTextBox.Text),
-            });
+            new UserDataBuilder()
+                .AddTwoFactor(new UserTwoFactorAuthenticationData(this.SecretKeyTextBox.Text))
+                .Build()
+                .WriteUserData(new BinaryUserDataSaveSystem());
         }
     }
 }
