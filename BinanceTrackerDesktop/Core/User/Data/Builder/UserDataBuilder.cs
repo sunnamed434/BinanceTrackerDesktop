@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.User.Authentication.Data;
-using BinanceTrackerDesktop.Core.User.Data.Save;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Builder
 {
@@ -7,13 +6,15 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
     {
         private UserData userData;
 
-        private IUserDataSaveSystem saveSystem; 
 
 
-
-        public UserDataBuilder()
+        public UserDataBuilder(UserData userData)
         {
-            userData = new UserData();
+            this.userData = userData;
+        }
+
+        public UserDataBuilder() : this(new UserData())
+        {
         }
 
 
@@ -23,7 +24,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException(nameof(value));
 
-            userData.Key = value;
+            this.userData.Key = value;
             return this;
         }
 
@@ -32,7 +33,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException(nameof(value));
 
-            userData.Secret = value;
+            this.userData.Secret = value;
             return this;
         }
 
@@ -41,13 +42,13 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException(nameof(value));
 
-            userData.Currency = value;
+            this.userData.Currency = value;
             return this;
         }
 
         public IUserDataBuilder AddBestBalance(decimal value)
         {
-            userData.BestBalance = value;
+            this.userData.BestBalance = value;
             return this;
         }
 
@@ -56,7 +57,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             if (authentication == null)
                 throw new ArgumentNullException(nameof(authentication));
 
-            userData.AuthenticationData = authentication;
+            this.userData.AuthenticationData = authentication;
             return this;
         }
 
@@ -82,66 +83,43 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
 
         public IUserDataBuilder SetBalancesHiden()
         {
-            userData.IsBalancesHiden = true;
+            this.userData.IsBalancesHiden = true;
             return this;
         }
 
         public IUserDataBuilder SetBalancesIsNotHiden()
         {
-            userData.IsBalancesHiden = false;
+            this.userData.IsBalancesHiden = false;
             return this;
         }
 
         public IUserDataBuilder SetNotificationsDisabled()
         {
-            userData.IsNotificationsEnabled = false;
+            this.userData.IsNotificationsEnabled = false;
             return this;
         }
 
         public IUserDataBuilder SetNotificationsEnabled()
         {
-            userData.IsNotificationsEnabled = true;
+            this.userData.IsNotificationsEnabled = true;
             return this;
         }
 
-        public IUserDataBuilder ReadExistingUserDataAndCacheIt(IUserDataSaveSystem system)
+        public IUserDataBuilder SetAsUserStartedApplicationFirstTime()
         {
-            if (system == null)
-                throw new ArgumentNullException(nameof(system));
-
-            userData = saveSystem.Read();
+            this.userData.IsUserStartedApplicationFirstTime = true;
             return this;
         }
 
-        public IUserDataBuilder ReadExistingUserDataAndCacheAll(IUserDataSaveSystem system)
+        public IUserDataBuilder SetAsUserStartedApplicationNotFirstTime()
         {
-            if (system == null)
-                throw new ArgumentNullException(nameof(system));
-
-            saveSystem = system;
-            userData = saveSystem.Read();
+            this.userData.IsUserStartedApplicationFirstTime = false;
             return this;
-        }
-
-        public IUserDataBuilder GetLastUsedSaveSystem(out IUserDataSaveSystem system)
-        {
-            if (saveSystem == null)
-                throw new InvalidOperationException();
-
-            system = saveSystem;
-            return this;
-        }
-
-        public IUserDataSaveSystem GetLastUsedSaveSystem()
-        {
-            GetLastUsedSaveSystem(out IUserDataSaveSystem system);
-
-            return system;
         }
 
         public UserData Build()
         {
-            return userData;
+            return this.userData;
         }
     }
 }

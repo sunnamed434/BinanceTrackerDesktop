@@ -43,6 +43,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
             if (userData.BestBalance < walletResult.Value)
                 userDataBuilder.AddBestBalance(walletResult.Value);
 
+            userDataBuilder.SetAsUserStartedApplicationNotFirstTime();
             userDataBuilder.Build()
                 .WriteUserData(userDataBuilder.GetLastUsedSaveSystem());
 

@@ -99,8 +99,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                 {
                     new UserDataBuilder()
                         .AddKey(this.UserKeyTextBox.Text)
-                        .AddSecret(this.UserKeyTextBox.Text)
+                        .AddSecret(this.UserSecretTextBox.Text)
                         .AddCurrency(this.UserCurrenyTextBox.Text)
+                        .SetAsUserStartedApplicationFirstTime()
                         .Build()
                         .WriteUserData(new BinaryUserDataSaveSystem());
                 }

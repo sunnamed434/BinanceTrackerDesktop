@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Theme;
-using BinanceTrackerDesktop.Core.User.Authentication.Data;
+﻿using BinanceTrackerDesktop.Core.User.Authentication.Data;
 
 namespace BinanceTrackerDesktop.Core.User.Data
 {
@@ -14,7 +13,7 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
         public UserTwoFactorAuthenticationData AuthenticationData;
 
-        public Theme Theme;
+        public Themes.Theme Theme;
 
         public decimal BestBalance;
 
@@ -22,8 +21,12 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
         public bool? IsNotificationsEnabled;
 
+        public bool IsUserStartedApplicationFirstTime;
+
 
 
         public bool IsNotificationsDisabled => IsNotificationsEnabled == false;
+
+        public bool HasAuthenticationData => AuthenticationData != null;
     }
 }
