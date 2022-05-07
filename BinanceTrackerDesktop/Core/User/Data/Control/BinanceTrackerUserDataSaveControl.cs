@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Components.Safely;
+﻿using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
@@ -7,45 +7,46 @@ using BinanceTrackerDesktop.Core.User.Wallet.Models;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Control
 {
-    public sealed class BinanceTrackerUserDataSaveControl
+    public sealed class BinanceTrackerUserDataSaveControl : IAwaitableSingletonObject, IAwaitableComponent
     {
-        private readonly ISafelyComponentControl safelyComponentContro;
-
         private readonly UserWallet wallet;
 
+        private static BinanceTrackerUserDataSaveControl instance;
 
 
-        public BinanceTrackerUserDataSaveControl(ISafelyComponentControl safelyComponentContro, UserWallet wallet)
+
+        public BinanceTrackerUserDataSaveControl(UserWallet wallet)
         {
-            if (safelyComponentContro == null)
-                throw new ArgumentNullException(nameof(safelyComponentContro));
-
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
-            this.safelyComponentContro = safelyComponentContro;
+            instance = this;
             this.wallet = wallet;
-
-            this.safelyComponentContro.RegisterListener(onCloseCallbackAsync);
         }
 
 
 
-        private async Task onCloseCallbackAsync()
-        {
-            UserWalletResult walletResult = await this.wallet.GetTotalBalanceAsync();
+        object IAwaitableSingletonObject.Instance => instance;
 
-            IUserDataBuilder userDataBuilder = new UserDataBuilder();
-            userDataBuilder
-                .ReadExistingUserDataAndCacheAll(new BinaryUserDataSaveSystem());
+
+
+        async Task IAwaitableComponent.OnExecute()
+        {
+            BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
+            IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());
+
             UserData userData = userDataBuilder.Build();
 
-            if (userData.BestBalance < walletResult.Value)
-                userDataBuilder.AddBestBalance(walletResult.Value);
+            UserWalletResult walletTotalBalanceResult = await this.wallet.GetTotalBalanceAsync();
+            if (userData.BestBalance.HasValue && userData.BestBalance.Value < walletTotalBalanceResult.Value)
+                userDataBuilder.AddBestBalance(walletTotalBalanceResult.Value);
 
-            userDataBuilder.SetAsUserStartedApplicationNotFirstTime();
-            userDataBuilder.Build()
-                .WriteUserData(userDataBuilder.GetLastUsedSaveSystem());
+            if (userData.BestBalance.HasValue == false)
+                userDataBuilder.AddBestBalance(walletTotalBalanceResult.Value);
+
+            userDataBuilder.SetAsUserStartedApplicationNotFirstTime()
+                .Build()
+                .WriteUserData(saveSystem);
 
             await Task.CompletedTask;
         }

@@ -1,16 +1,13 @@
 ﻿using Binance.Net.Clients;
-using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
+using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
-using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Core.Entry;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
-using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
-using BinanceTrackerDesktop.Core.Themes.Detector;
-using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
@@ -20,20 +17,22 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryI
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public partial class BinanceTrackerForm : Form
+    public partial class BinanceTrackerForm : Form, IAwaitableSingletonObject, IAwaitableComponentStart, IAwaitableComponentComplete
     {
-        private readonly ISafelyComponentControl safelyComponentControl;
-
         private readonly AuthenticatorForm authenticatorForm;
 
         private UserClient userClient;
 
         private IUserStatus userStatus;
 
+        private static BinanceTrackerForm instance;
+
 
 
         public BinanceTrackerForm()
         {
+            instance = this;
+
             InitializeComponent();
 
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -42,12 +41,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
-            
-            safelyComponentControl = new SafelyComponentControl()
-                .OnStarted(() => base.Hide())
-                .OnCompleted(() => Environment.FailFast("Close!"));
-
-            new BinanceTrackerTrayForm(safelyComponentControl);
 
             if (new BinaryUserDataSaveSystem().Read().HasAuthenticationData)
             {
@@ -55,42 +48,59 @@ namespace BinanceTrackerDesktop.Tracker.Forms
                 authenticatorForm.FormClosed += onAuthenticationFormClosed;
                 authenticatorForm.OnAuthenticationCompletedSuccessfully += onAuthenticationCompletedSuccessfully;
                 authenticatorForm.ShowDialog();
+                return;
             }
 
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
         }
 
-        
+
+
+        object IAwaitableSingletonObject.Instance => instance;
+
+
+
+        void IAwaitableComponentStart.OnStart()
+        {
+            base.Hide();
+        }
+
+        void IAwaitableComponentComplete.OnComplete()
+        {
+            Application.Exit();
+        }
+
+
 
         private void onAuthenticationCompletedSuccessfully()
         {
             authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
+
+            onFormActivated(this, null);
+            base.FormClosing += onFormClosing;
+
             authenticatorForm.Hide();
         }
 
         private void onAuthenticationFormClosed(object? sender, FormClosedEventArgs e)
         {
-            new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
-                .WillCloseIn(90)
-                .TryWithCarefully()
-                .Build(false);
-
             authenticatorForm.FormClosed -= onAuthenticationFormClosed;
-            Environment.FailFast("Authentication failed!");
+
+            Application.Exit();
         }
 
         private void onFormActivated(object? sender, EventArgs e)
         {
             base.Activated -= onFormActivated;
 
+            new BinanceTrackerTrayForm();
+
             userClient = new UserClient();
-
             userStatus = new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus();
-            new BinanceTrackerUserDataSaveControl(safelyComponentControl, userClient.Wallet);
+            new BinanceTrackerUserDataSaveControl(userClient.Wallet);
 
-            new BinanceTrackerUserBalanceControlUI(safelyComponentControl, userStatus,
+            new BinanceTrackerUserBalanceControlUI(userStatus,
             new ButtonComponentControl[]
             {
                 new ButtonComponentControl(this.RefreshTotalBalanceButton),
@@ -102,8 +112,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             });
 
             new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
-
-            this.themable.ApplyTheme();
         }
 
         private async void onFormClosing(object? sender, FormClosingEventArgs e)
@@ -112,7 +120,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             e.Cancel = true;
 
-            await safelyComponentControl.CallListenersAsync();
+            await BinanceTrackerEntryPoint.AwaitableComponentsProvider.Observer.CallListenersAsync();
         }
     }
 }

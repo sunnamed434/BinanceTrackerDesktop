@@ -37,8 +37,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         /// </summary>
         /// <param name="value">Adding value.</param>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
-        /// <exception cref="System.ArgumentException"></exception>
-        IUserDataBuilder AddBestBalance(decimal value);
+        IUserDataBuilder AddBestBalance(decimal? value);
 
         /// <summary>
         /// Adding <paramref name="authentication"/> to the <see cref="UserData"/>

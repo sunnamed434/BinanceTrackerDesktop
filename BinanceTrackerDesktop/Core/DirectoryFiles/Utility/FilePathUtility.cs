@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace BinanceTrackerDesktop.Core.DirectoryFiles.Utility
+﻿namespace BinanceTrackerDesktop.Core.DirectoryFiles.Utility
 {
     public sealed class FilePathUtility
     {

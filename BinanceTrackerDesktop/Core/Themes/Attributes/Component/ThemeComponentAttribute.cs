@@ -5,7 +5,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Attributes.Component
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class ThemeComponentAttribute : Attribute
     {
-        public ThemeComponentNameStringModel ComponentNameStringModel { get; }
+        public ThemeComponentNameStringModel NameString { get; }
 
 
 
@@ -14,7 +14,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Attributes.Component
             if (string.IsNullOrWhiteSpace(nameof(name)))
                 throw new ArgumentException(nameof(name));
 
-            ComponentNameStringModel = new ThemeComponentNameStringModel(name);
+            NameString = new ThemeComponentNameStringModel(name);
         }
     }
 }

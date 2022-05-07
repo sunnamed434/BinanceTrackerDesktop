@@ -2,7 +2,7 @@
 
 namespace BinanceTrackerDesktop.Core.Notification
 {
-    public sealed class NotificationsControl
+    public sealed class NotificationsSender
     {
         private static NotifyIcon notifyIcon;
 
@@ -15,18 +15,11 @@ namespace BinanceTrackerDesktop.Core.Notification
             if (notifyIcon == null)
                 throw new ArgumentNullException(nameof(notifyIcon));
 
-            NotificationsControl.notifyIcon = notifyIcon;
+            NotificationsSender.notifyIcon = notifyIcon;
 
             notifyIcon.BalloonTipShown += onPopupShown;
             notifyIcon.BalloonTipClicked += onPopupClicked;
             notifyIcon.BalloonTipClosed += onPopupClosed;
-        }
-
-        ~NotificationsControl()
-        {
-            notifyIcon.BalloonTipShown -= onPopupShown;
-            notifyIcon.BalloonTipClicked -= onPopupClicked;
-            notifyIcon.BalloonTipClosed -= onPopupClosed;
         }
 
 
@@ -45,7 +38,7 @@ namespace BinanceTrackerDesktop.Core.Notification
             {
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, ToolTipIcon.None);
             }
-            else if (new BinaryUserDataSaveSystem().Read().IsNotificationsEnabled ?? default(bool) == true)
+            else if (new BinaryUserDataSaveSystem().Read().IsNotificationsEnabled.HasValue)
             {
                 notifyIcon.ShowBalloonTip(popup.Timeout, popup.Title, popup.Message, ToolTipIcon.None);
             }

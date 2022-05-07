@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinanceTrackerDesktop.Core.Notification.Popup.Extension
+﻿namespace BinanceTrackerDesktop.Core.Notification.Popup.Extension
 {
     public static class PopupExtension
     {
@@ -9,7 +7,7 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Extension
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            NotificationsControl.Show(source, sendAnyway);
+            NotificationsSender.Show(source, sendAnyway);
         }
     }
 }

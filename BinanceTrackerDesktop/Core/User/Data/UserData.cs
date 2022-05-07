@@ -15,7 +15,7 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
         public Themes.Theme Theme;
 
-        public decimal BestBalance;
+        public decimal? BestBalance;
 
         public bool? IsBalancesHiden;
 

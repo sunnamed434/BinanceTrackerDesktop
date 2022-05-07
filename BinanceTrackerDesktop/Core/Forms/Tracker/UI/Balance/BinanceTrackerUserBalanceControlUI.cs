@@ -1,21 +1,18 @@
 ﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
+using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
-using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
-using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Status.Result;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {
-    public class BinanceTrackerUserBalanceControlUI
+    public class BinanceTrackerUserBalanceControlUI : IAwaitableSingletonObject, IAwaitableComponent
     {
-        private ISafelyComponentControl formSafelyCloseControl;
-
         private readonly IUserStatus userStatus;
 
         private readonly ButtonComponentControl[] formButtonControls;
@@ -24,13 +21,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
         private bool isBalancesHiden;
 
+        private static BinanceTrackerUserBalanceControlUI instance;
 
 
-        public BinanceTrackerUserBalanceControlUI(ISafelyComponentControl formSafelyCloseControl, IUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
+
+        public BinanceTrackerUserBalanceControlUI(IUserStatus userStatus, ButtonComponentControl[] formButtonControls, LabelComponentControl[] formTextControls)
         {
-            if (formSafelyCloseControl == null)
-                throw new ArgumentNullException(nameof(formSafelyCloseControl));
-
             if (userStatus == null)
                 throw new ArgumentNullException(nameof(userStatus));
 
@@ -46,21 +42,33 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             if (formTextControls.Any() == false)
                 throw new InvalidOperationException();
 
-            this.formSafelyCloseControl = formSafelyCloseControl;
+            instance = this;
+
             this.userStatus = userStatus;
             this.formButtonControls = formButtonControls;
             this.formTextControls = formTextControls;
 
-            formTextControls[0].SetDefaultTextColor(Color.Black);
-            formTextControls[1].SetDefaultTextColor(Color.Gray);
-
             setTextsInitializing();
             initializeAsync();
 
-            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
             this.formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler += onRefreshTotalBalanceButtonClicked;
             this.formTextControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler += onTextClicked;
             this.formTextControls[1].EventsContainer.ClickEventListener.OnTriggerEventHandler += onTextClicked;
+        }
+
+
+
+        object IAwaitableSingletonObject.Instance => instance;
+
+
+
+        async Task IAwaitableComponent.OnExecute()
+        {
+            formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onRefreshTotalBalanceButtonClicked;
+            formTextControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
+            formTextControls[1].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
+
+            await Task.CompletedTask;
         }
 
 
@@ -78,8 +86,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             {
                 await refreshBalancesFixedAsync();
             }
-
-            await Task.CompletedTask;
         }
 
         private async Task refreshBalancesFixedAsync(bool lockButton = true)
@@ -97,28 +103,21 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
                     await refreshBalancesSyncAsync();
                 }
             }
-
-            await Task.CompletedTask;
         }
 
         private async Task refreshBalanceAsync()
         {
-            IUserStatusResult totalBalanceResult = await userStatus.CalculateUserTotalBalanceAsync();
-            formTextControls[0].SetText(userStatus.Format((decimal)totalBalanceResult.Value));
-
-            await Task.CompletedTask;
+            IUserStatusResult totalBalanceStatusResult = await userStatus.CalculateUserTotalBalanceAsync();
+            formTextControls[0].SetText(userStatus.Format((decimal)totalBalanceStatusResult.Value));
         }
 
         private async Task refreshBalanceLossesAsync()
         {
+            IUserStatusResult totalBalanceStatusResult = await userStatus.CalculateUserTotalBalanceAsync();
+            IUserStatusResult balanceLossesStatusResult = await userStatus.CalculateUserBalanceLossesAsync();
+
             UserData data = new BinaryUserDataSaveSystem().Read();
-            
-            IUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
-            IUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
-
-            formTextControls[1].SetText(userStatus.Format((decimal)balanceLossesResult.Value), getColorFromBalanceLosses((decimal)balanceTotalResult.Value, data.BestBalance));
-
-            await Task.CompletedTask;
+            //formTextControls[1].SetText(userStatus.Format((decimal)balanceLossesStatusResult.Value), getColorFromBalanceLosses((decimal)totalBalanceStatusResult.Value, (decimal)data.BestBalance));
         }
 
         private async Task refreshBalancesSyncAsync(Action onStartedCallback = null, Action onCompletedCallback = null)
@@ -129,8 +128,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             await refreshBalanceLossesAsync();
 
             onCompletedCallback?.Invoke();
-
-            await Task.CompletedTask;
         }
 
         private void setTextsHiden()
@@ -138,7 +135,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             for (int i = 0; i < formTextControls.Length; i++)
             {
                 formTextControls[i].SetText(BinanceTrackerBalanceTextValues.Hiden);
-                formTextControls[i].SetForegroundColor(Color.Black);
             }
         }
 
@@ -181,25 +177,15 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
                 await refreshBalancesFixedAsync();
             }
 
-            new UserDataBuilder()
-                .ReadExistingUserDataAndCacheAll(new BinaryUserDataSaveSystem())
+            BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
+            new UserDataBuilder(saveSystem.Read())
                 .AddBalancesStateBasedOnData(isBalancesHiden)
-                .GetLastUsedSaveSystem(out IUserDataSaveSystem saveSystem)
                 .Build()
                 .WriteUserData(saveSystem);
         }
-
-        private async Task onCloseCallbackAsync()
-        {
-            formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onRefreshTotalBalanceButtonClicked;
-            formTextControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
-            formTextControls[1].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
-
-            await Task.CompletedTask;
-        }
     }
 
-    public class BinanceTrackerBalanceTextValues
+    public sealed class BinanceTrackerBalanceTextValues
     {
         public const string Initializing = "-----";
 

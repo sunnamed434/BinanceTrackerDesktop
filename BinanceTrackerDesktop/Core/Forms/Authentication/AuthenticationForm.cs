@@ -68,19 +68,17 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
             BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
             if (saveSystem.Read() != null)
             {
-                new UserDataBuilder()
-                    .ReadExistingUserDataAndCacheAll(saveSystem)
+                new UserDataBuilder(saveSystem.Read())
                     .AddTwoFactor(new UserTwoFactorAuthenticationData(this.SecretKeyTextBox.Text))
                     .Build()
-                    .WriteUserData(new BinaryUserDataSaveSystem());
-                
+                    .WriteUserData(saveSystem);
                 return;
             }
 
             new UserDataBuilder()
                 .AddTwoFactor(new UserTwoFactorAuthenticationData(this.SecretKeyTextBox.Text))
                 .Build()
-                .WriteUserData(new BinaryUserDataSaveSystem());
+                .WriteUserData(saveSystem);
         }
     }
 }

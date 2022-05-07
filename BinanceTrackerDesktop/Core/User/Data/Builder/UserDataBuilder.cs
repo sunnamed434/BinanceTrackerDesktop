@@ -46,7 +46,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             return this;
         }
 
-        public IUserDataBuilder AddBestBalance(decimal value)
+        public IUserDataBuilder AddBestBalance(decimal? value)
         {
             this.userData.BestBalance = value;
             return this;

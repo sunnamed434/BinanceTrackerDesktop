@@ -118,13 +118,12 @@
             <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.AddBestBalance(System.Decimal)">
+        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.AddBestBalance(System.Nullable{System.Decimal})">
             <summary>
             Adding <see cref="F:BinanceTrackerDesktop.Core.User.Data.UserData.BestBalance"/> to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.UserData"/>
             </summary>
             <param name="value">Adding value.</param>
             <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
-            <exception cref="T:System.ArgumentException"></exception>
         </member>
         <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.AddTwoFactor(BinanceTrackerDesktop.Core.User.Authentication.Data.UserTwoFactorAuthenticationData)">
             <summary>
@@ -183,33 +182,6 @@
             Set <see cref="F:BinanceTrackerDesktop.Core.User.Data.UserData.IsUserStartedApplicationFirstTime"/> to <see langword="false"/> to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.UserData"/>
             </summary>
             <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
-        </member>
-        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.ReadExistingUserDataAndCacheIt(BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem)">
-            <summary>
-            Reading existing user data and caching it to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/>
-            </summary>
-            <param name="system">User data save system.</param>
-            <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
-        </member>
-        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.ReadExistingUserDataAndCacheAll(BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem)">
-            <summary>
-            Reading existing user data and caching them to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/> <see cref="T:BinanceTrackerDesktop.Core.User.Data.UserData"/> and <see cref="T:BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem"/>
-            </summary>
-            <param name="system">User data save system.</param>
-            <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
-        </member>
-        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.GetLastUsedSaveSystem(BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem@)">
-            <summary>
-            Returning the last used <see cref="T:BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem"/>
-            </summary>
-            <param name="system">Last used <see cref="T:BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem"/></param>
-            <returns>Instance to the <see cref="T:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder"/></returns>
-        </member>
-        <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.GetLastUsedSaveSystem">
-            <summary>
-            Get last used <see cref="T:BinanceTrackerDesktop.Core.User.Data.Save.IUserDataSaveSystem"/>
-            </summary>
-            <returns>Instance to the last used <see cref="!:IUserDataSaveSystem>"/></returns>
         </member>
         <member name="M:BinanceTrackerDesktop.Core.User.Data.Builder.IUserDataBuilder.Build">
             <summary>

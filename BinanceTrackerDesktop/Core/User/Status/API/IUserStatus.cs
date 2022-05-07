@@ -16,6 +16,6 @@ namespace BinanceTrackerDesktop.Core.User.Control
 
         Task<IUserStatusResult> CalculateUserBalanceLossesAsync();
 
-        string Format(decimal value);
+        string Format(decimal? value);
     }
 }

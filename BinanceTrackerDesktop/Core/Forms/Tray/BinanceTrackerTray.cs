@@ -1,8 +1,10 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
+using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Observer;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
-using BinanceTrackerDesktop.Core.Components.Safely;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Base;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
+using BinanceTrackerDesktop.Core.Entry;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
@@ -14,10 +16,8 @@ using BinanceTrackerDesktop.Core.Window;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
-    public sealed class BinanceTrackerTray : TrayComponentControlBase
+    public sealed class BinanceTrackerTray : TrayComponentControlBase, IAwaitableSingletonObject, IAwaitableComponentObserverInstance, IAwaitableComponent
     {
-        private readonly ISafelyComponentControl formSafelyCloseControl;
-
         private readonly ProcessWindowHelper processWindowHelper;
 
         private readonly MenuStripComponentItemControl applicationOpenItemControl;
@@ -26,14 +26,16 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
         private readonly MenuStripComponentItemControl applicationQuitItemControl;
 
+        private static BinanceTrackerTray instance;
+
+        IAwaitableComponentsObserver IAwaitableComponentObserverInstance.Observer { get; set; }
 
 
-        public BinanceTrackerTray(NotifyIcon notifyIcon, ISafelyComponentControl formSafelyCloseControl) : base(notifyIcon)
+
+        public BinanceTrackerTray(NotifyIcon notifyIcon) : base(notifyIcon)
         {
-            if (formSafelyCloseControl == null)
-                throw new ArgumentNullException(nameof(formSafelyCloseControl));
+            instance = this;
 
-            this.formSafelyCloseControl = formSafelyCloseControl;
             processWindowHelper = new ProcessWindowHelper();
 
             applicationOpenItemControl = base.GetComponentAt(TrayItemsIdContainer.OpenApplicationUniqueIndex);
@@ -42,11 +44,28 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             initializeAsync();
 
-            this.formSafelyCloseControl.RegisterListener(onCloseCallbackAsync);
             applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onApplicationOpenItemClicked;
             notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onNotificationsItemControlClicked;
             applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onApplicationQuitItemClicked;
             EventsContainerControl.DoubleClickListener.OnTriggerEventHandler += onTrayDoubleClick;
+        }
+
+
+
+        object IAwaitableSingletonObject.Instance => instance;
+
+
+
+        async Task IAwaitableComponent.OnExecute()
+        {
+            applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
+            notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;
+            applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationQuitItemClicked;
+            EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClick;
+
+            this.HideTray();
+
+            await Task.CompletedTask;
         }
 
 
@@ -89,14 +108,15 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
         private void onNotificationsItemControlClicked(EventArgs e)
         {
-            IUserDataBuilder userDataBuilder = new UserDataBuilder()
-                .ReadExistingUserDataAndCacheAll(new BinaryUserDataSaveSystem());
+            BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
+            IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());
 
             UserData userData = userDataBuilder.Build();
-            userDataBuilder
-                .AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled == true ? false : true);
+
+            userDataBuilder.AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled == true ? false : true);
+
             userData = userDataBuilder.Build()
-                .WriteUserDataThenRead(userDataBuilder.GetLastUsedSaveSystem());
+                .WriteUserDataThenRead(saveSystem);
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
@@ -105,26 +125,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
                 .TryWithCarefully()
                 .Build(false);
 
-            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled ?? default));
+            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled.Value));
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)
         {
             this.HideTray();
 
-            await this.formSafelyCloseControl.CallListenersAsync();
-        }
-
-        private async Task onCloseCallbackAsync()
-        {
-            applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
-            notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;
-            applicationQuitItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationQuitItemClicked;
-            EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClick;
-
-            this.HideTray();
-
-            await Task.CompletedTask;
+            await BinanceTrackerEntryPoint.AwaitableComponentsProvider.Observer.CallListenersAsync();
         }
 
 

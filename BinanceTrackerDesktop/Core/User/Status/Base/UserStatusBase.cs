@@ -25,6 +25,6 @@ namespace BinanceTrackerDesktop.Core.User.Status.Base
 
         public abstract Task<IUserStatusResult> CalculateUserTotalBalanceAsync();
 
-        public abstract string Format(decimal value);
+        public abstract string Format(decimal? value);
     }
 }

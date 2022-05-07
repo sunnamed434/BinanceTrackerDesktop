@@ -18,8 +18,8 @@ namespace BinanceTrackerDesktop.Core.User.Status.Beginner
 
         public override async Task<IUserStatusResult> CalculateUserTotalBalanceAsync()
         {
-            UserWalletResult walletResult = await Wallet.GetTotalBalanceAsync();
-            return new UserStatusResult(walletResult.Value);
+            UserWalletResult totalBalanceWalletResult = await Wallet.GetTotalBalanceAsync();
+            return new UserStatusResult(totalBalanceWalletResult.Value);
         }
 
         public override async Task<IUserStatusResult> CalculateUserBalanceLossesAsync()
@@ -27,7 +27,7 @@ namespace BinanceTrackerDesktop.Core.User.Status.Beginner
             return await Task.FromResult<IUserStatusResult>(new UserStatusResult(default(decimal)));
         }
 
-        public override string Format(decimal value)
+        public override string Format(decimal? value)
         {
             return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value).ToString();
         }

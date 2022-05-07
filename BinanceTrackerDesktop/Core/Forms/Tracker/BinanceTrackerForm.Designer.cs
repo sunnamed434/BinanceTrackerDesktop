@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Attributes.Component;
-using BinanceTrackerDesktop.Core.Themes.Detector;
+﻿using BinanceTrackerDesktop.Core.Themes.Detector;
 using BinanceTrackerDesktop.Core.Themes.Models.Resource;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Self;
@@ -31,8 +30,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         #region Windows Form Designer
         private void InitializeComponent()
         {
-            themesProvider = new ThemesProvider(new ThemeDetector());
             themable = this;
+            themesProvider = new ThemesProvider(new ThemeDetector());
 
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
@@ -115,6 +114,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            themable.ApplyTheme();
         }
         #endregion
 
@@ -122,26 +122,28 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         void IThemable.ApplyTheme()
         {
-            IEnumerable<ThemeComponentResourceModel> resources = themesProvider.LoadThemeJSONData();
-            foreach (ThemeComponentResourceModel resource in resources)
+            foreach (ThemeComponentResourceModel resource in themesProvider.LoadThemeJSONData())
             {
-                foreach (Control control in this.Controls)
+                switch (resource.NameString.Name)
                 {
-                    ThemeComponentAttribute[] themeComponentAttributes = null;
-                    if ((themeComponentAttributes = (ThemeComponentAttribute[])control.GetType().GetCustomAttributes(typeof(ThemeComponentAttribute), false)) != null)
-                    {
-                        if (themeComponentAttributes.Any())
-                        {
-                            MessageBox.Show(themeComponentAttributes[0].ComponentNameStringModel.Name);
-                        }
-                    }
+                    case nameof(UserTotalBalanceText):
+                        UserTotalBalanceText.ForeColor = resource.RGB.GetColor();
+                        break;
+                    case nameof(TotalBalanceTooltipText):
+                        TotalBalanceTooltipText.ForeColor = resource.RGB.GetColor();
+                        break;
+                    case nameof(RefreshTotalBalanceButton):
+                        RefreshTotalBalanceButton.ForeColor = resource.RGB.GetColor();
+                        break;
+                    case nameof(UserTotalBalanceLosesText):
+                        UserTotalBalanceLosesText.ForeColor = resource.RGB.GetColor();
+                        break;
                 }
             }
         }
 
 
 
-        [ThemeComponentAttribute(nameof(UserTotalBalanceText))]
         private Label UserTotalBalanceText;
 
         private Label TotalBalanceTooltipText;
