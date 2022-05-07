@@ -57,7 +57,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             notificationsItemControl.SetText(getNotificationsText(binanceUserData.IsNotificationsEnabled ?? default(bool)));
 
             UserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
-
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Tracker Running")

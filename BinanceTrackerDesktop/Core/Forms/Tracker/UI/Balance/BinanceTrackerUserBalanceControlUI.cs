@@ -8,6 +8,7 @@ using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Status.Result;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {
@@ -111,6 +112,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         private async Task refreshBalanceLossesAsync()
         {
             UserData data = new BinaryUserDataSaveSystem().Read();
+            
             IUserStatusResult balanceTotalResult = await userStatus.CalculateUserTotalBalanceAsync();
             IUserStatusResult balanceLossesResult = await userStatus.CalculateUserBalanceLossesAsync();
 

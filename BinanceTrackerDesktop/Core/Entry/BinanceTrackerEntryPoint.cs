@@ -1,10 +1,8 @@
 ﻿using BinanceTrackerDesktop.Core.Forms.Authorization;
-using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.Window.Extension;
 using BinanceTrackerDesktop.Tracker.Forms;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Entry
 {

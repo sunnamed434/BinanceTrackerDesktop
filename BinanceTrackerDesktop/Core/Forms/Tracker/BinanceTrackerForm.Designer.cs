@@ -1,18 +1,22 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Attributes;
+﻿using BinanceTrackerDesktop.Core.Themes.Attributes.Component;
+using BinanceTrackerDesktop.Core.Themes.Detector;
+using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Self;
+using System.ComponentModel;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    partial class BinanceTrackerForm
+    partial class BinanceTrackerForm : IThemable
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IThemable themable;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private IThemesProvider themesProvider;
+
+        private IContainer components;
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,14 +26,14 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+
+        #region Windows Form Designer
         private void InitializeComponent()
         {
+            themesProvider = new ThemesProvider(new ThemeDetector());
+            themable = this;
+
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
@@ -112,22 +116,40 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.PerformLayout();
 
         }
-
         #endregion
+
+
+
+        void IThemable.ApplyTheme()
+        {
+            IEnumerable<ThemeComponentResourceModel> resources = themesProvider.LoadThemeJSONData();
+            foreach (ThemeComponentResourceModel resource in resources)
+            {
+                foreach (Control control in this.Controls)
+                {
+                    ThemeComponentAttribute[] themeComponentAttributes = null;
+                    if ((themeComponentAttributes = (ThemeComponentAttribute[])control.GetType().GetCustomAttributes(typeof(ThemeComponentAttribute), false)) != null)
+                    {
+                        if (themeComponentAttributes.Any())
+                        {
+                            MessageBox.Show(themeComponentAttributes[0].ComponentNameStringModel.Name);
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         [ThemeComponentAttribute(nameof(UserTotalBalanceText))]
         private Label UserTotalBalanceText;
 
-        [ThemeComponentAttribute(nameof(TotalBalanceTooltipText))]
         private Label TotalBalanceTooltipText;
 
-        [ThemeComponentAttribute(nameof(RefreshTotalBalanceButton))]
         private Button RefreshTotalBalanceButton;
 
-        [ThemeComponentAttribute(nameof(UserTotalBalanceLosesText))]
         private Label UserTotalBalanceLosesText;
 
         private MenuStrip MenuStrip;
     }
 }
-

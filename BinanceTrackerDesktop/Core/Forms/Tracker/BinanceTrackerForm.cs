@@ -3,16 +3,20 @@ using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.Safely;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
+using BinanceTrackerDesktop.Core.Themes.Detector;
+using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Status.Detector;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
@@ -31,11 +35,11 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         public BinanceTrackerForm()
         {
             InitializeComponent();
-            
+
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
             
@@ -45,21 +49,23 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             new BinanceTrackerTrayForm(safelyComponentControl);
 
-            authenticatorForm = new AuthenticatorForm();
-            authenticatorForm.FormClosed += onAuthenticationFormClosed;
-            authenticatorForm.OnAuthenticationCompletedSuccessfully += onAuthenticationCompletedSuccessfully;
-            authenticatorForm.ShowDialog();
+            if (new BinaryUserDataSaveSystem().Read().HasAuthenticationData)
+            {
+                authenticatorForm = new AuthenticatorForm();
+                authenticatorForm.FormClosed += onAuthenticationFormClosed;
+                authenticatorForm.OnAuthenticationCompletedSuccessfully += onAuthenticationCompletedSuccessfully;
+                authenticatorForm.ShowDialog();
+            }
 
             base.Activated += onFormActivated;
             base.FormClosing += onFormClosing;
         }
 
-
+        
 
         private void onAuthenticationCompletedSuccessfully()
         {
             authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
-
             authenticatorForm.Hide();
         }
 
@@ -96,6 +102,8 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             });
 
             new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
+
+            this.themable.ApplyTheme();
         }
 
         private async void onFormClosing(object? sender, FormClosingEventArgs e)

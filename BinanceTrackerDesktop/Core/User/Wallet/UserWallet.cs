@@ -6,9 +6,6 @@ using BinanceTrackerDesktop.Core.Formatters.Currency.Crypto;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BinanceTrackerDesktop.Core.User.Wallet
 {
@@ -44,15 +41,18 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
             const string NotExsistableCoin = "Sologenic";
             List<UserWalletCoinResult> result = new List<UserWalletCoinResult>();
-            foreach (BinanceUserAsset coin in coins.Data.Where(c => c.Available.ValueFitsToCalculation()))
+            if (coins.Success)
             {
-                if (coin.Name == NotExsistableCoin)
+                foreach (BinanceUserAsset coin in coins.Data.Where(c => c.Available.ValueFitsToCalculation()))
                 {
-                    continue;
-                }
+                    if (coin.Name == NotExsistableCoin)
+                    {
+                        continue;
+                    }
 
-                UserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
-                result.Add(coinResult);
+                    UserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
+                    result.Add(coinResult);
+                }
             }
 
             return result;
