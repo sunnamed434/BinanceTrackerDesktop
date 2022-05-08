@@ -1,12 +1,11 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Models.RGB;
-using BinanceTrackerDesktop.Core.Themes.Models.String;
+﻿using BinanceTrackerDesktop.Core.Themes.Models.HEX;
 
 namespace BinanceTrackerDesktop.Core.Themes.Models.Resource
 {
     public sealed class ThemeComponentResourceModel
     {
-        public ThemeComponentNameStringModel NameString;
+        public string Name;
 
-        public ThemeComponentRGBModel RGB;
+        public ThemeComponenthColorModel HEX;
     }
 }

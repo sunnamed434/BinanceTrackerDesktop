@@ -18,45 +18,82 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Observer
         public void RegisterListener(Type type)
         {
             if (type == null)
-                throw new ArgumentNullException(nameof(type));   
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
 
             registeredTypes.Add(type);
         }
 
+        public void RegisterListeners(Type[] types)
+        {
+            if (types.Any() == false)
+            {
+                throw new InvalidOperationException();
+            }
+
+            for (int i = 0; i < types.Length; i++)
+            {
+                RegisterListener(types[i]);
+            }
+        }
+
+        public void RegisterListeners(IEnumerable<Type> types)
+        {
+            if (types.Any() == false)
+            {
+                throw new InvalidOperationException();
+            }
+
+            foreach (Type type in types)
+            {
+                RegisterListener(type);
+            }
+        }
+
         public async Task CallListenersAsync()
         {
-            foreach (IAwaitableComponentObserverInstance awaitableComponentObserverInstance in ReflectionInterfacesFromTypesReceiverAssemblyUtility.GetInterfacesFromTypes<IAwaitableComponentObserverInstance>(registeredTypes.ToArray()))
+            try
             {
-                awaitableComponentObserverInstance.Observer = this;
-            }
+                foreach (IAwaitableComponentObserverInstance awaitableComponentObserverInstance in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentObserverInstance>(registeredTypes.ToArray()))
+                {
+                    awaitableComponentObserverInstance.Observer = this;
+                }
 
-            foreach (IAwaitableComponentStart awaitableComponentStart in ReflectionInterfacesFromTypesReceiverAssemblyUtility.GetInterfacesFromTypes<IAwaitableComponentStart>(registeredTypes.ToArray()))
+                foreach (IAwaitableComponentStart awaitableComponentStart in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentStart>(registeredTypes.ToArray()))
+                {
+                    awaitableComponentStart.OnStart();
+                }
+
+                foreach (IAwaitableComponentExecute awaitableComponent in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentExecute>(registeredTypes.ToArray()))
+                {
+                    closeCallbacks.Add(awaitableComponent.OnExecute);
+                }
+
+                Func<Task> func = () => Task.CompletedTask;
+                foreach (Func<Task> callback in closeCallbacks)
+                {
+                    if (callback == null)
+                        throw new ArgumentNullException(nameof(callback));
+
+                    func += callback;
+                }
+
+                await func?.Invoke();
+
+                foreach (IAwaitableComponentComplete awaitableComponentComplete in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentComplete>(registeredTypes.ToArray()))
+                {
+                    awaitableComponentComplete.OnComplete();
+                }
+            }
+            catch (Exception ex)
             {
-                awaitableComponentStart.OnStart();
+                throw ex;
             }
-
-            foreach (IAwaitableComponent awaitableComponent in ReflectionInterfacesFromTypesReceiverAssemblyUtility.GetInterfacesFromTypes<IAwaitableComponent>(registeredTypes.ToArray()))
+            finally
             {
-                closeCallbacks.Add(awaitableComponent.OnExecute);
+                await Task.CompletedTask;
             }
-
-            Func<Task> func = () => Task.CompletedTask;
-            foreach (Func<Task> callback in closeCallbacks)
-            {
-                if (callback == null)
-                    throw new ArgumentNullException(nameof(callback));
-
-                func += callback;
-            }
-
-            await func?.Invoke();
-
-            foreach (IAwaitableComponentComplete awaitableComponentComplete in ReflectionInterfacesFromTypesReceiverAssemblyUtility.GetInterfacesFromTypes<IAwaitableComponentComplete>(registeredTypes.ToArray()))
-            {
-                awaitableComponentComplete.OnComplete();
-            }
-
-            await Task.CompletedTask;
         }
     }
 }

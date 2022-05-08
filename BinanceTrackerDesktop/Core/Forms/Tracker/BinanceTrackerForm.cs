@@ -8,6 +8,8 @@ using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
+using BinanceTrackerDesktop.Core.Themes.Detector;
+using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
@@ -34,8 +36,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             instance = this;
 
             InitializeComponent();
+            this.themable = this;
+            this.ThemesProvider = new ThemesProvider(new ThemeDetector());
+            this.themable.ApplyTheme();
 
-            base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();

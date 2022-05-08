@@ -16,7 +16,7 @@ using BinanceTrackerDesktop.Core.Window;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
-    public sealed class BinanceTrackerTray : TrayComponentControlBase, IAwaitableSingletonObject, IAwaitableComponentObserverInstance, IAwaitableComponent
+    public sealed class BinanceTrackerTray : TrayComponentControlBase, IAwaitableSingletonObject, IAwaitableComponentObserverInstance, IAwaitableComponentExecute
     {
         private readonly ProcessWindowHelper processWindowHelper;
 
@@ -56,7 +56,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
-        async Task IAwaitableComponent.OnExecute()
+        async Task IAwaitableComponentExecute.OnExecute()
         {
             applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
             notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;

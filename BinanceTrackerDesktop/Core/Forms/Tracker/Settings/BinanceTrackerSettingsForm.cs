@@ -10,9 +10,9 @@ using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using System.Text;
 
-namespace BinanceTrackerDesktop.Core.Forms.Settings
+namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
 {
-    public partial class BinanceTrackerSettingsForm : Form
+    public sealed partial class BinanceTrackerSettingsForm : Form
     {
         private readonly UserWallet userWallet;
 

@@ -19,24 +19,20 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider
 
 
 
-        public void RegisterAllOnce()
+        public void RegisterAwaitablesOnce()
         {
             if (IsRegistered)
             {
                 throw new InvalidOperationException();
             }
 
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (Type type in types)
-            {
-                if (type.GetInterface(nameof(IAwaitableComponent)) != null 
-                    || type.GetInterface(nameof(IAwaitableComponentStart)) != null 
-                    || type.GetInterface(nameof(IAwaitableComponentComplete)) != null
-                    || type.GetInterface(nameof(IAwaitableComponentObserverInstance)) != null)
-                {
-                    Observer.RegisterListener(type);
-                }
-            }
+            Observer.RegisterListeners(Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => 
+                    t.GetInterface(nameof(IAwaitableComponentObserverInstance)) != null
+                    || t.GetInterface(nameof(IAwaitableComponentStart)) != null
+                    || t.GetInterface(nameof(IAwaitableComponentExecute)) != null
+                    || t.GetInterface(nameof(IAwaitableComponentComplete)) != null));
 
             IsRegistered = !IsRegistered;
         }

@@ -13,7 +13,7 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryI
 
 namespace BinanceTrackerDesktop.Core.Forms.Authorization
 {
-    public partial class BinanceTrackerAuthorizationForm : Form
+    public sealed partial class BinanceTrackerAuthorizationForm : Form
     {
         public BinanceTrackerAuthorizationForm()
         {

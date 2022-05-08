@@ -1,8 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.EventsContainer;
 using BinanceTrackerDesktop.Core.Components.TextControl;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control
 {
@@ -11,14 +8,6 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Con
         public readonly MenuStripComponentItemEventsContainer EventsContainer;
 
         public readonly ToolStripMenuItem ToolStrip;
-
-
-
-        public string Header { get; }
-
-        public Image Image { get; }
-
-        public byte Id { get; }
 
 
 
@@ -39,6 +28,14 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Con
         {
 
         }
+
+
+
+        public string Header { get; }
+
+        public Image Image { get; }
+
+        public byte Id { get; }
 
 
 

@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

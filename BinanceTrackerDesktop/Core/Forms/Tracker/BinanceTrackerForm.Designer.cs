@@ -1,16 +1,15 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Detector;
-using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+﻿using BinanceTrackerDesktop.Core.Themes.Models.Resource;
 using BinanceTrackerDesktop.Core.Themes.Provider;
-using BinanceTrackerDesktop.Core.Themes.Self;
+using BinanceTrackerDesktop.Core.Themes.Themable;
 using System.ComponentModel;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
     partial class BinanceTrackerForm : IThemable
     {
-        private IThemable themable;
+        public IThemesProvider ThemesProvider { get; }
 
-        private IThemesProvider themesProvider;
+        private IThemable themable;
 
         private IContainer components;
 
@@ -22,6 +21,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -30,9 +30,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         #region Windows Form Designer
         private void InitializeComponent()
         {
-            themable = this;
-            themesProvider = new ThemesProvider(new ThemeDetector());
-
             this.UserTotalBalanceText = new System.Windows.Forms.Label();
             this.TotalBalanceTooltipText = new System.Windows.Forms.Label();
             this.RefreshTotalBalanceButton = new System.Windows.Forms.Button();
@@ -43,10 +40,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             // UserTotalBalanceText
             // 
             this.UserTotalBalanceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.UserTotalBalanceText.Location = new System.Drawing.Point(3, 63);
+            this.UserTotalBalanceText.Location = new System.Drawing.Point(8, 54);
             this.UserTotalBalanceText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UserTotalBalanceText.Name = "UserTotalBalanceText";
-            this.UserTotalBalanceText.Size = new System.Drawing.Size(469, 60);
+            this.UserTotalBalanceText.Size = new System.Drawing.Size(410, 45);
             this.UserTotalBalanceText.TabIndex = 0;
             this.UserTotalBalanceText.Text = "€0.00";
             this.UserTotalBalanceText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -54,34 +51,39 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             // TotalBalanceTooltipText
             // 
             this.TotalBalanceTooltipText.AutoSize = true;
-            this.TotalBalanceTooltipText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TotalBalanceTooltipText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TotalBalanceTooltipText.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TotalBalanceTooltipText.Location = new System.Drawing.Point(9, 43);
+            this.TotalBalanceTooltipText.Location = new System.Drawing.Point(8, 32);
             this.TotalBalanceTooltipText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TotalBalanceTooltipText.Name = "TotalBalanceTooltipText";
-            this.TotalBalanceTooltipText.Size = new System.Drawing.Size(108, 17);
+            this.TotalBalanceTooltipText.Size = new System.Drawing.Size(106, 20);
             this.TotalBalanceTooltipText.TabIndex = 1;
             this.TotalBalanceTooltipText.Text = "Total Balance";
             // 
             // RefreshTotalBalanceButton
             // 
-            this.RefreshTotalBalanceButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RefreshTotalBalanceButton.Location = new System.Drawing.Point(187, 454);
-            this.RefreshTotalBalanceButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RefreshTotalBalanceButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.RefreshTotalBalanceButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.RefreshTotalBalanceButton.FlatAppearance.BorderSize = 0;
+            this.RefreshTotalBalanceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RefreshTotalBalanceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RefreshTotalBalanceButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.RefreshTotalBalanceButton.Location = new System.Drawing.Point(164, 340);
+            this.RefreshTotalBalanceButton.Margin = new System.Windows.Forms.Padding(4);
             this.RefreshTotalBalanceButton.Name = "RefreshTotalBalanceButton";
-            this.RefreshTotalBalanceButton.Size = new System.Drawing.Size(152, 35);
+            this.RefreshTotalBalanceButton.Size = new System.Drawing.Size(133, 26);
             this.RefreshTotalBalanceButton.TabIndex = 2;
             this.RefreshTotalBalanceButton.Text = "Refresh Balance";
-            this.RefreshTotalBalanceButton.UseVisualStyleBackColor = true;
+            this.RefreshTotalBalanceButton.UseVisualStyleBackColor = false;
             // 
             // UserTotalBalanceLosesText
             // 
             this.UserTotalBalanceLosesText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UserTotalBalanceLosesText.ForeColor = System.Drawing.Color.Gray;
-            this.UserTotalBalanceLosesText.Location = new System.Drawing.Point(360, 34);
+            this.UserTotalBalanceLosesText.Location = new System.Drawing.Point(315, 26);
             this.UserTotalBalanceLosesText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UserTotalBalanceLosesText.Name = "UserTotalBalanceLosesText";
-            this.UserTotalBalanceLosesText.Size = new System.Drawing.Size(165, 29);
+            this.UserTotalBalanceLosesText.Size = new System.Drawing.Size(144, 22);
             this.UserTotalBalanceLosesText.TabIndex = 3;
             this.UserTotalBalanceLosesText.Text = "€0.00";
             this.UserTotalBalanceLosesText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,16 +93,17 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.MenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.MenuStrip.Size = new System.Drawing.Size(525, 24);
+            this.MenuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.MenuStrip.Size = new System.Drawing.Size(459, 24);
             this.MenuStrip.TabIndex = 4;
             this.MenuStrip.Text = "MenuStrip";
             // 
             // BinanceTrackerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 508);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(459, 381);
             this.Controls.Add(this.UserTotalBalanceLosesText);
             this.Controls.Add(this.RefreshTotalBalanceButton);
             this.Controls.Add(this.TotalBalanceTooltipText);
@@ -108,13 +111,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.Controls.Add(this.MenuStrip);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.MainMenuStrip = this.MenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BinanceTrackerForm";
             this.Text = "Binance Tracker Desktop";
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            themable.ApplyTheme();
         }
         #endregion
 
@@ -122,25 +124,44 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         void IThemable.ApplyTheme()
         {
-            foreach (ThemeComponentResourceModel resource in themesProvider.LoadThemeJSONData())
+            foreach (ThemeComponentResourceModel resource in themable.ThemesProvider.LoadThemeJSONData())
             {
-                switch (resource.NameString.Name)
+                switch (resource.Name)
                 {
+                    case nameof(BinanceTrackerForm):
+                        BackColor = resource.HEX.GetColor();
+                        break;
+                    case nameof(MenuStrip):
+                        MenuStrip.BackColor = resource.HEX.GetColor();
+                        foreach (ToolStripMenuItem item in MenuStrip.Items)
+                        {
+                            item.BackColor = resource.HEX.GetColor();
+                        }
+                        break;
+                    case nameof(RefreshTotalBalanceButtonColor):
+                        RefreshTotalBalanceButton.BackColor = resource.HEX.GetColor();
+                        break;
+                    case nameof(RefreshTotalBalanceButtonTextColor):
+                        RefreshTotalBalanceButton.ForeColor = resource.HEX.GetColor();
+                        break;
                     case nameof(UserTotalBalanceText):
-                        UserTotalBalanceText.ForeColor = resource.RGB.GetColor();
+                        UserTotalBalanceText.ForeColor = resource.HEX.GetColor();
                         break;
                     case nameof(TotalBalanceTooltipText):
-                        TotalBalanceTooltipText.ForeColor = resource.RGB.GetColor();
-                        break;
-                    case nameof(RefreshTotalBalanceButton):
-                        RefreshTotalBalanceButton.ForeColor = resource.RGB.GetColor();
+                        TotalBalanceTooltipText.ForeColor = resource.HEX.GetColor();
                         break;
                     case nameof(UserTotalBalanceLosesText):
-                        UserTotalBalanceLosesText.ForeColor = resource.RGB.GetColor();
+                        UserTotalBalanceLosesText.ForeColor = resource.HEX.GetColor();
                         break;
                 }
             }
         }
+
+
+
+        internal readonly string RefreshTotalBalanceButtonColor;
+
+        internal readonly string RefreshTotalBalanceButtonTextColor;
 
 
 

@@ -47,7 +47,7 @@
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
 
-            this.control.ForeColor = (Color)color;
+            this.control.ForeColor = color.Value;
         }
 
         public virtual void SetBackgroundColor(Color? color)
@@ -55,7 +55,7 @@
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
 
-            this.control.BackColor = (Color)color;
+            this.control.BackColor = color.Value;
         }
 
         public virtual void SetDefaultTextColor(Color? color)
@@ -63,7 +63,7 @@
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
 
-            defaultColor = (Color)color;
+            defaultColor = color.Value;
         }
 
         public void SetDefaultTextColorAndAsCurrentForegroundColor(Color? color)

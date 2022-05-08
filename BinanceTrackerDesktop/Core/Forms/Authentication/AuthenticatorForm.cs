@@ -9,7 +9,7 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryI
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    public partial class AuthenticatorForm : Form
+    public sealed partial class AuthenticatorForm : Form
     {
         public event Action OnAuthenticationCompletedSuccessfully;
 

@@ -23,20 +23,12 @@ namespace BinanceTrackerDesktop.Core.Themes.Provider
             //return ThemeDetector.GetThemeReaderRepository().GetThemesDataFromReadedFile();
         }
 
-        /*public void ApplyTheme()
+        public ThemeComponentResourceModel GetResourceModelByName(string value)
         {
-            foreach ((ThemeComponentAttribute, Control) dataPair in CustomAttributesUtility.GetCustomAttributesFromFields<ThemeComponentAttribute, Control>
-                (BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance))
-            {
-                //Control.FromHandle()
-                foreach (ThemeComponentResourceModel resource in LoadThemeJSONData())
-                {
-                    if (dataPair.Item1.ComponentNameStringModel.Name.Equals(resource.NameString.Name))
-                    {
-                        MessageBox.Show("found!, " + resource.NameString);
-                    }
-                }
-            }
-        }*/
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value));
+
+            return LoadThemeJSONData().FirstOrDefault(r => r.Name.Equals(value));
+        }
     }
 }

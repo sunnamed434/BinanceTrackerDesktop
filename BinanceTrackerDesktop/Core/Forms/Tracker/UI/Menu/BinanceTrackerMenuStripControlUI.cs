@@ -5,19 +5,19 @@ using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
 using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
-using BinanceTrackerDesktop.Core.Forms.Settings;
+using BinanceTrackerDesktop.Core.Forms.Tracker.Settings;
+using BinanceTrackerDesktop.Core.Themes.Detector;
+using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 {
-    public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase
+    public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase, IThemable
     {
         private readonly MenuStrip menuStrip;
 
@@ -56,38 +56,49 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
             settingsItemControl = base.GetComponentAt(MenuItemsIdContainer.Settings);
 
+            ThemesProvider = new ThemesProvider(new ThemeDetector());
+            ApplyTheme();
+
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
             coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onCoinsItemClicked;
             settingsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onSettingsItemClicked;
         }
 
-        
 
-        ~BinanceTrackerMenuStripControlUI()
+
+        public IThemesProvider ThemesProvider { get; }
+
+
+
+        public void ApplyTheme()
         {
-            apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onAPIItemClicked;
-            coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onCoinsItemClicked;
-            settingsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onSettingsItemClicked;
+            ThemeComponentResourceModel menuStripItemsResource = ThemesProvider.GetResourceModelByName("MenuStripItemsText");
+            ThemeComponentResourceModel menuStripResource = ThemesProvider.GetResourceModelByName("MenuStrip");
+            menuStrip.BackColor = menuStripResource.HEX.GetColor();
+            foreach (MenuStripComponentItemControl menuStripItem in base.Components)
+            {
+                menuStripItem.SetForegroundColor(menuStripItemsResource.HEX.GetColor());
+            }
         }
 
 
 
-        public override void AddComponent(MenuStripComponentItemControl item)
+        public override void AddComponent(MenuStripComponentItemControl menuStripItem)
         {
-            if (item == null)
-                throw new ArgumentNullException(nameof(item));
+            if (menuStripItem == null)
+                throw new ArgumentNullException(nameof(menuStripItem));
 
-            this.menuStrip.Items.Add(item.ToolStrip);
-            base.Components.Add(item);
+            this.menuStrip.Items.Add(menuStripItem.ToolStrip);
+            base.Components.Add(menuStripItem);
         }
 
-        public override void RemoveComponent(MenuStripComponentItemControl item)
+        public override void RemoveComponent(MenuStripComponentItemControl menuStripItem)
         {
-            if (item == null)
-                throw new ArgumentNullException(nameof(item));
+            if (menuStripItem == null)
+                throw new ArgumentNullException(nameof(menuStripItem));
 
-            this.menuStrip.Items.Remove(item.ToolStrip);
-            base.Components.Remove(item);
+            this.menuStrip.Items.Remove(menuStripItem.ToolStrip);
+            base.Components.Remove(menuStripItem);
         }
 
 

@@ -12,7 +12,7 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryI
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    public partial class AuthenticationForm : Form
+    public sealed partial class AuthenticationForm : Form
     {
         private const int QRCodePictureBoxHiddenSizeValue = 0;
 

@@ -23,7 +23,7 @@ namespace BinanceTrackerDesktop.Core.Entry
             }
 
             AwaitableComponentsProvider = new AwaitableComponentsProvider(new AwaitableComponentsObserver());
-            AwaitableComponentsProvider.RegisterAllOnce();
+            AwaitableComponentsProvider.RegisterAwaitablesOnce();
 
             if (new BinaryUserDataSaveSystem().Read() == null)
             {
