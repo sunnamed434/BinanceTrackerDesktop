@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
+﻿namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
 {
     public interface IPopupBuilder
     {
@@ -16,7 +16,7 @@
 
         IPopupBuilder WithOnClickAction(Action callback);
 
-        IPopupBuilder TryWithCarefully();
+        IPopupBuilder ShowMessageBoxIfShouldOnBuild();
 
         IPopup BuildAsMessageBox();
 

@@ -1,13 +1,21 @@
-﻿using BinanceTrackerDesktop.Core.Notification.Popup.Extension;
+﻿using BinanceTrackerDesktop.Core.Notifications.Popup.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 
-namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
+namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
 {
     public sealed class PopupBuilder : IPopupBuilder
     {
-        private readonly Popup popup = Popup.Empty;
+        private readonly Popup popup;
 
-        private bool isCarefully = false;
+        private bool showMessageBoxIfShould;
+
+
+
+        public PopupBuilder()
+        {
+            popup = Popup.Empty;
+            showMessageBoxIfShould = false;
+        }
 
 
 
@@ -53,11 +61,11 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
             return this;
         }
 
-        public IPopupBuilder TryWithCarefully()
+        public IPopupBuilder ShowMessageBoxIfShouldOnBuild()
         {
             if (new BinaryUserDataSaveSystem().Read().IsNotificationsDisabled)
             {
-                isCarefully = true;
+                showMessageBoxIfShould = true;
             }
 
             return this;
@@ -72,7 +80,7 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
 
         public IPopup Build()
         {
-            if (isCarefully)
+            if (showMessageBoxIfShould)
             {
                 return BuildAsMessageBox();
             }
@@ -80,14 +88,14 @@ namespace BinanceTrackerDesktop.Core.Notification.Popup.Builder
             return popup;
         }
 
-        public IPopup Build(bool sendAnyway)
+        public IPopup Build(bool ignoreUserNotificationsState)
         {
-            if (isCarefully)
+            if (showMessageBoxIfShould)
             {
                 return Build();
             }
 
-            popup.Show(sendAnyway);
+            popup.Show(ignoreUserNotificationsState);
 
             return Build();
         }

@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control
 using BinanceTrackerDesktop.Core.Components.TrayControl.Base;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Extension;
 using BinanceTrackerDesktop.Core.Entry;
-using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
+using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
@@ -27,8 +27,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         private readonly MenuStripComponentItemControl applicationQuitItemControl;
 
         private static BinanceTrackerTray instance;
-
-        IAwaitableComponentsObserver IAwaitableComponentObserverInstance.Observer { get; set; }
 
 
 
@@ -52,6 +50,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
+        IAwaitableComponentsObserver IAwaitableComponentObserverInstance.Observer { get; set; }
+
         object IAwaitableSingletonObject.Instance => instance;
 
 
@@ -68,25 +68,24 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             await Task.CompletedTask;
         }
 
-
-
         private async void initializeAsync()
         {
-            UserData binanceUserData = new BinaryUserDataSaveSystem().Read();
-            notificationsItemControl.SetText(getNotificationsText(binanceUserData.IsNotificationsEnabled ?? default(bool)));
+            UserData userData = new BinaryUserDataSaveSystem().Read();
+            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled));
 
             UserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Tracker Running")
                 .WillCloseIn(90)
-                .WithOnClickAction(() => new ProcessWindowHelper().SetWindowToForeground())
+                .WithOnClickAction(() => processWindowHelper.SetWindowToForeground())
                 .WithOnCloseAction(() => new PopupBuilder()
                                               .WithTitle(ApplicationEnviroment.GlobalName)
                                               .WithMessage("Your best for today: " + coinResult.Asset)
                                               .WillCloseIn(90)
-                                              .Build(false))
-                .Build(false);
+                                              .ShowMessageBoxIfShouldOnBuild()
+                                              .Build())
+                .Build();
         }
 
         private string getNotificationsText(bool isNotificationsEnabled)
@@ -113,19 +112,19 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
             UserData userData = userDataBuilder.Build();
 
-            userDataBuilder.AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled == true ? false : true);
+            userDataBuilder.AddNotificationsStateBasedOnData(!userData.IsNotificationsEnabled);
 
             userData = userDataBuilder.Build()
                 .WriteUserDataThenRead(saveSystem);
 
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage(userData.IsNotificationsEnabled == true ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
+                .WithMessage(userData.IsNotificationsEnabled ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
                 .WillCloseIn(90)
-                .TryWithCarefully()
-                .Build(false);
+                .ShowMessageBoxIfShouldOnBuild()
+                .Build();
 
-            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled.Value));
+            notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled));
         }
 
         private async void onApplicationQuitItemClicked(EventArgs e)

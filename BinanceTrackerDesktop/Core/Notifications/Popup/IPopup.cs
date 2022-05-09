@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Notification.Popup
+﻿namespace BinanceTrackerDesktop.Core.Notifications.Popup
 {
     public interface IPopup
     {

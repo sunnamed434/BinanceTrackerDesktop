@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
-using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
+using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet;
@@ -48,8 +48,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
                                  .Append(NewCurrenyTextBox.Text)
                                  .ToString())
                     .WillCloseIn(90)
-                    .TryWithCarefully()
-                    .Build(false);
+                    .ShowMessageBoxIfShouldOnBuild()
+                    .Build();
                 return;
             }
 
@@ -69,8 +69,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
                                  .Append(data.Currency)
                                  .ToString())
                 .WillCloseIn(90)
-                .TryWithCarefully()
-                .Build(false);
+                .ShowMessageBoxIfShouldOnBuild()
+                .Build();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
-using BinanceTrackerDesktop.Core.Notification;
+using BinanceTrackerDesktop.Core.Notifications;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray

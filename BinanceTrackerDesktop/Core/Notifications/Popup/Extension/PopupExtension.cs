@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Notification.Popup.Extension
+﻿namespace BinanceTrackerDesktop.Core.Notifications.Popup.Extension
 {
     public static class PopupExtension
     {

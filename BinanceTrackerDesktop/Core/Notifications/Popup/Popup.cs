@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 
-namespace BinanceTrackerDesktop.Core.Notification.Popup
+namespace BinanceTrackerDesktop.Core.Notifications.Popup
 {
     public sealed class Popup : IPopup
     {

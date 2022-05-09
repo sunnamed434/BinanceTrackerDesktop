@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.User.Data
 
         public bool? IsBalancesHiden;
 
-        public bool? IsNotificationsEnabled;
+        public bool IsNotificationsEnabled;
 
         public bool IsUserStartedApplicationFirstTime;
 

@@ -56,7 +56,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             }
 
             base.Activated += onFormActivated;
-            base.FormClosing += onFormClosing;
         }
 
 
@@ -82,21 +81,21 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             authenticatorForm.OnAuthenticationCompletedSuccessfully -= onAuthenticationCompletedSuccessfully;
 
             onFormActivated(this, null);
-            base.FormClosing += onFormClosing;
 
             authenticatorForm.Hide();
         }
 
-        private void onAuthenticationFormClosed(object? sender, FormClosedEventArgs e)
+        private void onAuthenticationFormClosed(object sender, FormClosedEventArgs e)
         {
             authenticatorForm.FormClosed -= onAuthenticationFormClosed;
 
             Application.Exit();
         }
 
-        private void onFormActivated(object? sender, EventArgs e)
+        private void onFormActivated(object sender, EventArgs e)
         {
             base.Activated -= onFormActivated;
+            base.FormClosing += onFormClosing;
 
             new BinanceTrackerTrayForm();
 
@@ -118,7 +117,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
         }
 
-        private async void onFormClosing(object? sender, FormClosingEventArgs e)
+        private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
             base.FormClosing -= onFormClosing;
 

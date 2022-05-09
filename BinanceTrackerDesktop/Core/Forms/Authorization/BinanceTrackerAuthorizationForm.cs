@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
-using BinanceTrackerDesktop.Core.Notification.Popup.Builder;
+using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
@@ -81,16 +81,12 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                 UserData userData = new BinaryUserDataSaveSystem().Read();
                 if (userData != null)
                 {
-                    if (userData.AuthenticationData != null)
+                    if (userData.HasAuthenticationData)
                     {
-                        new UserDataBuilder()
+                        new UserDataBuilder(userData)
                             .AddKey(this.UserKeyTextBox.Text)
                             .AddSecret(this.UserSecretTextBox.Text)
                             .AddCurrency(this.UserCurrenyTextBox.Text)
-                            .AddTwoFactor(userData.AuthenticationData)
-                            .AddBalancesStateBasedOnData(userData.IsBalancesHiden)
-                            .AddBestBalance(userData.BestBalance)
-                            .AddNotificationsStateBasedOnData(userData.IsNotificationsEnabled)
                             .Build()
                             .WriteUserData(new BinaryUserDataSaveSystem());
                     }
@@ -101,6 +97,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                         .AddKey(this.UserKeyTextBox.Text)
                         .AddSecret(this.UserSecretTextBox.Text)
                         .AddCurrency(this.UserCurrenyTextBox.Text)
+                        .SetNotificationsEnabled()
                         .SetAsUserStartedApplicationFirstTime()
                         .Build()
                         .WriteUserData(new BinaryUserDataSaveSystem());
