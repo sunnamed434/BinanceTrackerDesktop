@@ -6,7 +6,7 @@ using BinanceTrackerDesktop.Core.User.Wallet;
 
 namespace BinanceTrackerDesktop.Core.User.Status.Detector
 {
-    public sealed class UserStatusDetector
+    public sealed class UserStatusDetector : IUserStatusDetector
     {
         private readonly IUserDataSaveSystem userDataSaveSystem;
 

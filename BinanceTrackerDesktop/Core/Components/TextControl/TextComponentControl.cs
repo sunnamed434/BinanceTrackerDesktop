@@ -33,7 +33,7 @@
 
         public virtual void SetText(string content, Color? color = null)
         {
-            if (string.IsNullOrEmpty(content))
+            if (string.IsNullOrWhiteSpace(content))
                 throw new ArgumentNullException(nameof(content));
 
             if (color != null)

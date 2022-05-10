@@ -29,7 +29,10 @@ namespace BinanceTrackerDesktop.Core.User.Status.Beginner
 
         public override string Format(decimal? value)
         {
-            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value).ToString();
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value.Value).ToString();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
             base.Text = "Tracker Settings";
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            base.StartPosition = FormStartPosition.CenterScreen;
+            base.StartPosition = FormStartPosition.CenterParent;
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.userWallet = userWallet ?? throw new ArgumentNullException(nameof(userWallet));

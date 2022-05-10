@@ -68,4 +68,3 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\net6.0-windows\r
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\net6.0-windows\BinanceTrackerDesktop.pdb
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\net6.0-windows\BinanceTrackerDesktop.genruntimeconfig.cache
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tracker.Settings.BinanceTrackerSettingsForm.resources
-D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Debug\net6.0-windows\BinanceTrackerDesktop.csproj.AssemblyReference.cache

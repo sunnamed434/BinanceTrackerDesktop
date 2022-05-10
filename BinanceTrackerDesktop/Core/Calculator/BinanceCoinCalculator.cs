@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BinanceTrackerDesktop.Core.Calculator
+﻿namespace BinanceTrackerDesktop.Core.Calculator
 {
     public sealed class BinanceCoinCalculator
     {

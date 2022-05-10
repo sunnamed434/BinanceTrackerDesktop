@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.User.Status.Standart
 
         public override string Format(decimal? value)
         {
-            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value).ToString();
+            return FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(value.Value).ToString();
         }
     }
 }

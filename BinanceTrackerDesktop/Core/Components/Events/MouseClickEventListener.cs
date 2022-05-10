@@ -1,6 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.Trigger;
-using System;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.Events
 {

@@ -1,9 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Currency.Crypto;
 using BinanceTrackerDesktop.Core.Formatters.ValueString;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace BinanceTrackerDesktop.Core.Formatters.Utility
@@ -21,6 +18,9 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
 
         public static object Format(object argument)
         {
+            if (argument == null)
+                throw new ArgumentNullException(nameof(argument));
+
             TemporaryFormatter formatter = formatters.FirstOrDefault(f => f.Type.Equals(typeof(TFormatterType)));
             if (formatter == null)
                 formatters.Add(formatter = new TemporaryFormatter(Activator.CreateInstance<TFormatterType>(), typeof(TFormatterType)));

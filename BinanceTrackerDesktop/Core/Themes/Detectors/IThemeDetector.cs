@@ -19,7 +19,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Detectors
         /// <summary>
         /// Getting theme and reading it from <see cref="UserThemeRepository"/>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Instance to the theme data reader.</returns>
         /// <exception cref="ThemeCannotBeRecognizedException"></exception>
         IThemeDataReaderRepository GetThemeReaderRepository();
     }

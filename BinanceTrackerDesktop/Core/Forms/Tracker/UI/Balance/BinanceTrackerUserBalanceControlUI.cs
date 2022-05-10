@@ -113,11 +113,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
         private async Task refreshBalanceLossesAsync()
         {
-            IUserStatusResult totalBalanceStatusResult = await userStatus.CalculateUserTotalBalanceAsync();
             IUserStatusResult balanceLossesStatusResult = await userStatus.CalculateUserBalanceLossesAsync();
+            IUserStatusResult totalBalanceStatusResult = await userStatus.CalculateUserTotalBalanceAsync();
 
             UserData data = new BinaryUserDataSaveSystem().Read();
-            //formTextControls[1].SetText(userStatus.Format((decimal)balanceLossesStatusResult.Value), getColorFromBalanceLosses((decimal)totalBalanceStatusResult.Value, (decimal)data.BestBalance));
+            string formattedLosses = userStatus.Format((decimal)balanceLossesStatusResult.Value);
+            Color balanceLossesColor = getColorFromBalanceLosses((decimal)totalBalanceStatusResult.Value, (decimal)data.BestBalance);
+            formTextControls[1].SetText(formattedLosses, balanceLossesColor);
         }
 
         private async Task refreshBalancesSyncAsync(Action onStartedCallback = null, Action onCompletedCallback = null)
@@ -149,13 +151,21 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
         private Color getColorFromBalanceLosses(decimal totalBalance, decimal bestBalance)
         {
             if (bestBalance == decimal.Zero)
+            {
                 return Color.Gray;
+            }
             else if (bestBalance > totalBalance)
+            {
                 return Color.Red;
+            }
             else if (bestBalance < totalBalance)
+            {
                 return Color.Green;
+            }
             else
+            {
                 return Color.Gray;
+            }
         }
 
 

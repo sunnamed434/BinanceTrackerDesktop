@@ -44,7 +44,8 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
             if (userData.BestBalance.HasValue == false)
                 userDataBuilder.AddBestBalance(walletTotalBalanceResult.Value);
 
-            userDataBuilder.SetAsUserStartedApplicationNotFirstTime()
+            userDataBuilder
+                .SetAsUserStartedApplicationNotFirstTime()
                 .Build()
                 .WriteUserData(saveSystem);
 

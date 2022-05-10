@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.Trigger;
-using System;
 
 namespace BinanceTrackerDesktop.Core.Event
 {
