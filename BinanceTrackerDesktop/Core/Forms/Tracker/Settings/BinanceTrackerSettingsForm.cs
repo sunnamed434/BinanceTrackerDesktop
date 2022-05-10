@@ -2,8 +2,12 @@
 using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
+using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Theme.Repositories;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using BinanceTrackerDesktop.Core.Validators;
@@ -16,21 +20,32 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
     {
         private readonly UserWallet userWallet;
 
+        private readonly IThemable themable;
+
 
 
         public BinanceTrackerSettingsForm(UserWallet userWallet)
         {
             InitializeComponent();
 
+            themable = this;
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
+            themable.ApplyTheme();
+
+            base.Text = "Tracker Settings";
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
+            this.userWallet = userWallet ?? throw new ArgumentNullException(nameof(userWallet));
 
             this.ChangeCurrencyButton.Click += onChangeCurrencyButtonClicked;
-            this.userWallet = userWallet;
         }
+
+
+
+        public IThemesProvider ThemesProvider { get; }
 
 
 

@@ -5,12 +5,12 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Themes.DirectoryT
 
 namespace BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Light
 {
-    public sealed class LightThemeReaderRepository : IThemeReaderRepository
+    public sealed class LightThemeReaderRepository : IThemeDataReaderRepository
     {
-        public IEnumerable<ThemeComponentResourceModel> GetThemesDataFromReadedFile()
+        public IEnumerable<ThemeData> GetThemeData()
         {
             string fileText = new ApplicationDirectoriesControl().Folders.Resources.Themes.GetDirectoryFile(RegisteredThemes.LightTheme).GetStringResult();
-            return JsonConvert.DeserializeObject<IEnumerable<ThemeComponentResourceModel>>(fileText);
+            return JsonConvert.DeserializeObject<IEnumerable<ThemeData>>(fileText);
         }
     }
 }

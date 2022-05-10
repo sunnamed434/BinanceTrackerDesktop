@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Base;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Exception;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Exceptions;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Extension;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Format;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Item;

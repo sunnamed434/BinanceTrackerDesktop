@@ -6,10 +6,12 @@ using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control
 using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.Forms.Tracker.Settings;
-using BinanceTrackerDesktop.Core.Themes.Detector;
-using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Models.Data;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Themable;
+using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Theme.Repositories;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Models;
 using CryptoExchange.Net.Objects;
@@ -33,10 +35,10 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
 
 
-        public BinanceTrackerMenuStripControlUI(MenuStrip self, BinanceClient client, UserWallet wallet)
+        public BinanceTrackerMenuStripControlUI(MenuStrip menuStrip, BinanceClient client, UserWallet wallet)
         {
-            if (self == null)
-                throw new ArgumentNullException(nameof(self));
+            if (menuStrip == null)
+                throw new ArgumentNullException(nameof(menuStrip));
 
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -44,7 +46,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
-            this.menuStrip = self;
+            this.menuStrip = menuStrip;
             this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
             this.client = client;
             this.wallet = wallet;
@@ -56,7 +58,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
             settingsItemControl = base.GetComponentAt(MenuItemsIdContainer.Settings);
 
-            ThemesProvider = new ThemesProvider(new ThemeDetector());
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
             ApplyTheme();
 
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
@@ -72,23 +74,24 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         public void ApplyTheme()
         {
-            ThemeComponentResourceModel menuStripItemsResource = ThemesProvider.GetResourceModelByName("MenuStripItemsText");
-            ThemeComponentResourceModel menuStripResource = ThemesProvider.GetResourceModelByName("MenuStrip");
-            menuStrip.BackColor = menuStripResource.HEX.GetColor();
-            foreach (MenuStripComponentItemControl menuStripItem in base.Components)
+            LoadedThemeData loadedThemeData = ThemesProvider.LoadThemeData();
+
+            menuStrip.BackColor = loadedThemeData.MenuStrip;
+            if (menuStrip.Items != null)
             {
-                menuStripItem.SetForegroundColor(menuStripItemsResource.HEX.GetColor());
+                foreach (MenuStripComponentItemControl control in base.AllComponents)
+                {
+                    control.SetDefaultTextColorAndAsCurrentForegroundColor(loadedThemeData.MenuStripItemText);
+                }
             }
         }
-
-
 
         public override void AddComponent(MenuStripComponentItemControl menuStripItem)
         {
             if (menuStripItem == null)
                 throw new ArgumentNullException(nameof(menuStripItem));
 
-            this.menuStrip.Items.Add(menuStripItem.ToolStrip);
+            this.menuStrip.Items.Add(menuStripItem.ToolStripItem);
             base.Components.Add(menuStripItem);
         }
 
@@ -97,7 +100,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             if (menuStripItem == null)
                 throw new ArgumentNullException(nameof(menuStripItem));
 
-            this.menuStrip.Items.Remove(menuStripItem.ToolStrip);
+            this.menuStrip.Items.Remove(menuStripItem.ToolStripItem);
             base.Components.Remove(menuStripItem);
         }
 

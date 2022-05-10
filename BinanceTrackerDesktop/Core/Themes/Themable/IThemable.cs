@@ -7,6 +7,9 @@ namespace BinanceTrackerDesktop.Core.Themes.Themable
     /// </summary>
     public interface IThemable
     {
+        /// <summary>
+        /// Themes provider.
+        /// </summary>
         IThemesProvider ThemesProvider { get; }
 
 

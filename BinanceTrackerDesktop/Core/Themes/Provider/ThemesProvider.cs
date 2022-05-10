@@ -1,6 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Detector;
+﻿using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Models.Data;
 using BinanceTrackerDesktop.Core.Themes.Models.Resource;
-using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Dark;
+using System.Reflection;
 
 namespace BinanceTrackerDesktop.Core.Themes.Provider
 {
@@ -17,18 +18,21 @@ namespace BinanceTrackerDesktop.Core.Themes.Provider
 
 
 
-        public IEnumerable<ThemeComponentResourceModel> LoadThemeJSONData()
+        public LoadedThemeData LoadThemeData()
         {
-            return new DarkThemeReaderRepository().GetThemesDataFromReadedFile();
-            //return ThemeDetector.GetThemeReaderRepository().GetThemesDataFromReadedFile();
-        }
+            LoadedThemeData loadedThemeData = new LoadedThemeData();
+            foreach (ThemeData themeData in ThemeDetector.GetThemeReaderRepository().GetThemeData())
+            {
+                foreach (FieldInfo fieldInfo in loadedThemeData.GetType().GetFields())
+                {
+                    if (themeData.Name == fieldInfo.Name)
+                    {
+                        fieldInfo.SetValue(loadedThemeData, themeData.HEX.GetColor());
+                    }
+                }
+            }
 
-        public ThemeComponentResourceModel GetResourceModelByName(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException(nameof(value));
-
-            return LoadThemeJSONData().FirstOrDefault(r => r.Name.Equals(value));
+            return loadedThemeData;
         }
     }
 }

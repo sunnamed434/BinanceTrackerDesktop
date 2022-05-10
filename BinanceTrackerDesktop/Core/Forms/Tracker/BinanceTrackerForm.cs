@@ -8,18 +8,19 @@ using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
-using BinanceTrackerDesktop.Core.Themes.Detector;
+using BinanceTrackerDesktop.Core.Themes.Detectors;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Status.Detector;
+using BinanceTrackerDesktop.Core.User.Theme.Repositories;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public partial class BinanceTrackerForm : Form, IAwaitableSingletonObject, IAwaitableComponentStart, IAwaitableComponentComplete
+    public sealed partial class BinanceTrackerForm : Form, IAwaitableSingletonObject, IAwaitableComponentStart, IAwaitableComponentComplete
     {
         private readonly AuthenticatorForm authenticatorForm;
 
@@ -36,12 +37,14 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             instance = this;
 
             InitializeComponent();
-            this.themable = this;
-            this.ThemesProvider = new ThemesProvider(new ThemeDetector());
-            this.themable.ApplyTheme();
+
+            themable = this;
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
+            themable.ApplyTheme();
 
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
+            base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;

@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Core.User.Authentication.Data;
-using BinanceTrackerDesktop.Core.User.Data.Save;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Builder
 {
@@ -96,6 +95,24 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetAsUserStartedApplicationNotFirstTime();
+
+        /// <summary>
+        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.System"/>
+        /// </summary>
+        /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+        IUserDataBuilder SetUserThemeAsSystem();
+
+        /// <summary>
+        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.Light"/>
+        /// </summary>
+        /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+        IUserDataBuilder SetUserThemeAsLight();
+
+        /// <summary>
+        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.Dark"/>
+        /// </summary>
+        /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+        IUserDataBuilder SetUserThemeAsDark();
 
         /// <summary>
         /// Building the <see cref="IUserDataBuilder"/>

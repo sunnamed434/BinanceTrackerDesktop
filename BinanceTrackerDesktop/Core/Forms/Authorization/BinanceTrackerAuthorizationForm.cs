@@ -99,6 +99,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
                         .AddCurrency(this.UserCurrenyTextBox.Text)
                         .SetNotificationsEnabled()
                         .SetAsUserStartedApplicationFirstTime()
+                        .SetUserThemeAsSystem()
                         .Build()
                         .WriteUserData(new BinaryUserDataSaveSystem());
                 }

@@ -1,8 +1,38 @@
-﻿namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
+﻿using BinanceTrackerDesktop.Core.Themes.Models.Data;
+using BinanceTrackerDesktop.Core.Themes.Themable;
+using System.ComponentModel;
+
+namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
 {
-    public partial class BinanceTrackerSettingsForm
+    public sealed partial class BinanceTrackerSettingsForm : IThemable
     {
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components;
+
+
+
+        public void ApplyTheme()
+        {
+            LoadedThemeData loadedThemeData = themable.ThemesProvider.LoadThemeData();
+
+            base.BackColor = loadedThemeData.Form;
+            foreach (Control control in Controls)
+            {
+                if (control is Button button)
+                {
+                    button.BackColor = loadedThemeData.Button;
+                    button.ForeColor = loadedThemeData.ButtonText;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.FlatStyle = FlatStyle.Flat;
+                }
+
+                if (control is Label label)
+                {
+                    label.ForeColor = loadedThemeData.Text;
+                }
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
@@ -12,6 +42,8 @@
             }
             base.Dispose(disposing);
         }
+
+
 
         #region Windows Form Designer generated code
         private void InitializeComponent()
@@ -62,8 +94,12 @@
         }
         #endregion
 
-        private System.Windows.Forms.TextBox NewCurrenyTextBox;
-        private System.Windows.Forms.Label NewCurrenyLabel;
-        private System.Windows.Forms.Button ChangeCurrencyButton;
+
+
+        private TextBox NewCurrenyTextBox;
+
+        private Label NewCurrenyLabel;
+
+        private Button ChangeCurrencyButton;
     }
 }

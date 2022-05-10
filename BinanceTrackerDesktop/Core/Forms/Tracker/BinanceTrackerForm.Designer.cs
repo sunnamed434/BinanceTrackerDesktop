@@ -1,11 +1,11 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+﻿using BinanceTrackerDesktop.Core.Themes.Models.Data;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Themable;
 using System.ComponentModel;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    partial class BinanceTrackerForm : IThemable
+    public sealed partial class BinanceTrackerForm : IThemable
     {
         public IThemesProvider ThemesProvider { get; }
 
@@ -66,7 +66,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.RefreshTotalBalanceButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.RefreshTotalBalanceButton.FlatAppearance.BorderSize = 0;
             this.RefreshTotalBalanceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RefreshTotalBalanceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RefreshTotalBalanceButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RefreshTotalBalanceButton.ForeColor = System.Drawing.SystemColors.Control;
             this.RefreshTotalBalanceButton.Location = new System.Drawing.Point(164, 340);
             this.RefreshTotalBalanceButton.Margin = new System.Windows.Forms.Padding(4);
@@ -124,44 +124,24 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         void IThemable.ApplyTheme()
         {
-            foreach (ThemeComponentResourceModel resource in themable.ThemesProvider.LoadThemeJSONData())
+            LoadedThemeData loadedThemeData = themable.ThemesProvider.LoadThemeData();
+            BackColor = loadedThemeData.Form;
+            foreach (Control control in Controls)
             {
-                switch (resource.Name)
+                if (control is Button button)
                 {
-                    case nameof(BinanceTrackerForm):
-                        BackColor = resource.HEX.GetColor();
-                        break;
-                    case nameof(MenuStrip):
-                        MenuStrip.BackColor = resource.HEX.GetColor();
-                        foreach (ToolStripMenuItem item in MenuStrip.Items)
-                        {
-                            item.BackColor = resource.HEX.GetColor();
-                        }
-                        break;
-                    case nameof(RefreshTotalBalanceButtonColor):
-                        RefreshTotalBalanceButton.BackColor = resource.HEX.GetColor();
-                        break;
-                    case nameof(RefreshTotalBalanceButtonTextColor):
-                        RefreshTotalBalanceButton.ForeColor = resource.HEX.GetColor();
-                        break;
-                    case nameof(UserTotalBalanceText):
-                        UserTotalBalanceText.ForeColor = resource.HEX.GetColor();
-                        break;
-                    case nameof(TotalBalanceTooltipText):
-                        TotalBalanceTooltipText.ForeColor = resource.HEX.GetColor();
-                        break;
-                    case nameof(UserTotalBalanceLosesText):
-                        UserTotalBalanceLosesText.ForeColor = resource.HEX.GetColor();
-                        break;
+                    button.BackColor = loadedThemeData.Button;
+                    button.ForeColor = loadedThemeData.ButtonText;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.FlatStyle = FlatStyle.Flat;
+                }
+
+                if (control is Label label)
+                {
+                    label.ForeColor = loadedThemeData.Text;
                 }
             }
         }
-
-
-
-        internal readonly string RefreshTotalBalanceButtonColor;
-
-        internal readonly string RefreshTotalBalanceButtonTextColor;
 
 
 

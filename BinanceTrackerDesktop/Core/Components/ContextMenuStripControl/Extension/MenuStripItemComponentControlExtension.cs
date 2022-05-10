@@ -14,7 +14,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
             if (to == null)
                 throw new ArgumentNullException(nameof(to));
 
-            source.ToolStrip.Image = to;
+            source.ToolStripItem.Image = to;
         }
 
         public static void Enable(this MenuStripComponentItemControl source)
@@ -22,7 +22,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            source.ToolStrip.Enabled = true;
+            source.ToolStripItem.Enabled = true;
         }
 
         public static void Disable(this MenuStripComponentItemControl source)
@@ -30,7 +30,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Extensio
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            source.ToolStrip.Enabled = false;
+            source.ToolStripItem.Enabled = false;
         }
     }
 }

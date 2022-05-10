@@ -35,7 +35,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            Strip.Items.Add(item.ToolStrip);
+            Strip.Items.Add(item.ToolStripItem);
             Components.Add(item);
         }
 
@@ -53,7 +53,7 @@ namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            Strip.Items.Remove(item.ToolStrip);
+            Strip.Items.Remove(item.ToolStripItem);
             Components.Remove(item);
         }
 

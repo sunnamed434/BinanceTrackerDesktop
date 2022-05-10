@@ -117,6 +117,24 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             return this;
         }
 
+        public IUserDataBuilder SetUserThemeAsSystem()
+        {
+            this.userData.Theme = Themes.Theme.System;
+            return this;
+        }
+
+        public IUserDataBuilder SetUserThemeAsLight()
+        {
+            this.userData.Theme = Themes.Theme.Light;
+            return this;
+        }
+
+        public IUserDataBuilder SetUserThemeAsDark()
+        {
+            this.userData.Theme = Themes.Theme.Dark;
+            return this;
+        }
+
         public UserData Build()
         {
             return this.userData;

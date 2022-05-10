@@ -2,9 +2,9 @@
 {
     public class TextComponentControl : ITextable
     {
-        private readonly Control control = null;
+        private readonly Control control;
 
-        private Color? defaultColor = null;
+        private Color? defaultColor;
 
 
 
@@ -66,7 +66,7 @@
             defaultColor = color.Value;
         }
 
-        public void SetDefaultTextColorAndAsCurrentForegroundColor(Color? color)
+        public virtual void SetDefaultTextColorAndAsCurrentForegroundColor(Color? color)
         {
             if (color == null)
                 throw new ArgumentNullException(nameof(color));
@@ -75,7 +75,7 @@
             SetForegroundColor(color);
         }
 
-        public void SetDefaultTextColorAndAsCurrentBackgroundColor(Color? color)
+        public virtual void SetDefaultTextColorAndAsCurrentBackgroundColor(Color? color)
         {
             if (color == null)
                 throw new ArgumentNullException(nameof(color));

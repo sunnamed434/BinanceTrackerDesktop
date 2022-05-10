@@ -2,10 +2,10 @@
 
 namespace BinanceTrackerDesktop.Core.Themes.Models.Resource
 {
-    public sealed class ThemeComponentResourceModel
+    public sealed class ThemeData
     {
         public string Name;
 
-        public ThemeComponenthColorModel HEX;
+        public ThemeColor HEX;
     }
 }

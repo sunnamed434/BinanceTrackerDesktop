@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Detector;
-using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+﻿using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Models.Data;
 
 namespace BinanceTrackerDesktop.Core.Themes.Provider
 {
@@ -9,8 +9,6 @@ namespace BinanceTrackerDesktop.Core.Themes.Provider
 
 
 
-        IEnumerable<ThemeComponentResourceModel> LoadThemeJSONData();
-
-        ThemeComponentResourceModel GetResourceModelByName(string value);
+        LoadedThemeData LoadThemeData();
     }
 }

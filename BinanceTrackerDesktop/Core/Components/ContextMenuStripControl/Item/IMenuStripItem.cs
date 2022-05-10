@@ -1,10 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Components.TextControl;
-using System;
-using System.Diagnostics.Tracing;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item
+﻿namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item
 {
     public interface IMenuStripItem
     {

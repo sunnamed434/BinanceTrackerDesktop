@@ -1,6 +1,6 @@
 ﻿namespace BinanceTrackerDesktop.Core.Themes.Models.HEX
 {
-    public sealed class ThemeComponenthColorModel
+    public sealed class ThemeColor
     {
         public string ColorText;
 
