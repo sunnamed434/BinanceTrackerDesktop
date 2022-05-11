@@ -61,6 +61,14 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         IUserDataBuilder AddBalancesStateBasedOnData(bool? value);
 
         /// <summary>
+        /// Adding <see cref="UserData.Theme"/> to the given <paramref name="theme"/>
+        /// </summary>
+        /// <param name="theme">Adding Theme.</param>
+        /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        IUserDataBuilder AddUserTheme(Themes.Theme theme);
+
+        /// <summary>
         /// Set <see cref="UserData.IsBalancesHiden"/> <see langword="true"/> to the <see cref="UserData"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
@@ -97,19 +105,25 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
         IUserDataBuilder SetAsUserStartedApplicationNotFirstTime();
 
         /// <summary>
-        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.System"/>
+        /// Set User Theme to <see cref="Themes.Theme.System"/> by calling method <see cref="AddUserTheme(Themes.Theme)"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetUserThemeAsSystem();
 
         /// <summary>
-        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.Light"/>
+        /// Set User Theme to <see cref="Themes.Theme.ColorBlind"/> by calling method <see cref="AddUserTheme(Themes.Theme)"/>
+        /// </summary>
+        /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+        IUserDataBuilder SetUserThemeAsColorBlind();
+
+        /// <summary>
+        /// Set User Theme to <see cref="Themes.Theme.Light"/> by calling method <see cref="AddUserTheme(Themes.Theme)"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetUserThemeAsLight();
 
         /// <summary>
-        /// Set <see cref="UserData.Theme"/> to <see cref="Themes.Theme.Dark"/>
+        /// Set User Theme to <see cref="Themes.Theme.Dark"/> by calling method <see cref="AddUserTheme(Themes.Theme)"/>
         /// </summary>
         /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
         IUserDataBuilder SetUserThemeAsDark();

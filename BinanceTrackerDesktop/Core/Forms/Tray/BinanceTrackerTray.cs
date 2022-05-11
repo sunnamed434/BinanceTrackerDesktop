@@ -11,7 +11,7 @@ using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results.Coin;
 using BinanceTrackerDesktop.Core.Window;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
@@ -56,7 +56,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
-        async Task IAwaitableComponentExecute.OnExecute()
+        void IAwaitableComponentExecute.OnExecute()
         {
             applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
             notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;
@@ -64,8 +64,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             EventsContainerControl.DoubleClickListener.OnTriggerEventHandler -= onTrayDoubleClick;
 
             this.HideTray();
-
-            await Task.CompletedTask;
         }
 
         private async void initializeAsync()
@@ -73,7 +71,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
             UserData userData = new BinaryUserDataSaveSystem().Read();
             notificationsItemControl.SetText(getNotificationsText(userData.IsNotificationsEnabled));
 
-            UserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
+            IUserWalletCoinResult coinResult = await new UserClient().Wallet.GetBestCoinAsync();
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Tracker Running")

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinanceTrackerDesktop.Core.Components.ButtonControl.Extension
+﻿namespace BinanceTrackerDesktop.Core.Components.ButtonControl.Extension
 {
     public static class ButtonComponentControlExtension
     {

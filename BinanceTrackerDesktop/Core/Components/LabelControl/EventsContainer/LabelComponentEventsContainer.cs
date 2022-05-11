@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Event;
+﻿using BinanceTrackerDesktop.Core.Triggers.Events.Listener;
 
 namespace BinanceTrackerDesktop.Core.Components.LabelControl.EventsContainer
 {

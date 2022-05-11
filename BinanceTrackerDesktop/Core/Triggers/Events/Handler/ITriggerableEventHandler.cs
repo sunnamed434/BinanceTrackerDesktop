@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Trigger
+﻿namespace BinanceTrackerDesktop.Core.Triggers.Events.Handler
 {
     /// <summary>
     /// A triggerable event handler for special targets.
@@ -14,7 +14,7 @@
 
 
         /// <summary>
-        /// Invoking <see cref="OnTriggerEventHandler"/>
+        /// Invoking event <see cref="OnTriggerEventHandler"/>
         /// </summary>
         /// <param name="e">Event args</param>
         /// <exception cref="System.ArgumentNullException"></exception>

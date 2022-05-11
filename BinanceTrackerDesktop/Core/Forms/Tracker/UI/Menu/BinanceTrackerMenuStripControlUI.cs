@@ -13,7 +13,7 @@ using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Theme.Repositories;
 using BinanceTrackerDesktop.Core.User.Wallet;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results.Coin;
 using CryptoExchange.Net.Objects;
 using System.Text;
 
@@ -132,7 +132,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private async void onCoinsItemClicked(EventArgs e)
         {
-            IEnumerable<IBinanceUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
+            IEnumerable<IUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
             MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset } = {FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(r.Price)}")));
         }

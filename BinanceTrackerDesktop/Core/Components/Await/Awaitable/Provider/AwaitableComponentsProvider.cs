@@ -32,6 +32,7 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider
                     t.GetInterface(nameof(IAwaitableComponentObserverInstance)) != null
                     || t.GetInterface(nameof(IAwaitableComponentStart)) != null
                     || t.GetInterface(nameof(IAwaitableComponentExecute)) != null
+                    || t.GetInterface(nameof(IAwaitableComponentAsyncExecute)) != null
                     || t.GetInterface(nameof(IAwaitableComponentComplete)) != null));
 
             IsRegistered = !IsRegistered;

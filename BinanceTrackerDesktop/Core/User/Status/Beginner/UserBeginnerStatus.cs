@@ -4,7 +4,7 @@ using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Status.Base;
 using BinanceTrackerDesktop.Core.User.Status.Result;
 using BinanceTrackerDesktop.Core.User.Wallet;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results;
 
 namespace BinanceTrackerDesktop.Core.User.Status.Beginner
 {
@@ -18,7 +18,7 @@ namespace BinanceTrackerDesktop.Core.User.Status.Beginner
 
         public override async Task<IUserStatusResult> CalculateUserTotalBalanceAsync()
         {
-            UserWalletResult totalBalanceWalletResult = await Wallet.GetTotalBalanceAsync();
+            IUserWalletResult totalBalanceWalletResult = await Wallet.GetTotalBalanceAsync();
             return new UserStatusResult(totalBalanceWalletResult.Value);
         }
 

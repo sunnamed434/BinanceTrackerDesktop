@@ -1,6 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.Trigger;
+﻿using BinanceTrackerDesktop.Core.Triggers.Events.Handler;
 
-namespace BinanceTrackerDesktop.Core.Event
+namespace BinanceTrackerDesktop.Core.Triggers.Events.Listener
 {
     public sealed class EventListener : ITriggerableEventHandler<EventArgs>
     {

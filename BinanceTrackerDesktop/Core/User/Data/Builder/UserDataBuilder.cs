@@ -81,6 +81,15 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
             return this;
         }
 
+        public IUserDataBuilder AddUserTheme(Themes.Theme theme)
+        {
+            if (theme == null)
+                throw new ArgumentNullException(nameof(theme));
+
+            this.userData.Theme = theme;
+            return this;
+        }
+
         public IUserDataBuilder SetBalancesHiden()
         {
             this.userData.IsBalancesHiden = true;
@@ -119,20 +128,22 @@ namespace BinanceTrackerDesktop.Core.User.Data.Builder
 
         public IUserDataBuilder SetUserThemeAsSystem()
         {
-            this.userData.Theme = Themes.Theme.System;
-            return this;
+            return AddUserTheme(Themes.Theme.System);
+        }
+
+        public IUserDataBuilder SetUserThemeAsColorBlind()
+        {
+            return AddUserTheme(Themes.Theme.ColorBlind);
         }
 
         public IUserDataBuilder SetUserThemeAsLight()
         {
-            this.userData.Theme = Themes.Theme.Light;
-            return this;
+            return AddUserTheme(Themes.Theme.Light);
         }
 
         public IUserDataBuilder SetUserThemeAsDark()
         {
-            this.userData.Theme = Themes.Theme.Dark;
-            return this;
+            return AddUserTheme(Themes.Theme.Dark);
         }
 
         public UserData Build()

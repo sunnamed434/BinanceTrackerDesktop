@@ -1,6 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.Trigger;
+﻿using BinanceTrackerDesktop.Core.Triggers.Events.Handler;
 
-namespace BinanceTrackerDesktop.Core.Components.Events
+namespace BinanceTrackerDesktop.Core.Triggers.Mouse
 {
     public class MouseClickEventListener : ITriggerableEventHandler<MouseEventArgs>
     {

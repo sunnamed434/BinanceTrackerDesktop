@@ -1,12 +1,5 @@
-﻿namespace BinanceTrackerDesktop.Core.Calculator
+﻿namespace BinanceTrackerDesktop.Core.Calculator.Options
 {
-    public interface IBinanceCoinOptions
-    {
-        decimal Price { get; }
-
-        decimal Amount { get; }
-    }
-
     public sealed class BinanceCoinOptions : IBinanceCoinOptions
     {
         public decimal Price { get; }

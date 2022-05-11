@@ -9,8 +9,8 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider.Utiliti
         /// <summary>
         /// Receives all interfaces from given <paramref name="types"/>
         /// </summary>
-        /// <typeparam name="TInterfaceTarget"></typeparam>
-        /// <param name="types"></param>
+        /// <typeparam name="TInterfaceTarget">Target for Interfaces searching.</typeparam>
+        /// <param name="types">Types.</param>
         /// <returns>Received interfaces.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
@@ -51,7 +51,7 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider.Utiliti
         /// <summary>
         /// Receives all interfaces by calling method <see cref="GetInterfacesFromTypes{TInterfaceTarget}(Type[])"/>, from giving types from current executing <see cref="Assembly"/>
         /// </summary>
-        /// <typeparam name="TInterfaceTarget"></typeparam>
+        /// <typeparam name="TInterfaceTarget">Target for Interfaces searching.</typeparam>
         /// <returns>Received interfaces.</returns>
         public static IEnumerable<TInterfaceTarget> GetInterfacesFromAssemblyTypes<TInterfaceTarget>()
         {

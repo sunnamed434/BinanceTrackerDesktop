@@ -11,6 +11,11 @@
         System,
 
         /// <summary>
+        /// Color blind Theme.
+        /// </summary>
+        ColorBlind,
+
+        /// <summary>
         /// Light Theme.
         /// </summary>
         Light,

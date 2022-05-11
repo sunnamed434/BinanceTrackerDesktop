@@ -53,46 +53,41 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Observer
 
         public async Task CallListenersAsync()
         {
-            try
+            Type[] types = registeredTypes.ToArray();
+            foreach (IAwaitableComponentObserverInstance awaitableComponentObserverInstance in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentObserverInstance>(types))
             {
-                foreach (IAwaitableComponentObserverInstance awaitableComponentObserverInstance in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentObserverInstance>(registeredTypes.ToArray()))
-                {
-                    awaitableComponentObserverInstance.Observer = this;
-                }
-
-                foreach (IAwaitableComponentStart awaitableComponentStart in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentStart>(registeredTypes.ToArray()))
-                {
-                    awaitableComponentStart.OnStart();
-                }
-
-                foreach (IAwaitableComponentExecute awaitableComponent in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentExecute>(registeredTypes.ToArray()))
-                {
-                    closeCallbacks.Add(awaitableComponent.OnExecute);
-                }
-
-                Func<Task> func = () => Task.CompletedTask;
-                foreach (Func<Task> callback in closeCallbacks)
-                {
-                    if (callback == null)
-                        throw new ArgumentNullException(nameof(callback));
-
-                    func += callback;
-                }
-
-                await func?.Invoke();
-
-                foreach (IAwaitableComponentComplete awaitableComponentComplete in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentComplete>(registeredTypes.ToArray()))
-                {
-                    awaitableComponentComplete.OnComplete();
-                }
+                awaitableComponentObserverInstance.Observer = this;
             }
-            catch (Exception ex)
+
+            foreach (IAwaitableComponentStart awaitableComponentStart in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentStart>(types))
             {
-                throw ex;
+                awaitableComponentStart.OnStart();
             }
-            finally
+
+            foreach (IAwaitableComponentExecute awaitableComponent in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentExecute>(types))
             {
-                await Task.CompletedTask;
+                awaitableComponent.OnExecute();
+            }
+
+            foreach (IAwaitableComponentAsyncExecute awaitableComponentAsync in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentAsyncExecute>(types))
+            {
+                closeCallbacks.Add(awaitableComponentAsync.OnExecuteAsync);
+            }
+
+            Func<Task> func = () => Task.CompletedTask;
+            foreach (Func<Task> callback in closeCallbacks)
+            {
+                if (callback == null)
+                    throw new ArgumentNullException(nameof(callback));
+
+                func += callback;
+            }
+
+            await func?.Invoke();
+
+            foreach (IAwaitableComponentComplete awaitableComponentComplete in ReflectionInterfacesFromTypesReceiverUtility.GetInterfacesFromTypes<IAwaitableComponentComplete>(types))
+            {
+                awaitableComponentComplete.OnComplete();
             }
         }
     }

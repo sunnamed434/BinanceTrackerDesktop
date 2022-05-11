@@ -25,7 +25,7 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider
         /// Registering only once with next interfaces:
         /// <para><see cref="IAwaitableComponentObserverInstance"/>;</para> 
         /// <para><see cref="IAwaitableComponentStart"/>;</para>
-        /// <para><see cref="IAwaitableComponentExecute"/>;</para>
+        /// <para><see cref="IAwaitableComponentAsyncExecute"/>;</para>
         /// <para><see cref="IAwaitableComponentComplete"/></para>
         /// </summary>
         /// <exception cref="System.InvalidOperationException"></exception>

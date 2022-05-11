@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Triggers.Events.Listener;
 
-namespace BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.EventsContainer
+namespace BinanceTrackerDesktop.Core.Triggers.MenuStrip
 {
     public sealed class MenuStripComponentItemEventsContainer
     {

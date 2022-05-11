@@ -9,7 +9,7 @@ using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Theme.Repositories;
 using BinanceTrackerDesktop.Core.User.Wallet;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results;
 using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using System.Text;
@@ -73,7 +73,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
             data.Currency = NewCurrenyTextBox.Text;
             userDataSaveSystem.Write(data);
 
-            UserWalletResult userWalletResult = await userWallet.GetTotalBalanceAsync();
+            IUserWalletResult userWalletResult = await userWallet.GetTotalBalanceAsync();
             data.BestBalance = userWalletResult.Value;
             userDataSaveSystem.Write(data);
 

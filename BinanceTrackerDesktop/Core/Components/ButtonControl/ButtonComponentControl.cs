@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Components.ButtonControl.EventsContainer;
-using BinanceTrackerDesktop.Core.Components.TextControl;
+﻿using BinanceTrackerDesktop.Core.Components.TextControl;
+using BinanceTrackerDesktop.Core.Triggers.Mouse.Button;
 
 namespace BinanceTrackerDesktop.Core.Components.ButtonControl
 {

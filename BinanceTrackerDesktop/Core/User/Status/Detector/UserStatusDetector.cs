@@ -16,14 +16,8 @@ namespace BinanceTrackerDesktop.Core.User.Status.Detector
 
         public UserStatusDetector(IUserDataSaveSystem userDataSaveSystem, UserWallet wallet)
         {
-            if (userDataSaveSystem == null)
-                throw new ArgumentNullException(nameof(userDataSaveSystem));
-
-            if (wallet == null)
-                throw new ArgumentNullException(nameof(wallet));
-
-            this.userDataSaveSystem = userDataSaveSystem;
-            this.wallet = wallet;
+            this.userDataSaveSystem = userDataSaveSystem ?? throw new ArgumentNullException(nameof(userDataSaveSystem));
+            this.wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
         }
 
 

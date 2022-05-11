@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// For awaitable component, an a interface that giving a special method when application closing is completed.
-    /// <para>It set`s automatically at runtime via "Reflection".</para>
+    /// <para>It executes automatically at runtime via <see langword="Reflection"/></para>
     /// </summary>
     public interface IAwaitableComponentComplete
     {

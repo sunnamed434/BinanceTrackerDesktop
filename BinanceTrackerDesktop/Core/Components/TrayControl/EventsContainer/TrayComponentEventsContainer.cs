@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.Components.Events;
-using BinanceTrackerDesktop.Core.Event;
+﻿using BinanceTrackerDesktop.Core.Triggers.Events.Listener;
+using BinanceTrackerDesktop.Core.Triggers.Mouse;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.EventsContainer
 {

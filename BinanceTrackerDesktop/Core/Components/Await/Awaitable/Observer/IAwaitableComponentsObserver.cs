@@ -40,9 +40,10 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Observer
         /// <para><see cref="IAwaitableComponentObserverInstance"/>;</para> 
         /// <para><see cref="IAwaitableComponentStart"/>;</para>
         /// <para><see cref="IAwaitableComponentExecute"/>;</para>
+        /// <para><see cref="IAwaitableComponentAsyncExecute"/>;</para>
         /// <para><see cref="IAwaitableComponentComplete"/></para>
         /// </summary>
-        /// <returns><see cref="Task.CompletedTask"/></returns>
+        /// <returns>Completed task.</returns>
         Task CallListenersAsync();
     }
 }

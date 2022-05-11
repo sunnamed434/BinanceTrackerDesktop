@@ -3,11 +3,11 @@ using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Wallet;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Control
 {
-    public sealed class BinanceTrackerUserDataSaveControl : IAwaitableSingletonObject, IAwaitableComponentExecute
+    public sealed class BinanceTrackerUserDataSaveControl : IAwaitableSingletonObject, IAwaitableComponentAsyncExecute
     {
         private readonly UserWallet wallet;
 
@@ -30,26 +30,25 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
 
 
 
-        async Task IAwaitableComponentExecute.OnExecute()
+        async Task IAwaitableComponentAsyncExecute.OnExecuteAsync()
         {
             BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
             IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());
 
-            UserData userData = userDataBuilder.Build();
+            UserData userData = userDataBuilder
+                .Build();
 
-            UserWalletResult walletTotalBalanceResult = await this.wallet.GetTotalBalanceAsync();
-            if (userData.BestBalance.HasValue && userData.BestBalance.Value < walletTotalBalanceResult.Value)
-                userDataBuilder.AddBestBalance(walletTotalBalanceResult.Value);
+            IUserWalletResult totalBalanceWalletResult = await this.wallet.GetTotalBalanceAsync();
+            if (userData.BestBalance.HasValue && userData.BestBalance.Value < totalBalanceWalletResult.Value)
+                userDataBuilder.AddBestBalance(totalBalanceWalletResult.Value);
 
             if (userData.BestBalance.HasValue == false)
-                userDataBuilder.AddBestBalance(walletTotalBalanceResult.Value);
+                userDataBuilder.AddBestBalance(totalBalanceWalletResult.Value);
 
             userDataBuilder
                 .SetAsUserStartedApplicationNotFirstTime()
                 .Build()
                 .WriteUserData(saveSystem);
-
-            await Task.CompletedTask;
         }
     }
 }

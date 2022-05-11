@@ -1,15 +1,17 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.Core.Calculator;
-using BinanceTrackerDesktop.Core.Calculator.Extension;
+using BinanceTrackerDesktop.Core.Calculator.Extensions;
+using BinanceTrackerDesktop.Core.Calculator.Options;
 using BinanceTrackerDesktop.Core.Formatters.Currency.Crypto;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
-using BinanceTrackerDesktop.Core.User.Wallet.Models;
+using BinanceTrackerDesktop.Core.User.Wallet.Results;
+using BinanceTrackerDesktop.Core.User.Wallet.Results.Coin;
 using CryptoExchange.Net.Objects;
 
 namespace BinanceTrackerDesktop.Core.User.Wallet
 {
-    public sealed class UserWallet
+    public sealed class UserWallet : IUserWallet
     {
         private readonly BinanceClient client;
 
@@ -22,9 +24,9 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
 
 
-        public async Task<UserWalletResult> GetTotalBalanceAsync()
+        public async Task<IUserWalletResult> GetTotalBalanceAsync()
         {
-            IEnumerable<UserWalletCoinResult> buyedCoins = await GetAllBuyedCoinsAsync();
+            IEnumerable<IUserWalletCoinResult> buyedCoins = await GetAllBuyedCoinsAsync();
 
             decimal result = decimal.Zero;
             foreach (UserWalletCoinResult buyedCoin in buyedCoins)
@@ -35,22 +37,22 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
             return new UserWalletResult(result);
         }
 
-        public async Task<IEnumerable<UserWalletCoinResult>> GetAllBuyedCoinsAsync()
+        public async Task<IEnumerable<IUserWalletCoinResult>> GetAllBuyedCoinsAsync()
         {
             WebCallResult<IEnumerable<BinanceUserAsset>> coins = await client.SpotApi.Account.GetUserAssetsAsync();
 
             const string NotExsistableCoin = "Sologenic";
-            List<UserWalletCoinResult> result = new List<UserWalletCoinResult>();
+            List<IUserWalletCoinResult> result = new List<IUserWalletCoinResult>();
             if (coins.Success)
             {
-                foreach (BinanceUserAsset coin in coins.Data.Where(c => c.Available.ValueFitsToCalculation()))
+                foreach (BinanceUserAsset coin in coins.Data.Where(c => c.Available.ValueFitsForCalculation()))
                 {
                     if (coin.Name == NotExsistableCoin)
                     {
                         continue;
                     }
 
-                    UserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
+                    IUserWalletCoinResult coinResult = await calculateAndFormatCoinPriceAsync(coin);
                     result.Add(coinResult);
                 }
             }
@@ -58,16 +60,16 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
             return result;
         }
 
-        public async Task<UserWalletCoinResult> GetBestCoinAsync()
+        public async Task<IUserWalletCoinResult> GetBestCoinAsync()
         {
-            IEnumerable<UserWalletCoinResult> coins = await GetAllBuyedCoinsAsync();
+            IEnumerable<IUserWalletCoinResult> coins = await GetAllBuyedCoinsAsync();
 
             return coins.OrderByDescending(c => c.Price).First();
         }
 
 
 
-        private async Task<UserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserAsset coin)
+        private async Task<IUserWalletCoinResult> calculateAndFormatCoinPriceAsync(BinanceUserAsset coin)
         {
             string formattedCryptocurrency = FormatterUtility<BasedOnUserDataCryptocurrencyFormatter>.Format(coin.Asset).ToString();
 

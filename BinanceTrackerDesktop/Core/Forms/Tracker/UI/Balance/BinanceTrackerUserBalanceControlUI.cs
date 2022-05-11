@@ -62,13 +62,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
 
 
-        async Task IAwaitableComponentExecute.OnExecute()
+        void IAwaitableComponentExecute.OnExecute()
         {
             formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onRefreshTotalBalanceButtonClicked;
             formTextControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
             formTextControls[1].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;
-
-            await Task.CompletedTask;
         }
 
 
@@ -118,18 +116,19 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
             UserData data = new BinaryUserDataSaveSystem().Read();
             string formattedLosses = userStatus.Format((decimal)balanceLossesStatusResult.Value);
-            Color balanceLossesColor = getColorFromBalanceLosses((decimal)totalBalanceStatusResult.Value, (decimal)data.BestBalance);
+            Color balanceLossesColor = getColorFromBalanceLosses((decimal)totalBalanceStatusResult.Value, data.BestBalance);
+
             formTextControls[1].SetText(formattedLosses, balanceLossesColor);
         }
 
-        private async Task refreshBalancesSyncAsync(Action onStartedCallback = null, Action onCompletedCallback = null)
+        private async Task refreshBalancesSyncAsync(Action onStartCallback = null, Action onCompleteCallback = null)
         {
-            onStartedCallback?.Invoke();
+            onStartCallback?.Invoke();
 
             await refreshBalanceAsync();
             await refreshBalanceLossesAsync();
 
-            onCompletedCallback?.Invoke();
+            onCompleteCallback?.Invoke();
         }
 
         private void setTextsHiden()
@@ -148,9 +147,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
             }
         }
 
-        private Color getColorFromBalanceLosses(decimal totalBalance, decimal bestBalance)
+        private Color getColorFromBalanceLosses(decimal? totalBalance, decimal? bestBalance)
         {
-            if (bestBalance == decimal.Zero)
+            if (bestBalance == null)
             {
                 return Color.Gray;
             }

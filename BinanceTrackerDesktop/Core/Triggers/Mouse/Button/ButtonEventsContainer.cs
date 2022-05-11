@@ -1,6 +1,6 @@
-﻿using BinanceTrackerDesktop.Core.Event;
+﻿using BinanceTrackerDesktop.Core.Triggers.Events.Listener;
 
-namespace BinanceTrackerDesktop.Core.Components.ButtonControl.EventsContainer
+namespace BinanceTrackerDesktop.Core.Triggers.Mouse.Button
 {
     public sealed class ButtonEventsContainer
     {
