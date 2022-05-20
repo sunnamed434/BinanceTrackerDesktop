@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
+﻿using BinanceTrackerDesktop.Core.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
@@ -7,7 +7,7 @@ using BinanceTrackerDesktop.Core.User.Wallet.Results;
 
 namespace BinanceTrackerDesktop.Core.User.Data.Control
 {
-    public sealed class BinanceTrackerUserDataSaveControl : IAwaitableSingletonObject, IAwaitableComponentAsyncExecute
+    public sealed class BinanceTrackerUserDataSaveControl : IAwaitableSingletonObject, IAwaitableAsyncExecute
     {
         private readonly UserWallet wallet;
 
@@ -30,7 +30,7 @@ namespace BinanceTrackerDesktop.Core.User.Data.Control
 
 
 
-        async Task IAwaitableComponentAsyncExecute.OnExecuteAsync()
+        async Task IAwaitableAsyncExecute.OnExecuteAsync()
         {
             BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
             IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());

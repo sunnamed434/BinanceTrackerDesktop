@@ -38,7 +38,6 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.deps.json
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.runtimeconfig.json
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.dll
-D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\ref\BinanceTrackerDesktop.dll
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.pdb
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\BinanceTrackerDesktop.xml
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\aa\BinanceTrackerDesktop.resources.dll
@@ -69,3 +68,4 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.genruntimeconfig.cache
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tracker.Settings.BinanceTrackerSettingsForm.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.csproj.AssemblyReference.cache
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\refint\BinanceTrackerDesktop.dll

@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Models.Data;
+﻿using BinanceTrackerDesktop.Core.Themes.Models;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Themable;
 using System.ComponentModel;
@@ -124,7 +124,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         void IThemable.ApplyTheme()
         {
-            LoadedThemeData loadedThemeData = themable.ThemesProvider.LoadThemeData();
+            ThemeColors loadedThemeData = themable.ThemesProvider.LoadThemeData();
             BackColor = loadedThemeData.Form;
             foreach (Control control in Controls)
             {

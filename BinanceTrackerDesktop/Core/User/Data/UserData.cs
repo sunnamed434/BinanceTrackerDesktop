@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.User.Authentication.Data;
+﻿using BinanceTrackerDesktop.Core.Localizations.Language;
+using BinanceTrackerDesktop.Core.User.Authentication.Data;
 
 namespace BinanceTrackerDesktop.Core.User.Data
 {
@@ -14,6 +15,8 @@ namespace BinanceTrackerDesktop.Core.User.Data
         public UserTwoFactorAuthenticationData AuthenticationData;
 
         public Themes.Theme Theme;
+
+        public ILanguage Language;
 
         public decimal? BestBalance;
 

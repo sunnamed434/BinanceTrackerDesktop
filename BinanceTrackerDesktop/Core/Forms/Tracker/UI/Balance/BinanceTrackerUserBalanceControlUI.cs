@@ -1,5 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
-using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
+﻿using BinanceTrackerDesktop.Core.Awaitable.Awaitables;
+using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Components.ButtonControl.Extension;
 using BinanceTrackerDesktop.Core.User.Control;
@@ -11,7 +11,7 @@ using BinanceTrackerDesktop.Core.User.Status.Result;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 {
-    public class BinanceTrackerUserBalanceControlUI : IAwaitableSingletonObject, IAwaitableComponentExecute
+    public class BinanceTrackerUserBalanceControlUI : IAwaitableSingletonObject, IAwaitableExecute
     {
         private readonly IUserStatus userStatus;
 
@@ -62,7 +62,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance
 
 
 
-        void IAwaitableComponentExecute.OnExecute()
+        void IAwaitableExecute.OnExecute()
         {
             formButtonControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onRefreshTotalBalanceButtonClicked;
             formTextControls[0].EventsContainer.ClickEventListener.OnTriggerEventHandler -= onTextClicked;

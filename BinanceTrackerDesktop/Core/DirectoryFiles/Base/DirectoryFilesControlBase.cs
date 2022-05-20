@@ -1,26 +1,35 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Item;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Utility;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Utilities;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Base
 {
-    public abstract class DirectoryFilesControlBase<TDirectoryFileItem> 
-        : IDirectoryFilesControl<TDirectoryFileItem> where TDirectoryFileItem : IDirectoryFileItem
+    public abstract class DirectoryFilesControlBase<TDirectoryFileItem> : 
+        DirectoryFilesControlBase, 
+        IDirectoryFilesControl<TDirectoryFileItem> where TDirectoryFileItem : IDirectoryFileItem
     {
-        public abstract string FolderPath { get; }
-
         public abstract IEnumerable<TDirectoryFileItem> Files { get; }
-
-        public virtual IEnumerable<string> FileExtensions => new List<string>();
 
 
 
         public virtual TDirectoryFileItem GetDirectoryFile(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name));
+            {
+                throw new ArgumentException(nameof(name));
+            }
 
             return Files.FirstOrDefault(i => i.FileName.Contains(name));
         }
+    }
+
+    public abstract class DirectoryFilesControlBase :
+        IDirectoryFilesControl
+    {
+        public abstract string FolderPath { get; }
+
+        public virtual IEnumerable<string> FilesExtensions { get; }
+
+
 
         public virtual IEnumerable<string> GetAllFilePathFromDirectory()
         {
@@ -28,8 +37,12 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Base
 
             string[] filesPaths = Directory.GetFiles(FolderPath);
             for (int i = 0; i < filesPaths.Length; i++)
-                if (FilePathUtility.TryGetExtensionOf(filesPaths[i], out string extension) && FileExtensions.Contains(extension))
+            {
+                if (PathUtility.TryGetExtensionFromPathAndCompareIt(filesPaths[i], (e) => FilesExtensions.Contains(e)))
+                {
                     yield return filesPaths[i];
+                }
+            }
         }
     }
 }

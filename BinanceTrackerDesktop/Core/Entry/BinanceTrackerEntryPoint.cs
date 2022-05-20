@@ -10,7 +10,7 @@ namespace BinanceTrackerDesktop.Core.Entry
 {
     public sealed class BinanceTrackerEntryPoint
     {
-        internal static AwaitableComponentsProvider AwaitableComponentsProvider;
+        internal static AwaitablesProvider AwaitablesProvider;
 
 
 
@@ -22,8 +22,8 @@ namespace BinanceTrackerDesktop.Core.Entry
                 return;
             }
 
-            AwaitableComponentsProvider = new AwaitableComponentsProvider(new AwaitableComponentsObserver());
-            AwaitableComponentsProvider.RegisterAwaitablesOnce();
+            AwaitablesProvider = new AwaitablesProvider(new AwaitablesObserver());
+            AwaitablesProvider.RegisterAwaitablesOnce();
 
             if (new BinaryUserDataSaveSystem().Read() == null)
             {

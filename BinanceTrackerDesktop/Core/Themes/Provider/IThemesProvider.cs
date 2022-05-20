@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Themes.Detectors;
-using BinanceTrackerDesktop.Core.Themes.Models.Data;
+using BinanceTrackerDesktop.Core.Themes.Models;
 
 namespace BinanceTrackerDesktop.Core.Themes.Provider
 {
@@ -9,6 +9,6 @@ namespace BinanceTrackerDesktop.Core.Themes.Provider
 
 
 
-        LoadedThemeData LoadThemeData();
+        ThemeColors LoadThemeData();
     }
 }

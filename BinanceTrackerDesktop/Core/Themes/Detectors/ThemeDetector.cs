@@ -1,38 +1,39 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Repositories.Readers;
+﻿using BinanceTrackerDesktop.Core.Themes.Recognizers;
+using BinanceTrackerDesktop.Core.Themes.Repositories.Readers;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Dark;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Exceptions;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Light;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.System;
-using BinanceTrackerDesktop.Core.User.Theme.Repositories;
+using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 
 namespace BinanceTrackerDesktop.Core.Themes.Detectors
 {
     public sealed class ThemeDetector : IThemeDetector
     {
-        public IUserThemeRepository UserThemeRepository { get; }
-
-
-
-        public ThemeDetector(IUserThemeRepository userThemeRepository)
+        public ThemeDetector(ThemeUserDataValueRepository themeRepository, ISystemThemeRecognizer themeRecognizer)
         {
-            UserThemeRepository = userThemeRepository ?? throw new ArgumentNullException(nameof(userThemeRepository));
+            ThemeRepository = themeRepository ?? throw new ArgumentNullException(nameof(themeRepository));
+            ThemeRecognizer = themeRecognizer ?? throw new ArgumentNullException(nameof(themeRecognizer));
         }
 
 
 
-        public IThemeDataReaderRepository GetThemeReaderRepository()
+        public ThemeUserDataValueRepository ThemeRepository { get; }
+
+        public ISystemThemeRecognizer ThemeRecognizer { get; }
+
+
+
+        public IThemeDataRepository GetThemeReaderRepository()
         {
-            Theme theme = UserThemeRepository.GetTheme();
-            if (theme.Equals(Theme.System))
-                return new SystemThemeReaderRepository();
-
-            if (theme.Equals(Theme.Light))
-                return new LightThemeReaderRepository();
-
-            if (theme.Equals(Theme.Dark))
-                return new DarkThemeReaderRepository();
-
-            throw new ThemeCannotBeRecognizedException();
+            Theme theme = ThemeRepository.GetValue();
+            return theme switch
+            {
+                Theme.System => new SystemThemeDataRepository(ThemeRecognizer),
+                Theme.Light  => new LightThemeReaderRepository(),
+                Theme.Dark   => new DarkThemeReaderRepository(),
+                _ => throw new ThemeCannotBeRecognizedException()
+            };
         }
     }
 }

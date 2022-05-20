@@ -1,13 +1,14 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.Themes.Detectors;
 using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Core.User.Theme.Repositories;
+using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Results;
 using BinanceTrackerDesktop.Core.Validators;
@@ -29,14 +30,14 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
             InitializeComponent();
 
             themable = this;
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
             themable.ApplyTheme();
 
             base.Text = "Tracker Settings";
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterParent;
-            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(DirectoryImagesControl.RegisteredImages.ApplicationIcon).GetIcon();
+            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
             this.userWallet = userWallet ?? throw new ArgumentNullException(nameof(userWallet));
 

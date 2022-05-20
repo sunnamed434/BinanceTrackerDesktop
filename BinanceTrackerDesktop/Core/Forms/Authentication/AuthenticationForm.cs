@@ -8,7 +8,7 @@ using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {

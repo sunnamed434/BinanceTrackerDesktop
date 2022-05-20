@@ -1,6 +1,6 @@
 ﻿using Binance.Net.Clients;
+using BinanceTrackerDesktop.Core.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
-using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
 using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Entry;
@@ -10,17 +10,18 @@ using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Themes.Detectors;
 using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Status.Detector;
-using BinanceTrackerDesktop.Core.User.Theme.Repositories;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images.DirectoryImagesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public sealed partial class BinanceTrackerForm : Form, IAwaitableSingletonObject, IAwaitableComponentStart, IAwaitableComponentComplete
+    public sealed partial class BinanceTrackerForm : Form, IAwaitableSingletonObject, IAwaitableStart, IAwaitableComplete
     {
         private readonly AuthenticatorForm authenticatorForm;
 
@@ -39,7 +40,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             InitializeComponent();
 
             themable = this;
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
             themable.ApplyTheme();
 
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -67,12 +68,12 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
 
 
-        void IAwaitableComponentStart.OnStart()
+        void IAwaitableStart.OnStart()
         {
             base.Hide();
         }
 
-        void IAwaitableComponentComplete.OnComplete()
+        void IAwaitableComplete.OnComplete()
         {
             Application.Exit();
         }
@@ -119,14 +120,14 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
         }
-
+        
         private async void onFormClosing(object sender, FormClosingEventArgs e)
         {
             base.FormClosing -= onFormClosing;
 
             e.Cancel = true;
 
-            await BinanceTrackerEntryPoint.AwaitableComponentsProvider.Observer.CallListenersAsync();
+            await BinanceTrackerEntryPoint.AwaitablesProvider.Observer.CallListenersAsync();
         }
     }
 }

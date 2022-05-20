@@ -1,11 +1,11 @@
 ﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
-using BinanceTrackerDesktop.Core.Themes.Models.Resource;
+using BinanceTrackerDesktop.Core.Themes.Models;
 using Newtonsoft.Json;
-using static BinanceTrackerDesktop.Core.DirectoryFiles.Control.Themes.DirectoryThemesControl;
+using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Themes.ThemesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Light
 {
-    public sealed class LightThemeReaderRepository : IThemeDataReaderRepository
+    public sealed class LightThemeReaderRepository : IThemeDataRepository
     {
         public IEnumerable<ThemeData> GetThemeData()
         {

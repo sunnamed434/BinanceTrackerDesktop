@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Exceptions;
+using Microsoft.Win32;
 
 namespace BinanceTrackerDesktop.Core.Themes.Recognizers.Windows
 {
@@ -10,12 +11,21 @@ namespace BinanceTrackerDesktop.Core.Themes.Recognizers.Windows
 
         private const int LightThemeValue = 1;
 
+        private const int DarkThemeValue = 0;
+
 
 
         public Theme RecognizeTheme()
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey(ThemesPath);
-            return (int)registry.GetValue(SystemUsesLightTheme) == LightThemeValue ? Theme.Light : Theme.Dark;
+            int themeValue = (int)registry.GetValue(SystemUsesLightTheme);
+
+            return themeValue switch
+            {
+                LightThemeValue => Theme.Light,
+                DarkThemeValue  => Theme.Dark,
+                _ => throw new ThemeCannotBeRecognizedException(),
+            };
         }
     }
 }

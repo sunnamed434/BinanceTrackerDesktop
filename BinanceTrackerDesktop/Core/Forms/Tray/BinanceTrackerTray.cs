@@ -1,5 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Component;
+using BinanceTrackerDesktop.Core.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Core.Components.Await.Awaitable.Observer;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
 using BinanceTrackerDesktop.Core.Components.TrayControl.Base;
@@ -16,7 +16,7 @@ using BinanceTrackerDesktop.Core.Window;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tray
 {
-    public sealed class BinanceTrackerTray : TrayComponentControlBase, IAwaitableSingletonObject, IAwaitableComponentObserverInstance, IAwaitableComponentExecute
+    public sealed class BinanceTrackerTray : TrayComponentControlBase, IAwaitableSingletonObject, IAwaitableObserverInstance, IAwaitableExecute
     {
         private readonly ProcessWindowHelper processWindowHelper;
 
@@ -50,13 +50,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
 
 
 
-        IAwaitableComponentsObserver IAwaitableComponentObserverInstance.Observer { get; set; }
+        IAwaitablesObserver IAwaitableObserverInstance.Observer { get; set; }
 
         object IAwaitableSingletonObject.Instance => instance;
 
 
 
-        void IAwaitableComponentExecute.OnExecute()
+        void IAwaitableExecute.OnExecute()
         {
             applicationOpenItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onApplicationOpenItemClicked;
             notificationsItemControl.EventsContainer.OnClick.OnTriggerEventHandler -= onNotificationsItemControlClicked;
@@ -129,7 +129,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         {
             this.HideTray();
 
-            await BinanceTrackerEntryPoint.AwaitableComponentsProvider.Observer.CallListenersAsync();
+            await BinanceTrackerEntryPoint.AwaitablesProvider.Observer.CallListenersAsync();
         }
 
 

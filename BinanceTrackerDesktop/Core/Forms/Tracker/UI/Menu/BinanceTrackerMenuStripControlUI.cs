@@ -7,11 +7,12 @@ using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.Forms.Tracker.Settings;
 using BinanceTrackerDesktop.Core.Themes.Detectors;
-using BinanceTrackerDesktop.Core.Themes.Models.Data;
+using BinanceTrackerDesktop.Core.Themes.Models;
 using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Core.User.Theme.Repositories;
+using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Results.Coin;
 using CryptoExchange.Net.Objects;
@@ -38,13 +39,19 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         public BinanceTrackerMenuStripControlUI(MenuStrip menuStrip, BinanceClient client, UserWallet wallet)
         {
             if (menuStrip == null)
+            {
                 throw new ArgumentNullException(nameof(menuStrip));
+            }
 
             if (client == null)
+            {
                 throw new ArgumentNullException(nameof(client));
+            }
 
             if (wallet == null)
+            {
                 throw new ArgumentNullException(nameof(wallet));
+            }
 
             this.menuStrip = menuStrip;
             this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -52,13 +59,15 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             this.wallet = wallet;
 
             foreach (MenuStripComponentItemControl item in InitializeItems())
+            {
                 AddComponent(item);
+            }
 
             apiItemControl = base.GetComponentAt(MenuItemsIdContainer.API);
             coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
             settingsItemControl = base.GetComponentAt(MenuItemsIdContainer.Settings);
 
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new UserThemeRepository(new BinaryUserDataSaveSystem())));
+            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
             ApplyTheme();
 
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
@@ -74,7 +83,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         public void ApplyTheme()
         {
-            LoadedThemeData loadedThemeData = ThemesProvider.LoadThemeData();
+            ThemeColors loadedThemeData = ThemesProvider.LoadThemeData();
 
             menuStrip.BackColor = loadedThemeData.MenuStrip;
             if (menuStrip.Items != null)
@@ -89,7 +98,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         public override void AddComponent(MenuStripComponentItemControl menuStripItem)
         {
             if (menuStripItem == null)
+            {
                 throw new ArgumentNullException(nameof(menuStripItem));
+            }
 
             this.menuStrip.Items.Add(menuStripItem.ToolStripItem);
             base.Components.Add(menuStripItem);
@@ -98,7 +109,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         public override void RemoveComponent(MenuStripComponentItemControl menuStripItem)
         {
             if (menuStripItem == null)
+            {
                 throw new ArgumentNullException(nameof(menuStripItem));
+            }
 
             this.menuStrip.Items.Remove(menuStripItem.ToolStripItem);
             base.Components.Remove(menuStripItem);

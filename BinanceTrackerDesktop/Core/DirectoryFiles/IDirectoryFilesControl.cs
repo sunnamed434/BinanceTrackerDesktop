@@ -2,17 +2,22 @@
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles
 {
-    public interface IDirectoryFilesControl<TFileItem> where TFileItem : IDirectoryFileItem
+    public interface IDirectoryFilesControl<TDirectoryFileItem> : IDirectoryFilesControl where TDirectoryFileItem : IDirectoryFileItem
+    {
+        IEnumerable<TDirectoryFileItem> Files { get; }
+
+
+
+        TDirectoryFileItem GetDirectoryFile(string name);
+    }
+
+    public interface IDirectoryFilesControl
     {
         string FolderPath { get; }
 
-        IEnumerable<TFileItem> Files { get; }
-
-        IEnumerable<string> FileExtensions { get; }
+        IEnumerable<string> FilesExtensions { get; }
 
 
-
-        TFileItem GetDirectoryFile(string name);
 
         IEnumerable<string> GetAllFilePathFromDirectory();
     }

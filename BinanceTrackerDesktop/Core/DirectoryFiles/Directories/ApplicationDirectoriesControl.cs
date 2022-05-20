@@ -1,6 +1,7 @@
-﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Files;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Images;
-using BinanceTrackerDesktop.Core.DirectoryFiles.Control.Themes;
+﻿using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.UserData;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Themes;
+using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Localizations;
 
 namespace BinanceTrackerDesktop.Core.DirectoryFiles.Directories
 {
@@ -19,32 +20,35 @@ namespace BinanceTrackerDesktop.Core.DirectoryFiles.Directories
 
         public sealed class Directories
         {
-            public readonly DirectoryOfResources Resources;
+            public readonly DirectoryResources Resources;
 
 
 
             public Directories()
             {
-                Resources = new DirectoryOfResources();
+                Resources = new DirectoryResources();
             }
 
 
 
-            public sealed class DirectoryOfResources
+            public sealed class DirectoryResources
             {
-                public readonly DirectoryImagesControl Images;
+                public readonly ImagesDirectoryFilesControl Images;
 
-                public readonly DirectoryFilesControl User;
+                public readonly UserDataDirectoryFilesControl User;
 
-                public readonly DirectoryThemesControl Themes;
+                public readonly ThemesDirectoryFilesControl Themes;
+
+                public readonly LocalizationsDirectoryFilesControl Localizations;
 
 
 
-                public DirectoryOfResources()
+                public DirectoryResources()
                 {
-                    Images = new DirectoryImagesControl();
-                    User = new DirectoryFilesControl();
-                    Themes = new DirectoryThemesControl();
+                    Images = new ImagesDirectoryFilesControl();
+                    User = new UserDataDirectoryFilesControl();
+                    Themes = new ThemesDirectoryFilesControl();
+                    Localizations = new LocalizationsDirectoryFilesControl();
                 }
             }
         }
