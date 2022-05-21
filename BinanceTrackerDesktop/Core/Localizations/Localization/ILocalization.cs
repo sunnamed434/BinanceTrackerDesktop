@@ -5,10 +5,6 @@ namespace BinanceTrackerDesktop.Core.Localizations.Localization
 {
     public interface ILocalization
     {
-        LanguageUserDataValueRepository LanguageRepository { get; }
-
-
-
         TranslationsData Load();
     }
 }

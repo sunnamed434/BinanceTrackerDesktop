@@ -9,12 +9,15 @@ using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Forms;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.User.Client;
 using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Data.Value;
+using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Authentication;
 using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Status.Detector;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
@@ -39,9 +42,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
             InitializeComponent();
 
-            themable = this;
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
-            themable.ApplyTheme();
+            FormsTheme.Apply(this, Controls, new WindowsSystemThemeRecognizer());
 
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
@@ -50,7 +51,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             base.MaximizeBox = false;
             this.RefreshTotalBalanceButton.TabStop = false;
 
-            if (new BinaryUserDataSaveSystem().Read().HasAuthenticationData)
+            if (UserDataValues.HasAuthenticationData.GetValue())
             {
                 authenticatorForm = new AuthenticatorForm();
                 authenticatorForm.FormClosed += onAuthenticationFormClosed;

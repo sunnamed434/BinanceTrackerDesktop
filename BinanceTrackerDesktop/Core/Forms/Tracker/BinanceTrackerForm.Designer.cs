@@ -1,16 +1,9 @@
-﻿using BinanceTrackerDesktop.Core.Themes.Models;
-using BinanceTrackerDesktop.Core.Themes.Provider;
-using BinanceTrackerDesktop.Core.Themes.Themable;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace BinanceTrackerDesktop.Tracker.Forms
 {
-    public sealed partial class BinanceTrackerForm : IThemable
+    public sealed partial class BinanceTrackerForm
     {
-        public IThemesProvider ThemesProvider { get; }
-
-        private IThemable themable;
-
         private IContainer components;
 
 
@@ -119,29 +112,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         }
         #endregion
-
-
-
-        void IThemable.ApplyTheme()
-        {
-            ThemeColors loadedThemeData = themable.ThemesProvider.LoadThemeData();
-            BackColor = loadedThemeData.Form;
-            foreach (Control control in Controls)
-            {
-                if (control is Button button)
-                {
-                    button.BackColor = loadedThemeData.Button;
-                    button.ForeColor = loadedThemeData.ButtonText;
-                    button.FlatAppearance.BorderSize = 0;
-                    button.FlatStyle = FlatStyle.Flat;
-                }
-
-                if (control is Label label)
-                {
-                    label.ForeColor = loadedThemeData.Text;
-                }
-            }
-        }
 
 
 

@@ -3,9 +3,9 @@ using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.Themes.Detectors;
+using BinanceTrackerDesktop.Core.Themes.Forms;
 using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
-using BinanceTrackerDesktop.Core.Themes.Themable;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
@@ -21,17 +21,13 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
     {
         private readonly UserWallet userWallet;
 
-        private readonly IThemable themable;
-
 
 
         public BinanceTrackerSettingsForm(UserWallet userWallet)
         {
             InitializeComponent();
 
-            themable = this;
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
-            themable.ApplyTheme();
+            FormsTheme.Apply(this, Controls, new WindowsSystemThemeRecognizer());
 
             base.Text = "Tracker Settings";
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -61,8 +57,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
                     .WithTitle(ApplicationEnviroment.GlobalName)
                     .WithMessage(new StringBuilder()
                                  .Append("[=(] Failed to change currency to ")
-                                 .Append(NewCurrenyTextBox.Text)
-                                 .ToString())
+                                 .Append(NewCurrenyTextBox.Text))
                     .WillCloseIn(90)
                     .ShowMessageBoxIfShouldOnBuild()
                     .Build();
@@ -82,8 +77,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage(new StringBuilder()
                                  .Append("[=)] Successfully changed currency to ")
-                                 .Append(data.Currency)
-                                 .ToString())
+                                 .Append(data.Currency))
                 .WillCloseIn(90)
                 .ShowMessageBoxIfShouldOnBuild()
                 .Build();

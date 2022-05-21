@@ -4,21 +4,18 @@ using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Dark;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Exceptions;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Light;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.System;
-using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
+using BinanceTrackerDesktop.Core.User.Data.Value;
 
 namespace BinanceTrackerDesktop.Core.Themes.Detectors
 {
     public sealed class ThemeDetector : IThemeDetector
     {
-        public ThemeDetector(ThemeUserDataValueRepository themeRepository, ISystemThemeRecognizer themeRecognizer)
+        public ThemeDetector(ISystemThemeRecognizer themeRecognizer)
         {
-            ThemeRepository = themeRepository ?? throw new ArgumentNullException(nameof(themeRepository));
             ThemeRecognizer = themeRecognizer ?? throw new ArgumentNullException(nameof(themeRecognizer));
         }
 
 
-
-        public ThemeUserDataValueRepository ThemeRepository { get; }
 
         public ISystemThemeRecognizer ThemeRecognizer { get; }
 
@@ -26,7 +23,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Detectors
 
         public IThemeDataRepository GetThemeReaderRepository()
         {
-            Theme theme = ThemeRepository.GetValue();
+            Theme theme = UserDataValues.Theme.GetValue();
             return theme switch
             {
                 Theme.System => new SystemThemeDataRepository(ThemeRecognizer),

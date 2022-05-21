@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Notifications.Popup.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using System.Text;
 
 namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
 {
@@ -28,6 +29,17 @@ namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
         public IPopupBuilder WithMessage(string content)
         {
             popup.Message = content;
+            return this;
+        }
+
+        public IPopupBuilder WithMessage(StringBuilder stringBuilder)
+        {
+            if (stringBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(stringBuilder));
+            }
+
+            popup.Message = stringBuilder.ToString();
             return this;
         }
 

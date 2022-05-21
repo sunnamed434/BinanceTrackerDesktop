@@ -6,13 +6,9 @@ using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control
 using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.Forms.Tracker.Settings;
-using BinanceTrackerDesktop.Core.Themes.Detectors;
-using BinanceTrackerDesktop.Core.Themes.Models;
-using BinanceTrackerDesktop.Core.Themes.Provider;
+using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
+using BinanceTrackerDesktop.Core.Themes.Forms;
 using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
-using BinanceTrackerDesktop.Core.Themes.Themable;
-using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Results.Coin;
 using CryptoExchange.Net.Objects;
@@ -20,7 +16,7 @@ using System.Text;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 {
-    public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase, IThemable
+    public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase
     {
         private readonly MenuStrip menuStrip;
 
@@ -67,8 +63,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             coinsItemControl = base.GetComponentAt(MenuItemsIdContainer.Coins);
             settingsItemControl = base.GetComponentAt(MenuItemsIdContainer.Settings);
 
-            ThemesProvider = new ThemesProvider(new ThemeDetector(new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem()), new WindowsSystemThemeRecognizer()));
-            ApplyTheme();
+            FormsTheme.Apply(menuStrip, base.AllComponents, new WindowsSystemThemeRecognizer());
 
             apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
             coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onCoinsItemClicked;
@@ -76,24 +71,6 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
         }
 
 
-
-        public IThemesProvider ThemesProvider { get; }
-
-
-
-        public void ApplyTheme()
-        {
-            ThemeColors loadedThemeData = ThemesProvider.LoadThemeData();
-
-            menuStrip.BackColor = loadedThemeData.MenuStrip;
-            if (menuStrip.Items != null)
-            {
-                foreach (MenuStripComponentItemControl control in base.AllComponents)
-                {
-                    control.SetDefaultTextColorAndAsCurrentForegroundColor(loadedThemeData.MenuStripItemText);
-                }
-            }
-        }
 
         public override void AddComponent(MenuStripComponentItemControl menuStripItem)
         {
@@ -124,23 +101,20 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
             WebCallResult<BinanceAPIKeyPermissions> result = await this.client.SpotApi.Account.GetAPIKeyPermissionsAsync();
             BinanceAPIKeyPermissions permissions = result.Data;
 
-            MessageBox.Show
-            (
-                new StringBuilder()
-                    .Append($"{nameof(permissions.IpRestrict)} = {permissions.IpRestrict}, ")
-                    .Append($"{nameof(permissions.EnableFutures)} = {permissions.EnableFutures}, ")
-                    .Append($"{nameof(permissions.EnableWithdrawals)} = {permissions.EnableWithdrawals}, ")
-                    .Append($"{nameof(permissions.EnableMargin)} = {permissions.EnableMargin}, ")
-                    .Append($"{nameof(permissions.EnableVanillaOptions)} = {permissions.EnableVanillaOptions}, ")
-                    .Append($"{nameof(permissions.EnableSpotAndMarginTrading)} = {permissions.EnableSpotAndMarginTrading}, ")
-                    .Append($"{nameof(permissions.EnableInternalTransfer)} = {permissions.EnableInternalTransfer}, ")
-                    .Append($"{nameof(permissions.EnableReading)} = {permissions.EnableReading}, ")
-                    .Append($"{nameof(permissions.PermitsUniversalTransfer)} = {permissions.PermitsUniversalTransfer}, ")
-                    .Append($"{nameof(permissions.TradingAuthorityExpirationTime)} = {permissions.TradingAuthorityExpirationTime}")
-                    .ToString(),
-
-                ApplicationEnviroment.GlobalName, MessageBoxButtons.OK, MessageBoxIcon.Information
-            );
+            new PopupBuilder()
+                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithMessage(new StringBuilder()
+                                 .Append($"{nameof(permissions.IpRestrict)} = {permissions.IpRestrict}, ")
+                                 .Append($"{nameof(permissions.EnableFutures)} = {permissions.EnableFutures}, ")
+                                 .Append($"{nameof(permissions.EnableWithdrawals)} = {permissions.EnableWithdrawals}, ")
+                                 .Append($"{nameof(permissions.EnableMargin)} = {permissions.EnableMargin}, ")
+                                 .Append($"{nameof(permissions.EnableVanillaOptions)} = {permissions.EnableVanillaOptions}, ")
+                                 .Append($"{nameof(permissions.EnableSpotAndMarginTrading)} = {permissions.EnableSpotAndMarginTrading}, ")
+                                 .Append($"{nameof(permissions.EnableInternalTransfer)} = {permissions.EnableInternalTransfer}, ")
+                                 .Append($"{nameof(permissions.EnableReading)} = {permissions.EnableReading}, ")
+                                 .Append($"{nameof(permissions.PermitsUniversalTransfer)} = {permissions.PermitsUniversalTransfer}, ")
+                                 .Append($"{nameof(permissions.TradingAuthorityExpirationTime)} = {permissions.TradingAuthorityExpirationTime}"))
+                .BuildAsMessageBox();
         }
 
         private async void onCoinsItemClicked(EventArgs e)
@@ -167,11 +141,11 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
     public sealed class MenuItemsTextContainer
     {
-        public static readonly string API = nameof(API);
+        public const string API = nameof(API);
 
-        public static readonly string Coins = nameof(Coins);
+        public const string Coins = nameof(Coins);
 
-        public static readonly string Settings = nameof(Settings);
+        public const string Settings = nameof(Settings);
     }
 
     public sealed class MenuItemsIdContainer

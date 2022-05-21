@@ -36,7 +36,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
 
         
 
-        private void onAuthorizeButtonClicked(object? sender, EventArgs e)
+        private void onAuthorizeButtonClicked(object sender, EventArgs e)
         {
             IStringValidator userKeyValidator = this.UserKeyTextBox.Rules()
                .ContentNotNullOrEmpty()
@@ -115,7 +115,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
             }
         }
 
-        private void onAddAuthenticatorButtonClicked(object? sender, EventArgs e)
+        private void onAddAuthenticatorButtonClicked(object sender, EventArgs e)
         {
             new AuthenticationForm().ShowDialog();
         }

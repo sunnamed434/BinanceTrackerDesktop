@@ -7,7 +7,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Recognizers.Windows
     {
         private const string ThemesPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
 
-        private const string SystemUsesLightTheme = "SystemUsesLightTheme";
+        private const string SystemUsesLightTheme = nameof(SystemUsesLightTheme);
 
         private const int LightThemeValue = 1;
 

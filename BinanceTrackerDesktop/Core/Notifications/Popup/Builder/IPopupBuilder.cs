@@ -1,10 +1,14 @@
-﻿namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
+﻿using System.Text;
+
+namespace BinanceTrackerDesktop.Core.Notifications.Popup.Builder
 {
     public interface IPopupBuilder
     {
         IPopupBuilder WithTitle(string name);
 
         IPopupBuilder WithMessage(string content);
+
+        IPopupBuilder WithMessage(StringBuilder stringBuilder);
 
         IPopupBuilder WillCloseIn(int value);
 
