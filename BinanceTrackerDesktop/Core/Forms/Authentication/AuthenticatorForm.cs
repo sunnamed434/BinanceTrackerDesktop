@@ -24,7 +24,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
             base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             base.StartPosition = FormStartPosition.CenterScreen;
-            base.Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+            base.Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
             base.MaximizeBox = false;
 
             this.CheckAuthenticationPINButton.Click += onCheckAuthenticationPINButtonClicked;

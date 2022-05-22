@@ -9,7 +9,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Dark
     {
         public IEnumerable<ThemeData> GetThemeData()
         {
-            string fileText = new ApplicationDirectoriesControl().Folders.Resources.Themes.GetDirectoryFile(RegisteredThemes.DarkTheme).GetStringResult();
+            string fileText = ApplicationDirectories.Resources.Themes.GetDirectoryFile(RegisteredThemes.DarkTheme).GetStringResult();
             return JsonConvert.DeserializeObject<IEnumerable<ThemeData>>(fileText);
         }
     }

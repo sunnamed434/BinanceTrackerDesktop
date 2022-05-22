@@ -75,7 +75,7 @@ namespace BinanceTrackerDesktop.Core.User.Wallet
 
             WebCallResult<BinancePrice> marketPriceResult = await client.SpotApi.ExchangeData.GetPriceAsync(formattedCryptocurrency);
 
-            return new UserWalletCoinResult(formattedCryptocurrency, BinanceCoinCalculator.GetPriceOf(new BinanceCoinOptions(marketPriceResult.Data.Price, coin.Available)));
+            return new UserWalletCoinResult(formattedCryptocurrency, CoinsCalculators.CoinsCalculator.CalculatePrice(new Coin(marketPriceResult.Data.Price, coin.Available)));
         }
     }
 }

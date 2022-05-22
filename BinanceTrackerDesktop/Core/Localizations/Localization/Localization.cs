@@ -9,7 +9,7 @@ namespace BinanceTrackerDesktop.Core.Localizations.Localization
     {
         public TranslationsData Load()
         {
-            string jsonValue = new ApplicationDirectoriesControl().Folders.Resources.Localizations.GetDirectoryFile(UserDataValues.Language.GetValue().Code).GetStringResult();
+            string jsonValue = ApplicationDirectories.Resources.Localizations.GetDirectoryFile(UserDataValues.Language.GetValue().Code).GetStringResult();
             return JsonConvert.DeserializeObject<TranslationsData>(jsonValue);
         }
     }

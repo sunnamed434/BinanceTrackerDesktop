@@ -22,7 +22,7 @@ namespace BinanceTrackerDesktop.Core.Components.Await.Awaitable.Provider
 
         /// <summary>
         /// Registering awaitables at the end set to <see cref="IsRegistered"/> to <see langword="true"/>.
-        /// Registering only once with next interfaces:
+        /// <br>Registering only once in next order:</br>
         /// <para><see cref="IAwaitableObserverInstance"/>;</para> 
         /// <para><see cref="IAwaitableStart"/>;</para>
         /// <para><see cref="IAwaitableAsyncExecute"/>;</para>

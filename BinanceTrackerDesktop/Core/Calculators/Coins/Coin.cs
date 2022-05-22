@@ -1,6 +1,6 @@
 ﻿namespace BinanceTrackerDesktop.Core.Calculator.Options
 {
-    public sealed class BinanceCoinOptions : IBinanceCoinOptions
+    public sealed class Coin : ICoin
     {
         public decimal Price { get; }
 
@@ -8,7 +8,7 @@
 
 
 
-        public BinanceCoinOptions(decimal price, decimal amount)
+        public Coin(decimal price, decimal amount)
         {
             Price = price;
             Amount = amount;

@@ -25,7 +25,7 @@ namespace BinanceTrackerDesktop.Core.Notifications.Popup
         {
             Title = string.Empty,
             Message = string.Empty,
-            Icon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon(),
+            Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon(),
             OnShow = null,
             OnClose = null,
             OnClick = null,

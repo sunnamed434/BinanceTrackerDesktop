@@ -23,8 +23,8 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
                 throw new ArgumentNullException(nameof(argument));
             }
 
-            TemporaryFormatter formatter = formatters.FirstOrDefault(f => f.Type.Equals(typeof(TFormatterType)));
-            if (formatter == null)
+            TemporaryFormatter formatter = null;
+            if ((formatter = formatters.FirstOrDefault(f => f.Type.Equals(typeof(TFormatterType)))) == null)
             {
                 formatters.Add(formatter = new TemporaryFormatter(Activator.CreateInstance<TFormatterType>(), typeof(TFormatterType)));
             }
@@ -47,10 +47,14 @@ namespace BinanceTrackerDesktop.Core.Formatters.Utility
             public TemporaryFormatter(object target, Type type)
             {
                 if (target == null)
+                {
                     throw new ArgumentNullException(nameof(target));
+                }
 
                 if (type == null)
+                {
                     throw new ArgumentNullException(nameof(type));
+                }
 
                 Target = target;
                 Type = type;

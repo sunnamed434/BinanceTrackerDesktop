@@ -15,7 +15,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Tray
         {
             InitializeComponent();
 
-            Icon applicationIcon = new ApplicationDirectoriesControl().Folders.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+            Icon applicationIcon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
 
             this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
             this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
