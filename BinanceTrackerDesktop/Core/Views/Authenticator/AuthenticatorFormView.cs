@@ -1,23 +1,27 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception.ErrorCode;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode;
+using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Core.Models.Authentication.Validation;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
-using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.User.Authentication.System.Result;
+using BinanceTrackerDesktop.Core.Views.Authenticator;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    public sealed partial class AuthenticatorForm : Form
+    public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
     {
         public event Action OnAuthenticationCompletedSuccessfully;
 
         public event Action OnAuthenticationCompletedFailed;
 
+        private AuthenticatorController controller;
 
 
-        public AuthenticatorForm()
+
+        public AuthenticatorFormView()
         {
             InitializeComponent();
 
@@ -32,13 +36,20 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
 
 
 
-        private void onCheckAuthenticationPINButtonClicked(object? sender, EventArgs e)
+        public void SetController(AuthenticatorController controller)
+        {
+            this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
+        }
+
+
+
+        private void onCheckAuthenticationPINButtonClicked(object sender, EventArgs e)
         {
             ValidateResult result = ValidateResult.Failed;
 
             try
             {
-                result = new UserAuthenticatorSystem().ValidateTwoFactor(this.UserSecretTextBot.Text, this.UserPINTextBox.Text);
+                result = controller.Validate(new UserValidationModel(this.UserSecretTextBot.Text, this.UserPINTextBox.Text));
             }
             catch (TwoFactorAuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCode.Secret)
             {

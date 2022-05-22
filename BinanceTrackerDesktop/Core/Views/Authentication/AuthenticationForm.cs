@@ -1,19 +1,24 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception.ErrorCode;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode;
+using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Core.Models.User.Authentication;
+using BinanceTrackerDesktop.Core.MVC.View;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.Data;
-using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.Views.Authentication;
 using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    public sealed partial class AuthenticationForm : Form
+    public sealed partial class AuthenticationForm : Form, IView<AuthenticationController>
     {
+        private AuthenticationController controller;
+
         private const int QRCodePictureBoxHiddenSizeValue = 0;
 
 
@@ -34,12 +39,20 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
 
 
 
-        private void onGenerateQRCodeButtonClicked(object? sender, EventArgs e)
+        public void SetController(AuthenticationController controller)
+        {
+            this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
+        }
+
+
+
+        private void onGenerateQRCodeButtonClicked(object sender, EventArgs e)
         {
             try
             {
+                
                 Image image = null;
-                if ((image = new UserAuthenticatorSystem().Authenticate(this.AccountTitleTextBox.Text, this.SecretKeyTextBox.Text)) != null)
+                if ((image = controller.AuthenticateAndGenerateQRCodeImage(new UserAuthenticationModel(this.AccountTitleTextBox.Text, this.SecretKeyTextBox.Text))) != null)
                 {
                     this.QRCodePictureBox.Size = image.Size;
                     this.QRCodePictureBox.Image = image;

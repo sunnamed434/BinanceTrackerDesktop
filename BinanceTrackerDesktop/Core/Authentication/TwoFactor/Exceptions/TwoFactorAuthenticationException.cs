@@ -1,15 +1,15 @@
-﻿using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception.ErrorCode;
+﻿using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode;
 
-namespace BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception
+namespace BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions
 {
-    public sealed class TwoFactorAuthenticationException : System.Exception
+    public sealed class TwoFactorAuthenticationException : Exception
     {
         public readonly AuthenticationErrorCode ErrorCode;
 
 
 
         public TwoFactorAuthenticationException(string argument, AuthenticationErrorCode errorCode) 
-            : base(string.Format("String validation failed: {0}", argument))
+            : base(string.Format("Two factor authentication failed: {0}", argument))
         {
             ErrorCode = errorCode;
         }

@@ -12,7 +12,6 @@ namespace BinanceTrackerDesktop.Core.Formatters.Currency.Crypto
                 throw new ArgumentNullException(nameof(content));
 
             UserData userData = new BinaryUserDataSaveSystem().Read();
-
             return new StringBuilder()
                 .Append(content)
                 .Append(userData.Currency)

@@ -8,6 +8,7 @@ namespace BinanceTrackerDesktop
         private static void Main()
         {
             ApplicationConfiguration.Initialize();
+
             new BinanceTrackerEntryPoint();
         }
     }

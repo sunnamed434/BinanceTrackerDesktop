@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception.ErrorCode
+﻿namespace BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode
 {
     public enum AuthenticationErrorCode : byte
     {

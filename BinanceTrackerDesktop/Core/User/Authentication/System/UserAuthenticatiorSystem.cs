@@ -1,6 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception;
-using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exception.ErrorCode;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions;
+using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode;
 using BinanceTrackerDesktop.Core.User.Authentication.System.Result;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
 using Google.Authenticator;

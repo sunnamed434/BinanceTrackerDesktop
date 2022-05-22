@@ -30,4 +30,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Forms\Authentication\" />
+  </ItemGroup>
+
 </Project>
