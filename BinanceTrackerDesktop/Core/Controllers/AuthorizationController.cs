@@ -5,6 +5,7 @@ using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
+using BinanceTrackerDesktop.Core.Views.Authorization;
 using BinanceTrackerDesktop.Core.Views.Authorization.Exceptions;
 using BinanceTrackerDesktop.Core.Views.Authorization.Exceptions.ErrorCode;
 
@@ -12,6 +13,18 @@ namespace BinanceTrackerDesktop.Core.Controllers
 {
     public sealed class AuthorizationController
     {
+        private readonly IAuthorizationView view;
+
+
+
+        public AuthorizationController(IAuthorizationView view)
+        {
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            this.view.SetController(this);
+        }
+
+
+
         public void Authorize(UserAuthorizationModel authorizationModel)
         {
             if (authorizationModel == null)

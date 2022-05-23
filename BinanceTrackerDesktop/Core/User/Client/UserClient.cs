@@ -27,7 +27,9 @@ namespace BinanceTrackerDesktop.Core.User.Client
             UserData data = SaveDataSystem.Read();
 
             if (data == null)
+            {
                 throw new InvalidOperationException();
+            }
 
             BinanceClient.SetDefaultOptions(new BinanceClientOptions
             {

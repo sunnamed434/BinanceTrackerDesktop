@@ -1,6 +1,6 @@
 ﻿namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    partial class AuthenticationForm
+    partial class AuthenticationFormView
     {
         /// <summary>
         /// Required designer variable.

@@ -30,7 +30,9 @@ namespace BinanceTrackerDesktop.Core.Entry
 
             if (new BinaryUserDataSaveSystem().Read() == null)
             {
-                Application.Run(new TrackerAuthorizationFormView());
+                TrackerAuthorizationFormView authorizationFormView = new TrackerAuthorizationFormView();
+                new AuthorizationController(authorizationFormView);
+                authorizationFormView.ShowDialog();
             }
             else
             {

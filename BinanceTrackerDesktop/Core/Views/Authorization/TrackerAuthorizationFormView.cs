@@ -95,7 +95,8 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
 
         private void onAddAuthenticatorButtonClicked(object sender, EventArgs e)
         {
-            new AuthenticationForm().ShowDialog();
+            AuthenticationFormView authenticationFormView = new AuthenticationFormView();
+            new AuthenticationController(authenticationFormView);
         }
     }
 

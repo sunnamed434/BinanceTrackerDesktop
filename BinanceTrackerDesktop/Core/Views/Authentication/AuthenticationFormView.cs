@@ -15,7 +15,7 @@ using static BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images.ImagesDir
 
 namespace BinanceTrackerDesktop.Core.Forms.Authentication
 {
-    public sealed partial class AuthenticationForm : Form, IView<AuthenticationController>
+    public sealed partial class AuthenticationFormView : Form, IAuthenticationView
     {
         private AuthenticationController controller;
 
@@ -23,7 +23,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authentication
 
 
 
-        public AuthenticationForm()
+        public AuthenticationFormView()
         {
             InitializeComponent();
 
