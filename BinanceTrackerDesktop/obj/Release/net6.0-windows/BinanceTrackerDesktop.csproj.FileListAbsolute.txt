@@ -42,7 +42,6 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\Newtonsoft.Json.dll
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\QRCoder.dll
-D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Properties.Resources.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.csproj.GenerateResource.cache
@@ -56,7 +55,6 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\ref\BinanceTrackerDesktop.dll
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.pdb
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.genruntimeconfig.cache
-D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tracker.Settings.BinanceTrackerSettingsForm.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.csproj.AssemblyReference.cache
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\refint\BinanceTrackerDesktop.dll
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Tracker.Forms.TrackerFormView.resources
@@ -69,3 +67,8 @@ C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\o
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.resources
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Tracker.Forms.TrackerFormView.resources
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.aa.resources
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationFormView.resources
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tracker.Settings.TrackerSettingsFormView.resources
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.xml
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\protobuf-net.dll
+D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\protobuf-net.Core.dll

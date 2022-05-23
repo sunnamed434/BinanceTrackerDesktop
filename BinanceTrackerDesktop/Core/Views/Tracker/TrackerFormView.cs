@@ -6,6 +6,7 @@ using BinanceTrackerDesktop.Core.Entry;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
+using BinanceTrackerDesktop.Core.MVC.View;
 using BinanceTrackerDesktop.Core.Themes.Forms;
 using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.User.Client;
@@ -116,12 +117,10 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
 
 
-        public void SetController(TrackerController controller)
+        void IView<TrackerController>.SetController(TrackerController controller)
         {
             this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
         }
-
-
 
         void IAwaitableStart.OnStart()
         {

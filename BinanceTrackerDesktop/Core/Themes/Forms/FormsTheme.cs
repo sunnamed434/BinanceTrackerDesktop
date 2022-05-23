@@ -11,6 +11,7 @@ namespace BinanceTrackerDesktop.Core.Themes.Forms
     {
         public static void Apply(MenuStrip menuStrip, IEnumerable<MenuStripComponentItemControl> items, ISystemThemeRecognizer themeRecognizer)
         {
+            return;
             if (menuStrip == null)
             {
                 throw new ArgumentNullException(nameof(menuStrip));
@@ -39,6 +40,8 @@ namespace BinanceTrackerDesktop.Core.Themes.Forms
 
         public static void Apply(Form form, ControlCollection controls, ISystemThemeRecognizer themeRecognizer)
         {
+            return;
+
             if (form == null)
             {
                 throw new ArgumentNullException(nameof(form));

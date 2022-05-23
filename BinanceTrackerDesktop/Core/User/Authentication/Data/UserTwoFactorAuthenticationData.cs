@@ -1,26 +1,38 @@
-﻿namespace BinanceTrackerDesktop.Core.User.Authentication.Data
+﻿using ProtoBuf;
+
+namespace BinanceTrackerDesktop.Core.User.Authentication.Data
 {
-    [Serializable]
+    [ProtoContract]
     public sealed class UserTwoFactorAuthenticationData
     {
-        public string Secret;
+        [ProtoMember(1)]
+        public string Secret { get; set; }
 
-        public string LastActivityTime;
+        [ProtoMember(2)]
+        public string LastActivityTime { get; set; }
 
 
 
-        public UserTwoFactorAuthenticationData(string secret, string lastUsageTime)
+        public UserTwoFactorAuthenticationData(string secret, DateTime lastActivityTime)
         {
             Secret = secret;
-            LastActivityTime = lastUsageTime;
+            LastActivityTime = lastActivityTime.ToString();
         }
 
-        public UserTwoFactorAuthenticationData(string secret) : this(secret, DateTime.Now.ToString())
+        public UserTwoFactorAuthenticationData(string secret) : this(secret, DateTime.Now)
         {
         }
 
-        public UserTwoFactorAuthenticationData() : this(null, null)
+        public UserTwoFactorAuthenticationData() : this(null, new DateTime(1970, 1, 1))
         {
+        }
+
+
+
+
+        public DateTime GetLastActivityInDateTime()
+        {
+            return DateTime.Parse(LastActivityTime);
         }
     }
 }

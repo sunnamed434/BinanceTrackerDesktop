@@ -37,9 +37,7 @@ namespace BinanceTrackerDesktop.Core.Entry
             else
             {
                 TrackerFormView trackerFormView = new TrackerFormView();
-
-                UserClient userClient = new UserClient();
-                new TrackerController(trackerFormView, new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus());
+                new TrackerController(trackerFormView, new UserStatusDetector(new BinaryUserDataSaveSystem(), new UserClient().Wallet).GetStatus());
                 trackerFormView.ShowDialog();
             }
         }

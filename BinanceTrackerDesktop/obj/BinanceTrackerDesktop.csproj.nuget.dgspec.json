@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {}
+    "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {
+    "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+        "projectUniqueName": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
         "projectName": "BinanceTrackerDesktop",
-        "projectPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
-        "packagesPath": "C:\\Users\\sunnamed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
+        "projectPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+        "packagesPath": "C:\\Users\\cetni\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sunnamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cetni\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -42,7 +43,7 @@
           "dependencies": {
             "Binance.Net": {
               "target": "Package",
-              "version": "[8.0.12, )"
+              "version": "[8.1.1, )"
             },
             "GoogleAuthenticator": {
               "target": "Package",
@@ -51,6 +52,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "protobuf-net": {
+              "target": "Package",
+              "version": "[3.1.4, )"
             }
           },
           "imports": [
@@ -71,7 +76,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -3,7 +3,9 @@ using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
+using BinanceTrackerDesktop.Core.User.Data.Save;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Core.User.Data.Value;
 using BinanceTrackerDesktop.Core.User.Status.Result;
 using BinanceTrackerDesktop.Core.Views.Tracker;
 
@@ -23,6 +25,10 @@ namespace BinanceTrackerDesktop.Core.Controllers
         {
             this.view = view;
             this.userStatus = userStatus ?? throw new ArgumentNullException(nameof(userStatus));
+
+            isBalancesHiden = UserDataValues.BalancesHiden.GetValue();
+
+            RefreshTotalBalance();
         }
 
 
@@ -123,8 +129,6 @@ namespace BinanceTrackerDesktop.Core.Controllers
             this.view.TotalBalanceLossesText = formattedLosses;
             this.view.TotalBalanceLossesTextColor = balanceLossesColor;
         }
-
-
 
         private Color getColorFromBalanceLosses(decimal? totalBalance, decimal? bestBalance)
         {

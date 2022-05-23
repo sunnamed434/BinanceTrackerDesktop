@@ -7,9 +7,9 @@ namespace BinanceTrackerDesktop.Core.User.Data.FileData
 {
     public sealed class UserDataFile
     {
-        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.User, new StringBuilder()
+        public static readonly string FullPath = Path.Combine(ApplicationDirectoryPaths.UserData, new StringBuilder()
             .Append(RegisteredData.UserFile)
-            .Append(FilesFormatExtensions.DAT)
+            .Append(FilesFormatExtensions.BIN)
             .ToString());
     }
 }

@@ -1,6 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Models.User.Authentication;
 using BinanceTrackerDesktop.Core.MVC.Controller;
-using BinanceTrackerDesktop.Core.MVC.View;
 using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.Views.Authentication;
 

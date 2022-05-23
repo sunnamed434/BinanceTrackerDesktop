@@ -1,7 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Themes.Recognizers;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers;
 using BinanceTrackerDesktop.Core.Themes.Repositories.Readers.Exceptions;
-using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 
 namespace BinanceTrackerDesktop.Core.Themes.Detectors
 {

@@ -1,10 +1,8 @@
-﻿using BinanceTrackerDesktop.Core.Localizations.Language.Name;
-
-namespace BinanceTrackerDesktop.Core.Localizations.Language
+﻿namespace BinanceTrackerDesktop.Core.Localizations.Language
 {
     public interface ILanguage
     {
-        LanguagesName Name { get; }
+        Languages Name { get; }
 
         string Code { get; }
     }

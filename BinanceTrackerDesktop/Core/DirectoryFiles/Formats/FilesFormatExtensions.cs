@@ -15,5 +15,7 @@
         public const string THEME = ".theme";
 
         public const string JSON = ".json";
+
+        public const string BIN = ".bin";
     }
 }

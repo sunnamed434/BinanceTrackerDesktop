@@ -1,30 +1,41 @@
 ﻿using BinanceTrackerDesktop.Core.Localizations.Language;
 using BinanceTrackerDesktop.Core.User.Authentication.Data;
+using ProtoBuf;
 
 namespace BinanceTrackerDesktop.Core.User.Data
 {
-    [Serializable]
+    [ProtoContract]
     public sealed class UserData
     {
-        public string Key;
+        [ProtoMember(1)]
+        public string Key { get; set; }
 
-        public string Secret;
+        [ProtoMember(2)]
+        public string Secret { get; set; }
 
-        public string Currency;
+        [ProtoMember(3)]
+        public string Currency { get; set; }
 
-        public UserTwoFactorAuthenticationData AuthenticationData;
+        [ProtoMember(4)]
+        public UserTwoFactorAuthenticationData AuthenticationData { get; set; }
 
-        public Themes.Theme Theme;
+        [ProtoMember(5)]
+        public Themes.Theme Theme { get; set; }
 
-        public ILanguage Language;
+        [ProtoMember(6)]
+        public Language Language { get; set; }
 
-        public decimal? BestBalance;
+        [ProtoMember(7)]
+        public decimal? BestBalance { get; set; }
 
-        public bool? IsBalancesHiden;
+        [ProtoMember(8)]
+        public bool? IsBalancesHiden { get; set; }
 
-        public bool IsNotificationsEnabled;
+        [ProtoMember(9)]
+        public bool IsNotificationsEnabled { get; set; }
 
-        public bool IsUserStartedApplicationFirstTime;
+        [ProtoMember(10)]
+        public bool IsUserStartedApplicationFirstTime { get; set; }
 
 
 

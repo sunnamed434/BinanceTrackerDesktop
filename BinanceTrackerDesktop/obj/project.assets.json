@@ -2,10 +2,10 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "Binance.Net/8.0.12": {
+      "Binance.Net/8.1.1": {
         "type": "package",
         "dependencies": {
-          "CryptoExchange.Net": "5.1.8"
+          "CryptoExchange.Net": "5.1.10"
         },
         "compile": {
           "lib/netstandard2.1/Binance.Net.dll": {}
@@ -14,7 +14,7 @@
           "lib/netstandard2.1/Binance.Net.dll": {}
         }
       },
-      "CryptoExchange.Net/5.1.8": {
+      "CryptoExchange.Net/5.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
@@ -85,6 +85,27 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "protobuf-net/3.1.4": {
+        "type": "package",
+        "dependencies": {
+          "protobuf-net.Core": "3.1.4"
+        },
+        "compile": {
+          "lib/net5.0/protobuf-net.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/protobuf-net.dll": {}
+        }
+      },
+      "protobuf-net.Core/3.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/protobuf-net.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/protobuf-net.Core.dll": {}
+        }
+      },
       "QRCoder/1.4.3": {
         "type": "package",
         "dependencies": {
@@ -125,14 +146,14 @@
     }
   },
   "libraries": {
-    "Binance.Net/8.0.12": {
-      "sha512": "ym/mJt/QOxwdSW1bVQjExI8vNqHRsFXTadzWMqOH2WMFkxiym408IDS0xm95h0UgOkNdui+t3eehxuLbIAORCw==",
+    "Binance.Net/8.1.1": {
+      "sha512": "TqvAJoF6J98iSUU89Cx+hGRqnbSvLAGgkFYBXqJ4t1J0FtnYp14fVtZpFo05d6ZRpo0eA9XJtaOjGHQihS/JNw==",
       "type": "package",
-      "path": "binance.net/8.0.12",
+      "path": "binance.net/8.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "binance.net.8.0.12.nupkg.sha512",
+        "binance.net.8.1.1.nupkg.sha512",
         "binance.net.nuspec",
         "icon.png",
         "lib/netstandard2.0/Binance.Net.dll",
@@ -141,14 +162,14 @@
         "lib/netstandard2.1/Binance.Net.xml"
       ]
     },
-    "CryptoExchange.Net/5.1.8": {
-      "sha512": "kJ8p8+UDz3IXWC6L2SDTC0RQd7oRPASrhCcAipcKuwB5SPWAWu57E3wJUHINGo9PQj+48CYcOJhm3oJJjab9Qg==",
+    "CryptoExchange.Net/5.1.10": {
+      "sha512": "KgdMrfjwlwkFQQM91lK/36nRvwNpubCxXpvgdKu3W9uqSIuquJ56l1+d3Xg/eTcd1+77VmHR+j+w3Az0w2963w==",
       "type": "package",
-      "path": "cryptoexchange.net/5.1.8",
+      "path": "cryptoexchange.net/5.1.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "cryptoexchange.net.5.1.8.nupkg.sha512",
+        "cryptoexchange.net.5.1.10.nupkg.sha512",
         "cryptoexchange.net.nuspec",
         "lib/netstandard2.0/CryptoExchange.Net.dll",
         "lib/netstandard2.0/CryptoExchange.Net.xml",
@@ -260,6 +281,50 @@
         "packageIcon.png"
       ]
     },
+    "protobuf-net/3.1.4": {
+      "sha512": "jK05D3263rTnSYMXwbsREx3Vhq6+0SXbPMmZLk/+ijezdcu6gSuN8FSS6yhpchv6FWmbHzccN49bIPEEuDMpKw==",
+      "type": "package",
+      "path": "protobuf-net/3.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/protobuf-net.dll",
+        "lib/net461/protobuf-net.xml",
+        "lib/net5.0/protobuf-net.dll",
+        "lib/net5.0/protobuf-net.xml",
+        "lib/netcoreapp3.1/protobuf-net.dll",
+        "lib/netcoreapp3.1/protobuf-net.xml",
+        "lib/netstandard2.0/protobuf-net.dll",
+        "lib/netstandard2.0/protobuf-net.xml",
+        "lib/netstandard2.1/protobuf-net.dll",
+        "lib/netstandard2.1/protobuf-net.xml",
+        "protobuf-net.3.1.4.nupkg.sha512",
+        "protobuf-net.nuspec",
+        "protobuf-net.png"
+      ]
+    },
+    "protobuf-net.Core/3.1.4": {
+      "sha512": "q7pKC6D1u5KXgjxDnkB82WP7rcsxhmlMjnWA9EVds5P6TDI7Mntl0DClEUX7cmI2mN8IKZ56uJOry2SrUbj/rQ==",
+      "type": "package",
+      "path": "protobuf-net.core/3.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/protobuf-net.Core.dll",
+        "lib/net461/protobuf-net.Core.xml",
+        "lib/net5.0/protobuf-net.Core.dll",
+        "lib/net5.0/protobuf-net.Core.xml",
+        "lib/netcoreapp3.1/protobuf-net.Core.dll",
+        "lib/netcoreapp3.1/protobuf-net.Core.xml",
+        "lib/netstandard2.0/protobuf-net.Core.dll",
+        "lib/netstandard2.0/protobuf-net.Core.xml",
+        "lib/netstandard2.1/protobuf-net.Core.dll",
+        "lib/netstandard2.1/protobuf-net.Core.xml",
+        "protobuf-net.core.3.1.4.nupkg.sha512",
+        "protobuf-net.core.nuspec",
+        "protobuf-net.png"
+      ]
+    },
     "QRCoder/1.4.3": {
       "sha512": "fWuFqjm8GTlEb2GqBl3Hi8HZZeZQwBSHxvRPtPjyNbT82H0ff0JwavKRBmMaXCno1Av6McPC8aJzri0Mj2w9Jw==",
       "type": "package",
@@ -323,25 +388,26 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "Binance.Net >= 8.0.12",
+      "Binance.Net >= 8.1.1",
       "GoogleAuthenticator >= 2.5.0",
-      "Newtonsoft.Json >= 13.0.1"
+      "Newtonsoft.Json >= 13.0.1",
+      "protobuf-net >= 3.1.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sunnamed\\.nuget\\packages\\": {}
+    "C:\\Users\\cetni\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+      "projectUniqueName": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
       "projectName": "BinanceTrackerDesktop",
-      "projectPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
-      "packagesPath": "C:\\Users\\sunnamed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
+      "projectPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+      "packagesPath": "C:\\Users\\cetni\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sunnamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cetni\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -349,7 +415,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
@@ -369,7 +436,7 @@
         "dependencies": {
           "Binance.Net": {
             "target": "Package",
-            "version": "[8.0.12, )"
+            "version": "[8.1.1, )"
           },
           "GoogleAuthenticator": {
             "target": "Package",
@@ -378,6 +445,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "protobuf-net": {
+            "target": "Package",
+            "version": "[3.1.4, )"
           }
         },
         "imports": [
@@ -398,7 +469,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

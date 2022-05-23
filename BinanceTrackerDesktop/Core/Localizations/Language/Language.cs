@@ -1,13 +1,16 @@
-﻿using BinanceTrackerDesktop.Core.Localizations.Language.Name;
+﻿using ProtoBuf;
 
 namespace BinanceTrackerDesktop.Core.Localizations.Language
 {
+    [ProtoContract]
     public class Language : ILanguage
     {
-        public Language(LanguagesName name, string code)
+        public Language(Languages name, string code)
         {
             if (string.IsNullOrWhiteSpace(code))
+            {
                 throw new ArgumentException(nameof(code));
+            }
 
             Name = name;
             Code = code;
@@ -15,8 +18,10 @@ namespace BinanceTrackerDesktop.Core.Localizations.Language
 
 
 
-        public LanguagesName Name { get; }
+        [ProtoMember(1)]
+        public Languages Name { get; set;  }
 
-        public string Code { get; }
+        [ProtoMember(2)]
+        public string Code { get; set; }
     }
 }

@@ -7,12 +7,12 @@ namespace BinanceTrackerDesktop.Core.User.Data.Value
 {
     public sealed class UserDataValues
     {
-        public static readonly HasAuthenticationDataUserDataValueRepository HasAuthenticationData = new HasAuthenticationDataUserDataValueRepository(SaveSystem);
+        public static readonly HasAuthenticationDataUserDataValueRepository HasAuthenticationData = new HasAuthenticationDataUserDataValueRepository(new BinaryUserDataSaveSystem());
 
-        public static readonly LanguageUserDataValueRepository Language = new LanguageUserDataValueRepository(SaveSystem);
+        public static readonly LanguageUserDataValueRepository Language = new LanguageUserDataValueRepository(new BinaryUserDataSaveSystem());
 
-        public static readonly ThemeUserDataValueRepository Theme = new ThemeUserDataValueRepository(SaveSystem);
+        public static readonly ThemeUserDataValueRepository Theme = new ThemeUserDataValueRepository(new BinaryUserDataSaveSystem());
 
-        private static readonly IUserDataSaveSystem SaveSystem = new BinaryUserDataSaveSystem();
+        public static readonly BalancesHidenUserDataValueRepository BalancesHiden = new BalancesHidenUserDataValueRepository(new BinaryUserDataSaveSystem());
     }
 }
