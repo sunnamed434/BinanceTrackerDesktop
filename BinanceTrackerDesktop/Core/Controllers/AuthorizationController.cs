@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Core.Forms.Authorization;
 using BinanceTrackerDesktop.Core.Models.User.Authorization;
+using BinanceTrackerDesktop.Core.MVC.Controller;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
@@ -11,16 +12,10 @@ using BinanceTrackerDesktop.Core.Views.Authorization.Exceptions.ErrorCode;
 
 namespace BinanceTrackerDesktop.Core.Controllers
 {
-    public sealed class AuthorizationController
+    public sealed class AuthorizationController : Controller<AuthorizationController>
     {
-        private readonly IAuthorizationView view;
-
-
-
-        public AuthorizationController(IAuthorizationView view)
+        public AuthorizationController(IAuthorizationView view) : base(view)
         {
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
-            this.view.SetController(this);
         }
 
 
@@ -33,17 +28,17 @@ namespace BinanceTrackerDesktop.Core.Controllers
             }
 
             authorizationModel.Key.Rules()
-               .ContentNotNullOrEmpty()
+               .ContentNotNullOrWhiteSpace()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey)
                .ThrowIfFailed(new AuthorizationException(nameof(authorizationModel.Key), AuthorizationErrorCode.Key));
 
             authorizationModel.Secret.Rules()
-               .ContentNotNullOrEmpty()
+               .ContentNotNullOrWhiteSpace()
                .MinCharacters(BinanceAPIKeysCharactersLength.MaxLengthSecretKey)
                .ThrowIfFailed(new AuthorizationException(nameof(authorizationModel.Secret), AuthorizationErrorCode.Secret));
 
             authorizationModel.Currency.Rules()
-                .ContentNotNullOrEmpty()
+                .ContentNotNullOrWhiteSpace()
                 .ThrowIfFailed(new AuthorizationException(nameof(authorizationModel.Currency), AuthorizationErrorCode.Currency));
 
             UserData userData = new BinaryUserDataSaveSystem().Read();
@@ -71,6 +66,13 @@ namespace BinanceTrackerDesktop.Core.Controllers
                     .Build()
                     .WriteUserData(new BinaryUserDataSaveSystem());
             }
+        }
+
+
+
+        protected override AuthorizationController InitializeController()
+        {
+            return this;
         }
     }
 }

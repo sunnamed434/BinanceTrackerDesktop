@@ -1,12 +1,9 @@
 ﻿using Binance.Net.Clients;
 using BinanceTrackerDesktop.Core.Awaitable.Awaitables;
-using BinanceTrackerDesktop.Core.ComponentControl.LabelControl;
-using BinanceTrackerDesktop.Core.Components.ButtonControl;
 using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Entry;
 using BinanceTrackerDesktop.Core.Forms.Authentication;
-using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Balance;
 using BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.Themes.Forms;
@@ -124,18 +121,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
         }
 
-        public void SetTextsHidenState()
-        {
-            TotalBalanceText = BinanceTrackerBalanceTextValues.Hiden;
-            TotalBalanceLossesText = BinanceTrackerBalanceTextValues.Hiden;
-        }
-
-        public void SetTextsInitializingState()
-        {
-            TotalBalanceText = BinanceTrackerBalanceTextValues.Initializing;
-            TotalBalanceLossesText = BinanceTrackerBalanceTextValues.Initializing;
-        }
-
 
 
         void IAwaitableStart.OnStart()
@@ -145,7 +130,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
 
         void IAwaitableComplete.OnComplete()
         {
-            Application.Exit();
+            controller.CloseApplication();
         }
 
         private void onAuthenticationCompletedSuccessfully()
@@ -161,7 +146,7 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         {
             authenticatorForm.FormClosed -= onAuthenticationFormClosed;
 
-            Application.Exit();
+            controller.CloseApplication();
         }
 
         private void onRefreshTotalBalanceButtonClicked(object sender, MouseEventArgs e)
@@ -185,17 +170,6 @@ namespace BinanceTrackerDesktop.Tracker.Forms
             userStatus = new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus();
             new BinanceTrackerUserDataSaveControl(userClient.Wallet);
 
-            //new BinanceTrackerUserBalanceControlUI(userStatus,
-            /*new ButtonComponentControl[]
-            {
-                new ButtonComponentControl(this.RefreshTotalBalanceButton),
-            },
-            new LabelComponentControl[]
-            {
-                new LabelComponentControl(this.UserTotalBalanceText),
-                new LabelComponentControl(this.UserTotalBalanceLossesText),
-            });*/
-
             new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
         }
         
@@ -209,10 +183,4 @@ namespace BinanceTrackerDesktop.Tracker.Forms
         }
     }
 
-    public sealed class BinanceTrackerBalanceTextValues
-    {
-        public const string Initializing = "-----";
-
-        public const string Hiden = "*****";
-    }
 }

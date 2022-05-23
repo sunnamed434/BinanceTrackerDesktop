@@ -1,8 +1,5 @@
 ﻿using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base;
 using BinanceTrackerDesktop.Core.Components.TrayControl.EventsContainer;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace BinanceTrackerDesktop.Core.Components.TrayControl.Base
 {

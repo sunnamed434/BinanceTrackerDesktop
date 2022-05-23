@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {}
+    "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {}
   },
   "projects": {
-    "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {
+    "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+        "projectUniqueName": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
         "projectName": "BinanceTrackerDesktop",
-        "projectPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
-        "packagesPath": "C:\\Users\\cetni\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
+        "projectPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\BinanceTrackerDesktop.csproj",
+        "packagesPath": "C:\\Users\\sunnamed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sunnamed\\Documents\\GitHub\\BinanceTrackerDesktop\\BinanceTrackerDesktop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\cetni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sunnamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -72,7 +71,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

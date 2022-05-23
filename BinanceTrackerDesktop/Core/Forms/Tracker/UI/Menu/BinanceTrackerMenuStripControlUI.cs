@@ -3,6 +3,7 @@ using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Base;
 using BinanceTrackerDesktop.Core.Components.ContextMenuStripControl.Item.Control;
+using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.Formatters.Currency;
 using BinanceTrackerDesktop.Core.Formatters.Utility;
 using BinanceTrackerDesktop.Core.Forms.Tracker.Settings;
@@ -126,7 +127,9 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.UI.Menu
 
         private void onSettingsItemClicked(EventArgs e)
         {
-            new BinanceTrackerSettingsForm(wallet).ShowDialog();
+            TrackerSettingsFormView settingsView = new TrackerSettingsFormView(wallet);
+            new SettingsController(settingsView, wallet);
+            new TrackerSettingsFormView(wallet).ShowDialog();
         }
 
 

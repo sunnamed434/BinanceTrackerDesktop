@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
 {
-    public sealed partial class BinanceTrackerSettingsForm
+    public sealed partial class TrackerSettingsFormView
     {
         private IContainer components;
 

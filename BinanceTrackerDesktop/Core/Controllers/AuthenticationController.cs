@@ -1,21 +1,19 @@
 ﻿using BinanceTrackerDesktop.Core.Models.User.Authentication;
+using BinanceTrackerDesktop.Core.MVC.Controller;
+using BinanceTrackerDesktop.Core.MVC.View;
 using BinanceTrackerDesktop.Core.User.Authentication.System;
 using BinanceTrackerDesktop.Core.Views.Authentication;
 
 namespace BinanceTrackerDesktop.Core.Controllers
 {
-    public sealed class AuthenticationController
+    public sealed class AuthenticationController : Controller<AuthenticationController>
     {
-        private readonly IAuthenticationView view;
-
         private readonly UserAuthenticatorSystem authenticatorSystem;
 
 
 
-        public AuthenticationController(IAuthenticationView view)
+        public AuthenticationController(IAuthenticationView view) : base(view)
         {
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
-            this.view.SetController(this);
             authenticatorSystem = new UserAuthenticatorSystem();
         }
 
@@ -29,6 +27,13 @@ namespace BinanceTrackerDesktop.Core.Controllers
             }
 
             return authenticatorSystem.Authenticate(userAuthentication.AccountTitle, userAuthentication.SecretKey);
+        }
+
+
+
+        protected override AuthenticationController InitializeController()
+        {
+            return this;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace BinanceTrackerDesktop.Core.Validators
             return this;
         }
 
-        public IStringValidator ContentNotNullOrEmpty()
+        public IStringValidator ContentNotNullOrWhiteSpace()
         {
             if (string.IsNullOrWhiteSpace(this.content))
                 success = false;

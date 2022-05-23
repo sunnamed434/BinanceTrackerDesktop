@@ -4,7 +4,6 @@ using BinanceTrackerDesktop.Core.Authentication.TwoFactor.Exceptions.ErrorCode;
 using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Models.User.Authentication;
-using BinanceTrackerDesktop.Core.MVC.View;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Core.User.Authentication.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;

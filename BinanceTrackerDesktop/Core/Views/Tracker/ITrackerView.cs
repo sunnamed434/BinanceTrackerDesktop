@@ -12,11 +12,5 @@ namespace BinanceTrackerDesktop.Core.Views.Tracker
         Color TotalBalanceLossesTextColor { get; set; }
 
         bool RefreshTotalBalanceButtonEnableState { get; set; }
-
-
-
-        void SetTextsHidenState();
-
-        void SetTextsInitializingState();
     }
 }

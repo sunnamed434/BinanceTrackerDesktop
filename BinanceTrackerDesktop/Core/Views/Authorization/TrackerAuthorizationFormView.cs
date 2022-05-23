@@ -97,6 +97,7 @@ namespace BinanceTrackerDesktop.Core.Forms.Authorization
         {
             AuthenticationFormView authenticationFormView = new AuthenticationFormView();
             new AuthenticationController(authenticationFormView);
+            authenticationFormView.ShowDialog();
         }
     }
 

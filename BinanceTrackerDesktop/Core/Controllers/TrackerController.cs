@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Core.User.Control;
+﻿using BinanceTrackerDesktop.Core.MVC.Controller;
+using BinanceTrackerDesktop.Core.User.Control;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Builder;
 using BinanceTrackerDesktop.Core.User.Data.Extension;
@@ -8,7 +9,7 @@ using BinanceTrackerDesktop.Core.Views.Tracker;
 
 namespace BinanceTrackerDesktop.Core.Controllers
 {
-    public sealed class TrackerController
+    public sealed class TrackerController : Controller<TrackerController>
     {
         private readonly ITrackerView view;
 
@@ -18,10 +19,9 @@ namespace BinanceTrackerDesktop.Core.Controllers
 
 
 
-        public TrackerController(ITrackerView view, IUserStatus userStatus)
+        public TrackerController(ITrackerView view, IUserStatus userStatus) : base(view)
         {
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
-            this.view.SetController(this);
+            this.view = view;
             this.userStatus = userStatus ?? throw new ArgumentNullException(nameof(userStatus));
         }
 
@@ -37,7 +37,7 @@ namespace BinanceTrackerDesktop.Core.Controllers
             isBalancesHiden = !isBalancesHiden;
             if (isBalancesHiden)
             {
-                this.view.SetTextsHidenState();
+                SetTextsHidenState();
             }
             else
             {
@@ -51,11 +51,28 @@ namespace BinanceTrackerDesktop.Core.Controllers
                 .WriteUserData(saveSystem);
         }
 
+        public void CloseApplication()
+        {
+            Application.Exit();
+        }
+
+        public void SetTextsHidenState()
+        {
+            view.TotalBalanceText = BinanceTrackerBalanceTextValues.Hiden;
+            view.TotalBalanceLossesText = BinanceTrackerBalanceTextValues.Hiden;
+        }
+
+        public void SetTextsInitializingState()
+        {
+            view.TotalBalanceText = BinanceTrackerBalanceTextValues.Initializing;
+            view.TotalBalanceLossesText = BinanceTrackerBalanceTextValues.Initializing;
+        }
+
         private async Task refreshBalancesFixedAsync(bool lockButton = true)
         {
             if (isBalancesHiden == false)
             {
-                this.view.SetTextsInitializingState();
+                SetTextsInitializingState();
 
                 if (lockButton)
                 {
@@ -128,5 +145,19 @@ namespace BinanceTrackerDesktop.Core.Controllers
                 return Color.Gray;
             }
         }
+
+
+
+        protected override TrackerController InitializeController()
+        {
+            return this;
+        }
+    }
+
+    public sealed class BinanceTrackerBalanceTextValues
+    {
+        public const string Initializing = "-----";
+
+        public const string Hiden = "*****";
     }
 }

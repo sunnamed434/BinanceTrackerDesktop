@@ -24,13 +24,13 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.System
         public Image Authenticate(string accountTitle, string secret)
         {
             accountTitle.Rules()
-                .ContentNotNullOrEmpty()
+                .ContentNotNullOrWhiteSpace()
                 .MinCharacters(UnsupportedCharactersCount)
                 .MaxCharacters(MaxAccountTitleCharacters)
                 .ThrowIfFailed(new TwoFactorAuthenticationException(nameof(accountTitle), AuthenticationErrorCode.AccountTitle));
 
             secret.Rules()
-                .ContentNotNullOrEmpty()
+                .ContentNotNullOrWhiteSpace()
                 .MinCharacters(UnsupportedCharactersCount)
                 .MaxCharacters(MaxSecretCharacters)
                 .ThrowIfFailed(new TwoFactorAuthenticationException(nameof(secret), AuthenticationErrorCode.Secret));
@@ -43,12 +43,12 @@ namespace BinanceTrackerDesktop.Core.User.Authentication.System
         public ValidateResult ValidateTwoFactor(string secret, string pin)
         {
             secret.Rules()
-                .ContentNotNullOrEmpty()
+                .ContentNotNullOrWhiteSpace()
                 .MinCharacters(MinCharacters)
                 .ThrowIfFailed(new TwoFactorAuthenticationException(nameof(secret), AuthenticationErrorCode.Secret));
 
             pin.Rules()
-                .ContentNotNullOrEmpty()
+                .ContentNotNullOrWhiteSpace()
                 .MinCharacters(MinCharacters)
                 .ThrowIfFailed(new TwoFactorAuthenticationException(nameof(pin), AuthenticationErrorCode.PIN));
 

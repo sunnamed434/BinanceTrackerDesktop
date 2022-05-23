@@ -6,7 +6,7 @@
 
         IStringValidator MaxCharacters(int count);
 
-        IStringValidator ContentNotNullOrEmpty();
+        IStringValidator ContentNotNullOrWhiteSpace();
 
         IStringValidator ThrowIfFailed(Type type);
 

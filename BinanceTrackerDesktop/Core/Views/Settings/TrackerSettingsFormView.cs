@@ -1,29 +1,30 @@
 ﻿using BinanceTrackerDesktop.Core.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Core.Controllers;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Controls.Images;
 using BinanceTrackerDesktop.Core.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Core.Notifications.Popup.Builder;
-using BinanceTrackerDesktop.Core.Themes.Detectors;
 using BinanceTrackerDesktop.Core.Themes.Forms;
-using BinanceTrackerDesktop.Core.Themes.Provider;
 using BinanceTrackerDesktop.Core.Themes.Recognizers.Windows;
 using BinanceTrackerDesktop.Core.User.Data;
 using BinanceTrackerDesktop.Core.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Core.User.Data.Value.Repositories.Language;
 using BinanceTrackerDesktop.Core.User.Wallet;
 using BinanceTrackerDesktop.Core.User.Wallet.Results;
 using BinanceTrackerDesktop.Core.Validators;
 using BinanceTrackerDesktop.Core.Validators.String.Extension;
+using BinanceTrackerDesktop.Core.Views.Settings;
 using System.Text;
 
 namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
 {
-    public sealed partial class BinanceTrackerSettingsForm : Form
+    public sealed partial class TrackerSettingsFormView : Form, ISettingsView
     {
         private readonly UserWallet userWallet;
 
+        private SettingsController controller;
 
 
-        public BinanceTrackerSettingsForm(UserWallet userWallet)
+
+        public TrackerSettingsFormView(UserWallet userWallet)
         {
             InitializeComponent();
 
@@ -42,14 +43,17 @@ namespace BinanceTrackerDesktop.Core.Forms.Tracker.Settings
 
 
 
-        public IThemesProvider ThemesProvider { get; }
+        public void SetController(SettingsController controller)
+        {
+            this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
+        }
 
 
 
         private async void onChangeCurrencyButtonClicked(object sender, EventArgs e)
         {
             IStringValidator userCurrencyValidator = this.NewCurrenyTextBox.Rules()
-                .ContentNotNullOrEmpty();
+                .ContentNotNullOrWhiteSpace();
 
             if (userCurrencyValidator.IsFailed)
             {

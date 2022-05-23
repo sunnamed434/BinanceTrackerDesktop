@@ -13,14 +13,8 @@ C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\b
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\bin\Release\net6.0-windows\QRCoder.dll
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.csproj.AssemblyReference.cache
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationForm.resources
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorForm.resources
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.resources
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Settings.BinanceTrackerSettingsForm.resources
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Tracker.Forms.BinanceTrackerForm.resources
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tray.BinanceTrackerTrayForm.resources
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Properties.Resources.resources
-C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.BinanceTrackerAuthorizationForm.aa.resources
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.csproj.GenerateResource.cache
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.AssemblyInfoInputs.cache
@@ -69,3 +63,9 @@ D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorFormView.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.resources
 D:\Github\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.aa.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Tracker.Settings.BinanceTrackerSettingsForm.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticationFormView.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authentication.AuthenticatorFormView.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Tracker.Forms.TrackerFormView.resources
+C:\Users\sunnamed\Documents\GitHub\BinanceTrackerDesktop\BinanceTrackerDesktop\obj\Release\net6.0-windows\BinanceTrackerDesktop.Core.Forms.Authorization.TrackerAuthorizationFormView.aa.resources

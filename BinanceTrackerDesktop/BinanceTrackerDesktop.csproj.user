@@ -10,7 +10,7 @@
     <Compile Update="Core\Views\Authorization\TrackerAuthorizationFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Forms\Tracker\Settings\BinanceTrackerSettingsForm.cs">
+    <Compile Update="Core\Views\Settings\TrackerSettingsFormView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Core\Views\Tracker\TrackerFormView.cs">
