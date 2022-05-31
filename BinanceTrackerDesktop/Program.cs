@@ -1,15 +1,14 @@
-using BinanceTrackerDesktop.Core.Entry;
+using BinanceTrackerDesktop.Entry;
 
-namespace BinanceTrackerDesktop
+namespace BinanceTrackerDesktop;
+
+internal static class Program
 {
-    internal static class Program
+    [STAThread]
+    private static void Main()
     {
-        [STAThread]
-        private static void Main()
-        {
-            ApplicationConfiguration.Initialize();
+        ApplicationConfiguration.Initialize();
 
-            new BinanceTrackerEntryPoint();
-        }
+        new BinanceTrackerEntryPoint();
     }
 }

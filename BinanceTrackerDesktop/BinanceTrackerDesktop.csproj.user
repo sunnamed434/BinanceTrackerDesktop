@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Core\Views\Authentication\AuthenticationFormView.cs">
+    <Compile Update="Views\Authentication\AuthenticationFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Views\Authenticator\AuthenticatorFormView.cs">
+    <Compile Update="Views\Authenticator\AuthenticatorFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Views\Authorization\TrackerAuthorizationFormView.cs">
+    <Compile Update="Views\Authorization\TrackerAuthorizationFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Views\Settings\TrackerSettingsFormView.cs">
+    <Compile Update="Views\Settings\TrackerSettingsFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Views\Tracker\TrackerFormView.cs">
+    <Compile Update="Views\Tracker\TrackerFormView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Forms\Tray\BinanceTrackerTrayForm.cs">
+    <Compile Update="Forms\Tray\BinanceTrackerTrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

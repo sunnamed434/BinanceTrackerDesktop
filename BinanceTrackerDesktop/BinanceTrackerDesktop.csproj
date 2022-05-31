@@ -10,9 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Core\Forms\Authentication\**" />
-    <EmbeddedResource Remove="Core\Forms\Authentication\**" />
-    <None Remove="Core\Forms\Authentication\**" />
+    <Compile Remove="Forms\Authentication\**" />
+    <Compile Remove="Forms\Tracker\Settings\**" />
+    <EmbeddedResource Remove="Forms\Authentication\**" />
+    <EmbeddedResource Remove="Forms\Tracker\Settings\**" />
+    <None Remove="Forms\Authentication\**" />
+    <None Remove="Forms\Tracker\Settings\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,11 +38,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Core\Forms\Tracker\Settings\" />
-    <Folder Include="Core\User\Data\Value\Repositories\Balance\" />
   </ItemGroup>
 
 </Project>
