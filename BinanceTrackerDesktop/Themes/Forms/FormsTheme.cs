@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.Components.ContextMenuStripControl.Item.Control;
-using BinanceTrackerDesktop.Themes.Detectors;
+﻿using BinanceTrackerDesktop.Themes.Detectors.Data;
 using BinanceTrackerDesktop.Themes.Models;
 using BinanceTrackerDesktop.Themes.Provider;
 using BinanceTrackerDesktop.Themes.Recognizers;
@@ -9,7 +8,7 @@ namespace BinanceTrackerDesktop.Themes.Forms;
 
 public sealed class FormsTheme
 {
-    public static void Apply(MenuStrip menuStrip, IEnumerable<MenuStripComponentItemControl> items, ISystemThemeRecognizer themeRecognizer)
+    public static void Apply(MenuStrip menuStrip, IEnumerable<KeyValuePair<byte, ToolStripMenuItem>> items, ISystemThemeRecognizer themeRecognizer)
     {
         if (menuStrip == null)
         {
@@ -26,15 +25,12 @@ public sealed class FormsTheme
             throw new InvalidOperationException();
         }
 
-        IThemesProvider themesProvider = new ThemesProvider(new ThemeDetector(themeRecognizer));
+        IThemesProvider themesProvider = new ThemesProvider(new ThemeDataDetector(themeRecognizer));
         ThemeColors loadedThemeData = themesProvider.LoadThemeData();
 
         menuStrip.BackColor = loadedThemeData.MenuStrip;
 
-        foreach (MenuStripComponentItemControl item in items)
-        {
-            item.SetDefaultTextColorAndAsCurrentForegroundColor(loadedThemeData.MenuStripItemText);
-        }
+        Apply(items, themeRecognizer);
     }
 
     public static void Apply(Form form, ControlCollection controls, ISystemThemeRecognizer themeRecognizer)
@@ -54,7 +50,7 @@ public sealed class FormsTheme
             throw new ArgumentNullException(nameof(themeRecognizer));
         }
 
-        IThemesProvider themesProvider = new ThemesProvider(new ThemeDetector(themeRecognizer));
+        IThemesProvider themesProvider = new ThemesProvider(new ThemeDataDetector(themeRecognizer));
         ThemeColors loadedThemeData = themesProvider.LoadThemeData();
         form.BackColor = loadedThemeData.Form;
         foreach (Control control in controls)
@@ -71,6 +67,26 @@ public sealed class FormsTheme
             {
                 label.ForeColor = loadedThemeData.Text;
             }
+        }
+    }
+
+    public static void Apply(IEnumerable<KeyValuePair<byte, ToolStripMenuItem>> items, ISystemThemeRecognizer themeRecognizer)
+    {
+        if (items == null)
+        {
+            throw new ArgumentException(nameof(items));
+        }
+
+        if (items.Any() == false)
+        {
+            throw new InvalidOperationException();
+        }
+
+        IThemesProvider themesProvider = new ThemesProvider(new ThemeDataDetector(themeRecognizer));
+        ThemeColors loadedThemeData = themesProvider.LoadThemeData();
+        foreach (KeyValuePair<byte, ToolStripMenuItem> keyValuePairItem in items)
+        {
+            keyValuePairItem.Value.ForeColor = loadedThemeData.MenuStripItemText;
         }
     }
 }

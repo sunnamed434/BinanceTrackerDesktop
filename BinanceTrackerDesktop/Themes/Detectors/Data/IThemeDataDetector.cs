@@ -2,12 +2,12 @@
 using BinanceTrackerDesktop.Themes.Repositories.Readers;
 using BinanceTrackerDesktop.Themes.Repositories.Readers.Exceptions;
 
-namespace BinanceTrackerDesktop.Themes.Detectors;
+namespace BinanceTrackerDesktop.Themes.Detectors.Data;
 
 /// <summary>
 /// User theme detector.
 /// </summary>
-public interface IThemeDetector
+public interface IThemeDataDetector
 {
     /// <summary>
     /// The system theme recognizer.
@@ -21,5 +21,5 @@ public interface IThemeDetector
     /// </summary>
     /// <returns>Instance to the theme data reader.</returns>
     /// <exception cref="ThemeCannotBeRecognizedException"></exception>
-    IThemeDataRepository GetThemeReaderRepository();
+    IThemeDataRepository DetectThemeDataRepository();
 }

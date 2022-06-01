@@ -1,11 +1,11 @@
-﻿using BinanceTrackerDesktop.Themes.Detectors;
+﻿using BinanceTrackerDesktop.Themes.Detectors.Data;
 using BinanceTrackerDesktop.Themes.Models;
 
 namespace BinanceTrackerDesktop.Themes.Provider;
 
 public interface IThemesProvider
 {
-    IThemeDetector ThemeDetector { get; }
+    IThemeDataDetector ThemeDetector { get; }
 
 
 

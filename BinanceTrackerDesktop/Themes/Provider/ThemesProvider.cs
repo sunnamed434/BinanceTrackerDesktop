@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Themes.Detectors;
+﻿using BinanceTrackerDesktop.Themes.Detectors.Data;
 using BinanceTrackerDesktop.Themes.Models;
 using System.Reflection;
 
@@ -6,11 +6,11 @@ namespace BinanceTrackerDesktop.Themes.Provider;
 
 public sealed class ThemesProvider : IThemesProvider
 {
-    public IThemeDetector ThemeDetector { get; }
+    public IThemeDataDetector ThemeDetector { get; }
 
 
 
-    public ThemesProvider(IThemeDetector themeDetector)
+    public ThemesProvider(ThemeDataDetector themeDetector)
     {
         ThemeDetector = themeDetector ?? throw new ArgumentNullException(nameof(themeDetector));
     }
@@ -20,7 +20,7 @@ public sealed class ThemesProvider : IThemesProvider
     public ThemeColors LoadThemeData()
     {
         ThemeColors themeColors = new ThemeColors();
-        foreach (ThemeData themeData in ThemeDetector.GetThemeReaderRepository().GetThemeData())
+        foreach (ThemeData themeData in ThemeDetector.DetectThemeDataRepository().GetThemeData())
         {
             foreach (FieldInfo fieldInfo in themeColors.GetType().GetFields())
             {

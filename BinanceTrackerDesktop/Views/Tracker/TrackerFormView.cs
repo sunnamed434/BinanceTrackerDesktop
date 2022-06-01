@@ -1,14 +1,13 @@
 ﻿using Binance.Net.Clients;
 using BinanceTrackerDesktop.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Controllers;
-using BinanceTrackerDesktop.Core.Forms.Tray;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Entry;
 using BinanceTrackerDesktop.Forms.Tracker.UI.Menu;
+using BinanceTrackerDesktop.Forms.Tray;
 using BinanceTrackerDesktop.MVC.View;
-using BinanceTrackerDesktop.Themes.Forms;
-using BinanceTrackerDesktop.Themes.Recognizers.Windows;
+using BinanceTrackerDesktop.Themes.Forms.Design;
 using BinanceTrackerDesktop.User.Client;
 using BinanceTrackerDesktop.User.Data.Value;
 using BinanceTrackerDesktop.User.Status.API;
@@ -19,7 +18,7 @@ using static BinanceTrackerDesktop.DirectoryFiles.Controls.Images.ImagesDirector
 
 namespace BinanceTrackerDesktop.Tracker.Forms;
 
-public sealed partial class TrackerFormView : Form, IAwaitableSingletonObject, ITrackerView, IAwaitableStart, IAwaitableComplete
+public sealed partial class TrackerFormView : DesignableForm, IAwaitableSingletonObject, ITrackerView, IAwaitableStart, IAwaitableComplete
 {
     private readonly AuthenticatorFormView authenticatorForm;
 
@@ -33,13 +32,12 @@ public sealed partial class TrackerFormView : Form, IAwaitableSingletonObject, I
 
 
 
-    public TrackerFormView()
+    public TrackerFormView() 
     {
         instance = this;
 
         InitializeComponent();
-
-        FormsTheme.Apply(this, Controls, new WindowsSystemThemeRecognizer());
+        base.ApplyTheme(this, Controls);
 
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterScreen;
@@ -63,7 +61,7 @@ public sealed partial class TrackerFormView : Form, IAwaitableSingletonObject, I
         this.UserTotalBalanceLossesText.MouseClick += onUserBalancesTextClicked;
     }
 
-    
+
 
     object IAwaitableSingletonObject.Instance => instance;
 
@@ -163,7 +161,7 @@ public sealed partial class TrackerFormView : Form, IAwaitableSingletonObject, I
         base.Activated -= onFormActivated;
         base.FormClosing += onFormClosing;
 
-        new BinanceTrackerTrayForm();
+        new TrackerTrayForm();
 
         userClient = new UserClient();
         userStatus = new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus();

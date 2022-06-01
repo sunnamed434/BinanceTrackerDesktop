@@ -1,9 +1,8 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Components.ContextMenuStripControl.Base;
-using BinanceTrackerDesktop.Components.ContextMenuStripControl.Item.Control;
 using BinanceTrackerDesktop.Controllers;
+using BinanceTrackerDesktop.Expandables;
 using BinanceTrackerDesktop.Formatters.Currency;
 using BinanceTrackerDesktop.Formatters.Utilities;
 using BinanceTrackerDesktop.Forms.Tracker.Settings;
@@ -17,7 +16,7 @@ using System.Text;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.UI.Menu;
 
-public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControlBase
+public sealed class BinanceTrackerMenuStripControlUI : IInitializableExpandable<ToolStripMenuItem, byte>
 {
     private readonly MenuStrip menuStrip;
 
@@ -25,11 +24,13 @@ public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControl
 
     private readonly UserWallet wallet;
 
-    private readonly MenuStripComponentItemControl apiItemControl;
+    private readonly MenuStripExpandableDesignable expandable;
 
-    private readonly MenuStripComponentItemControl coinsItemControl;
+    private readonly ToolStripMenuItem apiToolStripMenuItem;
 
-    private readonly MenuStripComponentItemControl settingsItemControl;
+    private readonly ToolStripMenuItem coinsToolStripMenuItem;
+
+    private readonly ToolStripMenuItem settingsToolStripMenuItem;
 
 
 
@@ -54,50 +55,23 @@ public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControl
         this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
         this.client = client;
         this.wallet = wallet;
+        expandable = new MenuStripExpandableDesignable(menuStrip);
+        expandable.AddComponents(this);
 
-        foreach (MenuStripComponentItemControl item in InitializeItems())
-        {
-            AddComponent(item);
-        }
+        apiToolStripMenuItem = expandable.GetComponentOrDefault(MenuItemsIdContainer.API);
+        coinsToolStripMenuItem = expandable.GetComponentOrDefault(MenuItemsIdContainer.Coins);
+        settingsToolStripMenuItem = expandable.GetComponentOrDefault(MenuItemsIdContainer.Settings);
 
-        apiItemControl = GetComponentAt(MenuItemsIdContainer.API);
-        coinsItemControl = GetComponentAt(MenuItemsIdContainer.Coins);
-        settingsItemControl = GetComponentAt(MenuItemsIdContainer.Settings);
+        FormsTheme.Apply(menuStrip, expandable.AllComponents, new WindowsSystemThemeRecognizer());
 
-        FormsTheme.Apply(menuStrip, AllComponents, new WindowsSystemThemeRecognizer());
-
-        apiItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onAPIItemClicked;
-        coinsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onCoinsItemClicked;
-        settingsItemControl.EventsContainer.OnClick.OnTriggerEventHandler += onSettingsItemClicked;
+        apiToolStripMenuItem.Click += onAPIItemClicked;
+        coinsToolStripMenuItem.Click += onCoinsItemClicked;
+        settingsToolStripMenuItem.Click += onSettingsItemClicked;
     }
 
 
 
-    public override void AddComponent(MenuStripComponentItemControl menuStripItem)
-    {
-        if (menuStripItem == null)
-        {
-            throw new ArgumentNullException(nameof(menuStripItem));
-        }
-
-        menuStrip.Items.Add(menuStripItem.ToolStripItem);
-        Components.Add(menuStripItem);
-    }
-
-    public override void RemoveComponent(MenuStripComponentItemControl menuStripItem)
-    {
-        if (menuStripItem == null)
-        {
-            throw new ArgumentNullException(nameof(menuStripItem));
-        }
-
-        menuStrip.Items.Remove(menuStripItem.ToolStripItem);
-        Components.Remove(menuStripItem);
-    }
-
-
-
-    private async void onAPIItemClicked(EventArgs e)
+    private async void onAPIItemClicked(object sender, EventArgs e)
     {
         WebCallResult<BinanceAPIKeyPermissions> result = await client.SpotApi.Account.GetAPIKeyPermissionsAsync();
         BinanceAPIKeyPermissions permissions = result.Data;
@@ -118,14 +92,14 @@ public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControl
             .BuildAsMessageBox();
     }
 
-    private async void onCoinsItemClicked(EventArgs e)
+    private async void onCoinsItemClicked(object sender, EventArgs e)
     {
         IEnumerable<IUserWalletCoinResult> result = await wallet.GetAllBuyedCoinsAsync();
 
         MessageBox.Show(string.Join("\n", result.Select(r => $"{r.Asset} = {FormatterUtility<BasedOnUserDataCurrencyFormatter>.Format(r.Price)}")));
     }
 
-    private void onSettingsItemClicked(EventArgs e)
+    private void onSettingsItemClicked(object sender, EventArgs e)
     {
         TrackerSettingsFormView settingsView = new TrackerSettingsFormView(wallet);
         new SettingsController(settingsView, wallet);
@@ -134,11 +108,11 @@ public sealed class BinanceTrackerMenuStripControlUI : MenuStripComponentControl
 
 
 
-    protected override IEnumerable<MenuStripComponentItemControl> InitializeItems()
+    IEnumerable<KeyValuePair<byte, ToolStripMenuItem>> IInitializableExpandable<ToolStripMenuItem, byte>.InitializeItems()
     {
-        yield return new MenuStripComponentItemControl(MenuItemsTextContainer.API, MenuItemsIdContainer.API);
-        yield return new MenuStripComponentItemControl(MenuItemsTextContainer.Coins, MenuItemsIdContainer.Coins);
-        yield return new MenuStripComponentItemControl(MenuItemsTextContainer.Settings, MenuItemsIdContainer.Settings);
+        yield return new KeyValuePair<byte, ToolStripMenuItem>(MenuItemsIdContainer.API, new ToolStripMenuItem(MenuItemsTextContainer.API));
+        yield return new KeyValuePair<byte, ToolStripMenuItem>(MenuItemsIdContainer.Coins, new ToolStripMenuItem(MenuItemsTextContainer.Coins));
+        yield return new KeyValuePair<byte, ToolStripMenuItem>(MenuItemsIdContainer.Settings, new ToolStripMenuItem(MenuItemsTextContainer.Settings));
     }
 }
 
