@@ -5,7 +5,7 @@ using BinanceTrackerDesktop.User.Data;
 using BinanceTrackerDesktop.User.Data.Save;
 using BinanceTrackerDesktop.User.Data.Save.Binary;
 using BinanceTrackerDesktop.User.Status.API;
-using BinanceTrackerDesktop.User.Status.Extensions;
+using BinanceTrackerDesktop.User.Status.Detector;
 using BinanceTrackerDesktop.User.Wallet;
 using CryptoExchange.Net.Authentication;
 
@@ -13,15 +13,17 @@ namespace BinanceTrackerDesktop.User.Client;
 
 public sealed class UserClient
 {
-    public readonly IUserDataSaveSystem SaveDataSystem;
+    public static readonly IUserDataSaveSystem SaveDataSystem;
 
-    public readonly UserWallet Wallet;
+    public static readonly UserWallet Wallet;
 
-    public readonly IUserStatus Status;
+    public static readonly IUserStatus Status;
+
+    public static readonly BinanceClient BinanceClient;
 
 
 
-    public UserClient()
+    static UserClient()
     {
         SaveDataSystem = new BinaryUserDataSaveSystem();
         UserData data = SaveDataSystem.Read();
@@ -53,6 +55,7 @@ public sealed class UserClient
         });
 
         Wallet = new UserWallet();
-        Status = this.GetUserStatus();
+        Status = new UserStatusDetector(SaveDataSystem, Wallet).GetStatus();
+        BinanceClient = new BinanceClient();
     }
 }

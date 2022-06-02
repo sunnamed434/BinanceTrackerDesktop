@@ -10,6 +10,8 @@ using BinanceTrackerDesktop.User.Data;
 using BinanceTrackerDesktop.User.Data.Builder;
 using BinanceTrackerDesktop.User.Data.Extension;
 using BinanceTrackerDesktop.User.Data.Save.Binary;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
 using BinanceTrackerDesktop.Window.Helper;
 using static BinanceTrackerDesktop.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
@@ -19,7 +21,7 @@ public sealed partial class TrackerTrayForm : Form,
     IAwaitableSingletonObject,
     IAwaitableObserverInstance,
     IAwaitableExecute,
-    IInitializableExpandable<ToolStripMenuItem, byte>
+    IInitializableExpandable<TrackerMenuBase, byte>
 {
     private readonly ContextMenuStripExpandableDesignable expandable;
 
@@ -135,11 +137,11 @@ public sealed partial class TrackerTrayForm : Form,
 
 
 
-    IEnumerable<KeyValuePair<byte, ToolStripMenuItem>> IInitializableExpandable<ToolStripMenuItem, byte>.InitializeItems()
+    IEnumerable<KeyValuePair<byte, TrackerMenuBase>> IInitializableExpandable<TrackerMenuBase, byte>.InitializeItems()
     {
-        yield return new KeyValuePair<byte, ToolStripMenuItem>(TrayItemsIdContainer.OpenApplicationUniqueIndex, new ToolStripMenuItem(TrayItemsTextContainer.OpenApplication));
-        yield return new KeyValuePair<byte, ToolStripMenuItem>(TrayItemsIdContainer.NotificationsUniqueIndex, new ToolStripMenuItem(TrayItemsTextContainer.DisableNotifications));
-        yield return new KeyValuePair<byte, ToolStripMenuItem>(TrayItemsIdContainer.QuitApplicationUniqueIndex, new ToolStripMenuItem(TrayItemsTextContainer.QuitApplication));
+        yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.OpenApplicationUniqueIndex, new TrayTrackerMenuOpen());
+        yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.NotificationsUniqueIndex, new TrayTrackerMenuNotifications());
+        yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.QuitApplicationUniqueIndex, new ToolStripMenuItem(TrayItemsTextContainer.QuitApplication));
     }
 }
 

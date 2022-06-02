@@ -12,7 +12,12 @@ public sealed class NotificationsSender
 
     public static void Initialize(NotifyIcon notifyIcon)
     {
-        NotificationsSender.notifyIcon = notifyIcon ?? throw new ArgumentNullException(nameof(notifyIcon));
+        if (notifyIcon == null)
+        {
+            throw new ArgumentNullException(nameof(notifyIcon));
+        }
+
+        NotificationsSender.notifyIcon = notifyIcon;
 
         notifyIcon.BalloonTipShown += onPopupShown;
         notifyIcon.BalloonTipClicked += onPopupClicked;

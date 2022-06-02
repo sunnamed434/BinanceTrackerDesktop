@@ -4,7 +4,6 @@ using BinanceTrackerDesktop.Controllers;
 using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Entry;
-using BinanceTrackerDesktop.Forms.Tracker.UI.Menu;
 using BinanceTrackerDesktop.Forms.Tray;
 using BinanceTrackerDesktop.MVC.View;
 using BinanceTrackerDesktop.Themes.Forms.Design;
@@ -14,6 +13,7 @@ using BinanceTrackerDesktop.User.Status.API;
 using BinanceTrackerDesktop.User.Status.Detector;
 using BinanceTrackerDesktop.Views.Authenticator;
 using BinanceTrackerDesktop.Views.Tracker;
+using BinanceTrackerDesktop.Views.Tracker.Menu;
 using static BinanceTrackerDesktop.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Tracker.Forms;
@@ -164,10 +164,10 @@ public sealed partial class TrackerFormView : DesignableForm, IAwaitableSingleto
         new TrackerTrayForm();
 
         userClient = new UserClient();
-        userStatus = new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus();
-        new BinanceTrackerUserDataSaveControl(userClient.Wallet);
+        userStatus = new UserStatusDetector(UserClient.SaveDataSystem, UserClient.Wallet).GetStatus();
+        new BinanceTrackerUserDataSaveControl(UserClient.Wallet);
 
-        new BinanceTrackerMenuStripControlUI(this.MenuStrip, new BinanceClient(), userClient.Wallet);
+        new TrackerMenuStripControlUI(this.MenuStrip);
     }
     
     private async void onFormClosing(object sender, FormClosingEventArgs e)

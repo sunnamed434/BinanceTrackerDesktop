@@ -74,7 +74,7 @@ public abstract class Expandable<TAddGetRemove, TSearchArgument> : IExpandable<T
             AddComponent(keyValuePairItem.Value, keyValuePairItem.Key);
         }
     }
-
+    
     public virtual TAddGetRemove GetComponentOrDefault(TSearchArgument search)
     {
         if (AllComponents.TryGetValue(search, out TAddGetRemove item))

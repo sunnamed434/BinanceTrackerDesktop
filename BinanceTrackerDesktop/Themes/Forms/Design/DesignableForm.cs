@@ -31,6 +31,11 @@ namespace BinanceTrackerDesktop.Themes.Forms.Design
             FormsTheme.Apply(form, controlCollection, SystemThemeRecognizer);
         }
 
+        public void ApplyTheme(MenuStrip menuStrip)
+        {
+            FormsTheme.Apply(menuStrip, SystemThemeRecognizer);
+        }
+
         public void ApplyTheme(MenuStrip menuStrip, IEnumerable<KeyValuePair<byte, ToolStripMenuItem>> items)
         {
             if (menuStrip == null)

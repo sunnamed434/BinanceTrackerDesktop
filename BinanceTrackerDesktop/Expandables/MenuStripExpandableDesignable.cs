@@ -13,17 +13,17 @@ public class MenuStripExpandableDesignable : ExpandableDesignable<ToolStripMenuI
 
 
 
-    public override void AddComponent(ToolStripMenuItem item, byte search)
+    public override void AddComponent(ToolStripMenuItem item, byte id)
     {
-        base.AddComponent(item, search);
+        base.AddComponent(item, id);
 
         MenuStrip.Items.Add(item);
     }
 
-    public override void RemoveComponent(byte search)
+    public override void RemoveComponent(byte id)
     {
-        base.RemoveComponent(search);
+        base.RemoveComponent(id);
 
-        MenuStrip.Items.Remove(GetComponentOrDefault(search));
+        MenuStrip.Items.Remove(GetComponentOrDefault(id));
     }
 }

@@ -13,17 +13,17 @@ public class ContextMenuStripExpandableDesignable : ExpandableDesignable<ToolStr
 
 
 
-    public override void AddComponent(ToolStripMenuItem item, byte search)
+    public override void AddComponent(ToolStripMenuItem item, byte id)
     {
-        base.AddComponent(item, search);
+        base.AddComponent(item, id);
 
         ContextMenuStrip.Items.Add(item);
     }
 
-    public override void RemoveComponent(byte search)
+    public override void RemoveComponent(byte id)
     {
-        base.RemoveComponent(search);
+        base.RemoveComponent(id);
 
-        ContextMenuStrip.Items.Remove(GetComponentOrDefault(search));
+        ContextMenuStrip.Items.Remove(GetComponentOrDefault(id));
     }
 }

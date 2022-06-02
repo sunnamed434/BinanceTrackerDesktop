@@ -83,8 +83,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
 
         TrackerFormView trackerFormView = new TrackerFormView();
 
-        UserClient userClient = new UserClient();
-        new TrackerController(trackerFormView, new UserStatusDetector(userClient.SaveDataSystem, userClient.Wallet).GetStatus());
+        new TrackerController(trackerFormView, new UserStatusDetector(UserClient.SaveDataSystem, UserClient.Wallet).GetStatus());
         trackerFormView.ShowDialog();
 
         base.Close();

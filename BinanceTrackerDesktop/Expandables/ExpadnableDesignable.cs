@@ -8,5 +8,8 @@ public class ExpandableDesignable<TAddGetRemove, TSearchArgument> : Expandable<T
 
 
 
-    public ExpandableDesignable() => DesignableForm = new DesignableForm();
+    public ExpandableDesignable()
+    {
+        DesignableForm = new DesignableForm();
+    }
 }

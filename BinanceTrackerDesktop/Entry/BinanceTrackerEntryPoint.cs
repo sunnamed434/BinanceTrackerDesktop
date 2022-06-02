@@ -37,7 +37,7 @@ public sealed class BinanceTrackerEntryPoint
         else
         {
             TrackerFormView trackerFormView = new TrackerFormView();
-            new TrackerController(trackerFormView, new UserStatusDetector(new BinaryUserDataSaveSystem(), new UserClient().Wallet).GetStatus());
+            new TrackerController(trackerFormView, new UserStatusDetector(new BinaryUserDataSaveSystem(), UserClient.Wallet).GetStatus());
             trackerFormView.ShowDialog();
         }
     }
