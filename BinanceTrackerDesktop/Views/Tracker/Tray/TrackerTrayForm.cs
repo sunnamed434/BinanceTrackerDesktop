@@ -60,7 +60,7 @@ public sealed partial class TrackerTrayForm : Form,
         using (this.NotifyIcon)
         {
             this.NotifyIcon.Visible = false;
-            this.NotifyIcon.Icon.Dispose();
+            this.NotifyIcon.Icon?.Dispose();
         }
     }
 

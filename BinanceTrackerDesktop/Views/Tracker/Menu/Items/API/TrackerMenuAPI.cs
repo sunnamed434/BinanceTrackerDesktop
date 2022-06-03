@@ -36,6 +36,6 @@ public sealed class TrackerMenuAPI : TrackerMenuBase
                              .Append($"{nameof(permissions.EnableReading)} = {permissions.EnableReading}, ")
                              .Append($"{nameof(permissions.PermitsUniversalTransfer)} = {permissions.PermitsUniversalTransfer}, ")
                              .Append($"{nameof(permissions.TradingAuthorityExpirationTime)} = {permissions.TradingAuthorityExpirationTime}"))
-            .BuildAsMessageBox();
+            .BuildToMessageBox();
     }
 }

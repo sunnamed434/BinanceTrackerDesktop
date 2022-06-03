@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Themes;
 using BinanceTrackerDesktop.User.Authentication.Data;
+using BinanceTrackerDesktop.User.Data.Save;
 
 namespace BinanceTrackerDesktop.User.Data.Builder;
 
@@ -11,7 +12,22 @@ public sealed class UserDataBuilder : IUserDataBuilder
 
     public UserDataBuilder(UserData userData)
     {
+        if (userData == null)
+        {
+            throw new ArgumentNullException(nameof(userData));
+        }
+
         this.userData = userData;
+    }
+
+    public UserDataBuilder(IUserDataSaveSystem userDataSaveSystem)
+    {
+        if (userDataSaveSystem == null)
+        {
+            throw new ArgumentNullException(nameof(userDataSaveSystem));
+        }
+
+        this.userData = userDataSaveSystem.Read();
     }
 
     public UserDataBuilder() : this(new UserData())
@@ -88,11 +104,11 @@ public sealed class UserDataBuilder : IUserDataBuilder
     {
         if (value.HasValue && value.Value)
         {
-            SetNotificationsDisabled();
+            SetNotificationsEnabled();
         }
         else
         {
-            SetNotificationsEnabled();
+            SetNotificationsDisabled();
         }
 
         return this;

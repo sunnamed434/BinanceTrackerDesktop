@@ -59,7 +59,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authorizate, please check your Key!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
             return;
         }
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Secret)
@@ -67,7 +67,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authorizate, please check your Secret!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
             return;
         }
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Currency)
@@ -75,7 +75,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authorizate, please check your Currency!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
             return;
         }
 

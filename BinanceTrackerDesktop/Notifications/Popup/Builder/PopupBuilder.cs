@@ -7,7 +7,7 @@ namespace BinanceTrackerDesktop.Notifications.Popup.Builder;
 
 public sealed class PopupBuilder : IPopupBuilder
 {
-    private readonly Popup popup;
+    private readonly IPopup popup;
 
     private bool showMessageBoxIfShould;
 
@@ -23,12 +23,22 @@ public sealed class PopupBuilder : IPopupBuilder
 
     public IPopupBuilder WithTitle(string name)
     {
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+
         popup.Title = name;
         return this;
     }
 
     public IPopupBuilder WithMessage(string content)
     {
+        if (content == null)
+        {
+            throw new ArgumentNullException(nameof(content));
+        }
+
         popup.Message = content;
         return this;
     }
@@ -50,33 +60,41 @@ public sealed class PopupBuilder : IPopupBuilder
         return this;
     }
 
-    public IPopupBuilder WithIcon(Icon icon)
-    {
-        popup.Icon = icon;
-        return this;
-    }
-
     public IPopupBuilder WithOnShowAction(Action callback)
     {
+        if (callback == null)
+        {
+            throw new ArgumentNullException(nameof(callback));
+        }
+
         popup.OnShow = callback;
         return this;
     }
 
     public IPopupBuilder WithOnCloseAction(Action callback)
     {
+        if (callback == null)
+        {
+            throw new ArgumentNullException(nameof(callback));
+        }
+
         popup.OnClose = callback;
         return this;
     }
 
     public IPopupBuilder WithOnClickAction(Action callback)
     {
+        if (callback == null)
+        {
+            throw new ArgumentNullException(nameof(callback));
+        }
+
         popup.OnClick = callback;
         return this;
     }
 
     public IPopupBuilder ShowMessageBoxIfShouldOnBuild()
     {
-
         if (UserDataValues.NotificationsDisabled.GetValue())
         {
             showMessageBoxIfShould = true;
@@ -85,7 +103,7 @@ public sealed class PopupBuilder : IPopupBuilder
         return this;
     }
 
-    public IPopup BuildAsMessageBox()
+    public IPopup BuildToMessageBox()
     {
         MessageBox.Show(popup.Message, popup.Title);
 
@@ -96,22 +114,17 @@ public sealed class PopupBuilder : IPopupBuilder
     {
         if (showMessageBoxIfShould)
         {
-            return BuildAsMessageBox();
+            return BuildToMessageBox();
         }
 
-        return popup;
+        return Build(false);
     }
 
     public IPopup Build(bool ignoreUserNotificationsState)
     {
-        if (showMessageBoxIfShould)
-        {
-            return Build();
-        }
-
         popup.Show(ignoreUserNotificationsState);
 
-        return Build();
+        return popup;
     }
 
 

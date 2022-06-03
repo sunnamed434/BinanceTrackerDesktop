@@ -12,8 +12,6 @@ public interface IPopupBuilder
 
     IPopupBuilder WillCloseIn(int value);
 
-    IPopupBuilder WithIcon(Icon icon);
-
     IPopupBuilder WithOnShowAction(Action callback);
 
     IPopupBuilder WithOnCloseAction(Action callback);
@@ -22,9 +20,9 @@ public interface IPopupBuilder
 
     IPopupBuilder ShowMessageBoxIfShouldOnBuild();
 
-    IPopup BuildAsMessageBox();
+    IPopup BuildToMessageBox();
 
     IPopup Build();
 
-    IPopup Build(bool sendAnyway);
+    IPopup Build(bool ignoreUserNotificationsState);
 }

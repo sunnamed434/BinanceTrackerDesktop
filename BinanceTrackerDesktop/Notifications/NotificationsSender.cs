@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.User.Data.Save.Binary;
+﻿using BinanceTrackerDesktop.Notifications.Popup;
+using BinanceTrackerDesktop.User.Data.Save.Binary;
 
 namespace BinanceTrackerDesktop.Notifications;
 
@@ -6,7 +7,7 @@ public sealed class NotificationsSender
 {
     private static NotifyIcon notifyIcon;
 
-    private static Popup.Popup lastUsedPopup;
+    private static IPopup lastUsedPopup;
 
 
 
@@ -26,7 +27,7 @@ public sealed class NotificationsSender
 
 
 
-    public static void Show(Popup.Popup popup, bool ignoreUserNotificationsState = false)
+    public static void Show(IPopup popup, bool ignoreUserNotificationsState = false)
     {
         if (popup == null)
         {

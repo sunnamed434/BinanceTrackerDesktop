@@ -62,20 +62,20 @@ public sealed partial class AuthenticationFormView : Form, IAuthenticationView
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authenticate, check your Account Title please!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
         }
         catch (TwoFactorAuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCode.Secret)
         {
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authenticate, check your Secret Key please!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
         }
 
         new PopupBuilder()
             .WithTitle(ApplicationEnviroment.GlobalName)
             .WithMessage("Successfully created QRCode and saved.")
-            .BuildAsMessageBox();
+            .BuildToMessageBox();
 
         BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
         if (saveSystem.Read() != null)

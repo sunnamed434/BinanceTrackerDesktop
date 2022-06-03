@@ -4,6 +4,7 @@ using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Data;
 using BinanceTrackerDesktop.User.Data.Builder;
 using BinanceTrackerDesktop.User.Data.Extension;
+using BinanceTrackerDesktop.User.Data.Save;
 using BinanceTrackerDesktop.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
 
@@ -11,28 +12,13 @@ namespace BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
 
 public sealed class TrayTrackerMenuNotifications : TrackerMenuBase
 {
-    public TrayTrackerMenuNotifications()
-    {
-        bool isNotificationsEnabled = new BinaryUserDataSaveSystem().Read().IsNotificationsEnabled;
-        Label = getNotificationsText(isNotificationsEnabled);
-    }
-
-
-
-    public override string Label { get; }
-
-
-
     public override void OnClick()
     {
-        BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
-        IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());
-
-        UserData userData = userDataBuilder.Build();
-
-        userDataBuilder.AddNotificationsStateBasedOnData(!userData.IsNotificationsEnabled);
-
-        userData = userDataBuilder.Build()
+        IUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
+        UserData userData = saveSystem.Read();
+        userData = new UserDataBuilder(userData)
+            .AddNotificationsStateBasedOnData(!userData.IsNotificationsEnabled)
+            .Build()
             .WriteUserDataThenRead(saveSystem);
 
         new PopupBuilder()
@@ -45,6 +31,12 @@ public sealed class TrayTrackerMenuNotifications : TrackerMenuBase
             .Build();
 
         ToolStripMenuItem.Text = getNotificationsText(userData.IsNotificationsEnabled);
+    }
+
+    protected override ToolStripMenuItem InitializeToolStripMenuItem()
+    {
+        bool isNotificationsEnabled = new BinaryUserDataSaveSystem().Read().IsNotificationsEnabled;
+        return new ToolStripMenuItem(getNotificationsText(isNotificationsEnabled));
     }
 
 

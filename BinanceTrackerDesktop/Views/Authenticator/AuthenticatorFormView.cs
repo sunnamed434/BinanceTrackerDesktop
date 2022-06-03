@@ -55,7 +55,7 @@ public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authenticate, check your Secret Key please!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
 
             OnAuthenticationCompletedFailed?.Invoke();
             return;
@@ -65,7 +65,7 @@ public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authenticate, check your pin please!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
 
             OnAuthenticationCompletedFailed?.Invoke();
             return;
@@ -76,7 +76,7 @@ public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Failed to authenticate!")
-                .BuildAsMessageBox();
+                .BuildToMessageBox();
             OnAuthenticationCompletedFailed?.Invoke();
             return;
         }
@@ -84,7 +84,7 @@ public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
         new PopupBuilder()
             .WithTitle(ApplicationEnviroment.GlobalName)
             .WithMessage(result.ToString())
-            .BuildAsMessageBox();
+            .BuildToMessageBox();
 
         OnAuthenticationCompletedSuccessfully?.Invoke();
     }

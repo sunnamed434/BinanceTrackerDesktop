@@ -2,13 +2,13 @@
 
 public static class PopupExtension
 {
-    public static void Show(this Popup source, bool sendAnyway = false)
+    public static void Show(this IPopup source, bool ignoreUserNotificationsState = false)
     {
         if (source == null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        NotificationsSender.Show(source, sendAnyway);
+        NotificationsSender.Show(source, ignoreUserNotificationsState);
     }
 }

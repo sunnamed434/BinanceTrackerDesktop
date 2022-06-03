@@ -21,7 +21,7 @@ public sealed class Popup : IPopup
 
 
 
-    public static readonly Popup Empty = new Popup
+    public static readonly IPopup Empty = new Popup
     {
         Title = string.Empty,
         Message = string.Empty,

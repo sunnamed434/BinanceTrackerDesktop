@@ -4,7 +4,7 @@ using BinanceTrackerDesktop.User.Authentication.Data;
 namespace BinanceTrackerDesktop.User.Data.Builder;
 
 /// <summary>
-/// Builder for <see cref="UserData"/>
+/// Represents a builder for the <see cref="UserData"/>.
 /// </summary>
 public interface IUserDataBuilder
 {
