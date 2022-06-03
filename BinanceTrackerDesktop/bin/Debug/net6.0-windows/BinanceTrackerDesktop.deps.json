@@ -1,0 +1,206 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "BinanceTrackerDesktop/1.0.0": {
+        "dependencies": {
+          "Binance.Net": "8.1.1",
+          "GoogleAuthenticator": "2.5.0",
+          "Newtonsoft.Json": "13.0.1",
+          "protobuf-net": "3.1.4"
+        },
+        "runtime": {
+          "BinanceTrackerDesktop.dll": {}
+        },
+        "resources": {
+          "aa/BinanceTrackerDesktop.resources.dll": {
+            "locale": "aa"
+          }
+        }
+      },
+      "Binance.Net/8.1.1": {
+        "dependencies": {
+          "CryptoExchange.Net": "5.1.10"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Binance.Net.dll": {
+            "assemblyVersion": "8.1.1.0",
+            "fileVersion": "8.1.1.0"
+          }
+        }
+      },
+      "CryptoExchange.Net/5.1.10": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "3.1.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/CryptoExchange.Net.dll": {
+            "assemblyVersion": "5.1.10.0",
+            "fileVersion": "5.1.10.0"
+          }
+        }
+      },
+      "GoogleAuthenticator/2.5.0": {
+        "dependencies": {
+          "QRCoder": "1.4.3"
+        },
+        "runtime": {
+          "lib/net6.0/Google.Authenticator.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.19.56504"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/3.1.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.19.56504"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/6.0.0": {},
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "protobuf-net/3.1.4": {
+        "dependencies": {
+          "protobuf-net.Core": "3.1.4"
+        },
+        "runtime": {
+          "lib/net5.0/protobuf-net.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.4.12255"
+          }
+        }
+      },
+      "protobuf-net.Core/3.1.4": {
+        "runtime": {
+          "lib/net5.0/protobuf-net.Core.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.4.12255"
+          }
+        }
+      },
+      "QRCoder/1.4.3": {
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/QRCoder.dll": {
+            "assemblyVersion": "1.4.3.0",
+            "fileVersion": "1.4.3.0"
+          }
+        }
+      },
+      "System.Drawing.Common/6.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "6.0.0"
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BinanceTrackerDesktop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Binance.Net/8.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TqvAJoF6J98iSUU89Cx+hGRqnbSvLAGgkFYBXqJ4t1J0FtnYp14fVtZpFo05d6ZRpo0eA9XJtaOjGHQihS/JNw==",
+      "path": "binance.net/8.1.1",
+      "hashPath": "binance.net.8.1.1.nupkg.sha512"
+    },
+    "CryptoExchange.Net/5.1.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KgdMrfjwlwkFQQM91lK/36nRvwNpubCxXpvgdKu3W9uqSIuquJ56l1+d3Xg/eTcd1+77VmHR+j+w3Az0w2963w==",
+      "path": "cryptoexchange.net/5.1.10",
+      "hashPath": "cryptoexchange.net.5.1.10.nupkg.sha512"
+    },
+    "GoogleAuthenticator/2.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N7wcIP0gQaSGEaoOqxZ7gTLtbjzDfhiA6dW8DY9NzoDFpP06Q9x3T5zpqvmd+Z4j0DdaVWDtMhIkXFPPe3kC3Q==",
+      "path": "googleauthenticator/2.5.0",
+      "hashPath": "googleauthenticator.2.5.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-44rDtOf1JXXAFpNT2EXMExaDm/4OJ2RXOL9i9lE4bK427nzC7Exphv+beB6IgluyE2GIoo8zezTStMXI7MQ8WA==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/3.1.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jjo4YXRx6MIpv6DiRxJjSpl+sPP0+5VW0clMEdLyIAz44PPwrDTFrd5PZckIxIXl1kKZ2KK6IL2nkt0+ug2MQg==",
+      "path": "microsoft.extensions.logging.abstractions/3.1.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+      "path": "microsoft.win32.systemevents/6.0.0",
+      "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "protobuf-net/3.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jK05D3263rTnSYMXwbsREx3Vhq6+0SXbPMmZLk/+ijezdcu6gSuN8FSS6yhpchv6FWmbHzccN49bIPEEuDMpKw==",
+      "path": "protobuf-net/3.1.4",
+      "hashPath": "protobuf-net.3.1.4.nupkg.sha512"
+    },
+    "protobuf-net.Core/3.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q7pKC6D1u5KXgjxDnkB82WP7rcsxhmlMjnWA9EVds5P6TDI7Mntl0DClEUX7cmI2mN8IKZ56uJOry2SrUbj/rQ==",
+      "path": "protobuf-net.core/3.1.4",
+      "hashPath": "protobuf-net.core.3.1.4.nupkg.sha512"
+    },
+    "QRCoder/1.4.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fWuFqjm8GTlEb2GqBl3Hi8HZZeZQwBSHxvRPtPjyNbT82H0ff0JwavKRBmMaXCno1Av6McPC8aJzri0Mj2w9Jw==",
+      "path": "qrcoder/1.4.3",
+      "hashPath": "qrcoder.1.4.3.nupkg.sha512"
+    },
+    "System.Drawing.Common/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "path": "system.drawing.common/6.0.0",
+      "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
+    }
+  }
+}
