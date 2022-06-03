@@ -2,7 +2,7 @@
 
 public class MenuStripExpandableDesignable : ExpandableDesignable<ToolStripMenuItem, byte>
 {
-    protected readonly MenuStrip MenuStrip;
+    public readonly MenuStrip MenuStrip;
 
 
 

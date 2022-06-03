@@ -2,7 +2,7 @@
 
 public class ContextMenuStripExpandableDesignable : ExpandableDesignable<ToolStripMenuItem, byte>
 {
-    protected readonly ContextMenuStrip ContextMenuStrip;
+    public readonly ContextMenuStrip ContextMenuStrip;
 
 
 

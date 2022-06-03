@@ -6,7 +6,7 @@ public interface ITrackerMenu
 
     Image Image { get; }
 
-    ToolStripItem[] Items { get; }
+    ToolStripItem[] DropDownItems { get; }
 
 
 

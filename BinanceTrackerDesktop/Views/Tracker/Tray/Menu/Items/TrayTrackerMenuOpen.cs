@@ -9,18 +9,14 @@ public sealed class TrayTrackerMenuOpen : TrackerMenuBase
 
 
 
-
     public TrayTrackerMenuOpen()
     {
         processWindowHelper = new ProcessWindowHelper();
     }
 
 
-    public override string Label => "";
 
-    public override Image Image => null;
-
-    public override ToolStripItem[] Items => null;
+    public override string Label => "Open Binance Tracker";
 
 
 

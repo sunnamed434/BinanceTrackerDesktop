@@ -8,7 +8,7 @@ public abstract class TrackerMenuBase : ITrackerMenu
 
     public TrackerMenuBase()
     {
-        ToolStripMenuItem = new ToolStripMenuItem(Label, Image, Items);
+        ToolStripMenuItem = new ToolStripMenuItem(Label, Image, DropDownItems);
         ToolStripMenuItem.Click += (_, _) => OnClick();
     }
 
@@ -16,9 +16,9 @@ public abstract class TrackerMenuBase : ITrackerMenu
 
     public abstract string Label { get; }
 
-    public abstract Image Image { get; }
+    public virtual Image Image { get; } = null;
 
-    public abstract ToolStripItem[] Items { get; }
+    public virtual ToolStripItem[] DropDownItems { get; } = null;
 
 
 

@@ -12,7 +12,7 @@ public sealed class TrackerMenuCoins : TrackerMenuBase
 
     public override Image Image => null;
 
-    public override ToolStripItem[] Items => null;
+    public override ToolStripItem[] DropDownItems => null;
     
 
 

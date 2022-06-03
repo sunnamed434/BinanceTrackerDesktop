@@ -2,17 +2,10 @@
 using BinanceTrackerDesktop.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Awaitable.Observer;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
-using BinanceTrackerDesktop.Entry;
 using BinanceTrackerDesktop.Expandables;
 using BinanceTrackerDesktop.Notifications;
-using BinanceTrackerDesktop.Notifications.Popup.Builder;
-using BinanceTrackerDesktop.User.Data;
-using BinanceTrackerDesktop.User.Data.Builder;
-using BinanceTrackerDesktop.User.Data.Extension;
-using BinanceTrackerDesktop.User.Data.Save.Binary;
 using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
 using BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
-using BinanceTrackerDesktop.Window.Helper;
 using static BinanceTrackerDesktop.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Forms.Tray;
@@ -23,17 +16,12 @@ public sealed partial class TrackerTrayForm : Form,
     IAwaitableExecute,
     IInitializableExpandable<TrackerMenuBase, byte>
 {
-    private readonly ContextMenuStripExpandableDesignable expandable;
-
-    private readonly IProcessWindowHelper processWindowHelper;
-
-    private readonly ToolStripMenuItem applicationToolStripMenuItem;
-
-    private readonly ToolStripMenuItem notificationsToolStripMenuItem;
-
-    private readonly ToolStripMenuItem quitApplicationToolStripMenuItem;
-
     private static TrackerTrayForm instance;
+
+    private readonly TrackerContextMenuStripExpandable expandable;
+
+    private readonly TrayTrackerMenuOpen trayTrackerMenuOpen;
+
 
 
     public TrackerTrayForm()
@@ -52,16 +40,10 @@ public sealed partial class TrackerTrayForm : Form,
 
         NotificationsSender.Initialize(this.NotifyIcon);
 
-        expandable = new ContextMenuStripExpandableDesignable(this.ContextMenuStrip);
+        expandable = new TrackerContextMenuStripExpandable(this.ContextMenuStrip);
         expandable.AddComponents(this);
-        processWindowHelper = new ProcessWindowHelper();
-        applicationToolStripMenuItem = expandable.GetComponentOrDefault(TrayItemsIdContainer.OpenApplicationUniqueIndex);
-        notificationsToolStripMenuItem = expandable.GetComponentOrDefault(TrayItemsIdContainer.NotificationsUniqueIndex);
-        quitApplicationToolStripMenuItem = expandable.GetComponentOrDefault(TrayItemsIdContainer.QuitApplicationUniqueIndex);
+        trayTrackerMenuOpen = (TrayTrackerMenuOpen)expandable.GetComponentOrDefault(TrayItemsIdContainer.OpenApplicationUniqueIndex);
 
-        applicationToolStripMenuItem.MouseDown += onApplicationOpenItemClicked;
-        notificationsToolStripMenuItem.MouseDown += onNotificationsItemControlClicked;
-        quitApplicationToolStripMenuItem.MouseDown += onApplicationQuitItemClicked;
         this.NotifyIcon.DoubleClick += onTrayDoubleClick;
     }
 
@@ -75,15 +57,6 @@ public sealed partial class TrackerTrayForm : Form,
 
     void IAwaitableExecute.OnExecute()
     {
-        applicationToolStripMenuItem.MouseDown -= onApplicationOpenItemClicked;
-        notificationsToolStripMenuItem.MouseDown -= onNotificationsItemControlClicked;
-        quitApplicationToolStripMenuItem.MouseDown -= onApplicationQuitItemClicked;
-
-        this.closeTray();
-    }
-
-    private void closeTray()
-    {
         using (this.NotifyIcon)
         {
             this.NotifyIcon.Visible = false;
@@ -91,48 +64,11 @@ public sealed partial class TrackerTrayForm : Form,
         }
     }
 
-    private string getNotificationsText(bool isNotificationsEnabled)
-    {
-        return isNotificationsEnabled == true ? TrayItemsTextContainer.DisableNotifications : TrayItemsTextContainer.EnableNotifications;
-    }
+    
 
     private void onTrayDoubleClick(object sender, EventArgs e)
     {
-        processWindowHelper.SetWindowToForeground();
-    }
-
-    private void onApplicationOpenItemClicked(object sender, MouseEventArgs e)
-    {
-        onTrayDoubleClick(sender, e);
-    }
-
-    private void onNotificationsItemControlClicked(object sender, MouseEventArgs e)
-    {
-        BinaryUserDataSaveSystem saveSystem = new BinaryUserDataSaveSystem();
-        IUserDataBuilder userDataBuilder = new UserDataBuilder(saveSystem.Read());
-
-        UserData userData = userDataBuilder.Build();
-
-        userDataBuilder.AddNotificationsStateBasedOnData(!userData.IsNotificationsEnabled);
-
-        userData = userDataBuilder.Build()
-            .WriteUserDataThenRead(saveSystem);
-
-        new PopupBuilder()
-            .WithTitle(ApplicationEnviroment.GlobalName)
-            .WithMessage(userData.IsNotificationsEnabled ? TrayItemsTextContainer.NotificationsEnabled : TrayItemsTextContainer.NotificationsDisabled)
-            .WillCloseIn(90)
-            .ShowMessageBoxIfShouldOnBuild()
-            .Build();
-
-        notificationsToolStripMenuItem.Text = getNotificationsText(userData.IsNotificationsEnabled);
-    }
-
-    private async void onApplicationQuitItemClicked(object sender, MouseEventArgs e)
-    {
-        closeTray();
-
-        await BinanceTrackerEntryPoint.AwaitablesProvider.Observer.CallListenersAsync();
+        trayTrackerMenuOpen.OnClick();
     }
 
 
@@ -141,7 +77,7 @@ public sealed partial class TrackerTrayForm : Form,
     {
         yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.OpenApplicationUniqueIndex, new TrayTrackerMenuOpen());
         yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.NotificationsUniqueIndex, new TrayTrackerMenuNotifications());
-        yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.QuitApplicationUniqueIndex, new ToolStripMenuItem(TrayItemsTextContainer.QuitApplication));
+        yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.QuitApplicationUniqueIndex, new TrayTrackerMenuQuit(this.NotifyIcon));
     }
 }
 
