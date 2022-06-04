@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Themes;
+﻿using BinanceTrackerDesktop.Localizations.Language;
+using BinanceTrackerDesktop.Themes;
 using BinanceTrackerDesktop.User.Authentication.Data;
 using BinanceTrackerDesktop.User.Data.Save;
 
@@ -117,6 +118,12 @@ public sealed class UserDataBuilder : IUserDataBuilder
     public IUserDataBuilder AddUserTheme(Theme theme)
     {
         userData.Theme = theme;
+        return this;
+    }
+
+    public IUserDataBuilder AddUserLanguage(Languages language)
+    {
+        this.userData.Language = language;
         return this;
     }
 

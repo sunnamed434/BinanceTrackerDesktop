@@ -27,7 +27,7 @@ public sealed partial class AuthenticatorFormView : Form, IAuthenticatorView
         FormBorderStyle = FormBorderStyle.FixedSingle;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterScreen;
-        Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+        Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
         MaximizeBox = false;
 
         this.CheckAuthenticationPINButton.Click += onCheckAuthenticationPINButtonClicked;

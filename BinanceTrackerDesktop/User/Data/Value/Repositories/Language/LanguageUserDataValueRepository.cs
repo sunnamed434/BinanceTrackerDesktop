@@ -3,7 +3,7 @@ using BinanceTrackerDesktop.User.Data.Save;
 
 namespace BinanceTrackerDesktop.User.Data.Value.Repositories.Language;
 
-public sealed class LanguageUserDataValueRepository : UserDataValueRepository<ILanguage>
+public sealed class LanguageUserDataValueRepository : UserDataValueRepository<Languages>
 {
     public LanguageUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem) : base(userDataSaveSystem)
     {
@@ -11,7 +11,7 @@ public sealed class LanguageUserDataValueRepository : UserDataValueRepository<IL
 
 
 
-    public override ILanguage GetValue()
+    public override Languages GetValue()
     {
         return UserDataSaveSystem.Read().Language;
     }

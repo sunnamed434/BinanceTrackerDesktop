@@ -31,6 +31,13 @@ public abstract class DirectoryFilesControlBase :
 
 
 
+    public DirectoryFilesControlBase()
+    {
+        Directory.CreateDirectory(FolderPath);
+    }
+
+
+
     public virtual IEnumerable<string> GetAllFilePathFromDirectory()
     {
         Directory.CreateDirectory(FolderPath);

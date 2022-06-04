@@ -59,6 +59,17 @@ public sealed class PopupBuilder : IPopupBuilder
         return this;
     }
 
+    public IPopupBuilder WithIcon(Icon icon)
+    {
+        if (icon == null)
+        {
+            throw new ArgumentNullException(nameof(icon));
+        }
+
+        popup.Icon = icon;
+        return this;
+    }
+
     public IPopupBuilder WithOnShowAction(Action callback)
     {
         if (callback == null)
@@ -125,8 +136,6 @@ public sealed class PopupBuilder : IPopupBuilder
 
         return popup;
     }
-
-
 
     public static implicit operator Popup(PopupBuilder builder)
     {

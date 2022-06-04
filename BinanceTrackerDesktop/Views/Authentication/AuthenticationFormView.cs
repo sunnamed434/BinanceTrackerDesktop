@@ -29,7 +29,7 @@ public sealed partial class AuthenticationFormView : Form, IAuthenticationView
         base.FormBorderStyle = FormBorderStyle.FixedSingle;
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterScreen;
-        base.Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+        base.Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
 
         this.QRCodePictureBox.Size = new Size(QRCodePictureBoxHiddenSizeValue, QRCodePictureBoxHiddenSizeValue);

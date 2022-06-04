@@ -12,6 +12,8 @@ public interface IPopupBuilder
 
     IPopupBuilder WillCloseIn(int value);
 
+    IPopupBuilder WithIcon(Icon icon);
+
     IPopupBuilder WithOnShowAction(Action callback);
 
     IPopupBuilder WithOnCloseAction(Action callback);

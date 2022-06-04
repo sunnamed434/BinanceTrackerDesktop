@@ -30,7 +30,7 @@ public sealed partial class TrackerTrayForm : Form,
 
         InitializeComponent();
 
-        Icon applicationIcon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+        Icon applicationIcon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
 
         this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
         this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;

@@ -25,7 +25,7 @@ public sealed class Popup : IPopup
     {
         Title = string.Empty,
         Message = string.Empty,
-        Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon(),
+        Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon(),
         OnShow = null,
         OnClose = null,
         OnClick = null,

@@ -24,7 +24,7 @@ public sealed class UserData
     public Theme Theme { get; set; }
 
     [ProtoMember(6)]
-    public Language Language { get; set; }
+    public Languages Language { get; set; }
 
     [ProtoMember(7)]
     public decimal? BestBalance { get; set; }

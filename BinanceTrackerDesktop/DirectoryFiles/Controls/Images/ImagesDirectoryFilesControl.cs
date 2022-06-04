@@ -23,8 +23,6 @@ public sealed class ImagesDirectoryFilesControl : DirectoryFilesControlBase<Dire
 
     public ImagesDirectoryFilesControl()
     {
-        Directory.CreateDirectory(FolderPath);
-
         List<DirectoryImageItem> items = new List<DirectoryImageItem>();
         foreach (string filePath in GetAllFilePathFromDirectory())
         {
@@ -49,10 +47,14 @@ public sealed class ImagesDirectoryFilesControl : DirectoryFilesControlBase<Dire
         public DirectoryImageItem(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentNullException(nameof(filePath));
+            {
+                throw new ArgumentException(nameof(filePath));
+            }
 
             if (File.Exists(filePath) == false)
+            {
                 throw new FileNotFoundException(nameof(filePath));
+            }
 
             Result = Image.FromFile(filePath);
             FileName = Path.GetFileName(filePath);
@@ -79,6 +81,6 @@ public sealed class ImagesDirectoryFilesControl : DirectoryFilesControlBase<Dire
 
     public sealed class RegisteredImages
     {
-        public static readonly string ApplicationIcon = "app";
+        public const string ApplicationIcon = "app";
     }
 }

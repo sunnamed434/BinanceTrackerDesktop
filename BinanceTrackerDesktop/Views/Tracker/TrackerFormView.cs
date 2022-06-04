@@ -43,7 +43,7 @@ public sealed partial class TrackerFormView : DesignableForm, IAwaitableSingleto
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterScreen;
         base.FormBorderStyle = FormBorderStyle.FixedSingle;
-        base.Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
+        base.Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
         this.RefreshTotalBalanceButton.TabStop = false;
         this.TotalBalanceTooltipText.Text = LocalizationData.Read().TotalBalance;

@@ -34,7 +34,7 @@ public sealed partial class TrackerSettingsFormView : Form, ISettingsView
         base.FormBorderStyle = FormBorderStyle.FixedSingle;
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterParent;
-        base.Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon();
+        base.Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
         this.userWallet = userWallet ?? throw new ArgumentNullException(nameof(userWallet));
 
