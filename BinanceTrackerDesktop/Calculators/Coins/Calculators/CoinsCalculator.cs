@@ -1,6 +1,6 @@
 ﻿namespace BinanceTrackerDesktop.Calculators.Coins.Calculators;
 
-public class CoinsCalculator : ICoinsCalculator
+public sealed class CoinsCalculator : ICoinsCalculator
 {
     public decimal CalculatePrice(ICoin coin)
     {

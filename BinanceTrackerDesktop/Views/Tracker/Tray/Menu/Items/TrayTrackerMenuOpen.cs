@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+﻿using BinanceTrackerDesktop.Localizations.Data;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 using BinanceTrackerDesktop.Window.Helper;
 
 namespace BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
@@ -16,12 +17,13 @@ public sealed class TrayTrackerMenuOpen : TrackerMenuBase
 
 
 
-    public override string Label => "Open Binance Tracker";
-
-
-
     public override void OnClick()
     {
         processWindowHelper.SetWindowToForeground();
+    }
+
+    protected override ToolStripMenuItem InitializeToolStripMenuItem()
+    {
+        return new ToolStripMenuItem(LocalizationData.Read().OpenBinanceTracker);
     }
 }

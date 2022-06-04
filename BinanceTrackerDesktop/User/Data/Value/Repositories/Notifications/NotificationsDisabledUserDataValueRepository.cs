@@ -2,20 +2,15 @@
 
 namespace BinanceTrackerDesktop.User.Data.Value.Repositories.Notifications;
 
-public sealed class NotificationsDisabledUserDataValueRepository : IUserDataValueRepository<bool>
+public sealed class NotificationsDisabledUserDataValueRepository : UserDataValueRepository<bool>
 {
-    public NotificationsDisabledUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem)
+    public NotificationsDisabledUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem) : base(userDataSaveSystem)
     {
-        UserDataSaveSystem = userDataSaveSystem ?? throw new ArgumentNullException(nameof(userDataSaveSystem));
     }
 
 
 
-    public IUserDataSaveSystem UserDataSaveSystem { get; }
-
-
-
-    public bool GetValue()
+    public override bool GetValue()
     {
         return UserDataSaveSystem.Read().IsNotificationsDisabled;
     }

@@ -2,7 +2,7 @@
 
 namespace BinanceTrackerDesktop.Localizations.Translation;
 
-public interface ITranslation
+public interface ITranslations
 {
     /// <summary>
     /// Gets the localization.

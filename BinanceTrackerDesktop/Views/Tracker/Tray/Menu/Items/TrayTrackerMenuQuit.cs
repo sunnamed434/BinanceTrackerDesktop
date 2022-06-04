@@ -1,5 +1,6 @@
 ﻿using BinanceTrackerDesktop.Entry;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.Localizations.Data;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 
 namespace BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
 
@@ -16,16 +17,16 @@ public sealed class TrayTrackerMenuQuit : TrackerMenuBase
 
 
 
-    public override string Label => "Quit Binance Tracker";
-
-    
-
-        
     public async override void OnClick()
     {
         closeTray();
 
         await BinanceTrackerEntryPoint.AwaitablesProvider.Observer.CallListenersAsync();
+    }
+
+    protected override ToolStripMenuItem InitializeToolStripMenuItem()
+    {
+        return new ToolStripMenuItem(LocalizationData.Read().QuitBinanceTracker);
     }
 
 

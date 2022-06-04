@@ -2,8 +2,7 @@
 using BinanceTrackerDesktop.Themes.Models;
 using BinanceTrackerDesktop.Themes.Provider;
 using BinanceTrackerDesktop.Themes.Recognizers;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 using static System.Windows.Forms.Control;
 
 namespace BinanceTrackerDesktop.Themes.Forms;

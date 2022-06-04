@@ -1,5 +1,4 @@
 ﻿using BinanceTrackerDesktop.Notifications.Popup.Extension;
-using BinanceTrackerDesktop.User.Data.Save.Binary;
 using BinanceTrackerDesktop.User.Data.Value;
 using System.Text;
 

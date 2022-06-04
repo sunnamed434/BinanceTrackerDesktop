@@ -1,28 +1,16 @@
 ﻿using BinanceTrackerDesktop.Expandables;
 using BinanceTrackerDesktop.Themes.Forms;
 using BinanceTrackerDesktop.Themes.Recognizers.Provider;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.API;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Coins;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Settings;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Items;
 
 namespace BinanceTrackerDesktop.Views.Tracker.Menu;
 
 public sealed class TrackerMenuStripControlUI : TrackerMenuStripExpandable, IInitializableExpandable<TrackerMenuBase, byte>
 {
-    private readonly MenuStrip menuStrip;
-
-
-
     public TrackerMenuStripControlUI(MenuStrip menuStrip) : base(menuStrip)
     {
-        if (menuStrip == null)
-        {
-            throw new ArgumentNullException(nameof(menuStrip));
-        }
-
-        this.menuStrip = menuStrip;
-        this.menuStrip.RenderMode = ToolStripRenderMode.Professional;
+        MenuStrip.RenderMode = ToolStripRenderMode.Professional;
 
         AddComponents(this);
         FormsTheme.Apply(menuStrip, AllComponents, new SystemThemeRecognizerProvider().Recognize());

@@ -27,6 +27,11 @@ public sealed class AwaitablesObserver : IAwaitablesObserver
 
     public void RegisterListeners(Type[] types)
     {
+        if (types == null)
+        {
+            throw new ArgumentNullException(nameof(types));
+        }
+
         if (types.Any() == false)
         {
             throw new InvalidOperationException();
@@ -40,6 +45,11 @@ public sealed class AwaitablesObserver : IAwaitablesObserver
 
     public void RegisterListeners(IEnumerable<Type> types)
     {
+        if (types == null)
+        {
+            throw new ArgumentNullException(nameof(types));
+        }
+
         if (types.Any() == false)
         {
             throw new InvalidOperationException();

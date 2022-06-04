@@ -1,23 +1,16 @@
 ﻿using Binance.Net.Objects.Models.Spot;
 using BinanceTrackerDesktop.ApplicationInfo.Environment;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Client;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 using CryptoExchange.Net.Objects;
 using System.Text;
 
-namespace BinanceTrackerDesktop.Views.Tracker.Menu.Items.API;
+namespace BinanceTrackerDesktop.Views.Tracker.Menu.Items;
 
 public sealed class TrackerMenuAPI : TrackerMenuBase
 {
-    public override string Label => "API";
-
-    public override Image Image => null;
-
-    public override ToolStripItem[] DropDownItems => null;
-
-
-
     public async override void OnClick()
     {
         WebCallResult<BinanceAPIKeyPermissions> result = await UserClient.BinanceClient.SpotApi.Account.GetAPIKeyPermissionsAsync();
@@ -37,5 +30,12 @@ public sealed class TrackerMenuAPI : TrackerMenuBase
                              .Append($"{nameof(permissions.PermitsUniversalTransfer)} = {permissions.PermitsUniversalTransfer}, ")
                              .Append($"{nameof(permissions.TradingAuthorityExpirationTime)} = {permissions.TradingAuthorityExpirationTime}"))
             .BuildToMessageBox();
+    }
+
+
+
+    protected override ToolStripMenuItem InitializeToolStripMenuItem()
+    {
+        return new ToolStripMenuItem(LocalizationData.Read().API);
     }
 }

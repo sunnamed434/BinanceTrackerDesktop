@@ -5,6 +5,7 @@ using BinanceTrackerDesktop.Core.User.Data.Control;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Entry;
 using BinanceTrackerDesktop.Forms.Tray;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.MVC.View;
 using BinanceTrackerDesktop.Themes.Forms.Design;
 using BinanceTrackerDesktop.User.Client;
@@ -45,6 +46,7 @@ public sealed partial class TrackerFormView : DesignableForm, IAwaitableSingleto
         base.Icon = ApplicationDirectories.Resources.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
         this.RefreshTotalBalanceButton.TabStop = false;
+        this.TotalBalanceTooltipText.Text = LocalizationData.Read().TotalBalance;
 
         if (UserDataValues.HasAuthenticationData.GetValue())
         {

@@ -1,4 +1,4 @@
-﻿namespace BinanceTrackerDesktop.Views.Tracker.Menu.Items;
+﻿namespace BinanceTrackerDesktop.Views.Tracker.Menu;
 
 public interface ITrackerMenu
 {

@@ -1,8 +1,8 @@
-﻿namespace BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+﻿namespace BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 
 public abstract class TrackerMenuBase : ITrackerMenu
 {
-    public readonly ToolStripMenuItem ToolStripMenuItem;
+    public ToolStripMenuItem ToolStripMenuItem { get; protected set; }
 
 
 
@@ -14,7 +14,7 @@ public abstract class TrackerMenuBase : ITrackerMenu
 
 
 
-    public virtual string Label { get; }
+    public virtual string Label { get; } = string.Empty;
 
     public virtual Image Image { get; } = null;
 

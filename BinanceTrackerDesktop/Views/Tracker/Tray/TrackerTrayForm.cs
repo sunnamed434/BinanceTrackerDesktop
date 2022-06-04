@@ -4,7 +4,7 @@ using BinanceTrackerDesktop.Awaitable.Observer;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Expandables;
 using BinanceTrackerDesktop.Notifications;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 using BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
 using static BinanceTrackerDesktop.DirectoryFiles.Controls.Images.ImagesDirectoryFilesControl;
 

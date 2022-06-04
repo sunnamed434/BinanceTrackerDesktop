@@ -1,12 +1,11 @@
 ﻿using BinanceTrackerDesktop.Localizations.Exceptions;
 using BinanceTrackerDesktop.Localizations.Localization;
-using BinanceTrackerDesktop.Localizations.Models;
 
 namespace BinanceTrackerDesktop.Localizations.Translation;
 
-public sealed class Translation : ITranslation
+public sealed class Translations : ITranslations
 {
-    public Translation(ILocalization localization)
+    public Translations(ILocalization localization)
     {
         Localization = localization ?? throw new ArgumentNullException(nameof(localization));
     }
@@ -24,12 +23,12 @@ public sealed class Translation : ITranslation
             throw new ArgumentException(nameof(key));
         }
 
-        TranslationsData translationsData = Localization.Load();
-        if (translationsData.Values.TryGetValue(key, out string value))
+        IDictionary<string, string> localization = Localization.Load();
+        if (localization.TryGetValue(key, out string value))
         {
             return value;
         }
 
-        throw new TranslationKeyWasNotFoundException(nameof(key));
+        throw new TranslationKeyWasNotFoundException(key);
     }
 }

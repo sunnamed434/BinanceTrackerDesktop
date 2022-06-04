@@ -1,8 +1,6 @@
-﻿using BinanceTrackerDesktop.Localizations.Models;
-
-namespace BinanceTrackerDesktop.Localizations.Localization;
+﻿namespace BinanceTrackerDesktop.Localizations.Localization;
 
 public interface ILocalization
 {
-    TranslationsData Load();
+    IDictionary<string, string> Load();
 }

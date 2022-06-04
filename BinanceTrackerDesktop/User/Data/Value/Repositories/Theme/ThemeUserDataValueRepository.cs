@@ -2,20 +2,15 @@
 
 namespace BinanceTrackerDesktop.User.Data.Value.Repositories.Theme;
 
-public sealed class ThemeUserDataValueRepository : IUserDataValueRepository<Themes.Theme>
+public sealed class ThemeUserDataValueRepository : UserDataValueRepository<Themes.Theme>
 {
-    public IUserDataSaveSystem UserDataSaveSystem { get; }
-
-
-
-    public ThemeUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem)
+    public ThemeUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem) : base(userDataSaveSystem)
     {
-        UserDataSaveSystem = userDataSaveSystem ?? throw new ArgumentNullException(nameof(userDataSaveSystem));
     }
 
 
 
-    public Themes.Theme GetValue()
+    public override Themes.Theme GetValue()
     {
         return UserDataSaveSystem.Read().Theme;
     }

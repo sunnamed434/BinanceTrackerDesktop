@@ -1,4 +1,4 @@
-﻿using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+﻿using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 
 namespace BinanceTrackerDesktop.Expandables;
 

@@ -2,19 +2,15 @@
 
 namespace BinanceTrackerDesktop.User.Data.Value.Repositories.Language;
 
-public sealed class BalancesHidenUserDataValueRepository : IUserDataValueRepository<bool>
+public sealed class BalancesHidenUserDataValueRepository : UserDataValueRepository<bool>
 {
-    public BalancesHidenUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem)
+    public BalancesHidenUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem) : base(userDataSaveSystem)
     {
-        UserDataSaveSystem = userDataSaveSystem ?? throw new ArgumentNullException(nameof(userDataSaveSystem));
     }
 
 
-    public IUserDataSaveSystem UserDataSaveSystem { get; }
 
-
-
-    public bool GetValue()
+    public override bool GetValue()
     {
         bool? isBalancesHiden = UserDataSaveSystem.Read().IsBalancesHiden;
 

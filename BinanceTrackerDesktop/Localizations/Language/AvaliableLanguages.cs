@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using static BinanceTrackerDesktop.DirectoryFiles.Controls.Localizations.LocalizationsDirectoryFilesControl;
 
 namespace BinanceTrackerDesktop.Localizations.Language;
 
@@ -12,8 +13,8 @@ public sealed class AvaliableLanguages
 
     private static readonly IReadOnlyCollection<ILanguage> all = new ReadOnlyCollection<ILanguage>(new List<ILanguage>
     {
-        new Language(Languages.English, "en"),
-        new Language(Languages.Russian, "ru")
+        new Language(Languages.English, RegisteredLocalizations.English),
+        new Language(Languages.Russian, RegisteredLocalizations.Russian)
     });
 
 

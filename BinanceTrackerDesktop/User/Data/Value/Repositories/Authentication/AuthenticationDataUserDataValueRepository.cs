@@ -2,20 +2,15 @@
 
 namespace BinanceTrackerDesktop.User.Data.Value.Repositories.Authentication;
 
-public sealed class HasAuthenticationDataUserDataValueRepository : IUserDataValueRepository<bool>
+public sealed class HasAuthenticationDataUserDataValueRepository : UserDataValueRepository<bool>
 {
-    public HasAuthenticationDataUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem)
+    public HasAuthenticationDataUserDataValueRepository(IUserDataSaveSystem userDataSaveSystem) : base(userDataSaveSystem)
     {
-        UserDataSaveSystem = userDataSaveSystem ?? throw new ArgumentNullException(nameof(userDataSaveSystem));
     }
 
 
 
-    public IUserDataSaveSystem UserDataSaveSystem { get; }
-
-
-
-    public bool GetValue()
+    public override bool GetValue()
     {
         return UserDataSaveSystem.Read().HasAuthenticationData;
     }

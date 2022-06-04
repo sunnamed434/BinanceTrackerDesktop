@@ -1,12 +1,13 @@
 ﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Forms.Tray;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Data;
 using BinanceTrackerDesktop.User.Data.Builder;
 using BinanceTrackerDesktop.User.Data.Extension;
 using BinanceTrackerDesktop.User.Data.Save;
 using BinanceTrackerDesktop.User.Data.Save.Binary;
-using BinanceTrackerDesktop.Views.Tracker.Menu.Items.Base;
+using BinanceTrackerDesktop.User.Data.Value;
+using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 
 namespace BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
 
@@ -21,11 +22,12 @@ public sealed class TrayTrackerMenuNotifications : TrackerMenuBase
             .Build()
             .WriteUserDataThenRead(saveSystem);
 
+        LocalizationData localizationData = LocalizationData.Read();
         new PopupBuilder()
             .WithTitle(ApplicationEnviroment.GlobalName)
             .WithMessage(userData.IsNotificationsEnabled 
-                ? TrayItemsTextContainer.NotificationsEnabled 
-                : TrayItemsTextContainer.NotificationsDisabled)
+                ? localizationData.NotificationsEnabled 
+                : localizationData.NotificationsDisabled)
             .WillCloseIn(90)
             .ShowMessageBoxIfShouldOnBuild()
             .Build();
@@ -35,16 +37,16 @@ public sealed class TrayTrackerMenuNotifications : TrackerMenuBase
 
     protected override ToolStripMenuItem InitializeToolStripMenuItem()
     {
-        bool isNotificationsEnabled = new BinaryUserDataSaveSystem().Read().IsNotificationsEnabled;
-        return new ToolStripMenuItem(getNotificationsText(isNotificationsEnabled));
+        return new ToolStripMenuItem(getNotificationsText(UserDataValues.NotificationsEnabled.GetValue()));
     }
 
 
 
     private string getNotificationsText(bool isNotificationsEnabled)
     {
+        LocalizationData localizationData = LocalizationData.Read();
         return isNotificationsEnabled 
-            ? TrayItemsTextContainer.DisableNotifications 
-            : TrayItemsTextContainer.EnableNotifications;
+            ? localizationData.DisableNotifications 
+            : localizationData.EnableNotifications;
     }
 }

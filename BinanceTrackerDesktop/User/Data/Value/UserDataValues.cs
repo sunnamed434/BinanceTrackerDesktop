@@ -17,4 +17,6 @@ public sealed class UserDataValues
     public static readonly BalancesHidenUserDataValueRepository BalancesHiden = new(new BinaryUserDataSaveSystem());
 
     public static readonly NotificationsDisabledUserDataValueRepository NotificationsDisabled = new(new BinaryUserDataSaveSystem());
+
+    public static readonly NotificationsEnabledUserDataValueRepository NotificationsEnabled = new(new BinaryUserDataSaveSystem());
 }
