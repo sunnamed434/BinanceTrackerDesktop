@@ -1,4 +1,5 @@
-﻿using BinanceTrackerDesktop.Themes;
+﻿using BinanceTrackerDesktop.Localizations.Language;
+using BinanceTrackerDesktop.Themes;
 using BinanceTrackerDesktop.User.Authentication.Data;
 
 namespace BinanceTrackerDesktop.User.Data.Builder;
@@ -68,6 +69,13 @@ public interface IUserDataBuilder
     /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
     /// <exception cref="ArgumentNullException"></exception>
     IUserDataBuilder AddUserTheme(Theme theme);
+
+    /// <summary>
+    /// Adding <see cref="UserData.Language"/> to the given <paramref name="language"/>
+    /// </summary>
+    /// <param name="language">Adding language.</param>
+    /// <returns>Instance to the <see cref="IUserDataBuilder"/></returns>
+    IUserDataBuilder AddUserLanguage(Languages language);
 
     /// <summary>
     /// Set <see cref="UserData.IsBalancesHiden"/> <see langword="true"/> to the <see cref="UserData"/>

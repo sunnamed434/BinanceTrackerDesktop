@@ -2,6 +2,7 @@
 using BinanceTrackerDesktop.Controllers;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Forms.Authentication;
+using BinanceTrackerDesktop.Localizations.Language;
 using BinanceTrackerDesktop.Localizations.Language.Names;
 using BinanceTrackerDesktop.Models.User.Authorization;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
@@ -11,6 +12,7 @@ using BinanceTrackerDesktop.User.Status.Detector;
 using BinanceTrackerDesktop.Views.Authorization;
 using BinanceTrackerDesktop.Views.Authorization.Exceptions;
 using BinanceTrackerDesktop.Views.Authorization.Exceptions.ErrorCode;
+using BinanceTrackerDesktop.Views.Authorization.Language;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Reflection;
@@ -40,10 +42,15 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         this.UserCurrenyTextBox.TextAlign = HorizontalAlignment.Center;
         this.LanguageComboBox.DrawMode = DrawMode.OwnerDrawVariable;
         this.LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        List<Language> languages = new List<Language>();
         foreach (FieldInfo fieldInfo in typeof(LanguageNames).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
         {
-            this.LanguageComboBox.Items.Add(fieldInfo.GetValue(null));
+            string languageNameText = (string)fieldInfo.GetValue(null);
+            languages.Add(new Language(
+                languageNameText,
+                ApplicationDirectories.Resources.ImagesFolder.Flags.GetDirectoryFile(languageNameText).GetImage()));
         }
+        this.LanguageComboBox.DataSource = languages;
         this.LanguageComboBox.SelectedItem = LanguageNames.English;
 
         this.AuthorizeButton.Click += onAuthorizeButtonClicked;
@@ -60,14 +67,22 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
 
 
 
+    private void clearTextBoxesAndIgnoreCurrency()
+    {
+        UserKeyTextBox.Text = string.Empty;
+        UserSecretTextBox.Text = string.Empty;
+    }
+
     private void onAuthorizeButtonClicked(object sender, EventArgs e)
     {
         try
         {
-            controller.Authorize(new UserAuthorizationModel(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text));
+            controller.Authorize(new UserAuthorizationModel(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text, Languages.English));
         }
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Key)
         {
+            clearTextBoxesAndIgnoreCurrency();
+
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authorizate, please check your Key!")
@@ -76,6 +91,8 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         }
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Secret)
         {
+            clearTextBoxesAndIgnoreCurrency();
+
             new PopupBuilder()
                 .WithTitle(ApplicationEnviroment.GlobalName)
                 .WithMessage("Cannot to authorizate, please check your Secret!")
@@ -94,7 +111,6 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         base.Hide();
 
         TrackerFormView trackerFormView = new TrackerFormView();
-
         new TrackerController(trackerFormView, new UserStatusDetector(UserClient.SaveDataSystem, UserClient.Wallet).GetStatus());
         trackerFormView.ShowDialog();
 
@@ -127,21 +143,22 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
             }
             else
             {
-                using (Brush backgbrush = new SolidBrush(Color.WhiteSmoke))
+                using (Brush brush = new SolidBrush(Color.WhiteSmoke))
                 {
-                    e.Graphics.FillRectangle(backgbrush, e.Bounds);
+                    e.Graphics.FillRectangle(brush, e.Bounds);
                     foregroundColor = Color.Black;
                 }
             }
 
-            using (Brush textbrush = new SolidBrush(foregroundColor))
+            Language language = (Language)this.LanguageComboBox.Items[e.Index];
+            using (Brush brush = new SolidBrush(foregroundColor))
             {
-                e.Graphics.DrawString(this.LanguageComboBox.Items[e.Index].ToString(),
-                                      e.Font, textbrush, e.Bounds.Height + 10, e.Bounds.Y,
+                e.Graphics.DrawString(language.DisplayName,
+                                      e.Font, brush, e.Bounds.Height + 10, e.Bounds.Y,
                                       StringFormat.GenericTypographic);
             }
 
-            e.Graphics.DrawImage(ApplicationDirectories.Resources.ImagesFolder.Flags.GetDirectoryFile(this.LanguageComboBox.Items[e.Index].ToString()).GetImage(),
+            e.Graphics.DrawImage(language.Image,
                                  new Rectangle(e.Bounds.Location,
                                  new Size(e.Bounds.Height - 2, e.Bounds.Height - 2)));
         }

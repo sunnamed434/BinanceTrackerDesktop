@@ -50,6 +50,7 @@ public sealed class AuthorizationController : Controller<AuthorizationController
                     .AddKey(authorizationModel.Key)
                     .AddSecret(authorizationModel.Secret)
                     .AddCurrency(authorizationModel.Currency)
+                    .AddUserLanguage(authorizationModel.Language)
                     .Build()
                     .WriteUserData(new BinaryUserDataSaveSystem());
             }
@@ -60,6 +61,7 @@ public sealed class AuthorizationController : Controller<AuthorizationController
                 .AddKey(authorizationModel.Key)
                 .AddSecret(authorizationModel.Secret)
                 .AddCurrency(authorizationModel.Currency)
+                .AddUserLanguage(authorizationModel.Language)
                 .SetNotificationsEnabled()
                 .SetAsUserStartedApplicationFirstTime()
                 .SetUserThemeAsSystem()

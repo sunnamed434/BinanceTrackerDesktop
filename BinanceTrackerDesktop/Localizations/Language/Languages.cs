@@ -3,5 +3,6 @@
 public enum Languages
 {
     English,
-    Russian
+    Russian,
+    Ukranian
 }
