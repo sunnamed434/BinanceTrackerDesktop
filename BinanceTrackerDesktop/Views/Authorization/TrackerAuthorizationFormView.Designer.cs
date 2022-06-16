@@ -30,7 +30,7 @@ partial class TrackerAuthorizationFormView
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.AddAuthenticatorButton = new System.Windows.Forms.Button();
             this.HeaderLabel = new System.Windows.Forms.Label();
-            this.LanguageComboBox = new System.Windows.Forms.ComboBox();
+            this.UserLanguageComboBox = new System.Windows.Forms.ComboBox();
             this.LanguageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -123,13 +123,13 @@ partial class TrackerAuthorizationFormView
             this.HeaderLabel.TabIndex = 8;
             this.HeaderLabel.Text = "Authorization";
             // 
-            // LanguageComboBox
+            // UserLanguageComboBox
             // 
-            this.LanguageComboBox.FormattingEnabled = true;
-            this.LanguageComboBox.Location = new System.Drawing.Point(19, 210);
-            this.LanguageComboBox.Name = "LanguageComboBox";
-            this.LanguageComboBox.Size = new System.Drawing.Size(157, 23);
-            this.LanguageComboBox.TabIndex = 9;
+            this.UserLanguageComboBox.FormattingEnabled = true;
+            this.UserLanguageComboBox.Location = new System.Drawing.Point(19, 210);
+            this.UserLanguageComboBox.Name = "UserLanguageComboBox";
+            this.UserLanguageComboBox.Size = new System.Drawing.Size(157, 23);
+            this.UserLanguageComboBox.TabIndex = 9;
             // 
             // LanguageLabel
             // 
@@ -148,7 +148,7 @@ partial class TrackerAuthorizationFormView
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 341);
             this.Controls.Add(this.LanguageLabel);
-            this.Controls.Add(this.LanguageComboBox);
+            this.Controls.Add(this.UserLanguageComboBox);
             this.Controls.Add(this.HeaderLabel);
             this.Controls.Add(this.AddAuthenticatorButton);
             this.Controls.Add(this.CurrencyLabel);
@@ -177,6 +177,6 @@ partial class TrackerAuthorizationFormView
     private System.Windows.Forms.Label CurrencyLabel;
     private Button AddAuthenticatorButton;
     private Label HeaderLabel;
-    private ComboBox LanguageComboBox;
+    private ComboBox UserLanguageComboBox;
     private Label LanguageLabel;
 }

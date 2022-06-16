@@ -1,7 +1,7 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Controllers;
+﻿using BinanceTrackerDesktop.Controllers;
 using BinanceTrackerDesktop.DirectoryFiles.Controls.Images;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.Themes.Forms;
 using BinanceTrackerDesktop.Themes.Recognizers.Windows;
@@ -12,7 +12,6 @@ using BinanceTrackerDesktop.User.Wallet.Results;
 using BinanceTrackerDesktop.Validators.String;
 using BinanceTrackerDesktop.Validators.String.Extension;
 using BinanceTrackerDesktop.Views.Settings;
-using System.Text;
 
 namespace BinanceTrackerDesktop.Forms.Tracker.Settings;
 
@@ -30,13 +29,16 @@ public sealed partial class TrackerSettingsFormView : Form, ISettingsView
 
         FormsTheme.Apply(this, Controls, new WindowsSystemThemeRecognizer());
 
-        base.Text = "Tracker Settings";
+        LocalizationData localizationData = LocalizationData.Read();
+        base.Text = localizationData.TrackerSettingsViewName;
         base.FormBorderStyle = FormBorderStyle.FixedSingle;
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterParent;
         base.Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(ImagesDirectoryFilesControl.RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
         this.userWallet = userWallet ?? throw new ArgumentNullException(nameof(userWallet));
+        this.NewCurrenyLabel.Text = localizationData.NewCurrenyLabel;
+        this.ChangeCurrencyButton.Text = localizationData.ChangeCurrencyButtonText;
 
         this.ChangeCurrencyButton.Click += onChangeCurrencyButtonClicked;
     }
@@ -55,13 +57,12 @@ public sealed partial class TrackerSettingsFormView : Form, ISettingsView
         IStringValidator userCurrencyValidator = this.NewCurrenyTextBox.Rules()
             .ContentNotNullOrWhiteSpace();
 
+        LocalizationData localizationData = LocalizationData.Read();
         if (userCurrencyValidator.IsFailed)
         {
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
-                .WithMessage(new StringBuilder()
-                             .Append("[=(] Failed to change currency to ")
-                             .Append(NewCurrenyTextBox.Text))
+                .WithTitle(localizationData.ApplicationName)
+                .WithMessage(string.Format(localizationData.TrackerSettingsView_FailedChangeCurrency_Message, NewCurrenyTextBox.Text))
                 .WillCloseIn(90)
                 .ShowMessageBoxIfShouldOnBuild()
                 .Build();
@@ -78,10 +79,8 @@ public sealed partial class TrackerSettingsFormView : Form, ISettingsView
         userDataSaveSystem.Write(data);
 
         new PopupBuilder()
-            .WithTitle(ApplicationEnviroment.GlobalName)
-            .WithMessage(new StringBuilder()
-                             .Append("[=)] Successfully changed currency to ")
-                             .Append(data.Currency))
+            .WithTitle(localizationData.ApplicationName)
+            .WithMessage(string.Format(localizationData.TrackerSettingsView_SuccessChangeCurrency_Message, data.Currency))
             .WillCloseIn(90)
             .ShowMessageBoxIfShouldOnBuild()
             .Build();

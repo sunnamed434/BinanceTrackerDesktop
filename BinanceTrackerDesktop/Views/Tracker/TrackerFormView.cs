@@ -40,13 +40,16 @@ public sealed partial class TrackerFormView : DesignableForm, IAwaitableSingleto
         InitializeComponent();
         base.ApplyTheme(this, Controls);
 
+        LocalizationData localizationData = LocalizationData.Read();
+        base.Text = localizationData.TrackerViewName;
         base.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         base.StartPosition = FormStartPosition.CenterScreen;
         base.FormBorderStyle = FormBorderStyle.FixedSingle;
         base.Icon = ApplicationDirectories.Resources.ImagesFolder.Images.GetDirectoryFile(RegisteredImages.ApplicationIcon).GetIcon();
         base.MaximizeBox = false;
         this.RefreshTotalBalanceButton.TabStop = false;
-        this.TotalBalanceTooltipText.Text = LocalizationData.Read().TotalBalance;
+        this.TotalBalanceTooltipText.Text = localizationData.TotalBalance;
+        this.RefreshTotalBalanceButton.Text = localizationData.RefreshTotalBalanceButtonText;
 
         if (UserDataValues.HasAuthenticationData.GetValue())
         {

@@ -5,6 +5,8 @@ namespace BinanceTrackerDesktop.Localizations.Data;
 
 public sealed class LocalizationData
 {
+    public string ApplicationName { get; init; }
+
     public string Settings { get; init; }
 
     public string Coins { get; init; }
@@ -24,6 +26,20 @@ public sealed class LocalizationData
     public string NotificationsDisabled { get; init; }
 
     public string TotalBalance { get; init; }
+
+    public string RefreshTotalBalanceButtonText { get; init; }
+
+    public string NewCurrenyLabel { get; init; }
+
+    public string ChangeCurrencyButtonText { get; init; }
+
+    public string TrackerViewName { get; init; }
+
+    public string TrackerSettingsViewName { get; init; }
+
+    public string TrackerSettingsView_FailedChangeCurrency_Message { get; init; }
+
+    public string TrackerSettingsView_SuccessChangeCurrency_Message { get; init; }
 
 
 

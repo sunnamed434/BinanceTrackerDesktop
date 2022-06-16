@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Objects.Models.Spot;
-using BinanceTrackerDesktop.ApplicationInfo.Environment;
 using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Client;
@@ -17,7 +16,7 @@ public sealed class TrackerMenuAPI : TrackerMenuBase
         BinanceAPIKeyPermissions permissions = result.Data;
 
         new PopupBuilder()
-            .WithTitle(ApplicationEnviroment.GlobalName)
+            .WithTitle(LocalizationData.Read().ApplicationName)
             .WithMessage(new StringBuilder()
                              .Append($"{nameof(permissions.IpRestrict)} = {permissions.IpRestrict}, ")
                              .Append($"{nameof(permissions.EnableFutures)} = {permissions.EnableFutures}, ")

@@ -1,4 +1,5 @@
 ﻿using BinanceTrackerDesktop.Localizations.Exceptions;
+using BinanceTrackerDesktop.Localizations.Language;
 using BinanceTrackerDesktop.Localizations.Localization;
 
 namespace BinanceTrackerDesktop.Localizations.Translation;
@@ -25,6 +26,11 @@ public sealed class Translations : ITranslations
 
         IDictionary<string, string> localization = Localization.Load();
         if (localization.TryGetValue(key, out string value))
+        {
+            return value;
+        }
+
+        if (new CustomLocalization(Languages.English).Load().TryGetValue(key, out value))
         {
             return value;
         }

@@ -11,6 +11,7 @@ public sealed class Localization : ILocalization
     {
         string jsonValue = ApplicationDirectories.Resources.Localizations.GetDirectoryFile(
             LocalizationCodes.GetLocalizationCodeFromLanguage(UserDataValues.Language.GetValue())).GetStringResult();
+
         return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonValue);
     }
 }

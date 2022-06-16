@@ -1,7 +1,7 @@
 ﻿using BinanceTrackerDesktop.Localizations.Language;
 using BinanceTrackerDesktop.Localizations.Language.Names;
 
-namespace BinanceTrackerDesktop.Views.Authorization.Language
+namespace BinanceTrackerDesktop.Views.Authorization.Models
 {
     public sealed class Language
     {

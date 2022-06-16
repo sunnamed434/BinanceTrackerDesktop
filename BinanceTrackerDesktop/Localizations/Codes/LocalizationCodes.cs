@@ -10,8 +10,9 @@ public sealed class LocalizationCodes
     {
         return name switch
         {
-            Languages.English => RegisteredLocalizations.English,
-            Languages.Russian => RegisteredLocalizations.Russian,
+            Languages.English  => RegisteredLocalizations.English,
+            Languages.Russian  => RegisteredLocalizations.Russian,
+            Languages.Ukranian => RegisteredLocalizations.Ukrainian,
             _ => throw new LanguageNotSupportedException(),
         };
     }

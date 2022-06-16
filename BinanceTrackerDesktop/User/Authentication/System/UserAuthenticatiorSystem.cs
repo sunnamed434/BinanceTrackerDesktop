@@ -1,6 +1,6 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions;
+﻿using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions;
 using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions.ErrorCode;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.User.Authentication.System.Result;
 using BinanceTrackerDesktop.Validators.String.Extension;
 using Google.Authenticator;
@@ -35,7 +35,7 @@ public class UserAuthenticatorSystem : IUserAuthenticatorSystem
             .MaxCharacters(MaxSecretCharacters)
             .ThrowIfFailed(new TwoFactorAuthenticationException(nameof(secret), AuthenticationErrorCode.Secret));
 
-        SetupCode setupCode = new TwoFactorAuthenticator().GenerateSetupCode(ApplicationEnviroment.GlobalName, accountTitle.Trim(), secret, false);
+        SetupCode setupCode = new TwoFactorAuthenticator().GenerateSetupCode(LocalizationData.Read().ApplicationName, accountTitle.Trim(), secret, false);
         using (MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(setupCode.QrCodeSetupImageUrl.Replace(IgnoringStringData, string.Empty))))
         {
             return Image.FromStream(memoryStream);

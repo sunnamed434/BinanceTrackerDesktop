@@ -1,5 +1,4 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Localizations.Data;
+﻿using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Data;
 using BinanceTrackerDesktop.User.Data.Builder;
@@ -24,7 +23,7 @@ public sealed class TrayTrackerMenuNotifications : TrackerMenuBase
 
         LocalizationData localizationData = LocalizationData.Read();
         new PopupBuilder()
-            .WithTitle(ApplicationEnviroment.GlobalName)
+            .WithTitle(localizationData.ApplicationName)
             .WithMessage(userData.IsNotificationsEnabled 
                 ? localizationData.NotificationsEnabled 
                 : localizationData.NotificationsDisabled)

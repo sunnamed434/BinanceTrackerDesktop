@@ -1,8 +1,8 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions;
+﻿using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions;
 using BinanceTrackerDesktop.Authentication.TwoFactor.Exceptions.ErrorCode;
 using BinanceTrackerDesktop.Controllers;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Models.User.Authentication;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
 using BinanceTrackerDesktop.User.Authentication.Data;
@@ -47,6 +47,7 @@ public sealed partial class AuthenticationFormView : Form, IAuthenticationView
 
     private void onGenerateQRCodeButtonClicked(object sender, EventArgs e)
     {
+        LocalizationData localizationData = LocalizationData.Read();
         try
         {
 
@@ -60,20 +61,20 @@ public sealed partial class AuthenticationFormView : Form, IAuthenticationView
         catch (TwoFactorAuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCode.AccountTitle)
         {
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithTitle(localizationData.ApplicationName)
                 .WithMessage("Cannot to authenticate, check your Account Title please!")
                 .BuildToMessageBox();
         }
         catch (TwoFactorAuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCode.Secret)
         {
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithTitle(localizationData.ApplicationName)
                 .WithMessage("Cannot to authenticate, check your Secret Key please!")
                 .BuildToMessageBox();
         }
 
         new PopupBuilder()
-            .WithTitle(ApplicationEnviroment.GlobalName)
+            .WithTitle(localizationData.ApplicationName)
             .WithMessage("Successfully created QRCode and saved.")
             .BuildToMessageBox();
 

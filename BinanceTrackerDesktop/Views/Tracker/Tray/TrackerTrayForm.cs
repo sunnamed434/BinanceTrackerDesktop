@@ -1,8 +1,8 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Awaitable.Awaitables;
+﻿using BinanceTrackerDesktop.Awaitable.Awaitables;
 using BinanceTrackerDesktop.Awaitable.Observer;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Expandables;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Notifications;
 using BinanceTrackerDesktop.Views.Tracker.Menu.Base;
 using BinanceTrackerDesktop.Views.Tracker.Tray.Menu.Items;
@@ -34,7 +34,7 @@ public sealed partial class TrackerTrayForm : Form,
 
         this.NotifyIcon.ContextMenuStrip = ContextMenuStrip;
         this.NotifyIcon.ContextMenuStrip.RenderMode = ToolStripRenderMode.System;
-        this.NotifyIcon.Text = ApplicationEnviroment.GlobalName;
+        this.NotifyIcon.Text = LocalizationData.Read().ApplicationName;
         this.NotifyIcon.Icon = applicationIcon;
         base.Icon = applicationIcon;
 
@@ -79,21 +79,6 @@ public sealed partial class TrackerTrayForm : Form,
         yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.NotificationsUniqueIndex, new TrayTrackerMenuNotifications());
         yield return new KeyValuePair<byte, TrackerMenuBase>(TrayItemsIdContainer.QuitApplicationUniqueIndex, new TrayTrackerMenuQuit(this.NotifyIcon));
     }
-}
-
-public sealed class TrayItemsTextContainer
-{
-    public const string OpenApplication = "Open Binance Tracker";
-
-    public const string QuitApplication = "Quit Binance Tracker";
-
-    public const string NotificationsEnabled = "Notifications Enabled";
-
-    public const string NotificationsDisabled = "Notifications Disabled";
-
-    public const string EnableNotifications = "Enable Notifications";
-
-    public const string DisableNotifications = "Disable Notifications";
 }
 
 public sealed class TrayItemsIdContainer

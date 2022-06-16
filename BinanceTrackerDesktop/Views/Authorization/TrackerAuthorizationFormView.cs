@@ -1,8 +1,7 @@
-﻿using BinanceTrackerDesktop.ApplicationInfo.Environment;
-using BinanceTrackerDesktop.Controllers;
+﻿using BinanceTrackerDesktop.Controllers;
 using BinanceTrackerDesktop.DirectoryFiles.Directories;
 using BinanceTrackerDesktop.Forms.Authentication;
-using BinanceTrackerDesktop.Localizations.Language;
+using BinanceTrackerDesktop.Localizations.Data;
 using BinanceTrackerDesktop.Localizations.Language.Names;
 using BinanceTrackerDesktop.Models.User.Authorization;
 using BinanceTrackerDesktop.Notifications.Popup.Builder;
@@ -12,7 +11,7 @@ using BinanceTrackerDesktop.User.Status.Detector;
 using BinanceTrackerDesktop.Views.Authorization;
 using BinanceTrackerDesktop.Views.Authorization.Exceptions;
 using BinanceTrackerDesktop.Views.Authorization.Exceptions.ErrorCode;
-using BinanceTrackerDesktop.Views.Authorization.Language;
+using BinanceTrackerDesktop.Views.Authorization.Models;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Reflection;
@@ -40,8 +39,8 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         this.UserKeyTextBox.TextAlign = HorizontalAlignment.Center;
         this.UserSecretTextBox.TextAlign = HorizontalAlignment.Center;
         this.UserCurrenyTextBox.TextAlign = HorizontalAlignment.Center;
-        this.LanguageComboBox.DrawMode = DrawMode.OwnerDrawVariable;
-        this.LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        this.UserLanguageComboBox.DrawMode = DrawMode.OwnerDrawVariable;
+        this.UserLanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         List<Language> languages = new List<Language>();
         foreach (FieldInfo fieldInfo in typeof(LanguageNames).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
         {
@@ -50,12 +49,12 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
                 languageNameText,
                 ApplicationDirectories.Resources.ImagesFolder.Flags.GetDirectoryFile(languageNameText).GetImage()));
         }
-        this.LanguageComboBox.DataSource = languages;
-        this.LanguageComboBox.SelectedItem = LanguageNames.English;
+        this.UserLanguageComboBox.DataSource = languages;
+        this.UserLanguageComboBox.SelectedItem = LanguageNames.English;
 
         this.AuthorizeButton.Click += onAuthorizeButtonClicked;
         this.AddAuthenticatorButton.Click += onAddAuthenticatorButtonClicked;
-        this.LanguageComboBox.DrawItem += onLanguageComboBoxDrawItem;
+        this.UserLanguageComboBox.DrawItem += onLanguageComboBoxDrawItem;
     }
 
 
@@ -73,18 +72,24 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         UserSecretTextBox.Text = string.Empty;
     }
 
+    private Language getLanguageFromSelectedItemInLanguageComboBox()
+    {
+        return (Language)this.UserLanguageComboBox.SelectedItem;
+    }
+
     private void onAuthorizeButtonClicked(object sender, EventArgs e)
     {
+        LocalizationData localizationData = LocalizationData.Read();
         try
         {
-            controller.Authorize(new UserAuthorizationModel(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text, Languages.English));
+            controller.Authorize(new UserAuthorizationModel(this.UserKeyTextBox.Text, this.UserSecretTextBox.Text, this.UserCurrenyTextBox.Text, getLanguageFromSelectedItemInLanguageComboBox().Name));
         }
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Key)
         {
             clearTextBoxesAndIgnoreCurrency();
 
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithTitle(localizationData.ApplicationName)
                 .WithMessage("Cannot to authorizate, please check your Key!")
                 .BuildToMessageBox();
             return;
@@ -94,7 +99,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
             clearTextBoxesAndIgnoreCurrency();
 
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithTitle(localizationData.ApplicationName)
                 .WithMessage("Cannot to authorizate, please check your Secret!")
                 .BuildToMessageBox();
             return;
@@ -102,7 +107,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
         catch (AuthorizationException ex) when (ex.ErrorCode == AuthorizationErrorCode.Currency)
         {
             new PopupBuilder()
-                .WithTitle(ApplicationEnviroment.GlobalName)
+                .WithTitle(localizationData.ApplicationName)
                 .WithMessage("Cannot to authorizate, please check your Currency!")
                 .BuildToMessageBox();
             return;
@@ -150,7 +155,7 @@ public sealed partial class TrackerAuthorizationFormView : Form, IAuthorizationV
                 }
             }
 
-            Language language = (Language)this.LanguageComboBox.Items[e.Index];
+            Language language = (Language)this.UserLanguageComboBox.Items[e.Index];
             using (Brush brush = new SolidBrush(foregroundColor))
             {
                 e.Graphics.DrawString(language.DisplayName,

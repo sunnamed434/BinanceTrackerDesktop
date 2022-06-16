@@ -79,5 +79,7 @@ public sealed class LocalizationsDirectoryFilesControl : DirectoryFilesControlBa
         public const string English = "en";
 
         public const string Russian = "ru";
+
+        public const string Ukrainian = "uk";
     }
 }
